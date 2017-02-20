@@ -30,6 +30,7 @@ typedef enum PSC_PROC_STATE_CAMERASHOTtag
     PR_STATE_CS_BAURATE,
     PR_STATE_CS_CONFIG_DATASIZE,
     PR_STATE_CS_TAKE_PICTURE,
+    PR_STATE_CS_LOAD_DATA_SIZE,
     PR_STATE_CS_LOAD_DATA,
     PR_STATE_CS_MAX
 }PSC_PROC_STATE_CAMERASHOT;
@@ -48,6 +49,7 @@ PSC_RET psc_Proc_CameraShot_Baurate(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_ConfigDataSize(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD*);
+PSC_RET psc_Proc_CameraShot_LoadDataSize(PSC_ST_CMD*);
 
 
 PSC_RET PSC_Proc_CameraShot_Init(PSC_RET (**pFunc)(PSC_ST_CMD*))
@@ -88,6 +90,10 @@ PSC_RET PSC_Proc_CameraShot_Main(PSC_ST_CMD* pstData)
             break;
         case PR_STATE_CS_TAKE_PICTURE:
             DBG_printf("TRACE Proc CS take picture \n\r");
+            ret = psc_Proc_CameraShot_LoadDataSize(pstData);
+            break;
+        case PR_STATE_CS_LOAD_DATA_SIZE:
+            DBG_printf("TRACE Proc CS LoadDataSize \n\r");
             ret = psc_Proc_CameraShot_LoadData(pstData);
             break;
         case PR_STATE_CS_LOAD_DATA:
@@ -101,7 +107,7 @@ PSC_RET PSC_Proc_CameraShot_Main(PSC_ST_CMD* pstData)
             break;
         
     }
-    CyDelay(500);
+    CyDelay(1500);
 //    if( ret == PSC_RET_SUCCESS )
 //    {
 //        svPSC_PROC_STATE_CAMERASHOT++;
@@ -149,7 +155,7 @@ PSC_RET psc_Proc_CameraShot_ResetCamera(PSC_ST_CMD* pstData)
     //TODO: Return Value Check from CAM
     //      That is in pstData->
     
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,reset_camera,read_datasize_size);
+    ret = PSC_Comm_SndCommand(DEV_ID_CAM,reset_camera,reset_camera_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -194,6 +200,7 @@ PSC_RET psc_Proc_CameraShot_ConfigDataSize(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     
+    
     ret = PSC_Comm_SndCommand(DEV_ID_CAM,config_datasize,config_datasize_size);
     if( ret != PSC_RET_SUCCESS )
     {
@@ -218,6 +225,27 @@ PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD* pstData)
     //TODO: Return Value Check from CAM
     //      That is in pstData->
     ret = PSC_Comm_SndCommand(DEV_ID_CAM,take_picture,tack_picture_size);
+    if( ret != PSC_RET_SUCCESS )
+    {
+        return ret;
+        
+    }
+
+    ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
+    if( ret != PSC_RET_SUCCESS )
+    {
+        return ret;
+    }
+    
+    svPSC_PROC_STATE_CAMERASHOT++;
+    return PSC_RET_SUCCESS;
+}
+
+PSC_RET psc_Proc_CameraShot_LoadDataSize(PSC_ST_CMD* pstData)
+{
+    PSC_RET ret;
+    
+    ret = PSC_Comm_SndCommand(DEV_ID_CAM,read_datasize,read_datasize_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;

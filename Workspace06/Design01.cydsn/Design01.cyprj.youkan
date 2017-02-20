@@ -85,76 +85,6 @@
 <CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256 type_name="CyDesigner.Common.ProjMgmt.Model.CyConfigDependencies" version="1">
 <dependency_info name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" xml_contents_version="2">
 <CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021 type_name="CyDesigner.Common.Base.CyFileDeps" version="1">
-<file name=".\CortexM3\ARM_GCC_493\Debug\PSC_Communicate.o">
-<dep name=".\Generated_Source\PSoC5\Cam_Rx_Intr.h" />
-<dep name=".\Generated_Source\PSoC5\Cam_Tx_Intr.h" />
-<dep name=".\Generated_Source\PSoC5\Comm_Rx_Intr.h" />
-<dep name=".\Generated_Source\PSoC5\Comm_Tx_Intr.h" />
-<dep name=".\Generated_Source\PSoC5\CyDmac.h" />
-<dep name=".\Generated_Source\PSoC5\CyFlash.h" />
-<dep name=".\Generated_Source\PSoC5\CyLib.h" />
-<dep name=".\Generated_Source\PSoC5\CySpc.h" />
-<dep name=".\Generated_Source\PSoC5\UART_TO_CAMERA.h" />
-<dep name=".\Generated_Source\PSoC5\UART_TO_CAMERA_IntClock.h" />
-<dep name=".\Generated_Source\PSoC5\UART_TO_COMM.h" />
-<dep name=".\Generated_Source\PSoC5\UART_TO_COMM_IntClock.h" />
-<dep name=".\Generated_Source\PSoC5\UART_TO_DEBUG.h" />
-<dep name=".\Generated_Source\PSoC5\UART_TO_DEBUG_IntClock.h" />
-<dep name=".\Generated_Source\PSoC5\cmsis_armcc.h" />
-<dep name=".\Generated_Source\PSoC5\cmsis_gcc.h" />
-<dep name=".\Generated_Source\PSoC5\core_cm3.h" />
-<dep name=".\Generated_Source\PSoC5\core_cm3_psoc5.h" />
-<dep name=".\Generated_Source\PSoC5\core_cmFunc.h" />
-<dep name=".\Generated_Source\PSoC5\core_cmInstr.h" />
-<dep name=".\Generated_Source\PSoC5\cyPm.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice.h" />
-<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC5\cydisabledsheets.h" />
-<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC5\cyfitter_cfg.h" />
-<dep name=".\Generated_Source\PSoC5\cypins.h" />
-<dep name=".\Generated_Source\PSoC5\cytypes.h" />
-<dep name=".\Generated_Source\PSoC5\project.h" />
-<dep name=".\Debugs.h" />
-<dep name=".\PSC_CMD_API.h" />
-<dep name=".\PSC_Communicate.c" />
-<dep name=".\PSC_Communicate.h" />
-<dep name=".\PSC_Types.h" />
-</file>
-<file name=".\Generated_Source\PSoC5\Cam_Rx_Intr.h" />
-<file name=".\Generated_Source\PSoC5\Cam_Tx_Intr.h" />
-<file name=".\Generated_Source\PSoC5\Comm_Rx_Intr.h" />
-<file name=".\Generated_Source\PSoC5\Comm_Tx_Intr.h" />
-<file name=".\Generated_Source\PSoC5\CyDmac.h" />
-<file name=".\Generated_Source\PSoC5\CyFlash.h" />
-<file name=".\Generated_Source\PSoC5\CyLib.h" />
-<file name=".\Generated_Source\PSoC5\CySpc.h" />
-<file name=".\Generated_Source\PSoC5\UART_TO_CAMERA.h" />
-<file name=".\Generated_Source\PSoC5\UART_TO_CAMERA_IntClock.h" />
-<file name=".\Generated_Source\PSoC5\UART_TO_COMM.h" />
-<file name=".\Generated_Source\PSoC5\UART_TO_COMM_IntClock.h" />
-<file name=".\Generated_Source\PSoC5\UART_TO_DEBUG.h" />
-<file name=".\Generated_Source\PSoC5\UART_TO_DEBUG_IntClock.h" />
-<file name=".\Generated_Source\PSoC5\cmsis_armcc.h" />
-<file name=".\Generated_Source\PSoC5\cmsis_gcc.h" />
-<file name=".\Generated_Source\PSoC5\core_cm3.h" />
-<file name=".\Generated_Source\PSoC5\core_cm3_psoc5.h" />
-<file name=".\Generated_Source\PSoC5\core_cmFunc.h" />
-<file name=".\Generated_Source\PSoC5\core_cmInstr.h" />
-<file name=".\Generated_Source\PSoC5\cyPm.h" />
-<file name=".\Generated_Source\PSoC5\cydevice.h" />
-<file name=".\Generated_Source\PSoC5\cydevice_trm.h" />
-<file name=".\Generated_Source\PSoC5\cydisabledsheets.h" />
-<file name=".\Generated_Source\PSoC5\cyfitter.h" />
-<file name=".\Generated_Source\PSoC5\cyfitter_cfg.h" />
-<file name=".\Generated_Source\PSoC5\cypins.h" />
-<file name=".\Generated_Source\PSoC5\cytypes.h" />
-<file name=".\Generated_Source\PSoC5\project.h" />
-<file name=".\Debugs.h" />
-<file name=".\PSC_CMD_API.h" />
-<file name=".\PSC_Communicate.c" />
-<file name=".\PSC_Communicate.h" />
-<file name=".\PSC_Types.h" />
 <file name=".\CortexM3\ARM_GCC_493\Debug\PSC_Proc_CameraShot.o">
 <dep name=".\Generated_Source\PSoC5\Cam_Rx_Intr.h" />
 <dep name=".\Generated_Source\PSoC5\Cam_Tx_Intr.h" />
@@ -194,10 +124,80 @@
 <dep name=".\PSC_Proc_Common.h" />
 <dep name=".\PSC_Types.h" />
 </file>
+<file name=".\Generated_Source\PSoC5\Cam_Rx_Intr.h" />
+<file name=".\Generated_Source\PSoC5\Cam_Tx_Intr.h" />
+<file name=".\Generated_Source\PSoC5\Comm_Rx_Intr.h" />
+<file name=".\Generated_Source\PSoC5\Comm_Tx_Intr.h" />
+<file name=".\Generated_Source\PSoC5\CyDmac.h" />
+<file name=".\Generated_Source\PSoC5\CyFlash.h" />
+<file name=".\Generated_Source\PSoC5\CyLib.h" />
+<file name=".\Generated_Source\PSoC5\CySpc.h" />
+<file name=".\Generated_Source\PSoC5\UART_TO_CAMERA.h" />
+<file name=".\Generated_Source\PSoC5\UART_TO_CAMERA_IntClock.h" />
+<file name=".\Generated_Source\PSoC5\UART_TO_COMM.h" />
+<file name=".\Generated_Source\PSoC5\UART_TO_COMM_IntClock.h" />
+<file name=".\Generated_Source\PSoC5\UART_TO_DEBUG.h" />
+<file name=".\Generated_Source\PSoC5\UART_TO_DEBUG_IntClock.h" />
+<file name=".\Generated_Source\PSoC5\cmsis_armcc.h" />
+<file name=".\Generated_Source\PSoC5\cmsis_gcc.h" />
+<file name=".\Generated_Source\PSoC5\core_cm3.h" />
+<file name=".\Generated_Source\PSoC5\core_cm3_psoc5.h" />
+<file name=".\Generated_Source\PSoC5\core_cmFunc.h" />
+<file name=".\Generated_Source\PSoC5\core_cmInstr.h" />
+<file name=".\Generated_Source\PSoC5\cyPm.h" />
+<file name=".\Generated_Source\PSoC5\cydevice.h" />
+<file name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<file name=".\Generated_Source\PSoC5\cydisabledsheets.h" />
+<file name=".\Generated_Source\PSoC5\cyfitter.h" />
+<file name=".\Generated_Source\PSoC5\cyfitter_cfg.h" />
+<file name=".\Generated_Source\PSoC5\cypins.h" />
+<file name=".\Generated_Source\PSoC5\cytypes.h" />
+<file name=".\Generated_Source\PSoC5\project.h" />
+<file name=".\Debugs.h" />
+<file name=".\PSC_CMD_API.h" />
 <file name=".\PSC_Camera.h" />
+<file name=".\PSC_Communicate.h" />
 <file name=".\PSC_Proc_CameraShot.c" />
 <file name=".\PSC_Proc_CameraShot.h" />
 <file name=".\PSC_Proc_Common.h" />
+<file name=".\PSC_Types.h" />
+<file name=".\CortexM3\ARM_GCC_493\Debug\PSC_Communicate.o">
+<dep name=".\Generated_Source\PSoC5\Cam_Rx_Intr.h" />
+<dep name=".\Generated_Source\PSoC5\Cam_Tx_Intr.h" />
+<dep name=".\Generated_Source\PSoC5\Comm_Rx_Intr.h" />
+<dep name=".\Generated_Source\PSoC5\Comm_Tx_Intr.h" />
+<dep name=".\Generated_Source\PSoC5\CyDmac.h" />
+<dep name=".\Generated_Source\PSoC5\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC5\CyLib.h" />
+<dep name=".\Generated_Source\PSoC5\CySpc.h" />
+<dep name=".\Generated_Source\PSoC5\UART_TO_CAMERA.h" />
+<dep name=".\Generated_Source\PSoC5\UART_TO_CAMERA_IntClock.h" />
+<dep name=".\Generated_Source\PSoC5\UART_TO_COMM.h" />
+<dep name=".\Generated_Source\PSoC5\UART_TO_COMM_IntClock.h" />
+<dep name=".\Generated_Source\PSoC5\UART_TO_DEBUG.h" />
+<dep name=".\Generated_Source\PSoC5\UART_TO_DEBUG_IntClock.h" />
+<dep name=".\Generated_Source\PSoC5\cmsis_armcc.h" />
+<dep name=".\Generated_Source\PSoC5\cmsis_gcc.h" />
+<dep name=".\Generated_Source\PSoC5\core_cm3.h" />
+<dep name=".\Generated_Source\PSoC5\core_cm3_psoc5.h" />
+<dep name=".\Generated_Source\PSoC5\core_cmFunc.h" />
+<dep name=".\Generated_Source\PSoC5\core_cmInstr.h" />
+<dep name=".\Generated_Source\PSoC5\cyPm.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice.h" />
+<dep name=".\Generated_Source\PSoC5\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC5\cydisabledsheets.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC5\cyfitter_cfg.h" />
+<dep name=".\Generated_Source\PSoC5\cypins.h" />
+<dep name=".\Generated_Source\PSoC5\cytypes.h" />
+<dep name=".\Generated_Source\PSoC5\project.h" />
+<dep name=".\Debugs.h" />
+<dep name=".\PSC_CMD_API.h" />
+<dep name=".\PSC_Communicate.c" />
+<dep name=".\PSC_Communicate.h" />
+<dep name=".\PSC_Types.h" />
+</file>
+<file name=".\PSC_Communicate.c" />
 <file name=".\CortexM3\ARM_GCC_493\Debug\PSC_MAIN.o">
 <dep name=".\Generated_Source\PSoC5\Cam_Rx_Intr.h" />
 <dep name=".\Generated_Source\PSoC5\Cam_Tx_Intr.h" />
@@ -1147,9 +1147,10 @@
 <name_val_pair name="Generated_Source\PSoC5\UART_TO_DEBUG_INT.c" v="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name="Generated_Source\PSoC5\UART_TO_DEBUG_BOOT.c" v="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name="Generated_Source\PSoC5\UART_TO_DEBUG_IntClock.c" v="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
+<name_val_pair name="C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\CortexM3\ARM_GCC_493\Debug\Design01.hex" v="-mcpu=cortex-m3 -mthumb -g -ffunction-sections -Og -ffat-lto-objects -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections" />
 </name>
 </genericCmdLineData>
-<codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\youkan\AppData\Local\Cypress Semiconductor\PSoC Creator\4.0&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\youkan\Desktop\came\Workspace06\Design01.cydsn\Design01.cyprj -d CY8C5888LTI-LP097 -s C:\Users\youkan\Desktop\came\Workspace06\Design01.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
+<codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\youkan\AppData\Local\Cypress Semiconductor\PSoC Creator\4.0&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Design01.cyprj -d CY8C5888LTI-LP097 -s C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
 </CyGuid_b0374e30-ce3a-47f2-ad85-821643292c68>
 </dataGuid>
 <dataGuid v="925cc1e1-309e-4e08-b0a1-09a83c35b157">
@@ -1697,7 +1698,7 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="131319815582066424" />
+<deps_time v="131320689502269927" />
 <top_block v="TopDesign" />
 <last_generation v="0" />
 <pdl_path v="C:\Users\youkan\Documents\Cypress\PDL\2.1.0" />
@@ -1705,7 +1706,7 @@
 </dataGuid>
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
-<deps_time v="131319825686152824" />
+<deps_time v="131320738316470047" />
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
 <dataGuid v="504337dd-7d07-4bc7-9057-90e60cf6c469">

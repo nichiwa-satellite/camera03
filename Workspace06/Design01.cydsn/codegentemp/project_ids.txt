@@ -1,6 +1,5 @@
-C:\Users\youkan\Desktop\came\Workspace06\Design01.cydsn\Design01.cyprj|ea40077d-db2a-454a-8d25-c9808bb00052
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|33cb8ecb-a81c-45fc-bcde-685f3752787a
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|24784fd1-db0d-46a1-9a1c-0dea39667e85
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|43440701-2123-43ad-b50f-12183e2f9d3c
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|886a6109-a9c1-41fe-9e07-5d708dc1c895
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\dev\psoc3\AnalogDevice\PSoC35AnalogDevice.cylib\PSoC35AnalogDevice.cyprj|38692292-b076-45b7-a4ea-2d1afd9265a5
+C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Design01.cyprj|83892b54-9263-4173-935a-2a08f5236512
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|bf1c3973-770c-4821-8321-cbec069068bc
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|8c32e45c-aa51-4f65-b9b1-447034b4fcb6
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|6247d884-613a-44c4-8f05-0e9d6a35f2e6
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|60b7aea1-5b27-4a0f-80e6-3568c296d3e8
