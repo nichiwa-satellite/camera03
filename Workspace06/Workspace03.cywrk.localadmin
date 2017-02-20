@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace03\Design01\Source Files\PSC_Communicate.c">
+<ExpandedNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\TopDesign</v>
+<v>Workspace03\Design01\Design01.cydwr</v>
+<v>Workspace03\Design01\Design01.cydwr\Pins</v>
+<v>Workspace03\Design01\Design01.cydwr\Analog</v>
+<v>Workspace03\Design01\Design01.cydwr\Clocks</v>
+<v>Workspace03\Design01\Design01.cydwr\Interrupts</v>
+<v>Workspace03\Design01\Design01.cydwr\DMA</v>
+<v>Workspace03\Design01\Design01.cydwr\System</v>
+<v>Workspace03\Design01\Design01.cydwr\Directives</v>
+<v>Workspace03\Design01\Design01.cydwr\Flash Security</v>
+<v>Workspace03\Design01\Design01.cydwr\EEPROM</v>
+<v>Workspace03\Design01\Header Files</v>
+<v>Workspace03\Design01\Header Files\cyapicallbacks.h</v>
+<v>Workspace03\Design01\Source Files</v>
+<v>Workspace03\Design01\Source Files\main.c</v>
+<v>Workspace03\Design01\Generated_Source</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cm3gcc.ld</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\Cm3Iar.icf</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\Cm3RealView.scat</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\Cm3Start.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cmsis_armcc.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cmsis_gcc.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\core_cm3.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\core_cm3_psoc5.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\core_cmFunc.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\core_cmInstr.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyBootAsmGnu.s</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyBootAsmIar.s</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyBootAsmRv.s</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyDmac.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyDmac.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyFlash.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyFlash.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyLib.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CyLib.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cypins.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cyPm.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cyPm.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CySpc.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\CySpc.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cytypes.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cyutils.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA\UART_TO_CAMERA.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA\UART_TO_CAMERA.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA\UART_TO_CAMERA_BOOT.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA\UART_TO_CAMERA_INT.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA\UART_TO_CAMERA_PM.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA_IntClock</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA_IntClock\UART_TO_CAMERA_IntClock.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_CAMERA_IntClock\UART_TO_CAMERA_IntClock.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM\UART_TO_COMM.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM\UART_TO_COMM.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM\UART_TO_COMM_BOOT.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM\UART_TO_COMM_INT.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM\UART_TO_COMM_PM.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM_IntClock</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM_IntClock\UART_TO_COMM_IntClock.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\UART_TO_COMM_IntClock\UART_TO_COMM_IntClock.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cycodeshareexport.ld</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cycodeshareimport.ld</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cycodeshareimport.scat</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydevice.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydevice_trm.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydevicegnu.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydevicegnu_trm.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydeviceiar.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydeviceiar_trm.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydevicerv.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydevicerv_trm.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cydisabledsheets.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cyfitter.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cyfitter_cfg.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cyfitter_cfg.h</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cyfittergnu.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cyfitteriar.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cyfitterrv.inc</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\cymetadata.c</v>
+<v>Workspace03\Design01\Generated_Source\PSoC5\project.h</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\TopDesign</v>
+<v>Workspace03\Design01\Design01.cydwr</v>
+<v>Workspace03\Design01\Design01.cydwr\Pins</v>
+<v>Workspace03\Design01\Design01.cydwr\Analog</v>
+<v>Workspace03\Design01\Design01.cydwr\Clocks</v>
+<v>Workspace03\Design01\Design01.cydwr\Interrupts</v>
+<v>Workspace03\Design01\Design01.cydwr\DMA</v>
+<v>Workspace03\Design01\Design01.cydwr\System</v>
+<v>Workspace03\Design01\Design01.cydwr\Directives</v>
+<v>Workspace03\Design01\Design01.cydwr\Flash Security</v>
+<v>Workspace03\Design01\Design01.cydwr\EEPROM</v>
+<v>Workspace03\Design01\Header Files</v>
+<v>Workspace03\Design01\Header Files\cyapicallbacks.h</v>
+<v>Workspace03\Design01\Header Files\PSC_Camera.h</v>
+<v>Workspace03\Design01\Header Files\PSC_CMD_API.h</v>
+<v>Workspace03\Design01\Header Files\PSC_Communicate.h</v>
+<v>Workspace03\Design01\Header Files\PSC_MAIN.h</v>
+<v>Workspace03\Design01\Header Files\PSC_Proc_CameraShot.h</v>
+<v>Workspace03\Design01\Header Files\PSC_Proc_Common.h</v>
+<v>Workspace03\Design01\Header Files\PSC_Types.h</v>
+<v>Workspace03\Design01\Source Files</v>
+<v>Workspace03\Design01\Source Files\main.c</v>
+<v>Workspace03\Design01\Source Files\PSC_Camera.c</v>
+<v>Workspace03\Design01\Source Files\PSC_CMD_API.c</v>
+<v>Workspace03\Design01\Source Files\PSC_Communicate.c</v>
+<v>Workspace03\Design01\Source Files\PSC_MAIN.c</v>
+<v>Workspace03\Design01\Source Files\PSC_Proc_CameraShot.c</v>
+<v>Workspace03\Design01\Generated_Source</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace03\Design01\TopDesign\TopDesign.cysch">
+<ExpandedNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\TopDesign</v>
+<v>Workspace03\Design01\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\TopDesign</v>
+<v>Workspace03\Design01\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\CortexM3</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cam_Rx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cam_Tx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cm3Start.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Comm_Rx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Comm_Tx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyDmac.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyLib.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cymetadata.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyPm.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CySpc.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyutils.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\main.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Camera.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_CMD_API.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Communicate.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_MAIN.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Proc_CameraShot.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_BOOT.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_INT.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_IntClock.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_PM.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_BOOT.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_INT.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_IntClock.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_PM.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Design01.elf</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Design01.hex</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Design01.map</v>
+<v>Workspace03\Design01\Design01.gpdsc</v>
+<v>Workspace03\Design01\Design01.rpt</v>
+<v>Workspace03\Design01\Design01_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\CortexM3</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cam_Rx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cam_Tx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cm3Start.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Comm_Rx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Comm_Tx_Intr.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyDmac.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyLib.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cymetadata.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyPm.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CySpc.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyutils.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\main.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Camera.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_CMD_API.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Communicate.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_MAIN.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Proc_CameraShot.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_BOOT.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_INT.lst</v>
+<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_IntClock.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace03">
+<ExpandedNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\PSoC 5LP Architecture TRM</v>
+<v>Workspace03\Design01\CY8C58LP Family Datasheet</v>
+<v>Workspace03\Design01\System Reference Guides</v>
+<v>Workspace03\Design01\System Reference Guides\cy_boot_v5_50</v>
+<v>Workspace03\Design01\cy_isr_v1_70</v>
+<v>Workspace03\Design01\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>Workspace03\Design01\cy_pins_v2_20</v>
+<v>Workspace03\Design01\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Workspace03\Design01\UART_v2_50</v>
+<v>Workspace03\Design01\UART_v2_50\UART_v2_50.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace03</v>
+<v>Workspace03\Design01</v>
+<v>Workspace03\Design01\PSoC 5LP Architecture TRM</v>
+<v>Workspace03\Design01\CY8C58LP Family Datasheet</v>
+<v>Workspace03\Design01\System Reference Guides</v>
+<v>Workspace03\Design01\System Reference Guides\cy_boot_v5_50</v>
+<v>Workspace03\Design01\cy_isr_v1_70</v>
+<v>Workspace03\Design01\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>Workspace03\Design01\cy_pins_v2_20</v>
+<v>Workspace03\Design01\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Workspace03\Design01\UART_v2_50</v>
+<v>Workspace03\Design01\UART_v2_50\UART_v2_50.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\Design01.cydsn\PSC_Communicate.c" />
+<name v=".\Design01.cydsn\Design01.cydwr" />
+<name v=".\Design01.cydsn\PSC_MAIN.c" />
+<name v=".\Design01.cydsn\PSC_CMD_API.c" />
+<name v=".\Design01.cydsn\main.c" />
+<name v=".\Design01.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\Design01.cydsn\PSC_Camera.c" />
+<name v=".\Design01.cydsn\PSC_Proc_CameraShot.c" />
+<name v=".\Design01.cydsn\PSC_CMD_API.h" />
+<name v=".\Design01.cydsn\PSC_Camera.h" />
+<name v=".\Design01.cydsn\PSC_Types.h" />
+<name v=".\Design01.cydsn\PSC_Communicate.h" />
+<name v=".\Design01.cydsn\PSC_Proc_CameraShot.h" />
+<name v=".\Design01.cydsn\PSC_Proc_Common.h" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1015, 388" SelectedTabbedMdiWindow="d033a7ed-e1e6-4467-863a-deecaaabfa43"><DocumentWindow Key="fbc77d87-5c42-4728-a24f-d477e1ab00bf" Guid="eada64ee-34df-478f-8ccb-ee019b5da059" /><DocumentWindow Key="0b933314-07f6-440b-ad0c-a67bade048a6" Guid="ad4c6e20-ecee-4c06-8a6f-0ac025f08e2e" /><DocumentWindow Key="ad9e78a9-d691-4d98-8fc0-bf81c11281b6" Guid="df2a95db-c871-461e-9ef2-528c9de36cd9" /><DocumentWindow Key="006d64fd-cc1a-4409-8cda-e11c3fa89138" Guid="437b5265-0201-4297-856d-4b091b62b5de" /><DocumentWindow Key="2a4a23a6-ed11-4e7e-ae99-c810a43b68e4" Guid="69d8b2c9-96e3-4cd3-90de-38dd0a732065" /><DocumentWindow Key="15477fd8-514d-4da0-830b-4ce8fcc600a4" Guid="89befd0b-39a9-4951-ad58-3e0220c280aa" /><DocumentWindow Key="cb767734-1e66-44e3-a06d-ff8a6877ac2a" Guid="26aedc70-5b3c-4621-9ed4-a9e396cb344f" /><DocumentWindow Key="0c86b380-fb16-45ff-b469-2f0918c66667" Guid="f16de209-c144-409c-a113-49fa0c5939c1" /><DocumentWindow Key="2230658e-d171-4908-9321-89ddd53edf8c" Guid="07c2ee7b-5333-4531-927a-f5926d2cee73" /><DocumentWindow Key="d42fac44-4332-456e-b807-24e326247fb1" Guid="40fb8688-714d-4fda-a4ad-7ec9b9b6812c" /><DocumentWindow Key="b32a3695-8674-404d-b5ce-0c8806c66f96" Guid="e3f26f95-d539-4b1c-a2d5-1197638f784a" /><DocumentWindow Key="04e12ded-4a2f-4220-8a2e-568dca3e436a" Guid="43bf3d11-8ed9-43dc-9896-529280556138" /><DocumentWindow Key="a3a4da8b-0bbc-4240-98fd-0044283f0a93" Guid="d033a7ed-e1e6-4467-863a-deecaaabfa43" /><DocumentWindow Key="cec79d14-4622-4926-9df9-a381f8d45244" Guid="9430f677-a8ad-4e53-9395-26702f03e95d" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3910ba0e-3caf-42b1-9155-450f54a67e36" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

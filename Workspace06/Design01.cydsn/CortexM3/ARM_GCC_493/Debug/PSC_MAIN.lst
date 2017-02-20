@@ -1,0 +1,2425 @@
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"PSC_MAIN.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.psc_Initialize,"ax",%progbits
+  19              		.align	2
+  20              		.global	psc_Initialize
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	psc_Initialize, %function
+  24              	psc_Initialize:
+  25              	.LFB65:
+  26              		.file 1 "PSC_MAIN.c"
+   1:PSC_MAIN.c    **** /* ========================================
+   2:PSC_MAIN.c    ****  *
+   3:PSC_MAIN.c    ****  * Copyright YOUR COMPANY, THE YEAR
+   4:PSC_MAIN.c    ****  * All Rights Reserved
+   5:PSC_MAIN.c    ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:PSC_MAIN.c    ****  *
+   7:PSC_MAIN.c    ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:PSC_MAIN.c    ****  * WHICH IS THE PROPERTY OF your company.
+   9:PSC_MAIN.c    ****  *
+  10:PSC_MAIN.c    ****  * ========================================
+  11:PSC_MAIN.c    **** */
+  12:PSC_MAIN.c    **** 
+  13:PSC_MAIN.c    **** /* [] END OF FILE */
+  14:PSC_MAIN.c    **** 
+  15:PSC_MAIN.c    **** #include "PSC_MAIN.h"
+  16:PSC_MAIN.c    **** #include "PSC_Types.h"
+  17:PSC_MAIN.c    **** #include "PSC_Communicate.h"
+  18:PSC_MAIN.c    **** #include "PSC_CMD_API.h"
+  19:PSC_MAIN.c    **** #include "PSC_Proc_Common.h"
+  20:PSC_MAIN.c    **** #include "PSC_Proc_CameraShot.h"
+  21:PSC_MAIN.c    **** #include "Debugs.h"
+  22:PSC_MAIN.c    **** 
+  23:PSC_MAIN.c    **** //Typedef
+  24:PSC_MAIN.c    **** //-------------------------------------------------//
+  25:PSC_MAIN.c    **** 
+  26:PSC_MAIN.c    **** typedef enum PSC_STATEtag
+  27:PSC_MAIN.c    **** {
+  28:PSC_MAIN.c    ****     PSC_ST_IDLE,
+  29:PSC_MAIN.c    ****     PSC_ST_RUN,
+  30:PSC_MAIN.c    ****     PSC_ST_MAX
+  31:PSC_MAIN.c    ****     
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 2
+
+
+  32:PSC_MAIN.c    **** }PSC_STATE;
+  33:PSC_MAIN.c    **** 
+  34:PSC_MAIN.c    **** typedef enum PSC_INTR_STATEtag
+  35:PSC_MAIN.c    **** {
+  36:PSC_MAIN.c    ****     PSC_INTR_ST_SLEEP,
+  37:PSC_MAIN.c    ****     PSC_INTR_ST_ACTIVE,
+  38:PSC_MAIN.c    ****     PSC_INTR_ST_MAX
+  39:PSC_MAIN.c    ****     
+  40:PSC_MAIN.c    **** }PSC_INTR_STATE;
+  41:PSC_MAIN.c    **** 
+  42:PSC_MAIN.c    **** typedef struct PSC_ST_PROCtag
+  43:PSC_MAIN.c    **** {
+  44:PSC_MAIN.c    ****     PSC_RET     (*pfInit)();
+  45:PSC_MAIN.c    ****     PSC_RET     (*pfProc)(PSC_ST_CMD*);
+  46:PSC_MAIN.c    **** }PSC_ST_PROC;
+  47:PSC_MAIN.c    **** 
+  48:PSC_MAIN.c    **** 
+  49:PSC_MAIN.c    **** //Prototypes
+  50:PSC_MAIN.c    **** //-------------------------------------------------//
+  51:PSC_MAIN.c    **** void PSC_PROGRAM_START();
+  52:PSC_MAIN.c    **** PSC_RET psc_Main();
+  53:PSC_MAIN.c    **** PSC_RET psc_Initialize();
+  54:PSC_MAIN.c    **** 
+  55:PSC_MAIN.c    **** PSC_RET psc_Main_Idle();
+  56:PSC_MAIN.c    **** PSC_RET psc_Main_Run();
+  57:PSC_MAIN.c    **** 
+  58:PSC_MAIN.c    **** PSC_RET psc_CmdHandle();                   //CommandHandling
+  59:PSC_MAIN.c    **** 
+  60:PSC_MAIN.c    **** //Static
+  61:PSC_MAIN.c    **** static PSC_STATE        svPSC_PROG_STATE;           //status
+  62:PSC_MAIN.c    **** static PSC_INTR_STATE   svPSC_INTR_STATE;
+  63:PSC_MAIN.c    **** static PSC_ST_CMD       sstPSC_COMMAND;
+  64:PSC_MAIN.c    **** static PSC_RET          (*psfPSC_PROC)(PSC_ST_CMD*);
+  65:PSC_MAIN.c    **** 
+  66:PSC_MAIN.c    **** void PSC_PROGRAM_START()
+  67:PSC_MAIN.c    **** {
+  68:PSC_MAIN.c    ****     if( psc_Main() != PSC_RET_SUCCESS )
+  69:PSC_MAIN.c    ****     {
+  70:PSC_MAIN.c    ****         //FAITAL ERROR
+  71:PSC_MAIN.c    ****         return;
+  72:PSC_MAIN.c    ****     }
+  73:PSC_MAIN.c    **** }
+  74:PSC_MAIN.c    **** 
+  75:PSC_MAIN.c    **** 
+  76:PSC_MAIN.c    **** PSC_RET psc_Main()
+  77:PSC_MAIN.c    **** {
+  78:PSC_MAIN.c    ****     PSC_RET ret;
+  79:PSC_MAIN.c    ****     ret = psc_Initialize();
+  80:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+  81:PSC_MAIN.c    ****     {
+  82:PSC_MAIN.c    ****         return ret;
+  83:PSC_MAIN.c    ****     }
+  84:PSC_MAIN.c    ****     
+  85:PSC_MAIN.c    ****     while( 1 )
+  86:PSC_MAIN.c    ****     {
+  87:PSC_MAIN.c    ****         switch(svPSC_PROG_STATE)
+  88:PSC_MAIN.c    ****         {
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 3
+
+
+  89:PSC_MAIN.c    ****             case PSC_ST_IDLE:
+  90:PSC_MAIN.c    ****                 /* DEBUG */
+  91:PSC_MAIN.c    ****                 DBG_printf("TRACE PSC_ST_ILDE \n\r");
+  92:PSC_MAIN.c    ****                 ret = psc_Main_Idle();
+  93:PSC_MAIN.c    ****                 if( ret != PSC_RET_SUCCESS )
+  94:PSC_MAIN.c    ****                 {
+  95:PSC_MAIN.c    ****                     return ret;
+  96:PSC_MAIN.c    ****                 }
+  97:PSC_MAIN.c    ****                 break;
+  98:PSC_MAIN.c    ****             case PSC_ST_RUN:
+  99:PSC_MAIN.c    ****                 DBG_printf("TRACE PSC_ST_RUN \n\r");
+ 100:PSC_MAIN.c    ****                 ret = psc_Main_Run();
+ 101:PSC_MAIN.c    ****                 if( ret != PSC_RET_SUCCESS )
+ 102:PSC_MAIN.c    ****                 {
+ 103:PSC_MAIN.c    ****                     return ret;
+ 104:PSC_MAIN.c    ****                 }
+ 105:PSC_MAIN.c    ****                 break;
+ 106:PSC_MAIN.c    ****             default:
+ 107:PSC_MAIN.c    ****                 break;
+ 108:PSC_MAIN.c    ****         }
+ 109:PSC_MAIN.c    ****     }
+ 110:PSC_MAIN.c    **** 
+ 111:PSC_MAIN.c    ****     return PSC_RET_SUCCESS;
+ 112:PSC_MAIN.c    **** }
+ 113:PSC_MAIN.c    **** 
+ 114:PSC_MAIN.c    **** 
+ 115:PSC_MAIN.c    **** 
+ 116:PSC_MAIN.c    **** PSC_RET psc_Initialize()
+ 117:PSC_MAIN.c    **** {
+  27              		.loc 1 117 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+ 118:PSC_MAIN.c    ****     PSC_RET ret;
+ 119:PSC_MAIN.c    ****     DBG_Init();
+  35              		.loc 1 119 0
+  36 0002 FFF7FEFF 		bl	DBG_Init
+  37              	.LVL0:
+ 120:PSC_MAIN.c    ****     ret = PSC_CMD_CREATE_CONTEXT(&sstPSC_COMMAND);
+  38              		.loc 1 120 0
+  39 0006 0848     		ldr	r0, .L6
+  40 0008 FFF7FEFF 		bl	PSC_CMD_CREATE_CONTEXT
+  41              	.LVL1:
+ 121:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+  42              		.loc 1 121 0
+  43 000c 48B9     		cbnz	r0, .L3
+ 122:PSC_MAIN.c    ****     {
+ 123:PSC_MAIN.c    ****         //Create Context Error
+ 124:PSC_MAIN.c    ****         return ret;
+ 125:PSC_MAIN.c    ****     }
+ 126:PSC_MAIN.c    ****     
+ 127:PSC_MAIN.c    ****     ret = PSC_Comm_Initialize();
+  44              		.loc 1 127 0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 4
+
+
+  45 000e FFF7FEFF 		bl	PSC_Comm_Initialize
+  46              	.LVL2:
+ 128:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+  47              		.loc 1 128 0
+  48 0012 38B9     		cbnz	r0, .L4
+ 129:PSC_MAIN.c    ****     {
+ 130:PSC_MAIN.c    ****         //Create Context Error
+ 131:PSC_MAIN.c    ****         return ret;
+ 132:PSC_MAIN.c    ****     }
+ 133:PSC_MAIN.c    ****     
+ 134:PSC_MAIN.c    ****     svPSC_PROG_STATE = PSC_ST_IDLE;
+  49              		.loc 1 134 0
+  50 0014 044B     		ldr	r3, .L6
+  51 0016 83F83800 		strb	r0, [r3, #56]
+ 135:PSC_MAIN.c    ****     svPSC_INTR_STATE = PSC_INTR_ST_ACTIVE;
+  52              		.loc 1 135 0
+  53 001a 0122     		movs	r2, #1
+  54 001c 83F83920 		strb	r2, [r3, #57]
+ 136:PSC_MAIN.c    ****     return PSC_RET_SUCCESS;
+  55              		.loc 1 136 0
+  56 0020 08BD     		pop	{r3, pc}
+  57              	.L3:
+  58 0022 08BD     		pop	{r3, pc}
+  59              	.L4:
+ 137:PSC_MAIN.c    ****         
+ 138:PSC_MAIN.c    **** }
+  60              		.loc 1 138 0
+  61 0024 08BD     		pop	{r3, pc}
+  62              	.L7:
+  63 0026 00BF     		.align	2
+  64              	.L6:
+  65 0028 00000000 		.word	.LANCHOR0
+  66              		.cfi_endproc
+  67              	.LFE65:
+  68              		.size	psc_Initialize, .-psc_Initialize
+  69              		.section	.text.psc_CmdHandle,"ax",%progbits
+  70              		.align	2
+  71              		.global	psc_CmdHandle
+  72              		.thumb
+  73              		.thumb_func
+  74              		.type	psc_CmdHandle, %function
+  75              	psc_CmdHandle:
+  76              	.LFB67:
+ 139:PSC_MAIN.c    **** 
+ 140:PSC_MAIN.c    **** 
+ 141:PSC_MAIN.c    **** 
+ 142:PSC_MAIN.c    **** PSC_RET psc_Main_Idle()
+ 143:PSC_MAIN.c    **** {
+ 144:PSC_MAIN.c    ****     PSC_RET ret;
+ 145:PSC_MAIN.c    ****     
+ 146:PSC_MAIN.c    ****     ret = PSC_CMD_SET_DEVICE_ID(&sstPSC_COMMAND,DEV_ID_COMM);
+ 147:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 148:PSC_MAIN.c    ****     {
+ 149:PSC_MAIN.c    ****         return ret;
+ 150:PSC_MAIN.c    ****     }
+ 151:PSC_MAIN.c    ****     
+ 152:PSC_MAIN.c    ****     ret = PSC_Comm_GetCommand(&sstPSC_COMMAND);
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 5
+
+
+ 153:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 154:PSC_MAIN.c    ****     {
+ 155:PSC_MAIN.c    ****         return ret;
+ 156:PSC_MAIN.c    ****     }
+ 157:PSC_MAIN.c    ****     
+ 158:PSC_MAIN.c    ****     svPSC_PROG_STATE = PSC_ST_RUN;
+ 159:PSC_MAIN.c    ****     
+ 160:PSC_MAIN.c    ****     ret = psc_CmdHandle();
+ 161:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 162:PSC_MAIN.c    ****     {
+ 163:PSC_MAIN.c    ****         return ret;
+ 164:PSC_MAIN.c    ****     }
+ 165:PSC_MAIN.c    ****     return PSC_RET_SUCCESS;
+ 166:PSC_MAIN.c    **** }
+ 167:PSC_MAIN.c    **** 
+ 168:PSC_MAIN.c    **** PSC_RET psc_CmdHandle()
+ 169:PSC_MAIN.c    **** {
+  77              		.loc 1 169 0
+  78              		.cfi_startproc
+  79              		@ args = 0, pretend = 0, frame = 8
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81 0000 00B5     		push	{lr}
+  82              		.cfi_def_cfa_offset 4
+  83              		.cfi_offset 14, -4
+  84 0002 83B0     		sub	sp, sp, #12
+  85              		.cfi_def_cfa_offset 16
+ 170:PSC_MAIN.c    ****     PSC_RET ret;
+ 171:PSC_MAIN.c    ****     PSC_COMMAND cmd;
+ 172:PSC_MAIN.c    ****     
+ 173:PSC_MAIN.c    ****     ret = PSC_CMD_GET_COMMAND(&sstPSC_COMMAND,&cmd);
+  86              		.loc 1 173 0
+  87 0004 0D48     		ldr	r0, .L17
+  88 0006 01A9     		add	r1, sp, #4
+  89 0008 FFF7FEFF 		bl	PSC_CMD_GET_COMMAND
+  90              	.LVL3:
+ 174:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+  91              		.loc 1 174 0
+  92 000c 78B9     		cbnz	r0, .L12
+ 175:PSC_MAIN.c    ****     {
+ 176:PSC_MAIN.c    ****         return ret;
+ 177:PSC_MAIN.c    ****     }
+ 178:PSC_MAIN.c    ****     
+ 179:PSC_MAIN.c    ****     switch( cmd )
+  93              		.loc 1 179 0
+  94 000e 019B     		ldr	r3, [sp, #4]
+  95 0010 012B     		cmp	r3, #1
+  96 0012 02D0     		beq	.L11
+  97 0014 022B     		cmp	r3, #2
+  98 0016 0BD0     		beq	.L13
+  99 0018 04E0     		b	.L15
+ 100              	.L11:
+ 180:PSC_MAIN.c    ****     {
+ 181:PSC_MAIN.c    ****         case COMM_REQ_CAMERASHOT:
+ 182:PSC_MAIN.c    ****             ret = PSC_Proc_CameraShot_Init(&psfPSC_PROC);
+ 101              		.loc 1 182 0
+ 102 001a 0948     		ldr	r0, .L17+4
+ 103              	.LVL4:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 6
+
+
+ 104 001c FFF7FEFF 		bl	PSC_Proc_CameraShot_Init
+ 105              	.LVL5:
+ 183:PSC_MAIN.c    ****             if( ret != PSC_RET_SUCCESS )
+ 106              		.loc 1 183 0
+ 107 0020 40B9     		cbnz	r0, .L14
+ 108 0022 07E0     		b	.L9
+ 109              	.L15:
+ 184:PSC_MAIN.c    ****             {
+ 185:PSC_MAIN.c    ****                 return ret;
+ 186:PSC_MAIN.c    ****             }
+ 187:PSC_MAIN.c    ****             break;
+ 188:PSC_MAIN.c    ****         case COMM_REQ_DOWNLOAD_FILE:
+ 189:PSC_MAIN.c    ****             break;
+ 190:PSC_MAIN.c    ****         default:
+ 191:PSC_MAIN.c    ****             svPSC_PROG_STATE = PSC_ST_IDLE;
+ 110              		.loc 1 191 0
+ 111 0024 0020     		movs	r0, #0
+ 112              	.LVL6:
+ 113 0026 054B     		ldr	r3, .L17
+ 114 0028 83F83800 		strb	r0, [r3, #56]
+ 192:PSC_MAIN.c    ****             break;
+ 115              		.loc 1 192 0
+ 116 002c 02E0     		b	.L9
+ 117              	.LVL7:
+ 118              	.L12:
+ 119 002e 01E0     		b	.L9
+ 120              	.L13:
+ 193:PSC_MAIN.c    ****     }
+ 194:PSC_MAIN.c    ****     return PSC_RET_SUCCESS;
+ 121              		.loc 1 194 0
+ 122 0030 0020     		movs	r0, #0
+ 123              	.LVL8:
+ 124 0032 FFE7     		b	.L9
+ 125              	.LVL9:
+ 126              	.L14:
+ 127              	.L9:
+ 195:PSC_MAIN.c    **** }
+ 128              		.loc 1 195 0
+ 129 0034 03B0     		add	sp, sp, #12
+ 130              		.cfi_def_cfa_offset 4
+ 131              		@ sp needed
+ 132 0036 5DF804FB 		ldr	pc, [sp], #4
+ 133              	.L18:
+ 134 003a 00BF     		.align	2
+ 135              	.L17:
+ 136 003c 00000000 		.word	.LANCHOR0
+ 137 0040 3C000000 		.word	.LANCHOR0+60
+ 138              		.cfi_endproc
+ 139              	.LFE67:
+ 140              		.size	psc_CmdHandle, .-psc_CmdHandle
+ 141              		.section	.text.psc_Main_Idle,"ax",%progbits
+ 142              		.align	2
+ 143              		.global	psc_Main_Idle
+ 144              		.thumb
+ 145              		.thumb_func
+ 146              		.type	psc_Main_Idle, %function
+ 147              	psc_Main_Idle:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 7
+
+
+ 148              	.LFB66:
+ 143:PSC_MAIN.c    ****     PSC_RET ret;
+ 149              		.loc 1 143 0
+ 150              		.cfi_startproc
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153 0000 08B5     		push	{r3, lr}
+ 154              		.cfi_def_cfa_offset 8
+ 155              		.cfi_offset 3, -8
+ 156              		.cfi_offset 14, -4
+ 146:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 157              		.loc 1 146 0
+ 158 0002 0A48     		ldr	r0, .L25
+ 159 0004 0021     		movs	r1, #0
+ 160 0006 FFF7FEFF 		bl	PSC_CMD_SET_DEVICE_ID
+ 161              	.LVL10:
+ 147:PSC_MAIN.c    ****     {
+ 162              		.loc 1 147 0
+ 163 000a 58B9     		cbnz	r0, .L21
+ 152:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 164              		.loc 1 152 0
+ 165 000c 0748     		ldr	r0, .L25
+ 166              	.LVL11:
+ 167 000e FFF7FEFF 		bl	PSC_Comm_GetCommand
+ 168              	.LVL12:
+ 153:PSC_MAIN.c    ****     {
+ 169              		.loc 1 153 0
+ 170 0012 40B9     		cbnz	r0, .L22
+ 158:PSC_MAIN.c    ****     
+ 171              		.loc 1 158 0
+ 172 0014 0122     		movs	r2, #1
+ 173 0016 054B     		ldr	r3, .L25
+ 174 0018 83F83820 		strb	r2, [r3, #56]
+ 160:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 175              		.loc 1 160 0
+ 176 001c FFF7FEFF 		bl	psc_CmdHandle
+ 177              	.LVL13:
+ 161:PSC_MAIN.c    ****     {
+ 178              		.loc 1 161 0
+ 179 0020 10B9     		cbnz	r0, .L23
+ 180 0022 08BD     		pop	{r3, pc}
+ 181              	.L21:
+ 182 0024 08BD     		pop	{r3, pc}
+ 183              	.L22:
+ 184 0026 08BD     		pop	{r3, pc}
+ 185              	.L23:
+ 166:PSC_MAIN.c    **** 
+ 186              		.loc 1 166 0
+ 187 0028 08BD     		pop	{r3, pc}
+ 188              	.L26:
+ 189 002a 00BF     		.align	2
+ 190              	.L25:
+ 191 002c 00000000 		.word	.LANCHOR0
+ 192              		.cfi_endproc
+ 193              	.LFE66:
+ 194              		.size	psc_Main_Idle, .-psc_Main_Idle
+ 195              		.section	.text.psc_Main_Run,"ax",%progbits
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 8
+
+
+ 196              		.align	2
+ 197              		.global	psc_Main_Run
+ 198              		.thumb
+ 199              		.thumb_func
+ 200              		.type	psc_Main_Run, %function
+ 201              	psc_Main_Run:
+ 202              	.LFB68:
+ 196:PSC_MAIN.c    **** 
+ 197:PSC_MAIN.c    **** 
+ 198:PSC_MAIN.c    **** 
+ 199:PSC_MAIN.c    **** PSC_RET psc_Main_Run()
+ 200:PSC_MAIN.c    **** {
+ 203              		.loc 1 200 0
+ 204              		.cfi_startproc
+ 205              		@ args = 0, pretend = 0, frame = 0
+ 206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 207 0000 08B5     		push	{r3, lr}
+ 208              		.cfi_def_cfa_offset 8
+ 209              		.cfi_offset 3, -8
+ 210              		.cfi_offset 14, -4
+ 201:PSC_MAIN.c    ****     PSC_RET ret;
+ 202:PSC_MAIN.c    **** 
+ 203:PSC_MAIN.c    ****     
+ 204:PSC_MAIN.c    ****     if( psfPSC_PROC == null )
+ 211              		.loc 1 204 0
+ 212 0002 0A4B     		ldr	r3, .L33
+ 213 0004 DB6B     		ldr	r3, [r3, #60]
+ 214 0006 5BB1     		cbz	r3, .L29
+ 205:PSC_MAIN.c    ****     {
+ 206:PSC_MAIN.c    ****         return PSC_RET_SUCCESS;
+ 207:PSC_MAIN.c    ****     }
+ 208:PSC_MAIN.c    ****     
+ 209:PSC_MAIN.c    ****     ret = psfPSC_PROC(&sstPSC_COMMAND);
+ 215              		.loc 1 209 0
+ 216 0008 0848     		ldr	r0, .L33
+ 217 000a 9847     		blx	r3
+ 218              	.LVL14:
+ 210:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 219              		.loc 1 210 0
+ 220 000c 50B9     		cbnz	r0, .L30
+ 211:PSC_MAIN.c    ****     {
+ 212:PSC_MAIN.c    ****         return ret;
+ 213:PSC_MAIN.c    ****     }
+ 214:PSC_MAIN.c    ****     
+ 215:PSC_MAIN.c    ****     if( gsvPSC_PROC_STATE == PSC_PROC_SLEEP )
+ 221              		.loc 1 215 0
+ 222 000e 084B     		ldr	r3, .L33+4
+ 223 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 224 0012 012B     		cmp	r3, #1
+ 225 0014 07D1     		bne	.L31
+ 216:PSC_MAIN.c    ****     {
+ 217:PSC_MAIN.c    ****         psfPSC_PROC = null;
+ 226              		.loc 1 217 0
+ 227 0016 054B     		ldr	r3, .L33
+ 228 0018 D863     		str	r0, [r3, #60]
+ 218:PSC_MAIN.c    ****         svPSC_PROG_STATE = PSC_ST_IDLE;
+ 229              		.loc 1 218 0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 9
+
+
+ 230 001a 83F83800 		strb	r0, [r3, #56]
+ 219:PSC_MAIN.c    ****         return PSC_RET_SUCCESS;
+ 231              		.loc 1 219 0
+ 232 001e 08BD     		pop	{r3, pc}
+ 233              	.LVL15:
+ 234              	.L29:
+ 206:PSC_MAIN.c    ****     }
+ 235              		.loc 1 206 0
+ 236 0020 0020     		movs	r0, #0
+ 237 0022 08BD     		pop	{r3, pc}
+ 238              	.LVL16:
+ 239              	.L30:
+ 240 0024 08BD     		pop	{r3, pc}
+ 241              	.L31:
+ 220:PSC_MAIN.c    ****     }
+ 221:PSC_MAIN.c    ****     
+ 222:PSC_MAIN.c    **** //    ret = PSC_Comm_GetCommand(&sstPSC_COMMAND);
+ 223:PSC_MAIN.c    **** //    if( ret != PSC_RET_SUCCESS )
+ 224:PSC_MAIN.c    **** //    {
+ 225:PSC_MAIN.c    **** //        return ret;
+ 226:PSC_MAIN.c    **** //    }
+ 227:PSC_MAIN.c    ****     
+ 228:PSC_MAIN.c    ****     return PSC_RET_SUCCESS;
+ 242              		.loc 1 228 0
+ 243 0026 0020     		movs	r0, #0
+ 244              	.LVL17:
+ 229:PSC_MAIN.c    **** }...
+ 245              		.loc 1 229 0
+ 246 0028 08BD     		pop	{r3, pc}
+ 247              	.L34:
+ 248 002a 00BF     		.align	2
+ 249              	.L33:
+ 250 002c 00000000 		.word	.LANCHOR0
+ 251 0030 00000000 		.word	gsvPSC_PROC_STATE
+ 252              		.cfi_endproc
+ 253              	.LFE68:
+ 254              		.size	psc_Main_Run, .-psc_Main_Run
+ 255              		.section	.text.psc_Main,"ax",%progbits
+ 256              		.align	2
+ 257              		.global	psc_Main
+ 258              		.thumb
+ 259              		.thumb_func
+ 260              		.type	psc_Main, %function
+ 261              	psc_Main:
+ 262              	.LFB64:
+  77:PSC_MAIN.c    **** {
+ 263              		.loc 1 77 0
+ 264              		.cfi_startproc
+ 265              		@ args = 0, pretend = 0, frame = 0
+ 266              		@ frame_needed = 0, uses_anonymous_args = 0
+ 267 0000 08B5     		push	{r3, lr}
+ 268              		.cfi_def_cfa_offset 8
+ 269              		.cfi_offset 3, -8
+ 270              		.cfi_offset 14, -4
+  79:PSC_MAIN.c    ****     ret = psc_Initialize();
+ 271              		.loc 1 79 0
+ 272 0002 FFF7FEFF 		bl	psc_Initialize
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 10
+
+
+ 273              	.LVL18:
+  80:PSC_MAIN.c    ****     if( ret != PSC_RET_SUCCESS )
+ 274              		.loc 1 80 0
+ 275 0006 B0B9     		cbnz	r0, .L42
+ 276              	.L38:
+  87:PSC_MAIN.c    ****         switch(svPSC_PROG_STATE)
+ 277              		.loc 1 87 0
+ 278 0008 0B4B     		ldr	r3, .L44
+ 279 000a 93F83830 		ldrb	r3, [r3, #56]	@ zero_extendqisi2
+ 280 000e 13B1     		cbz	r3, .L39
+ 281 0010 012B     		cmp	r3, #1
+ 282 0012 08D0     		beq	.L40
+ 283 0014 F8E7     		b	.L38
+ 284              	.L39:
+  91:PSC_MAIN.c    ****                 DBG_printf("TRACE PSC_ST_ILDE \n\r");
+ 285              		.loc 1 91 0
+ 286 0016 0948     		ldr	r0, .L44+4
+ 287              	.LVL19:
+ 288 0018 FFF7FEFF 		bl	DBG_printf
+ 289              	.LVL20:
+  92:PSC_MAIN.c    ****                 ret = psc_Main_Idle();
+ 290              		.loc 1 92 0
+ 291 001c FFF7FEFF 		bl	psc_Main_Idle
+ 292              	.LVL21:
+  93:PSC_MAIN.c    ****                 if( ret != PSC_RET_SUCCESS )
+ 293              		.loc 1 93 0
+ 294 0020 0028     		cmp	r0, #0
+ 295 0022 F1D0     		beq	.L38
+  95:PSC_MAIN.c    ****                     return ret;
+ 296              		.loc 1 95 0
+ 297 0024 08BD     		pop	{r3, pc}
+ 298              	.L40:
+  99:PSC_MAIN.c    ****                 DBG_printf("TRACE PSC_ST_RUN \n\r");
+ 299              		.loc 1 99 0
+ 300 0026 0648     		ldr	r0, .L44+8
+ 301              	.LVL22:
+ 302 0028 FFF7FEFF 		bl	DBG_printf
+ 303              	.LVL23:
+ 100:PSC_MAIN.c    ****                 ret = psc_Main_Run();
+ 304              		.loc 1 100 0
+ 305 002c FFF7FEFF 		bl	psc_Main_Run
+ 306              	.LVL24:
+ 101:PSC_MAIN.c    ****                 if( ret != PSC_RET_SUCCESS )
+ 307              		.loc 1 101 0
+ 308 0030 0028     		cmp	r0, #0
+ 309 0032 E9D0     		beq	.L38
+ 103:PSC_MAIN.c    ****                     return ret;
+ 310              		.loc 1 103 0
+ 311 0034 08BD     		pop	{r3, pc}
+ 312              	.L42:
+ 112:PSC_MAIN.c    **** }
+ 313              		.loc 1 112 0
+ 314 0036 08BD     		pop	{r3, pc}
+ 315              	.L45:
+ 316              		.align	2
+ 317              	.L44:
+ 318 0038 00000000 		.word	.LANCHOR0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 11
+
+
+ 319 003c 00000000 		.word	.LC0
+ 320 0040 18000000 		.word	.LC1
+ 321              		.cfi_endproc
+ 322              	.LFE64:
+ 323              		.size	psc_Main, .-psc_Main
+ 324              		.section	.text.PSC_PROGRAM_START,"ax",%progbits
+ 325              		.align	2
+ 326              		.global	PSC_PROGRAM_START
+ 327              		.thumb
+ 328              		.thumb_func
+ 329              		.type	PSC_PROGRAM_START, %function
+ 330              	PSC_PROGRAM_START:
+ 331              	.LFB63:
+  67:PSC_MAIN.c    **** {
+ 332              		.loc 1 67 0
+ 333              		.cfi_startproc
+ 334              		@ args = 0, pretend = 0, frame = 0
+ 335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 336 0000 08B5     		push	{r3, lr}
+ 337              		.cfi_def_cfa_offset 8
+ 338              		.cfi_offset 3, -8
+ 339              		.cfi_offset 14, -4
+  68:PSC_MAIN.c    ****     if( psc_Main() != PSC_RET_SUCCESS )
+ 340              		.loc 1 68 0
+ 341 0002 FFF7FEFF 		bl	psc_Main
+ 342              	.LVL25:
+ 343 0006 08BD     		pop	{r3, pc}
+ 344              		.cfi_endproc
+ 345              	.LFE63:
+ 346              		.size	PSC_PROGRAM_START, .-PSC_PROGRAM_START
+ 347              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 348              		.align	2
+ 349              	.LC0:
+ 350 0000 54524143 		.ascii	"TRACE PSC_ST_ILDE \012\015\000"
+ 350      45205053 
+ 350      435F5354 
+ 350      5F494C44 
+ 350      45200A0D 
+ 351 0015 000000   		.space	3
+ 352              	.LC1:
+ 353 0018 54524143 		.ascii	"TRACE PSC_ST_RUN \012\015\000"
+ 353      45205053 
+ 353      435F5354 
+ 353      5F52554E 
+ 353      200A0D00 
+ 354              		.bss
+ 355              		.align	2
+ 356              		.set	.LANCHOR0,. + 0
+ 357              		.type	sstPSC_COMMAND, %object
+ 358              		.size	sstPSC_COMMAND, 56
+ 359              	sstPSC_COMMAND:
+ 360 0000 00000000 		.space	56
+ 360      00000000 
+ 360      00000000 
+ 360      00000000 
+ 360      00000000 
+ 361              		.type	svPSC_PROG_STATE, %object
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 12
+
+
+ 362              		.size	svPSC_PROG_STATE, 1
+ 363              	svPSC_PROG_STATE:
+ 364 0038 00       		.space	1
+ 365              		.type	svPSC_INTR_STATE, %object
+ 366              		.size	svPSC_INTR_STATE, 1
+ 367              	svPSC_INTR_STATE:
+ 368 0039 00       		.space	1
+ 369 003a 0000     		.space	2
+ 370              		.type	psfPSC_PROC, %object
+ 371              		.size	psfPSC_PROC, 4
+ 372              	psfPSC_PROC:
+ 373 003c 00000000 		.space	4
+ 374              		.text
+ 375              	.Letext0:
+ 376              		.file 2 "PSC_Types.h"
+ 377              		.file 3 "PSC_CMD_API.h"
+ 378              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 379              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 380              		.file 6 "PSC_Proc_Common.h"
+ 381              		.file 7 "Generated_Source\\PSoC5/core_cm3.h"
+ 382              		.file 8 "PSC_Proc_CameraShot.h"
+ 383              		.file 9 "PSC_Communicate.h"
+ 384              		.file 10 "Debugs.h"
+ 385              		.section	.debug_info,"",%progbits
+ 386              	.Ldebug_info0:
+ 387 0000 B0050000 		.4byte	0x5b0
+ 388 0004 0400     		.2byte	0x4
+ 389 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 390 000a 04       		.byte	0x4
+ 391 000b 01       		.uleb128 0x1
+ 392 000c 0E030000 		.4byte	.LASF83
+ 393 0010 01       		.byte	0x1
+ 394 0011 50010000 		.4byte	.LASF84
+ 395 0015 1C040000 		.4byte	.LASF85
+ 396 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 397 001d 00000000 		.4byte	0
+ 398 0021 00000000 		.4byte	.Ldebug_line0
+ 399 0025 02       		.uleb128 0x2
+ 400 0026 9C030000 		.4byte	.LASF0
+ 401 002a 02       		.byte	0x2
+ 402 002b 22       		.byte	0x22
+ 403 002c 30000000 		.4byte	0x30
+ 404 0030 03       		.uleb128 0x3
+ 405 0031 04       		.byte	0x4
+ 406 0032 07       		.byte	0x7
+ 407 0033 B7020000 		.4byte	.LASF2
+ 408 0037 02       		.uleb128 0x2
+ 409 0038 79040000 		.4byte	.LASF1
+ 410 003c 02       		.byte	0x2
+ 411 003d 23       		.byte	0x23
+ 412 003e 42000000 		.4byte	0x42
+ 413 0042 03       		.uleb128 0x3
+ 414 0043 01       		.byte	0x1
+ 415 0044 08       		.byte	0x8
+ 416 0045 3E020000 		.4byte	.LASF3
+ 417 0049 04       		.uleb128 0x4
+ 418 004a B9040000 		.4byte	.LASF7
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 13
+
+
+ 419 004e 01       		.byte	0x1
+ 420 004f 02       		.byte	0x2
+ 421 0050 25       		.byte	0x25
+ 422 0051 62000000 		.4byte	0x62
+ 423 0055 05       		.uleb128 0x5
+ 424 0056 C3030000 		.4byte	.LASF4
+ 425 005a 00       		.sleb128 0
+ 426 005b 05       		.uleb128 0x5
+ 427 005c 34050000 		.4byte	.LASF5
+ 428 0060 01       		.sleb128 1
+ 429 0061 00       		.byte	0
+ 430 0062 02       		.uleb128 0x2
+ 431 0063 1A020000 		.4byte	.LASF6
+ 432 0067 02       		.byte	0x2
+ 433 0068 29       		.byte	0x29
+ 434 0069 49000000 		.4byte	0x49
+ 435 006d 04       		.uleb128 0x4
+ 436 006e E7040000 		.4byte	.LASF8
+ 437 0072 01       		.byte	0x1
+ 438 0073 02       		.byte	0x2
+ 439 0074 2B       		.byte	0x2b
+ 440 0075 8C000000 		.4byte	0x8c
+ 441 0079 05       		.uleb128 0x5
+ 442 007a D5020000 		.4byte	.LASF9
+ 443 007e 00       		.sleb128 0
+ 444 007f 05       		.uleb128 0x5
+ 445 0080 4C020000 		.4byte	.LASF10
+ 446 0084 01       		.sleb128 1
+ 447 0085 05       		.uleb128 0x5
+ 448 0086 ED010000 		.4byte	.LASF11
+ 449 008a 02       		.sleb128 2
+ 450 008b 00       		.byte	0
+ 451 008c 02       		.uleb128 0x2
+ 452 008d 57000000 		.4byte	.LASF12
+ 453 0091 02       		.byte	0x2
+ 454 0092 30       		.byte	0x30
+ 455 0093 6D000000 		.4byte	0x6d
+ 456 0097 04       		.uleb128 0x4
+ 457 0098 F8000000 		.4byte	.LASF13
+ 458 009c 01       		.byte	0x1
+ 459 009d 02       		.byte	0x2
+ 460 009e 32       		.byte	0x32
+ 461 009f C8000000 		.4byte	0xc8
+ 462 00a3 05       		.uleb128 0x5
+ 463 00a4 69020000 		.4byte	.LASF14
+ 464 00a8 00       		.sleb128 0
+ 465 00a9 05       		.uleb128 0x5
+ 466 00aa 03010000 		.4byte	.LASF15
+ 467 00ae 01       		.sleb128 1
+ 468 00af 05       		.uleb128 0x5
+ 469 00b0 68000000 		.4byte	.LASF16
+ 470 00b4 02       		.sleb128 2
+ 471 00b5 05       		.uleb128 0x5
+ 472 00b6 9D040000 		.4byte	.LASF17
+ 473 00ba 03       		.sleb128 3
+ 474 00bb 05       		.uleb128 0x5
+ 475 00bc 1A010000 		.4byte	.LASF18
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 14
+
+
+ 476 00c0 04       		.sleb128 4
+ 477 00c1 05       		.uleb128 0x5
+ 478 00c2 9B020000 		.4byte	.LASF19
+ 479 00c6 05       		.sleb128 5
+ 480 00c7 00       		.byte	0
+ 481 00c8 02       		.uleb128 0x2
+ 482 00c9 2E010000 		.4byte	.LASF20
+ 483 00cd 02       		.byte	0x2
+ 484 00ce 3A       		.byte	0x3a
+ 485 00cf 97000000 		.4byte	0x97
+ 486 00d3 06       		.uleb128 0x6
+ 487 00d4 C5040000 		.4byte	.LASF28
+ 488 00d8 07       		.byte	0x7
+ 489 00d9 03       		.byte	0x3
+ 490 00da 1F       		.byte	0x1f
+ 491 00db 1C010000 		.4byte	0x11c
+ 492 00df 07       		.uleb128 0x7
+ 493 00e0 36010000 		.4byte	.LASF21
+ 494 00e4 03       		.byte	0x3
+ 495 00e5 21       		.byte	0x21
+ 496 00e6 62000000 		.4byte	0x62
+ 497 00ea 00       		.byte	0
+ 498 00eb 07       		.uleb128 0x7
+ 499 00ec 02030000 		.4byte	.LASF22
+ 500 00f0 03       		.byte	0x3
+ 501 00f1 22       		.byte	0x22
+ 502 00f2 62000000 		.4byte	0x62
+ 503 00f6 01       		.byte	0x1
+ 504 00f7 07       		.uleb128 0x7
+ 505 00f8 42000000 		.4byte	.LASF23
+ 506 00fc 03       		.byte	0x3
+ 507 00fd 23       		.byte	0x23
+ 508 00fe 62000000 		.4byte	0x62
+ 509 0102 02       		.byte	0x2
+ 510 0103 07       		.uleb128 0x7
+ 511 0104 03050000 		.4byte	.LASF24
+ 512 0108 03       		.byte	0x3
+ 513 0109 24       		.byte	0x24
+ 514 010a 42000000 		.4byte	0x42
+ 515 010e 03       		.byte	0x3
+ 516 010f 07       		.uleb128 0x7
+ 517 0110 3D010000 		.4byte	.LASF25
+ 518 0114 03       		.byte	0x3
+ 519 0115 25       		.byte	0x25
+ 520 0116 1C010000 		.4byte	0x11c
+ 521 011a 04       		.byte	0x4
+ 522 011b 00       		.byte	0
+ 523 011c 08       		.uleb128 0x8
+ 524 011d 62000000 		.4byte	0x62
+ 525 0121 2C010000 		.4byte	0x12c
+ 526 0125 09       		.uleb128 0x9
+ 527 0126 2C010000 		.4byte	0x12c
+ 528 012a 02       		.byte	0x2
+ 529 012b 00       		.byte	0
+ 530 012c 03       		.uleb128 0x3
+ 531 012d 04       		.byte	0x4
+ 532 012e 07       		.byte	0x7
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 15
+
+
+ 533 012f F8010000 		.4byte	.LASF26
+ 534 0133 02       		.uleb128 0x2
+ 535 0134 57020000 		.4byte	.LASF27
+ 536 0138 03       		.byte	0x3
+ 537 0139 27       		.byte	0x27
+ 538 013a D3000000 		.4byte	0xd3
+ 539 013e 06       		.uleb128 0x6
+ 540 013f 92000000 		.4byte	.LASF29
+ 541 0143 34       		.byte	0x34
+ 542 0144 03       		.byte	0x3
+ 543 0145 29       		.byte	0x29
+ 544 0146 7B010000 		.4byte	0x17b
+ 545 014a 07       		.uleb128 0x7
+ 546 014b DA040000 		.4byte	.LASF30
+ 547 014f 03       		.byte	0x3
+ 548 0150 2B       		.byte	0x2b
+ 549 0151 42000000 		.4byte	0x42
+ 550 0155 00       		.byte	0
+ 551 0156 07       		.uleb128 0x7
+ 552 0157 58050000 		.4byte	.LASF31
+ 553 015b 03       		.byte	0x3
+ 554 015c 2C       		.byte	0x2c
+ 555 015d 25000000 		.4byte	0x25
+ 556 0161 04       		.byte	0x4
+ 557 0162 07       		.uleb128 0x7
+ 558 0163 DF000000 		.4byte	.LASF32
+ 559 0167 03       		.byte	0x3
+ 560 0168 2D       		.byte	0x2d
+ 561 0169 7B010000 		.4byte	0x17b
+ 562 016d 08       		.byte	0x8
+ 563 016e 07       		.uleb128 0x7
+ 564 016f 60050000 		.4byte	.LASF33
+ 565 0173 03       		.byte	0x3
+ 566 0174 2E       		.byte	0x2e
+ 567 0175 33010000 		.4byte	0x133
+ 568 0179 2C       		.byte	0x2c
+ 569 017a 00       		.byte	0
+ 570 017b 08       		.uleb128 0x8
+ 571 017c 37000000 		.4byte	0x37
+ 572 0180 8B010000 		.4byte	0x18b
+ 573 0184 09       		.uleb128 0x9
+ 574 0185 2C010000 		.4byte	0x12c
+ 575 0189 23       		.byte	0x23
+ 576 018a 00       		.byte	0
+ 577 018b 02       		.uleb128 0x2
+ 578 018c D2030000 		.4byte	.LASF34
+ 579 0190 03       		.byte	0x3
+ 580 0191 2F       		.byte	0x2f
+ 581 0192 3E010000 		.4byte	0x13e
+ 582 0196 06       		.uleb128 0x6
+ 583 0197 4D050000 		.4byte	.LASF35
+ 584 019b 38       		.byte	0x38
+ 585 019c 03       		.byte	0x3
+ 586 019d 33       		.byte	0x33
+ 587 019e BB010000 		.4byte	0x1bb
+ 588 01a2 07       		.uleb128 0x7
+ 589 01a3 2C000000 		.4byte	.LASF36
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 16
+
+
+ 590 01a7 03       		.byte	0x3
+ 591 01a8 35       		.byte	0x35
+ 592 01a9 8C000000 		.4byte	0x8c
+ 593 01ad 00       		.byte	0
+ 594 01ae 07       		.uleb128 0x7
+ 595 01af 23020000 		.4byte	.LASF37
+ 596 01b3 03       		.byte	0x3
+ 597 01b4 36       		.byte	0x36
+ 598 01b5 8B010000 		.4byte	0x18b
+ 599 01b9 04       		.byte	0x4
+ 600 01ba 00       		.byte	0
+ 601 01bb 02       		.uleb128 0x2
+ 602 01bc 42050000 		.4byte	.LASF38
+ 603 01c0 03       		.byte	0x3
+ 604 01c1 37       		.byte	0x37
+ 605 01c2 96010000 		.4byte	0x196
+ 606 01c6 03       		.uleb128 0x3
+ 607 01c7 01       		.byte	0x1
+ 608 01c8 06       		.byte	0x6
+ 609 01c9 79020000 		.4byte	.LASF39
+ 610 01cd 03       		.uleb128 0x3
+ 611 01ce 02       		.byte	0x2
+ 612 01cf 05       		.byte	0x5
+ 613 01d0 4D000000 		.4byte	.LASF40
+ 614 01d4 03       		.uleb128 0x3
+ 615 01d5 02       		.byte	0x2
+ 616 01d6 07       		.byte	0x7
+ 617 01d7 B0030000 		.4byte	.LASF41
+ 618 01db 02       		.uleb128 0x2
+ 619 01dc 82040000 		.4byte	.LASF42
+ 620 01e0 04       		.byte	0x4
+ 621 01e1 3F       		.byte	0x3f
+ 622 01e2 E6010000 		.4byte	0x1e6
+ 623 01e6 03       		.uleb128 0x3
+ 624 01e7 04       		.byte	0x4
+ 625 01e8 05       		.byte	0x5
+ 626 01e9 E4010000 		.4byte	.LASF43
+ 627 01ed 03       		.uleb128 0x3
+ 628 01ee 04       		.byte	0x4
+ 629 01ef 07       		.byte	0x7
+ 630 01f0 54040000 		.4byte	.LASF44
+ 631 01f4 03       		.uleb128 0x3
+ 632 01f5 08       		.byte	0x8
+ 633 01f6 05       		.byte	0x5
+ 634 01f7 B1010000 		.4byte	.LASF45
+ 635 01fb 03       		.uleb128 0x3
+ 636 01fc 08       		.byte	0x8
+ 637 01fd 07       		.byte	0x7
+ 638 01fe BF010000 		.4byte	.LASF46
+ 639 0202 0A       		.uleb128 0xa
+ 640 0203 04       		.byte	0x4
+ 641 0204 05       		.byte	0x5
+ 642 0205 696E7400 		.ascii	"int\000"
+ 643 0209 02       		.uleb128 0x2
+ 644 020a A8030000 		.4byte	.LASF47
+ 645 020e 05       		.byte	0x5
+ 646 020f 2C       		.byte	0x2c
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 17
+
+
+ 647 0210 DB010000 		.4byte	0x1db
+ 648 0214 03       		.uleb128 0x3
+ 649 0215 04       		.byte	0x4
+ 650 0216 04       		.byte	0x4
+ 651 0217 AB010000 		.4byte	.LASF48
+ 652 021b 03       		.uleb128 0x3
+ 653 021c 08       		.byte	0x8
+ 654 021d 04       		.byte	0x4
+ 655 021e D8000000 		.4byte	.LASF49
+ 656 0222 03       		.uleb128 0x3
+ 657 0223 01       		.byte	0x1
+ 658 0224 08       		.byte	0x8
+ 659 0225 09030000 		.4byte	.LASF50
+ 660 0229 0B       		.uleb128 0xb
+ 661 022a 04       		.byte	0x4
+ 662 022b 22020000 		.4byte	0x222
+ 663 022f 04       		.uleb128 0x4
+ 664 0230 F0020000 		.4byte	.LASF51
+ 665 0234 01       		.byte	0x1
+ 666 0235 06       		.byte	0x6
+ 667 0236 13       		.byte	0x13
+ 668 0237 48020000 		.4byte	0x248
+ 669 023b 05       		.uleb128 0x5
+ 670 023c 01020000 		.4byte	.LASF52
+ 671 0240 00       		.sleb128 0
+ 672 0241 05       		.uleb128 0x5
+ 673 0242 E3030000 		.4byte	.LASF53
+ 674 0246 01       		.sleb128 1
+ 675 0247 00       		.byte	0
+ 676 0248 02       		.uleb128 0x2
+ 677 0249 E9000000 		.4byte	.LASF54
+ 678 024d 06       		.byte	0x6
+ 679 024e 17       		.byte	0x17
+ 680 024f 2F020000 		.4byte	0x22f
+ 681 0253 04       		.uleb128 0x4
+ 682 0254 0F040000 		.4byte	.LASF55
+ 683 0258 01       		.byte	0x1
+ 684 0259 01       		.byte	0x1
+ 685 025a 1A       		.byte	0x1a
+ 686 025b 72020000 		.4byte	0x272
+ 687 025f 05       		.uleb128 0x5
+ 688 0260 AB020000 		.4byte	.LASF56
+ 689 0264 00       		.sleb128 0
+ 690 0265 05       		.uleb128 0x5
+ 691 0266 33020000 		.4byte	.LASF57
+ 692 026a 01       		.sleb128 1
+ 693 026b 05       		.uleb128 0x5
+ 694 026c F2030000 		.4byte	.LASF58
+ 695 0270 02       		.sleb128 2
+ 696 0271 00       		.byte	0
+ 697 0272 02       		.uleb128 0x2
+ 698 0273 5E000000 		.4byte	.LASF59
+ 699 0277 01       		.byte	0x1
+ 700 0278 20       		.byte	0x20
+ 701 0279 53020000 		.4byte	0x253
+ 702 027d 04       		.uleb128 0x4
+ 703 027e A6000000 		.4byte	.LASF60
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 18
+
+
+ 704 0282 01       		.byte	0x1
+ 705 0283 01       		.byte	0x1
+ 706 0284 22       		.byte	0x22
+ 707 0285 9C020000 		.4byte	0x29c
+ 708 0289 05       		.uleb128 0x5
+ 709 028a 69010000 		.4byte	.LASF61
+ 710 028e 00       		.sleb128 0
+ 711 028f 05       		.uleb128 0x5
+ 712 0290 66040000 		.4byte	.LASF62
+ 713 0294 01       		.sleb128 1
+ 714 0295 05       		.uleb128 0x5
+ 715 0296 1C000000 		.4byte	.LASF63
+ 716 029a 02       		.sleb128 2
+ 717 029b 00       		.byte	0
+ 718 029c 02       		.uleb128 0x2
+ 719 029d E1020000 		.4byte	.LASF64
+ 720 02a1 01       		.byte	0x1
+ 721 02a2 28       		.byte	0x28
+ 722 02a3 7D020000 		.4byte	0x27d
+ 723 02a7 0C       		.uleb128 0xc
+ 724 02a8 C8000000 		.4byte	0xc8
+ 725 02ac B6020000 		.4byte	0x2b6
+ 726 02b0 0D       		.uleb128 0xd
+ 727 02b1 B6020000 		.4byte	0x2b6
+ 728 02b5 00       		.byte	0
+ 729 02b6 0B       		.uleb128 0xb
+ 730 02b7 04       		.byte	0x4
+ 731 02b8 BB010000 		.4byte	0x1bb
+ 732 02bc 0B       		.uleb128 0xb
+ 733 02bd 04       		.byte	0x4
+ 734 02be A7020000 		.4byte	0x2a7
+ 735 02c2 0E       		.uleb128 0xe
+ 736 02c3 33000000 		.4byte	.LASF65
+ 737 02c7 01       		.byte	0x1
+ 738 02c8 74       		.byte	0x74
+ 739 02c9 C8000000 		.4byte	0xc8
+ 740 02cd 00000000 		.4byte	.LFB65
+ 741 02d1 2C000000 		.4byte	.LFE65-.LFB65
+ 742 02d5 01       		.uleb128 0x1
+ 743 02d6 9C       		.byte	0x9c
+ 744 02d7 14030000 		.4byte	0x314
+ 745 02db 0F       		.uleb128 0xf
+ 746 02dc 72657400 		.ascii	"ret\000"
+ 747 02e0 01       		.byte	0x1
+ 748 02e1 76       		.byte	0x76
+ 749 02e2 C8000000 		.4byte	0xc8
+ 750 02e6 00000000 		.4byte	.LLST0
+ 751 02ea 10       		.uleb128 0x10
+ 752 02eb 06000000 		.4byte	.LVL0
+ 753 02ef 09050000 		.4byte	0x509
+ 754 02f3 11       		.uleb128 0x11
+ 755 02f4 0C000000 		.4byte	.LVL1
+ 756 02f8 16050000 		.4byte	0x516
+ 757 02fc 0A030000 		.4byte	0x30a
+ 758 0300 12       		.uleb128 0x12
+ 759 0301 01       		.uleb128 0x1
+ 760 0302 50       		.byte	0x50
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 19
+
+
+ 761 0303 05       		.uleb128 0x5
+ 762 0304 03       		.byte	0x3
+ 763 0305 00000000 		.4byte	.LANCHOR0
+ 764 0309 00       		.byte	0
+ 765 030a 10       		.uleb128 0x10
+ 766 030b 12000000 		.4byte	.LVL2
+ 767 030f 2B050000 		.4byte	0x52b
+ 768 0313 00       		.byte	0
+ 769 0314 0E       		.uleb128 0xe
+ 770 0315 D6010000 		.4byte	.LASF66
+ 771 0319 01       		.byte	0x1
+ 772 031a A8       		.byte	0xa8
+ 773 031b C8000000 		.4byte	0xc8
+ 774 031f 00000000 		.4byte	.LFB67
+ 775 0323 44000000 		.4byte	.LFE67-.LFB67
+ 776 0327 01       		.uleb128 0x1
+ 777 0328 9C       		.byte	0x9c
+ 778 0329 7B030000 		.4byte	0x37b
+ 779 032d 0F       		.uleb128 0xf
+ 780 032e 72657400 		.ascii	"ret\000"
+ 781 0332 01       		.byte	0x1
+ 782 0333 AA       		.byte	0xaa
+ 783 0334 C8000000 		.4byte	0xc8
+ 784 0338 1E000000 		.4byte	.LLST1
+ 785 033c 13       		.uleb128 0x13
+ 786 033d 636D6400 		.ascii	"cmd\000"
+ 787 0341 01       		.byte	0x1
+ 788 0342 AB       		.byte	0xab
+ 789 0343 25000000 		.4byte	0x25
+ 790 0347 02       		.uleb128 0x2
+ 791 0348 91       		.byte	0x91
+ 792 0349 74       		.sleb128 -12
+ 793 034a 11       		.uleb128 0x11
+ 794 034b 0C000000 		.4byte	.LVL3
+ 795 034f 3C050000 		.4byte	0x53c
+ 796 0353 67030000 		.4byte	0x367
+ 797 0357 12       		.uleb128 0x12
+ 798 0358 01       		.uleb128 0x1
+ 799 0359 51       		.byte	0x51
+ 800 035a 02       		.uleb128 0x2
+ 801 035b 91       		.byte	0x91
+ 802 035c 74       		.sleb128 -12
+ 803 035d 12       		.uleb128 0x12
+ 804 035e 01       		.uleb128 0x1
+ 805 035f 50       		.byte	0x50
+ 806 0360 05       		.uleb128 0x5
+ 807 0361 03       		.byte	0x3
+ 808 0362 00000000 		.4byte	.LANCHOR0
+ 809 0366 00       		.byte	0
+ 810 0367 14       		.uleb128 0x14
+ 811 0368 20000000 		.4byte	.LVL5
+ 812 036c 5C050000 		.4byte	0x55c
+ 813 0370 12       		.uleb128 0x12
+ 814 0371 01       		.uleb128 0x1
+ 815 0372 50       		.byte	0x50
+ 816 0373 05       		.uleb128 0x5
+ 817 0374 03       		.byte	0x3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 20
+
+
+ 818 0375 3C000000 		.4byte	.LANCHOR0+60
+ 819 0379 00       		.byte	0
+ 820 037a 00       		.byte	0
+ 821 037b 0E       		.uleb128 0xe
+ 822 037c 5B010000 		.4byte	.LASF67
+ 823 0380 01       		.byte	0x1
+ 824 0381 8E       		.byte	0x8e
+ 825 0382 C8000000 		.4byte	0xc8
+ 826 0386 00000000 		.4byte	.LFB66
+ 827 038a 30000000 		.4byte	.LFE66-.LFB66
+ 828 038e 01       		.uleb128 0x1
+ 829 038f 9C       		.byte	0x9c
+ 830 0390 E0030000 		.4byte	0x3e0
+ 831 0394 0F       		.uleb128 0xf
+ 832 0395 72657400 		.ascii	"ret\000"
+ 833 0399 01       		.byte	0x1
+ 834 039a 90       		.byte	0x90
+ 835 039b C8000000 		.4byte	0xc8
+ 836 039f 47000000 		.4byte	.LLST2
+ 837 03a3 11       		.uleb128 0x11
+ 838 03a4 0A000000 		.4byte	.LVL10
+ 839 03a8 77050000 		.4byte	0x577
+ 840 03ac BF030000 		.4byte	0x3bf
+ 841 03b0 12       		.uleb128 0x12
+ 842 03b1 01       		.uleb128 0x1
+ 843 03b2 51       		.byte	0x51
+ 844 03b3 01       		.uleb128 0x1
+ 845 03b4 30       		.byte	0x30
+ 846 03b5 12       		.uleb128 0x12
+ 847 03b6 01       		.uleb128 0x1
+ 848 03b7 50       		.byte	0x50
+ 849 03b8 05       		.uleb128 0x5
+ 850 03b9 03       		.byte	0x3
+ 851 03ba 00000000 		.4byte	.LANCHOR0
+ 852 03be 00       		.byte	0
+ 853 03bf 11       		.uleb128 0x11
+ 854 03c0 12000000 		.4byte	.LVL12
+ 855 03c4 91050000 		.4byte	0x591
+ 856 03c8 D6030000 		.4byte	0x3d6
+ 857 03cc 12       		.uleb128 0x12
+ 858 03cd 01       		.uleb128 0x1
+ 859 03ce 50       		.byte	0x50
+ 860 03cf 05       		.uleb128 0x5
+ 861 03d0 03       		.byte	0x3
+ 862 03d1 00000000 		.4byte	.LANCHOR0
+ 863 03d5 00       		.byte	0
+ 864 03d6 10       		.uleb128 0x10
+ 865 03d7 20000000 		.4byte	.LVL13
+ 866 03db 14030000 		.4byte	0x314
+ 867 03df 00       		.byte	0
+ 868 03e0 0E       		.uleb128 0xe
+ 869 03e1 0F000000 		.4byte	.LASF68
+ 870 03e5 01       		.byte	0x1
+ 871 03e6 C7       		.byte	0xc7
+ 872 03e7 C8000000 		.4byte	0xc8
+ 873 03eb 00000000 		.4byte	.LFB68
+ 874 03ef 34000000 		.4byte	.LFE68-.LFB68
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 21
+
+
+ 875 03f3 01       		.uleb128 0x1
+ 876 03f4 9C       		.byte	0x9c
+ 877 03f5 18040000 		.4byte	0x418
+ 878 03f9 0F       		.uleb128 0xf
+ 879 03fa 72657400 		.ascii	"ret\000"
+ 880 03fe 01       		.byte	0x1
+ 881 03ff C9       		.byte	0xc9
+ 882 0400 C8000000 		.4byte	0xc8
+ 883 0404 70000000 		.4byte	.LLST3
+ 884 0408 15       		.uleb128 0x15
+ 885 0409 0C000000 		.4byte	.LVL14
+ 886 040d 12       		.uleb128 0x12
+ 887 040e 01       		.uleb128 0x1
+ 888 040f 50       		.byte	0x50
+ 889 0410 05       		.uleb128 0x5
+ 890 0411 03       		.byte	0x3
+ 891 0412 00000000 		.4byte	.LANCHOR0
+ 892 0416 00       		.byte	0
+ 893 0417 00       		.byte	0
+ 894 0418 0E       		.uleb128 0xe
+ 895 0419 11020000 		.4byte	.LASF69
+ 896 041d 01       		.byte	0x1
+ 897 041e 4C       		.byte	0x4c
+ 898 041f C8000000 		.4byte	0xc8
+ 899 0423 00000000 		.4byte	.LFB64
+ 900 0427 44000000 		.4byte	.LFE64-.LFB64
+ 901 042b 01       		.uleb128 0x1
+ 902 042c 9C       		.byte	0x9c
+ 903 042d 8A040000 		.4byte	0x48a
+ 904 0431 0F       		.uleb128 0xf
+ 905 0432 72657400 		.ascii	"ret\000"
+ 906 0436 01       		.byte	0x1
+ 907 0437 4E       		.byte	0x4e
+ 908 0438 C8000000 		.4byte	0xc8
+ 909 043c 8E000000 		.4byte	.LLST4
+ 910 0440 10       		.uleb128 0x10
+ 911 0441 06000000 		.4byte	.LVL18
+ 912 0445 C2020000 		.4byte	0x2c2
+ 913 0449 11       		.uleb128 0x11
+ 914 044a 1C000000 		.4byte	.LVL20
+ 915 044e A6050000 		.4byte	0x5a6
+ 916 0452 60040000 		.4byte	0x460
+ 917 0456 12       		.uleb128 0x12
+ 918 0457 01       		.uleb128 0x1
+ 919 0458 50       		.byte	0x50
+ 920 0459 05       		.uleb128 0x5
+ 921 045a 03       		.byte	0x3
+ 922 045b 00000000 		.4byte	.LC0
+ 923 045f 00       		.byte	0
+ 924 0460 10       		.uleb128 0x10
+ 925 0461 20000000 		.4byte	.LVL21
+ 926 0465 7B030000 		.4byte	0x37b
+ 927 0469 11       		.uleb128 0x11
+ 928 046a 2C000000 		.4byte	.LVL23
+ 929 046e A6050000 		.4byte	0x5a6
+ 930 0472 80040000 		.4byte	0x480
+ 931 0476 12       		.uleb128 0x12
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 22
+
+
+ 932 0477 01       		.uleb128 0x1
+ 933 0478 50       		.byte	0x50
+ 934 0479 05       		.uleb128 0x5
+ 935 047a 03       		.byte	0x3
+ 936 047b 18000000 		.4byte	.LC1
+ 937 047f 00       		.byte	0
+ 938 0480 10       		.uleb128 0x10
+ 939 0481 30000000 		.4byte	.LVL24
+ 940 0485 E0030000 		.4byte	0x3e0
+ 941 0489 00       		.byte	0
+ 942 048a 16       		.uleb128 0x16
+ 943 048b F1040000 		.4byte	.LASF86
+ 944 048f 01       		.byte	0x1
+ 945 0490 42       		.byte	0x42
+ 946 0491 00000000 		.4byte	.LFB63
+ 947 0495 08000000 		.4byte	.LFE63-.LFB63
+ 948 0499 01       		.uleb128 0x1
+ 949 049a 9C       		.byte	0x9c
+ 950 049b A9040000 		.4byte	0x4a9
+ 951 049f 10       		.uleb128 0x10
+ 952 04a0 06000000 		.4byte	.LVL25
+ 953 04a4 18040000 		.4byte	0x418
+ 954 04a8 00       		.byte	0
+ 955 04a9 17       		.uleb128 0x17
+ 956 04aa 8C040000 		.4byte	.LASF70
+ 957 04ae 01       		.byte	0x1
+ 958 04af 3D       		.byte	0x3d
+ 959 04b0 72020000 		.4byte	0x272
+ 960 04b4 05       		.uleb128 0x5
+ 961 04b5 03       		.byte	0x3
+ 962 04b6 38000000 		.4byte	svPSC_PROG_STATE
+ 963 04ba 17       		.uleb128 0x17
+ 964 04bb C4020000 		.4byte	.LASF71
+ 965 04bf 01       		.byte	0x1
+ 966 04c0 3E       		.byte	0x3e
+ 967 04c1 9C020000 		.4byte	0x29c
+ 968 04c5 05       		.uleb128 0x5
+ 969 04c6 03       		.byte	0x3
+ 970 04c7 39000000 		.4byte	svPSC_INTR_STATE
+ 971 04cb 17       		.uleb128 0x17
+ 972 04cc 00000000 		.4byte	.LASF72
+ 973 04d0 01       		.byte	0x1
+ 974 04d1 3F       		.byte	0x3f
+ 975 04d2 BB010000 		.4byte	0x1bb
+ 976 04d6 05       		.uleb128 0x5
+ 977 04d7 03       		.byte	0x3
+ 978 04d8 00000000 		.4byte	sstPSC_COMMAND
+ 979 04dc 17       		.uleb128 0x17
+ 980 04dd CC000000 		.4byte	.LASF73
+ 981 04e1 01       		.byte	0x1
+ 982 04e2 40       		.byte	0x40
+ 983 04e3 BC020000 		.4byte	0x2bc
+ 984 04e7 05       		.uleb128 0x5
+ 985 04e8 03       		.byte	0x3
+ 986 04e9 3C000000 		.4byte	psfPSC_PROC
+ 987 04ed 18       		.uleb128 0x18
+ 988 04ee 13050000 		.4byte	.LASF74
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 23
+
+
+ 989 04f2 07       		.byte	0x7
+ 990 04f3 9606     		.2byte	0x696
+ 991 04f5 F9040000 		.4byte	0x4f9
+ 992 04f9 19       		.uleb128 0x19
+ 993 04fa 09020000 		.4byte	0x209
+ 994 04fe 1A       		.uleb128 0x1a
+ 995 04ff FD030000 		.4byte	.LASF75
+ 996 0503 06       		.byte	0x6
+ 997 0504 19       		.byte	0x19
+ 998 0505 48020000 		.4byte	0x248
+ 999 0509 1B       		.uleb128 0x1b
+ 1000 050a B0040000 		.4byte	.LASF81
+ 1001 050e 0A       		.byte	0xa
+ 1002 050f 12       		.byte	0x12
+ 1003 0510 16050000 		.4byte	0x516
+ 1004 0514 1C       		.uleb128 0x1c
+ 1005 0515 00       		.byte	0
+ 1006 0516 1D       		.uleb128 0x1d
+ 1007 0517 94010000 		.4byte	.LASF76
+ 1008 051b 03       		.byte	0x3
+ 1009 051c 3B       		.byte	0x3b
+ 1010 051d C8000000 		.4byte	0xc8
+ 1011 0521 2B050000 		.4byte	0x52b
+ 1012 0525 0D       		.uleb128 0xd
+ 1013 0526 B6020000 		.4byte	0x2b6
+ 1014 052a 00       		.byte	0
+ 1015 052b 1E       		.uleb128 0x1e
+ 1016 052c 20050000 		.4byte	.LASF87
+ 1017 0530 09       		.byte	0x9
+ 1018 0531 17       		.byte	0x17
+ 1019 0532 C8000000 		.4byte	0xc8
+ 1020 0536 3C050000 		.4byte	0x53c
+ 1021 053a 1C       		.uleb128 0x1c
+ 1022 053b 00       		.byte	0
+ 1023 053c 1D       		.uleb128 0x1d
+ 1024 053d 7E000000 		.4byte	.LASF77
+ 1025 0541 03       		.byte	0x3
+ 1026 0542 41       		.byte	0x41
+ 1027 0543 C8000000 		.4byte	0xc8
+ 1028 0547 56050000 		.4byte	0x556
+ 1029 054b 0D       		.uleb128 0xd
+ 1030 054c B6020000 		.4byte	0x2b6
+ 1031 0550 0D       		.uleb128 0xd
+ 1032 0551 56050000 		.4byte	0x556
+ 1033 0555 00       		.byte	0
+ 1034 0556 0B       		.uleb128 0xb
+ 1035 0557 04       		.byte	0x4
+ 1036 0558 25000000 		.4byte	0x25
+ 1037 055c 1D       		.uleb128 0x1d
+ 1038 055d 7B010000 		.4byte	.LASF78
+ 1039 0561 08       		.byte	0x8
+ 1040 0562 16       		.byte	0x16
+ 1041 0563 C8000000 		.4byte	0xc8
+ 1042 0567 71050000 		.4byte	0x571
+ 1043 056b 0D       		.uleb128 0xd
+ 1044 056c 71050000 		.4byte	0x571
+ 1045 0570 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 24
+
+
+ 1046 0571 0B       		.uleb128 0xb
+ 1047 0572 04       		.byte	0x4
+ 1048 0573 BC020000 		.4byte	0x2bc
+ 1049 0577 1D       		.uleb128 0x1d
+ 1050 0578 85020000 		.4byte	.LASF79
+ 1051 057c 03       		.byte	0x3
+ 1052 057d 3D       		.byte	0x3d
+ 1053 057e C8000000 		.4byte	0xc8
+ 1054 0582 91050000 		.4byte	0x591
+ 1055 0586 0D       		.uleb128 0xd
+ 1056 0587 B6020000 		.4byte	0x2b6
+ 1057 058b 0D       		.uleb128 0xd
+ 1058 058c 8C000000 		.4byte	0x8c
+ 1059 0590 00       		.byte	0
+ 1060 0591 1D       		.uleb128 0x1d
+ 1061 0592 B8000000 		.4byte	.LASF80
+ 1062 0596 09       		.byte	0x9
+ 1063 0597 18       		.byte	0x18
+ 1064 0598 C8000000 		.4byte	0xc8
+ 1065 059c A6050000 		.4byte	0x5a6
+ 1066 05a0 0D       		.uleb128 0xd
+ 1067 05a1 B6020000 		.4byte	0x2b6
+ 1068 05a5 00       		.byte	0
+ 1069 05a6 1F       		.uleb128 0x1f
+ 1070 05a7 28020000 		.4byte	.LASF82
+ 1071 05ab 0A       		.byte	0xa
+ 1072 05ac 13       		.byte	0x13
+ 1073 05ad 0D       		.uleb128 0xd
+ 1074 05ae 29020000 		.4byte	0x229
+ 1075 05b2 00       		.byte	0
+ 1076 05b3 00       		.byte	0
+ 1077              		.section	.debug_abbrev,"",%progbits
+ 1078              	.Ldebug_abbrev0:
+ 1079 0000 01       		.uleb128 0x1
+ 1080 0001 11       		.uleb128 0x11
+ 1081 0002 01       		.byte	0x1
+ 1082 0003 25       		.uleb128 0x25
+ 1083 0004 0E       		.uleb128 0xe
+ 1084 0005 13       		.uleb128 0x13
+ 1085 0006 0B       		.uleb128 0xb
+ 1086 0007 03       		.uleb128 0x3
+ 1087 0008 0E       		.uleb128 0xe
+ 1088 0009 1B       		.uleb128 0x1b
+ 1089 000a 0E       		.uleb128 0xe
+ 1090 000b 55       		.uleb128 0x55
+ 1091 000c 17       		.uleb128 0x17
+ 1092 000d 11       		.uleb128 0x11
+ 1093 000e 01       		.uleb128 0x1
+ 1094 000f 10       		.uleb128 0x10
+ 1095 0010 17       		.uleb128 0x17
+ 1096 0011 00       		.byte	0
+ 1097 0012 00       		.byte	0
+ 1098 0013 02       		.uleb128 0x2
+ 1099 0014 16       		.uleb128 0x16
+ 1100 0015 00       		.byte	0
+ 1101 0016 03       		.uleb128 0x3
+ 1102 0017 0E       		.uleb128 0xe
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 25
+
+
+ 1103 0018 3A       		.uleb128 0x3a
+ 1104 0019 0B       		.uleb128 0xb
+ 1105 001a 3B       		.uleb128 0x3b
+ 1106 001b 0B       		.uleb128 0xb
+ 1107 001c 49       		.uleb128 0x49
+ 1108 001d 13       		.uleb128 0x13
+ 1109 001e 00       		.byte	0
+ 1110 001f 00       		.byte	0
+ 1111 0020 03       		.uleb128 0x3
+ 1112 0021 24       		.uleb128 0x24
+ 1113 0022 00       		.byte	0
+ 1114 0023 0B       		.uleb128 0xb
+ 1115 0024 0B       		.uleb128 0xb
+ 1116 0025 3E       		.uleb128 0x3e
+ 1117 0026 0B       		.uleb128 0xb
+ 1118 0027 03       		.uleb128 0x3
+ 1119 0028 0E       		.uleb128 0xe
+ 1120 0029 00       		.byte	0
+ 1121 002a 00       		.byte	0
+ 1122 002b 04       		.uleb128 0x4
+ 1123 002c 04       		.uleb128 0x4
+ 1124 002d 01       		.byte	0x1
+ 1125 002e 03       		.uleb128 0x3
+ 1126 002f 0E       		.uleb128 0xe
+ 1127 0030 0B       		.uleb128 0xb
+ 1128 0031 0B       		.uleb128 0xb
+ 1129 0032 3A       		.uleb128 0x3a
+ 1130 0033 0B       		.uleb128 0xb
+ 1131 0034 3B       		.uleb128 0x3b
+ 1132 0035 0B       		.uleb128 0xb
+ 1133 0036 01       		.uleb128 0x1
+ 1134 0037 13       		.uleb128 0x13
+ 1135 0038 00       		.byte	0
+ 1136 0039 00       		.byte	0
+ 1137 003a 05       		.uleb128 0x5
+ 1138 003b 28       		.uleb128 0x28
+ 1139 003c 00       		.byte	0
+ 1140 003d 03       		.uleb128 0x3
+ 1141 003e 0E       		.uleb128 0xe
+ 1142 003f 1C       		.uleb128 0x1c
+ 1143 0040 0D       		.uleb128 0xd
+ 1144 0041 00       		.byte	0
+ 1145 0042 00       		.byte	0
+ 1146 0043 06       		.uleb128 0x6
+ 1147 0044 13       		.uleb128 0x13
+ 1148 0045 01       		.byte	0x1
+ 1149 0046 03       		.uleb128 0x3
+ 1150 0047 0E       		.uleb128 0xe
+ 1151 0048 0B       		.uleb128 0xb
+ 1152 0049 0B       		.uleb128 0xb
+ 1153 004a 3A       		.uleb128 0x3a
+ 1154 004b 0B       		.uleb128 0xb
+ 1155 004c 3B       		.uleb128 0x3b
+ 1156 004d 0B       		.uleb128 0xb
+ 1157 004e 01       		.uleb128 0x1
+ 1158 004f 13       		.uleb128 0x13
+ 1159 0050 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 26
+
+
+ 1160 0051 00       		.byte	0
+ 1161 0052 07       		.uleb128 0x7
+ 1162 0053 0D       		.uleb128 0xd
+ 1163 0054 00       		.byte	0
+ 1164 0055 03       		.uleb128 0x3
+ 1165 0056 0E       		.uleb128 0xe
+ 1166 0057 3A       		.uleb128 0x3a
+ 1167 0058 0B       		.uleb128 0xb
+ 1168 0059 3B       		.uleb128 0x3b
+ 1169 005a 0B       		.uleb128 0xb
+ 1170 005b 49       		.uleb128 0x49
+ 1171 005c 13       		.uleb128 0x13
+ 1172 005d 38       		.uleb128 0x38
+ 1173 005e 0B       		.uleb128 0xb
+ 1174 005f 00       		.byte	0
+ 1175 0060 00       		.byte	0
+ 1176 0061 08       		.uleb128 0x8
+ 1177 0062 01       		.uleb128 0x1
+ 1178 0063 01       		.byte	0x1
+ 1179 0064 49       		.uleb128 0x49
+ 1180 0065 13       		.uleb128 0x13
+ 1181 0066 01       		.uleb128 0x1
+ 1182 0067 13       		.uleb128 0x13
+ 1183 0068 00       		.byte	0
+ 1184 0069 00       		.byte	0
+ 1185 006a 09       		.uleb128 0x9
+ 1186 006b 21       		.uleb128 0x21
+ 1187 006c 00       		.byte	0
+ 1188 006d 49       		.uleb128 0x49
+ 1189 006e 13       		.uleb128 0x13
+ 1190 006f 2F       		.uleb128 0x2f
+ 1191 0070 0B       		.uleb128 0xb
+ 1192 0071 00       		.byte	0
+ 1193 0072 00       		.byte	0
+ 1194 0073 0A       		.uleb128 0xa
+ 1195 0074 24       		.uleb128 0x24
+ 1196 0075 00       		.byte	0
+ 1197 0076 0B       		.uleb128 0xb
+ 1198 0077 0B       		.uleb128 0xb
+ 1199 0078 3E       		.uleb128 0x3e
+ 1200 0079 0B       		.uleb128 0xb
+ 1201 007a 03       		.uleb128 0x3
+ 1202 007b 08       		.uleb128 0x8
+ 1203 007c 00       		.byte	0
+ 1204 007d 00       		.byte	0
+ 1205 007e 0B       		.uleb128 0xb
+ 1206 007f 0F       		.uleb128 0xf
+ 1207 0080 00       		.byte	0
+ 1208 0081 0B       		.uleb128 0xb
+ 1209 0082 0B       		.uleb128 0xb
+ 1210 0083 49       		.uleb128 0x49
+ 1211 0084 13       		.uleb128 0x13
+ 1212 0085 00       		.byte	0
+ 1213 0086 00       		.byte	0
+ 1214 0087 0C       		.uleb128 0xc
+ 1215 0088 15       		.uleb128 0x15
+ 1216 0089 01       		.byte	0x1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 27
+
+
+ 1217 008a 27       		.uleb128 0x27
+ 1218 008b 19       		.uleb128 0x19
+ 1219 008c 49       		.uleb128 0x49
+ 1220 008d 13       		.uleb128 0x13
+ 1221 008e 01       		.uleb128 0x1
+ 1222 008f 13       		.uleb128 0x13
+ 1223 0090 00       		.byte	0
+ 1224 0091 00       		.byte	0
+ 1225 0092 0D       		.uleb128 0xd
+ 1226 0093 05       		.uleb128 0x5
+ 1227 0094 00       		.byte	0
+ 1228 0095 49       		.uleb128 0x49
+ 1229 0096 13       		.uleb128 0x13
+ 1230 0097 00       		.byte	0
+ 1231 0098 00       		.byte	0
+ 1232 0099 0E       		.uleb128 0xe
+ 1233 009a 2E       		.uleb128 0x2e
+ 1234 009b 01       		.byte	0x1
+ 1235 009c 3F       		.uleb128 0x3f
+ 1236 009d 19       		.uleb128 0x19
+ 1237 009e 03       		.uleb128 0x3
+ 1238 009f 0E       		.uleb128 0xe
+ 1239 00a0 3A       		.uleb128 0x3a
+ 1240 00a1 0B       		.uleb128 0xb
+ 1241 00a2 3B       		.uleb128 0x3b
+ 1242 00a3 0B       		.uleb128 0xb
+ 1243 00a4 49       		.uleb128 0x49
+ 1244 00a5 13       		.uleb128 0x13
+ 1245 00a6 11       		.uleb128 0x11
+ 1246 00a7 01       		.uleb128 0x1
+ 1247 00a8 12       		.uleb128 0x12
+ 1248 00a9 06       		.uleb128 0x6
+ 1249 00aa 40       		.uleb128 0x40
+ 1250 00ab 18       		.uleb128 0x18
+ 1251 00ac 9742     		.uleb128 0x2117
+ 1252 00ae 19       		.uleb128 0x19
+ 1253 00af 01       		.uleb128 0x1
+ 1254 00b0 13       		.uleb128 0x13
+ 1255 00b1 00       		.byte	0
+ 1256 00b2 00       		.byte	0
+ 1257 00b3 0F       		.uleb128 0xf
+ 1258 00b4 34       		.uleb128 0x34
+ 1259 00b5 00       		.byte	0
+ 1260 00b6 03       		.uleb128 0x3
+ 1261 00b7 08       		.uleb128 0x8
+ 1262 00b8 3A       		.uleb128 0x3a
+ 1263 00b9 0B       		.uleb128 0xb
+ 1264 00ba 3B       		.uleb128 0x3b
+ 1265 00bb 0B       		.uleb128 0xb
+ 1266 00bc 49       		.uleb128 0x49
+ 1267 00bd 13       		.uleb128 0x13
+ 1268 00be 02       		.uleb128 0x2
+ 1269 00bf 17       		.uleb128 0x17
+ 1270 00c0 00       		.byte	0
+ 1271 00c1 00       		.byte	0
+ 1272 00c2 10       		.uleb128 0x10
+ 1273 00c3 898201   		.uleb128 0x4109
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 28
+
+
+ 1274 00c6 00       		.byte	0
+ 1275 00c7 11       		.uleb128 0x11
+ 1276 00c8 01       		.uleb128 0x1
+ 1277 00c9 31       		.uleb128 0x31
+ 1278 00ca 13       		.uleb128 0x13
+ 1279 00cb 00       		.byte	0
+ 1280 00cc 00       		.byte	0
+ 1281 00cd 11       		.uleb128 0x11
+ 1282 00ce 898201   		.uleb128 0x4109
+ 1283 00d1 01       		.byte	0x1
+ 1284 00d2 11       		.uleb128 0x11
+ 1285 00d3 01       		.uleb128 0x1
+ 1286 00d4 31       		.uleb128 0x31
+ 1287 00d5 13       		.uleb128 0x13
+ 1288 00d6 01       		.uleb128 0x1
+ 1289 00d7 13       		.uleb128 0x13
+ 1290 00d8 00       		.byte	0
+ 1291 00d9 00       		.byte	0
+ 1292 00da 12       		.uleb128 0x12
+ 1293 00db 8A8201   		.uleb128 0x410a
+ 1294 00de 00       		.byte	0
+ 1295 00df 02       		.uleb128 0x2
+ 1296 00e0 18       		.uleb128 0x18
+ 1297 00e1 9142     		.uleb128 0x2111
+ 1298 00e3 18       		.uleb128 0x18
+ 1299 00e4 00       		.byte	0
+ 1300 00e5 00       		.byte	0
+ 1301 00e6 13       		.uleb128 0x13
+ 1302 00e7 34       		.uleb128 0x34
+ 1303 00e8 00       		.byte	0
+ 1304 00e9 03       		.uleb128 0x3
+ 1305 00ea 08       		.uleb128 0x8
+ 1306 00eb 3A       		.uleb128 0x3a
+ 1307 00ec 0B       		.uleb128 0xb
+ 1308 00ed 3B       		.uleb128 0x3b
+ 1309 00ee 0B       		.uleb128 0xb
+ 1310 00ef 49       		.uleb128 0x49
+ 1311 00f0 13       		.uleb128 0x13
+ 1312 00f1 02       		.uleb128 0x2
+ 1313 00f2 18       		.uleb128 0x18
+ 1314 00f3 00       		.byte	0
+ 1315 00f4 00       		.byte	0
+ 1316 00f5 14       		.uleb128 0x14
+ 1317 00f6 898201   		.uleb128 0x4109
+ 1318 00f9 01       		.byte	0x1
+ 1319 00fa 11       		.uleb128 0x11
+ 1320 00fb 01       		.uleb128 0x1
+ 1321 00fc 31       		.uleb128 0x31
+ 1322 00fd 13       		.uleb128 0x13
+ 1323 00fe 00       		.byte	0
+ 1324 00ff 00       		.byte	0
+ 1325 0100 15       		.uleb128 0x15
+ 1326 0101 898201   		.uleb128 0x4109
+ 1327 0104 01       		.byte	0x1
+ 1328 0105 11       		.uleb128 0x11
+ 1329 0106 01       		.uleb128 0x1
+ 1330 0107 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 29
+
+
+ 1331 0108 00       		.byte	0
+ 1332 0109 16       		.uleb128 0x16
+ 1333 010a 2E       		.uleb128 0x2e
+ 1334 010b 01       		.byte	0x1
+ 1335 010c 3F       		.uleb128 0x3f
+ 1336 010d 19       		.uleb128 0x19
+ 1337 010e 03       		.uleb128 0x3
+ 1338 010f 0E       		.uleb128 0xe
+ 1339 0110 3A       		.uleb128 0x3a
+ 1340 0111 0B       		.uleb128 0xb
+ 1341 0112 3B       		.uleb128 0x3b
+ 1342 0113 0B       		.uleb128 0xb
+ 1343 0114 11       		.uleb128 0x11
+ 1344 0115 01       		.uleb128 0x1
+ 1345 0116 12       		.uleb128 0x12
+ 1346 0117 06       		.uleb128 0x6
+ 1347 0118 40       		.uleb128 0x40
+ 1348 0119 18       		.uleb128 0x18
+ 1349 011a 9742     		.uleb128 0x2117
+ 1350 011c 19       		.uleb128 0x19
+ 1351 011d 01       		.uleb128 0x1
+ 1352 011e 13       		.uleb128 0x13
+ 1353 011f 00       		.byte	0
+ 1354 0120 00       		.byte	0
+ 1355 0121 17       		.uleb128 0x17
+ 1356 0122 34       		.uleb128 0x34
+ 1357 0123 00       		.byte	0
+ 1358 0124 03       		.uleb128 0x3
+ 1359 0125 0E       		.uleb128 0xe
+ 1360 0126 3A       		.uleb128 0x3a
+ 1361 0127 0B       		.uleb128 0xb
+ 1362 0128 3B       		.uleb128 0x3b
+ 1363 0129 0B       		.uleb128 0xb
+ 1364 012a 49       		.uleb128 0x49
+ 1365 012b 13       		.uleb128 0x13
+ 1366 012c 02       		.uleb128 0x2
+ 1367 012d 18       		.uleb128 0x18
+ 1368 012e 00       		.byte	0
+ 1369 012f 00       		.byte	0
+ 1370 0130 18       		.uleb128 0x18
+ 1371 0131 34       		.uleb128 0x34
+ 1372 0132 00       		.byte	0
+ 1373 0133 03       		.uleb128 0x3
+ 1374 0134 0E       		.uleb128 0xe
+ 1375 0135 3A       		.uleb128 0x3a
+ 1376 0136 0B       		.uleb128 0xb
+ 1377 0137 3B       		.uleb128 0x3b
+ 1378 0138 05       		.uleb128 0x5
+ 1379 0139 49       		.uleb128 0x49
+ 1380 013a 13       		.uleb128 0x13
+ 1381 013b 3F       		.uleb128 0x3f
+ 1382 013c 19       		.uleb128 0x19
+ 1383 013d 3C       		.uleb128 0x3c
+ 1384 013e 19       		.uleb128 0x19
+ 1385 013f 00       		.byte	0
+ 1386 0140 00       		.byte	0
+ 1387 0141 19       		.uleb128 0x19
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 30
+
+
+ 1388 0142 35       		.uleb128 0x35
+ 1389 0143 00       		.byte	0
+ 1390 0144 49       		.uleb128 0x49
+ 1391 0145 13       		.uleb128 0x13
+ 1392 0146 00       		.byte	0
+ 1393 0147 00       		.byte	0
+ 1394 0148 1A       		.uleb128 0x1a
+ 1395 0149 34       		.uleb128 0x34
+ 1396 014a 00       		.byte	0
+ 1397 014b 03       		.uleb128 0x3
+ 1398 014c 0E       		.uleb128 0xe
+ 1399 014d 3A       		.uleb128 0x3a
+ 1400 014e 0B       		.uleb128 0xb
+ 1401 014f 3B       		.uleb128 0x3b
+ 1402 0150 0B       		.uleb128 0xb
+ 1403 0151 49       		.uleb128 0x49
+ 1404 0152 13       		.uleb128 0x13
+ 1405 0153 3F       		.uleb128 0x3f
+ 1406 0154 19       		.uleb128 0x19
+ 1407 0155 3C       		.uleb128 0x3c
+ 1408 0156 19       		.uleb128 0x19
+ 1409 0157 00       		.byte	0
+ 1410 0158 00       		.byte	0
+ 1411 0159 1B       		.uleb128 0x1b
+ 1412 015a 2E       		.uleb128 0x2e
+ 1413 015b 01       		.byte	0x1
+ 1414 015c 3F       		.uleb128 0x3f
+ 1415 015d 19       		.uleb128 0x19
+ 1416 015e 03       		.uleb128 0x3
+ 1417 015f 0E       		.uleb128 0xe
+ 1418 0160 3A       		.uleb128 0x3a
+ 1419 0161 0B       		.uleb128 0xb
+ 1420 0162 3B       		.uleb128 0x3b
+ 1421 0163 0B       		.uleb128 0xb
+ 1422 0164 3C       		.uleb128 0x3c
+ 1423 0165 19       		.uleb128 0x19
+ 1424 0166 01       		.uleb128 0x1
+ 1425 0167 13       		.uleb128 0x13
+ 1426 0168 00       		.byte	0
+ 1427 0169 00       		.byte	0
+ 1428 016a 1C       		.uleb128 0x1c
+ 1429 016b 18       		.uleb128 0x18
+ 1430 016c 00       		.byte	0
+ 1431 016d 00       		.byte	0
+ 1432 016e 00       		.byte	0
+ 1433 016f 1D       		.uleb128 0x1d
+ 1434 0170 2E       		.uleb128 0x2e
+ 1435 0171 01       		.byte	0x1
+ 1436 0172 3F       		.uleb128 0x3f
+ 1437 0173 19       		.uleb128 0x19
+ 1438 0174 03       		.uleb128 0x3
+ 1439 0175 0E       		.uleb128 0xe
+ 1440 0176 3A       		.uleb128 0x3a
+ 1441 0177 0B       		.uleb128 0xb
+ 1442 0178 3B       		.uleb128 0x3b
+ 1443 0179 0B       		.uleb128 0xb
+ 1444 017a 27       		.uleb128 0x27
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 31
+
+
+ 1445 017b 19       		.uleb128 0x19
+ 1446 017c 49       		.uleb128 0x49
+ 1447 017d 13       		.uleb128 0x13
+ 1448 017e 3C       		.uleb128 0x3c
+ 1449 017f 19       		.uleb128 0x19
+ 1450 0180 01       		.uleb128 0x1
+ 1451 0181 13       		.uleb128 0x13
+ 1452 0182 00       		.byte	0
+ 1453 0183 00       		.byte	0
+ 1454 0184 1E       		.uleb128 0x1e
+ 1455 0185 2E       		.uleb128 0x2e
+ 1456 0186 01       		.byte	0x1
+ 1457 0187 3F       		.uleb128 0x3f
+ 1458 0188 19       		.uleb128 0x19
+ 1459 0189 03       		.uleb128 0x3
+ 1460 018a 0E       		.uleb128 0xe
+ 1461 018b 3A       		.uleb128 0x3a
+ 1462 018c 0B       		.uleb128 0xb
+ 1463 018d 3B       		.uleb128 0x3b
+ 1464 018e 0B       		.uleb128 0xb
+ 1465 018f 49       		.uleb128 0x49
+ 1466 0190 13       		.uleb128 0x13
+ 1467 0191 3C       		.uleb128 0x3c
+ 1468 0192 19       		.uleb128 0x19
+ 1469 0193 01       		.uleb128 0x1
+ 1470 0194 13       		.uleb128 0x13
+ 1471 0195 00       		.byte	0
+ 1472 0196 00       		.byte	0
+ 1473 0197 1F       		.uleb128 0x1f
+ 1474 0198 2E       		.uleb128 0x2e
+ 1475 0199 01       		.byte	0x1
+ 1476 019a 3F       		.uleb128 0x3f
+ 1477 019b 19       		.uleb128 0x19
+ 1478 019c 03       		.uleb128 0x3
+ 1479 019d 0E       		.uleb128 0xe
+ 1480 019e 3A       		.uleb128 0x3a
+ 1481 019f 0B       		.uleb128 0xb
+ 1482 01a0 3B       		.uleb128 0x3b
+ 1483 01a1 0B       		.uleb128 0xb
+ 1484 01a2 27       		.uleb128 0x27
+ 1485 01a3 19       		.uleb128 0x19
+ 1486 01a4 3C       		.uleb128 0x3c
+ 1487 01a5 19       		.uleb128 0x19
+ 1488 01a6 00       		.byte	0
+ 1489 01a7 00       		.byte	0
+ 1490 01a8 00       		.byte	0
+ 1491              		.section	.debug_loc,"",%progbits
+ 1492              	.Ldebug_loc0:
+ 1493              	.LLST0:
+ 1494 0000 0C000000 		.4byte	.LVL1
+ 1495 0004 11000000 		.4byte	.LVL2-1
+ 1496 0008 0100     		.2byte	0x1
+ 1497 000a 50       		.byte	0x50
+ 1498 000b 12000000 		.4byte	.LVL2
+ 1499 000f 2C000000 		.4byte	.LFE65
+ 1500 0013 0100     		.2byte	0x1
+ 1501 0015 50       		.byte	0x50
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 32
+
+
+ 1502 0016 00000000 		.4byte	0
+ 1503 001a 00000000 		.4byte	0
+ 1504              	.LLST1:
+ 1505 001e 0C000000 		.4byte	.LVL3
+ 1506 0022 1C000000 		.4byte	.LVL4
+ 1507 0026 0100     		.2byte	0x1
+ 1508 0028 50       		.byte	0x50
+ 1509 0029 20000000 		.4byte	.LVL5
+ 1510 002d 26000000 		.4byte	.LVL6
+ 1511 0031 0100     		.2byte	0x1
+ 1512 0033 50       		.byte	0x50
+ 1513 0034 2E000000 		.4byte	.LVL7
+ 1514 0038 32000000 		.4byte	.LVL8
+ 1515 003c 0100     		.2byte	0x1
+ 1516 003e 50       		.byte	0x50
+ 1517 003f 00000000 		.4byte	0
+ 1518 0043 00000000 		.4byte	0
+ 1519              	.LLST2:
+ 1520 0047 0A000000 		.4byte	.LVL10
+ 1521 004b 0E000000 		.4byte	.LVL11
+ 1522 004f 0100     		.2byte	0x1
+ 1523 0051 50       		.byte	0x50
+ 1524 0052 12000000 		.4byte	.LVL12
+ 1525 0056 1F000000 		.4byte	.LVL13-1
+ 1526 005a 0100     		.2byte	0x1
+ 1527 005c 50       		.byte	0x50
+ 1528 005d 20000000 		.4byte	.LVL13
+ 1529 0061 30000000 		.4byte	.LFE66
+ 1530 0065 0100     		.2byte	0x1
+ 1531 0067 50       		.byte	0x50
+ 1532 0068 00000000 		.4byte	0
+ 1533 006c 00000000 		.4byte	0
+ 1534              	.LLST3:
+ 1535 0070 0C000000 		.4byte	.LVL14
+ 1536 0074 20000000 		.4byte	.LVL15
+ 1537 0078 0100     		.2byte	0x1
+ 1538 007a 50       		.byte	0x50
+ 1539 007b 24000000 		.4byte	.LVL16
+ 1540 007f 28000000 		.4byte	.LVL17
+ 1541 0083 0100     		.2byte	0x1
+ 1542 0085 50       		.byte	0x50
+ 1543 0086 00000000 		.4byte	0
+ 1544 008a 00000000 		.4byte	0
+ 1545              	.LLST4:
+ 1546 008e 06000000 		.4byte	.LVL18
+ 1547 0092 18000000 		.4byte	.LVL19
+ 1548 0096 0100     		.2byte	0x1
+ 1549 0098 50       		.byte	0x50
+ 1550 0099 20000000 		.4byte	.LVL21
+ 1551 009d 28000000 		.4byte	.LVL22
+ 1552 00a1 0100     		.2byte	0x1
+ 1553 00a3 50       		.byte	0x50
+ 1554 00a4 30000000 		.4byte	.LVL24
+ 1555 00a8 44000000 		.4byte	.LFE64
+ 1556 00ac 0100     		.2byte	0x1
+ 1557 00ae 50       		.byte	0x50
+ 1558 00af 00000000 		.4byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 33
+
+
+ 1559 00b3 00000000 		.4byte	0
+ 1560              		.section	.debug_aranges,"",%progbits
+ 1561 0000 44000000 		.4byte	0x44
+ 1562 0004 0200     		.2byte	0x2
+ 1563 0006 00000000 		.4byte	.Ldebug_info0
+ 1564 000a 04       		.byte	0x4
+ 1565 000b 00       		.byte	0
+ 1566 000c 0000     		.2byte	0
+ 1567 000e 0000     		.2byte	0
+ 1568 0010 00000000 		.4byte	.LFB65
+ 1569 0014 2C000000 		.4byte	.LFE65-.LFB65
+ 1570 0018 00000000 		.4byte	.LFB67
+ 1571 001c 44000000 		.4byte	.LFE67-.LFB67
+ 1572 0020 00000000 		.4byte	.LFB66
+ 1573 0024 30000000 		.4byte	.LFE66-.LFB66
+ 1574 0028 00000000 		.4byte	.LFB68
+ 1575 002c 34000000 		.4byte	.LFE68-.LFB68
+ 1576 0030 00000000 		.4byte	.LFB64
+ 1577 0034 44000000 		.4byte	.LFE64-.LFB64
+ 1578 0038 00000000 		.4byte	.LFB63
+ 1579 003c 08000000 		.4byte	.LFE63-.LFB63
+ 1580 0040 00000000 		.4byte	0
+ 1581 0044 00000000 		.4byte	0
+ 1582              		.section	.debug_ranges,"",%progbits
+ 1583              	.Ldebug_ranges0:
+ 1584 0000 00000000 		.4byte	.LFB65
+ 1585 0004 2C000000 		.4byte	.LFE65
+ 1586 0008 00000000 		.4byte	.LFB67
+ 1587 000c 44000000 		.4byte	.LFE67
+ 1588 0010 00000000 		.4byte	.LFB66
+ 1589 0014 30000000 		.4byte	.LFE66
+ 1590 0018 00000000 		.4byte	.LFB68
+ 1591 001c 34000000 		.4byte	.LFE68
+ 1592 0020 00000000 		.4byte	.LFB64
+ 1593 0024 44000000 		.4byte	.LFE64
+ 1594 0028 00000000 		.4byte	.LFB63
+ 1595 002c 08000000 		.4byte	.LFE63
+ 1596 0030 00000000 		.4byte	0
+ 1597 0034 00000000 		.4byte	0
+ 1598              		.section	.debug_line,"",%progbits
+ 1599              	.Ldebug_line0:
+ 1600 0000 4A020000 		.section	.debug_str,"MS",%progbits,1
+ 1600      0200AD01 
+ 1600      00000201 
+ 1600      FB0E0D00 
+ 1600      01010101 
+ 1601              	.LASF72:
+ 1602 0000 73737450 		.ascii	"sstPSC_COMMAND\000"
+ 1602      53435F43 
+ 1602      4F4D4D41 
+ 1602      4E4400
+ 1603              	.LASF68:
+ 1604 000f 7073635F 		.ascii	"psc_Main_Run\000"
+ 1604      4D61696E 
+ 1604      5F52756E 
+ 1604      00
+ 1605              	.LASF63:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 34
+
+
+ 1606 001c 5053435F 		.ascii	"PSC_INTR_ST_MAX\000"
+ 1606      494E5452 
+ 1606      5F53545F 
+ 1606      4D415800 
+ 1607              	.LASF36:
+ 1608 002c 6465765F 		.ascii	"dev_id\000"
+ 1608      696400
+ 1609              	.LASF65:
+ 1610 0033 7073635F 		.ascii	"psc_Initialize\000"
+ 1610      496E6974 
+ 1610      69616C69 
+ 1610      7A6500
+ 1611              	.LASF23:
+ 1612 0042 45786563 		.ascii	"Executable\000"
+ 1612      75746162 
+ 1612      6C6500
+ 1613              	.LASF40:
+ 1614 004d 73686F72 		.ascii	"short int\000"
+ 1614      7420696E 
+ 1614      7400
+ 1615              	.LASF12:
+ 1616 0057 4445565F 		.ascii	"DEV_ID\000"
+ 1616      494400
+ 1617              	.LASF59:
+ 1618 005e 5053435F 		.ascii	"PSC_STATE\000"
+ 1618      53544154 
+ 1618      4500
+ 1619              	.LASF16:
+ 1620 0068 5053435F 		.ascii	"PSC_RET_INVALID_PARAM\000"
+ 1620      5245545F 
+ 1620      494E5641 
+ 1620      4C49445F 
+ 1620      50415241 
+ 1621              	.LASF77:
+ 1622 007e 5053435F 		.ascii	"PSC_CMD_GET_COMMAND\000"
+ 1622      434D445F 
+ 1622      4745545F 
+ 1622      434F4D4D 
+ 1622      414E4400 
+ 1623              	.LASF29:
+ 1624 0092 5053435F 		.ascii	"PSC_CMD_RCV_DATAtag\000"
+ 1624      434D445F 
+ 1624      5243565F 
+ 1624      44415441 
+ 1624      74616700 
+ 1625              	.LASF60:
+ 1626 00a6 5053435F 		.ascii	"PSC_INTR_STATEtag\000"
+ 1626      494E5452 
+ 1626      5F535441 
+ 1626      54457461 
+ 1626      6700
+ 1627              	.LASF80:
+ 1628 00b8 5053435F 		.ascii	"PSC_Comm_GetCommand\000"
+ 1628      436F6D6D 
+ 1628      5F476574 
+ 1628      436F6D6D 
+ 1628      616E6400 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 35
+
+
+ 1629              	.LASF73:
+ 1630 00cc 70736650 		.ascii	"psfPSC_PROC\000"
+ 1630      53435F50 
+ 1630      524F4300 
+ 1631              	.LASF49:
+ 1632 00d8 646F7562 		.ascii	"double\000"
+ 1632      6C6500
+ 1633              	.LASF32:
+ 1634 00df 72656376 		.ascii	"recv_data\000"
+ 1634      5F646174 
+ 1634      6100
+ 1635              	.LASF54:
+ 1636 00e9 5053435F 		.ascii	"PSC_PROC_STATE\000"
+ 1636      50524F43 
+ 1636      5F535441 
+ 1636      544500
+ 1637              	.LASF13:
+ 1638 00f8 5053435F 		.ascii	"PSC_RETtag\000"
+ 1638      52455474 
+ 1638      616700
+ 1639              	.LASF15:
+ 1640 0103 5053435F 		.ascii	"PSC_RET_INTERNAL_ERROR\000"
+ 1640      5245545F 
+ 1640      494E5445 
+ 1640      524E414C 
+ 1640      5F455252 
+ 1641              	.LASF18:
+ 1642 011a 5053435F 		.ascii	"PSC_RET_PARTY_ERROR\000"
+ 1642      5245545F 
+ 1642      50415254 
+ 1642      595F4552 
+ 1642      524F5200 
+ 1643              	.LASF20:
+ 1644 012e 5053435F 		.ascii	"PSC_RET\000"
+ 1644      52455400 
+ 1645              	.LASF21:
+ 1646 0136 52657375 		.ascii	"Result\000"
+ 1646      6C7400
+ 1647              	.LASF25:
+ 1648 013d 50726F70 		.ascii	"PropertyCorruption\000"
+ 1648      65727479 
+ 1648      436F7272 
+ 1648      75707469 
+ 1648      6F6E00
+ 1649              	.LASF84:
+ 1650 0150 5053435F 		.ascii	"PSC_MAIN.c\000"
+ 1650      4D41494E 
+ 1650      2E6300
+ 1651              	.LASF67:
+ 1652 015b 7073635F 		.ascii	"psc_Main_Idle\000"
+ 1652      4D61696E 
+ 1652      5F49646C 
+ 1652      6500
+ 1653              	.LASF61:
+ 1654 0169 5053435F 		.ascii	"PSC_INTR_ST_SLEEP\000"
+ 1654      494E5452 
+ 1654      5F53545F 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 36
+
+
+ 1654      534C4545 
+ 1654      5000
+ 1655              	.LASF78:
+ 1656 017b 5053435F 		.ascii	"PSC_Proc_CameraShot_Init\000"
+ 1656      50726F63 
+ 1656      5F43616D 
+ 1656      65726153 
+ 1656      686F745F 
+ 1657              	.LASF76:
+ 1658 0194 5053435F 		.ascii	"PSC_CMD_CREATE_CONTEXT\000"
+ 1658      434D445F 
+ 1658      43524541 
+ 1658      54455F43 
+ 1658      4F4E5445 
+ 1659              	.LASF48:
+ 1660 01ab 666C6F61 		.ascii	"float\000"
+ 1660      7400
+ 1661              	.LASF45:
+ 1662 01b1 6C6F6E67 		.ascii	"long long int\000"
+ 1662      206C6F6E 
+ 1662      6720696E 
+ 1662      7400
+ 1663              	.LASF46:
+ 1664 01bf 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1664      206C6F6E 
+ 1664      6720756E 
+ 1664      7369676E 
+ 1664      65642069 
+ 1665              	.LASF66:
+ 1666 01d6 7073635F 		.ascii	"psc_CmdHandle\000"
+ 1666      436D6448 
+ 1666      616E646C 
+ 1666      6500
+ 1667              	.LASF43:
+ 1668 01e4 6C6F6E67 		.ascii	"long int\000"
+ 1668      20696E74 
+ 1668      00
+ 1669              	.LASF11:
+ 1670 01ed 4445565F 		.ascii	"DEV_ID_MAX\000"
+ 1670      49445F4D 
+ 1670      415800
+ 1671              	.LASF26:
+ 1672 01f8 73697A65 		.ascii	"sizetype\000"
+ 1672      74797065 
+ 1672      00
+ 1673              	.LASF52:
+ 1674 0201 5053435F 		.ascii	"PSC_PROC_ACTIVE\000"
+ 1674      50524F43 
+ 1674      5F414354 
+ 1674      49564500 
+ 1675              	.LASF69:
+ 1676 0211 7073635F 		.ascii	"psc_Main\000"
+ 1676      4D61696E 
+ 1676      00
+ 1677              	.LASF6:
+ 1678 021a 5053435F 		.ascii	"PSC_BOOL\000"
+ 1678      424F4F4C 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 37
+
+
+ 1678      00
+ 1679              	.LASF37:
+ 1680 0223 44617461 		.ascii	"Data\000"
+ 1680      00
+ 1681              	.LASF82:
+ 1682 0228 4442475F 		.ascii	"DBG_printf\000"
+ 1682      7072696E 
+ 1682      746600
+ 1683              	.LASF57:
+ 1684 0233 5053435F 		.ascii	"PSC_ST_RUN\000"
+ 1684      53545F52 
+ 1684      554E00
+ 1685              	.LASF3:
+ 1686 023e 756E7369 		.ascii	"unsigned char\000"
+ 1686      676E6564 
+ 1686      20636861 
+ 1686      7200
+ 1687              	.LASF10:
+ 1688 024c 4445565F 		.ascii	"DEV_ID_CAM\000"
+ 1688      49445F43 
+ 1688      414D00
+ 1689              	.LASF27:
+ 1690 0257 5053435F 		.ascii	"PSC_CMD_INTEGRITY\000"
+ 1690      434D445F 
+ 1690      494E5445 
+ 1690      47524954 
+ 1690      5900
+ 1691              	.LASF14:
+ 1692 0269 5053435F 		.ascii	"PSC_RET_SUCCESS\000"
+ 1692      5245545F 
+ 1692      53554343 
+ 1692      45535300 
+ 1693              	.LASF39:
+ 1694 0279 7369676E 		.ascii	"signed char\000"
+ 1694      65642063 
+ 1694      68617200 
+ 1695              	.LASF79:
+ 1696 0285 5053435F 		.ascii	"PSC_CMD_SET_DEVICE_ID\000"
+ 1696      434D445F 
+ 1696      5345545F 
+ 1696      44455649 
+ 1696      43455F49 
+ 1697              	.LASF19:
+ 1698 029b 5053435F 		.ascii	"PSC_RET_TIMEOUT\000"
+ 1698      5245545F 
+ 1698      54494D45 
+ 1698      4F555400 
+ 1699              	.LASF56:
+ 1700 02ab 5053435F 		.ascii	"PSC_ST_IDLE\000"
+ 1700      53545F49 
+ 1700      444C4500 
+ 1701              	.LASF2:
+ 1702 02b7 756E7369 		.ascii	"unsigned int\000"
+ 1702      676E6564 
+ 1702      20696E74 
+ 1702      00
+ 1703              	.LASF71:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 38
+
+
+ 1704 02c4 73765053 		.ascii	"svPSC_INTR_STATE\000"
+ 1704      435F494E 
+ 1704      54525F53 
+ 1704      54415445 
+ 1704      00
+ 1705              	.LASF9:
+ 1706 02d5 4445565F 		.ascii	"DEV_ID_COMM\000"
+ 1706      49445F43 
+ 1706      4F4D4D00 
+ 1707              	.LASF64:
+ 1708 02e1 5053435F 		.ascii	"PSC_INTR_STATE\000"
+ 1708      494E5452 
+ 1708      5F535441 
+ 1708      544500
+ 1709              	.LASF51:
+ 1710 02f0 5053435F 		.ascii	"PSC_PROC_STATEtag\000"
+ 1710      50524F43 
+ 1710      5F535441 
+ 1710      54457461 
+ 1710      6700
+ 1711              	.LASF22:
+ 1712 0302 50617269 		.ascii	"Parity\000"
+ 1712      747900
+ 1713              	.LASF50:
+ 1714 0309 63686172 		.ascii	"char\000"
+ 1714      00
+ 1715              	.LASF83:
+ 1716 030e 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1716      4320342E 
+ 1716      392E3320 
+ 1716      32303135 
+ 1716      30333033 
+ 1717 0341 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1717      20726576 
+ 1717      6973696F 
+ 1717      6E203232 
+ 1717      31323230 
+ 1718 0374 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1718      66756E63 
+ 1718      74696F6E 
+ 1718      2D736563 
+ 1718      74696F6E 
+ 1719              	.LASF0:
+ 1720 039c 5053435F 		.ascii	"PSC_COMMAND\000"
+ 1720      434F4D4D 
+ 1720      414E4400 
+ 1721              	.LASF47:
+ 1722 03a8 696E7433 		.ascii	"int32_t\000"
+ 1722      325F7400 
+ 1723              	.LASF41:
+ 1724 03b0 73686F72 		.ascii	"short unsigned int\000"
+ 1724      7420756E 
+ 1724      7369676E 
+ 1724      65642069 
+ 1724      6E7400
+ 1725              	.LASF4:
+ 1726 03c3 5053435F 		.ascii	"PSC_BOOL_FALSE\000"
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 39
+
+
+ 1726      424F4F4C 
+ 1726      5F46414C 
+ 1726      534500
+ 1727              	.LASF34:
+ 1728 03d2 5053435F 		.ascii	"PSC_CMD_RCV_DATA\000"
+ 1728      434D445F 
+ 1728      5243565F 
+ 1728      44415441 
+ 1728      00
+ 1729              	.LASF53:
+ 1730 03e3 5053435F 		.ascii	"PSC_PROC_SLEEP\000"
+ 1730      50524F43 
+ 1730      5F534C45 
+ 1730      455000
+ 1731              	.LASF58:
+ 1732 03f2 5053435F 		.ascii	"PSC_ST_MAX\000"
+ 1732      53545F4D 
+ 1732      415800
+ 1733              	.LASF75:
+ 1734 03fd 67737650 		.ascii	"gsvPSC_PROC_STATE\000"
+ 1734      53435F50 
+ 1734      524F435F 
+ 1734      53544154 
+ 1734      4500
+ 1735              	.LASF55:
+ 1736 040f 5053435F 		.ascii	"PSC_STATEtag\000"
+ 1736      53544154 
+ 1736      45746167 
+ 1736      00
+ 1737              	.LASF85:
+ 1738 041c 433A5C55 		.ascii	"C:\\Users\\youkan\\Desktop\\came\\Workspace06\\Desi"
+ 1738      73657273 
+ 1738      5C796F75 
+ 1738      6B616E5C 
+ 1738      4465736B 
+ 1739 0449 676E3031 		.ascii	"gn01.cydsn\000"
+ 1739      2E637964 
+ 1739      736E00
+ 1740              	.LASF44:
+ 1741 0454 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1741      20756E73 
+ 1741      69676E65 
+ 1741      6420696E 
+ 1741      7400
+ 1742              	.LASF62:
+ 1743 0466 5053435F 		.ascii	"PSC_INTR_ST_ACTIVE\000"
+ 1743      494E5452 
+ 1743      5F53545F 
+ 1743      41435449 
+ 1743      564500
+ 1744              	.LASF1:
+ 1745 0479 5053435F 		.ascii	"PSC_CHAR\000"
+ 1745      43484152 
+ 1745      00
+ 1746              	.LASF42:
+ 1747 0482 5F5F696E 		.ascii	"__int32_t\000"
+ 1747      7433325F 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 40
+
+
+ 1747      7400
+ 1748              	.LASF70:
+ 1749 048c 73765053 		.ascii	"svPSC_PROG_STATE\000"
+ 1749      435F5052 
+ 1749      4F475F53 
+ 1749      54415445 
+ 1749      00
+ 1750              	.LASF17:
+ 1751 049d 5053435F 		.ascii	"PSC_RET_RECV_FAILD\000"
+ 1751      5245545F 
+ 1751      52454356 
+ 1751      5F464149 
+ 1751      4C4400
+ 1752              	.LASF81:
+ 1753 04b0 4442475F 		.ascii	"DBG_Init\000"
+ 1753      496E6974 
+ 1753      00
+ 1754              	.LASF7:
+ 1755 04b9 5053435F 		.ascii	"PSC_BOOLtag\000"
+ 1755      424F4F4C 
+ 1755      74616700 
+ 1756              	.LASF28:
+ 1757 04c5 5053435F 		.ascii	"PSC_CMD_INTEGRITYtag\000"
+ 1757      434D445F 
+ 1757      494E5445 
+ 1757      47524954 
+ 1757      59746167 
+ 1758              	.LASF30:
+ 1759 04da 52656376 		.ascii	"RecvDataSize\000"
+ 1759      44617461 
+ 1759      53697A65 
+ 1759      00
+ 1760              	.LASF8:
+ 1761 04e7 4445565F 		.ascii	"DEV_IDtag\000"
+ 1761      49447461 
+ 1761      6700
+ 1762              	.LASF86:
+ 1763 04f1 5053435F 		.ascii	"PSC_PROGRAM_START\000"
+ 1763      50524F47 
+ 1763      52414D5F 
+ 1763      53544152 
+ 1763      5400
+ 1764              	.LASF24:
+ 1765 0503 4572726F 		.ascii	"ErrorCorrection\000"
+ 1765      72436F72 
+ 1765      72656374 
+ 1765      696F6E00 
+ 1766              	.LASF74:
+ 1767 0513 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1767      52784275 
+ 1767      66666572 
+ 1767      00
+ 1768              	.LASF87:
+ 1769 0520 5053435F 		.ascii	"PSC_Comm_Initialize\000"
+ 1769      436F6D6D 
+ 1769      5F496E69 
+ 1769      7469616C 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccCY0cpc.s 			page 41
+
+
+ 1769      697A6500 
+ 1770              	.LASF5:
+ 1771 0534 5053435F 		.ascii	"PSC_BOOL_TRUE\000"
+ 1771      424F4F4C 
+ 1771      5F545255 
+ 1771      4500
+ 1772              	.LASF38:
+ 1773 0542 5053435F 		.ascii	"PSC_ST_CMD\000"
+ 1773      53545F43 
+ 1773      4D4400
+ 1774              	.LASF35:
+ 1775 054d 5053435F 		.ascii	"PSC_CMDtag\000"
+ 1775      434D4474 
+ 1775      616700
+ 1776              	.LASF31:
+ 1777 0558 636F6D6D 		.ascii	"command\000"
+ 1777      616E6400 
+ 1778              	.LASF33:
+ 1779 0560 496E7465 		.ascii	"Integrity\000"
+ 1779      67726974 
+ 1779      7900
+ 1780              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

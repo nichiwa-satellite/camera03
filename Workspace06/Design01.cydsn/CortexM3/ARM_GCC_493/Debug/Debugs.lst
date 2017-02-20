@@ -1,0 +1,718 @@
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"Debugs.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.DBG_Init,"ax",%progbits
+  19              		.align	2
+  20              		.global	DBG_Init
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	DBG_Init, %function
+  24              	DBG_Init:
+  25              	.LFB63:
+  26              		.file 1 "Debugs.c"
+   1:Debugs.c      **** /* ========================================
+   2:Debugs.c      ****  *
+   3:Debugs.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:Debugs.c      ****  * All Rights Reserved
+   5:Debugs.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:Debugs.c      ****  *
+   7:Debugs.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:Debugs.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:Debugs.c      ****  *
+  10:Debugs.c      ****  * ========================================
+  11:Debugs.c      **** */
+  12:Debugs.c      **** 
+  13:Debugs.c      **** /* [] END OF FILE */
+  14:Debugs.c      **** 
+  15:Debugs.c      **** 
+  16:Debugs.c      **** #include "Debugs.h"
+  17:Debugs.c      **** #include "project.h"
+  18:Debugs.c      **** 
+  19:Debugs.c      **** void DBG_Init();
+  20:Debugs.c      **** void DBG_printf(char str[]);
+  21:Debugs.c      **** 
+  22:Debugs.c      **** void DBG_Init()
+  23:Debugs.c      **** {
+  27              		.loc 1 23 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 2
+
+
+  24:Debugs.c      ****     UART_TO_DEBUG_Init();
+  35              		.loc 1 24 0
+  36 0002 FFF7FEFF 		bl	UART_TO_DEBUG_Init
+  37              	.LVL0:
+  25:Debugs.c      ****     UART_TO_DEBUG_Start();
+  38              		.loc 1 25 0
+  39 0006 FFF7FEFF 		bl	UART_TO_DEBUG_Start
+  40              	.LVL1:
+  41 000a 08BD     		pop	{r3, pc}
+  42              		.cfi_endproc
+  43              	.LFE63:
+  44              		.size	DBG_Init, .-DBG_Init
+  45              		.section	.text.DBG_printf,"ax",%progbits
+  46              		.align	2
+  47              		.global	DBG_printf
+  48              		.thumb
+  49              		.thumb_func
+  50              		.type	DBG_printf, %function
+  51              	DBG_printf:
+  52              	.LFB64:
+  26:Debugs.c      **** }
+  27:Debugs.c      **** 
+  28:Debugs.c      **** void DBG_printf(char str[])
+  29:Debugs.c      **** {
+  53              		.loc 1 29 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57              	.LVL2:
+  58 0000 08B5     		push	{r3, lr}
+  59              		.cfi_def_cfa_offset 8
+  60              		.cfi_offset 3, -8
+  61              		.cfi_offset 14, -4
+  30:Debugs.c      ****     UART_TO_DEBUG_PutString(str);
+  62              		.loc 1 30 0
+  63 0002 FFF7FEFF 		bl	UART_TO_DEBUG_PutString
+  64              	.LVL3:
+  65 0006 08BD     		pop	{r3, pc}
+  66              		.cfi_endproc
+  67              	.LFE64:
+  68              		.size	DBG_printf, .-DBG_printf
+  69              		.text
+  70              	.Letext0:
+  71              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+  72              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+  73              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+  74              		.file 5 "Generated_Source\\PSoC5/UART_TO_DEBUG.h"
+  75              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+  76              		.section	.debug_info,"",%progbits
+  77              	.Ldebug_info0:
+  78 0000 45010000 		.4byte	0x145
+  79 0004 0400     		.2byte	0x4
+  80 0006 00000000 		.4byte	.Ldebug_abbrev0
+  81 000a 04       		.byte	0x4
+  82 000b 01       		.uleb128 0x1
+  83 000c 84000000 		.4byte	.LASF18
+  84 0010 01       		.byte	0x1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 3
+
+
+  85 0011 41010000 		.4byte	.LASF19
+  86 0015 92010000 		.4byte	.LASF20
+  87 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  88 001d 00000000 		.4byte	0
+  89 0021 00000000 		.4byte	.Ldebug_line0
+  90 0025 02       		.uleb128 0x2
+  91 0026 01       		.byte	0x1
+  92 0027 06       		.byte	0x6
+  93 0028 5E010000 		.4byte	.LASF0
+  94 002c 02       		.uleb128 0x2
+  95 002d 01       		.byte	0x1
+  96 002e 08       		.byte	0x8
+  97 002f 6A010000 		.4byte	.LASF1
+  98 0033 02       		.uleb128 0x2
+  99 0034 02       		.byte	0x2
+ 100 0035 05       		.byte	0x5
+ 101 0036 88010000 		.4byte	.LASF2
+ 102 003a 02       		.uleb128 0x2
+ 103 003b 02       		.byte	0x2
+ 104 003c 07       		.byte	0x7
+ 105 003d 0E000000 		.4byte	.LASF3
+ 106 0041 03       		.uleb128 0x3
+ 107 0042 78010000 		.4byte	.LASF9
+ 108 0046 02       		.byte	0x2
+ 109 0047 3F       		.byte	0x3f
+ 110 0048 4C000000 		.4byte	0x4c
+ 111 004c 02       		.uleb128 0x2
+ 112 004d 04       		.byte	0x4
+ 113 004e 05       		.byte	0x5
+ 114 004f 38010000 		.4byte	.LASF4
+ 115 0053 02       		.uleb128 0x2
+ 116 0054 04       		.byte	0x4
+ 117 0055 07       		.byte	0x7
+ 118 0056 4A000000 		.4byte	.LASF5
+ 119 005a 02       		.uleb128 0x2
+ 120 005b 08       		.byte	0x8
+ 121 005c 05       		.byte	0x5
+ 122 005d 00000000 		.4byte	.LASF6
+ 123 0061 02       		.uleb128 0x2
+ 124 0062 08       		.byte	0x8
+ 125 0063 07       		.byte	0x7
+ 126 0064 67000000 		.4byte	.LASF7
+ 127 0068 04       		.uleb128 0x4
+ 128 0069 04       		.byte	0x4
+ 129 006a 05       		.byte	0x5
+ 130 006b 696E7400 		.ascii	"int\000"
+ 131 006f 02       		.uleb128 0x2
+ 132 0070 04       		.byte	0x4
+ 133 0071 07       		.byte	0x7
+ 134 0072 21000000 		.4byte	.LASF8
+ 135 0076 03       		.uleb128 0x3
+ 136 0077 42000000 		.4byte	.LASF10
+ 137 007b 03       		.byte	0x3
+ 138 007c 2C       		.byte	0x2c
+ 139 007d 41000000 		.4byte	0x41
+ 140 0081 02       		.uleb128 0x2
+ 141 0082 04       		.byte	0x4
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 4
+
+
+ 142 0083 04       		.byte	0x4
+ 143 0084 82010000 		.4byte	.LASF11
+ 144 0088 02       		.uleb128 0x2
+ 145 0089 08       		.byte	0x8
+ 146 008a 04       		.byte	0x4
+ 147 008b 4A010000 		.4byte	.LASF12
+ 148 008f 05       		.uleb128 0x5
+ 149 0090 7E000000 		.4byte	.LASF13
+ 150 0094 04       		.byte	0x4
+ 151 0095 A301     		.2byte	0x1a3
+ 152 0097 9B000000 		.4byte	0x9b
+ 153 009b 02       		.uleb128 0x2
+ 154 009c 01       		.byte	0x1
+ 155 009d 08       		.byte	0x8
+ 156 009e 33010000 		.4byte	.LASF14
+ 157 00a2 02       		.uleb128 0x2
+ 158 00a3 04       		.byte	0x4
+ 159 00a4 07       		.byte	0x7
+ 160 00a5 CA010000 		.4byte	.LASF15
+ 161 00a9 06       		.uleb128 0x6
+ 162 00aa 04       		.byte	0x4
+ 163 00ab 9B000000 		.4byte	0x9b
+ 164 00af 07       		.uleb128 0x7
+ 165 00b0 2A010000 		.4byte	.LASF21
+ 166 00b4 01       		.byte	0x1
+ 167 00b5 16       		.byte	0x16
+ 168 00b6 00000000 		.4byte	.LFB63
+ 169 00ba 0C000000 		.4byte	.LFE63-.LFB63
+ 170 00be 01       		.uleb128 0x1
+ 171 00bf 9C       		.byte	0x9c
+ 172 00c0 D7000000 		.4byte	0xd7
+ 173 00c4 08       		.uleb128 0x8
+ 174 00c5 06000000 		.4byte	.LVL0
+ 175 00c9 1E010000 		.4byte	0x11e
+ 176 00cd 08       		.uleb128 0x8
+ 177 00ce 0A000000 		.4byte	.LVL1
+ 178 00d2 25010000 		.4byte	0x125
+ 179 00d6 00       		.byte	0
+ 180 00d7 09       		.uleb128 0x9
+ 181 00d8 5C000000 		.4byte	.LASF22
+ 182 00dc 01       		.byte	0x1
+ 183 00dd 1C       		.byte	0x1c
+ 184 00de 00000000 		.4byte	.LFB64
+ 185 00e2 08000000 		.4byte	.LFE64-.LFB64
+ 186 00e6 01       		.uleb128 0x1
+ 187 00e7 9C       		.byte	0x9c
+ 188 00e8 0D010000 		.4byte	0x10d
+ 189 00ec 0A       		.uleb128 0xa
+ 190 00ed 73747200 		.ascii	"str\000"
+ 191 00f1 01       		.byte	0x1
+ 192 00f2 1C       		.byte	0x1c
+ 193 00f3 A9000000 		.4byte	0xa9
+ 194 00f7 00000000 		.4byte	.LLST0
+ 195 00fb 0B       		.uleb128 0xb
+ 196 00fc 06000000 		.4byte	.LVL3
+ 197 0100 2C010000 		.4byte	0x12c
+ 198 0104 0C       		.uleb128 0xc
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 5
+
+
+ 199 0105 01       		.uleb128 0x1
+ 200 0106 50       		.byte	0x50
+ 201 0107 03       		.uleb128 0x3
+ 202 0108 F3       		.byte	0xf3
+ 203 0109 01       		.uleb128 0x1
+ 204 010a 50       		.byte	0x50
+ 205 010b 00       		.byte	0
+ 206 010c 00       		.byte	0
+ 207 010d 0D       		.uleb128 0xd
+ 208 010e 51010000 		.4byte	.LASF23
+ 209 0112 06       		.byte	0x6
+ 210 0113 9606     		.2byte	0x696
+ 211 0115 19010000 		.4byte	0x119
+ 212 0119 0E       		.uleb128 0xe
+ 213 011a 76000000 		.4byte	0x76
+ 214 011e 0F       		.uleb128 0xf
+ 215 011f D3010000 		.4byte	.LASF16
+ 216 0123 05       		.byte	0x5
+ 217 0124 59       		.byte	0x59
+ 218 0125 0F       		.uleb128 0xf
+ 219 0126 2E000000 		.4byte	.LASF17
+ 220 012a 05       		.byte	0x5
+ 221 012b 54       		.byte	0x54
+ 222 012c 10       		.uleb128 0x10
+ 223 012d 12010000 		.4byte	.LASF24
+ 224 0131 05       		.byte	0x5
+ 225 0132 8B       		.byte	0x8b
+ 226 0133 3D010000 		.4byte	0x13d
+ 227 0137 11       		.uleb128 0x11
+ 228 0138 3D010000 		.4byte	0x13d
+ 229 013c 00       		.byte	0
+ 230 013d 06       		.uleb128 0x6
+ 231 013e 04       		.byte	0x4
+ 232 013f 43010000 		.4byte	0x143
+ 233 0143 12       		.uleb128 0x12
+ 234 0144 8F000000 		.4byte	0x8f
+ 235 0148 00       		.byte	0
+ 236              		.section	.debug_abbrev,"",%progbits
+ 237              	.Ldebug_abbrev0:
+ 238 0000 01       		.uleb128 0x1
+ 239 0001 11       		.uleb128 0x11
+ 240 0002 01       		.byte	0x1
+ 241 0003 25       		.uleb128 0x25
+ 242 0004 0E       		.uleb128 0xe
+ 243 0005 13       		.uleb128 0x13
+ 244 0006 0B       		.uleb128 0xb
+ 245 0007 03       		.uleb128 0x3
+ 246 0008 0E       		.uleb128 0xe
+ 247 0009 1B       		.uleb128 0x1b
+ 248 000a 0E       		.uleb128 0xe
+ 249 000b 55       		.uleb128 0x55
+ 250 000c 17       		.uleb128 0x17
+ 251 000d 11       		.uleb128 0x11
+ 252 000e 01       		.uleb128 0x1
+ 253 000f 10       		.uleb128 0x10
+ 254 0010 17       		.uleb128 0x17
+ 255 0011 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 6
+
+
+ 256 0012 00       		.byte	0
+ 257 0013 02       		.uleb128 0x2
+ 258 0014 24       		.uleb128 0x24
+ 259 0015 00       		.byte	0
+ 260 0016 0B       		.uleb128 0xb
+ 261 0017 0B       		.uleb128 0xb
+ 262 0018 3E       		.uleb128 0x3e
+ 263 0019 0B       		.uleb128 0xb
+ 264 001a 03       		.uleb128 0x3
+ 265 001b 0E       		.uleb128 0xe
+ 266 001c 00       		.byte	0
+ 267 001d 00       		.byte	0
+ 268 001e 03       		.uleb128 0x3
+ 269 001f 16       		.uleb128 0x16
+ 270 0020 00       		.byte	0
+ 271 0021 03       		.uleb128 0x3
+ 272 0022 0E       		.uleb128 0xe
+ 273 0023 3A       		.uleb128 0x3a
+ 274 0024 0B       		.uleb128 0xb
+ 275 0025 3B       		.uleb128 0x3b
+ 276 0026 0B       		.uleb128 0xb
+ 277 0027 49       		.uleb128 0x49
+ 278 0028 13       		.uleb128 0x13
+ 279 0029 00       		.byte	0
+ 280 002a 00       		.byte	0
+ 281 002b 04       		.uleb128 0x4
+ 282 002c 24       		.uleb128 0x24
+ 283 002d 00       		.byte	0
+ 284 002e 0B       		.uleb128 0xb
+ 285 002f 0B       		.uleb128 0xb
+ 286 0030 3E       		.uleb128 0x3e
+ 287 0031 0B       		.uleb128 0xb
+ 288 0032 03       		.uleb128 0x3
+ 289 0033 08       		.uleb128 0x8
+ 290 0034 00       		.byte	0
+ 291 0035 00       		.byte	0
+ 292 0036 05       		.uleb128 0x5
+ 293 0037 16       		.uleb128 0x16
+ 294 0038 00       		.byte	0
+ 295 0039 03       		.uleb128 0x3
+ 296 003a 0E       		.uleb128 0xe
+ 297 003b 3A       		.uleb128 0x3a
+ 298 003c 0B       		.uleb128 0xb
+ 299 003d 3B       		.uleb128 0x3b
+ 300 003e 05       		.uleb128 0x5
+ 301 003f 49       		.uleb128 0x49
+ 302 0040 13       		.uleb128 0x13
+ 303 0041 00       		.byte	0
+ 304 0042 00       		.byte	0
+ 305 0043 06       		.uleb128 0x6
+ 306 0044 0F       		.uleb128 0xf
+ 307 0045 00       		.byte	0
+ 308 0046 0B       		.uleb128 0xb
+ 309 0047 0B       		.uleb128 0xb
+ 310 0048 49       		.uleb128 0x49
+ 311 0049 13       		.uleb128 0x13
+ 312 004a 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 7
+
+
+ 313 004b 00       		.byte	0
+ 314 004c 07       		.uleb128 0x7
+ 315 004d 2E       		.uleb128 0x2e
+ 316 004e 01       		.byte	0x1
+ 317 004f 3F       		.uleb128 0x3f
+ 318 0050 19       		.uleb128 0x19
+ 319 0051 03       		.uleb128 0x3
+ 320 0052 0E       		.uleb128 0xe
+ 321 0053 3A       		.uleb128 0x3a
+ 322 0054 0B       		.uleb128 0xb
+ 323 0055 3B       		.uleb128 0x3b
+ 324 0056 0B       		.uleb128 0xb
+ 325 0057 11       		.uleb128 0x11
+ 326 0058 01       		.uleb128 0x1
+ 327 0059 12       		.uleb128 0x12
+ 328 005a 06       		.uleb128 0x6
+ 329 005b 40       		.uleb128 0x40
+ 330 005c 18       		.uleb128 0x18
+ 331 005d 9742     		.uleb128 0x2117
+ 332 005f 19       		.uleb128 0x19
+ 333 0060 01       		.uleb128 0x1
+ 334 0061 13       		.uleb128 0x13
+ 335 0062 00       		.byte	0
+ 336 0063 00       		.byte	0
+ 337 0064 08       		.uleb128 0x8
+ 338 0065 898201   		.uleb128 0x4109
+ 339 0068 00       		.byte	0
+ 340 0069 11       		.uleb128 0x11
+ 341 006a 01       		.uleb128 0x1
+ 342 006b 31       		.uleb128 0x31
+ 343 006c 13       		.uleb128 0x13
+ 344 006d 00       		.byte	0
+ 345 006e 00       		.byte	0
+ 346 006f 09       		.uleb128 0x9
+ 347 0070 2E       		.uleb128 0x2e
+ 348 0071 01       		.byte	0x1
+ 349 0072 3F       		.uleb128 0x3f
+ 350 0073 19       		.uleb128 0x19
+ 351 0074 03       		.uleb128 0x3
+ 352 0075 0E       		.uleb128 0xe
+ 353 0076 3A       		.uleb128 0x3a
+ 354 0077 0B       		.uleb128 0xb
+ 355 0078 3B       		.uleb128 0x3b
+ 356 0079 0B       		.uleb128 0xb
+ 357 007a 27       		.uleb128 0x27
+ 358 007b 19       		.uleb128 0x19
+ 359 007c 11       		.uleb128 0x11
+ 360 007d 01       		.uleb128 0x1
+ 361 007e 12       		.uleb128 0x12
+ 362 007f 06       		.uleb128 0x6
+ 363 0080 40       		.uleb128 0x40
+ 364 0081 18       		.uleb128 0x18
+ 365 0082 9742     		.uleb128 0x2117
+ 366 0084 19       		.uleb128 0x19
+ 367 0085 01       		.uleb128 0x1
+ 368 0086 13       		.uleb128 0x13
+ 369 0087 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 8
+
+
+ 370 0088 00       		.byte	0
+ 371 0089 0A       		.uleb128 0xa
+ 372 008a 05       		.uleb128 0x5
+ 373 008b 00       		.byte	0
+ 374 008c 03       		.uleb128 0x3
+ 375 008d 08       		.uleb128 0x8
+ 376 008e 3A       		.uleb128 0x3a
+ 377 008f 0B       		.uleb128 0xb
+ 378 0090 3B       		.uleb128 0x3b
+ 379 0091 0B       		.uleb128 0xb
+ 380 0092 49       		.uleb128 0x49
+ 381 0093 13       		.uleb128 0x13
+ 382 0094 02       		.uleb128 0x2
+ 383 0095 17       		.uleb128 0x17
+ 384 0096 00       		.byte	0
+ 385 0097 00       		.byte	0
+ 386 0098 0B       		.uleb128 0xb
+ 387 0099 898201   		.uleb128 0x4109
+ 388 009c 01       		.byte	0x1
+ 389 009d 11       		.uleb128 0x11
+ 390 009e 01       		.uleb128 0x1
+ 391 009f 31       		.uleb128 0x31
+ 392 00a0 13       		.uleb128 0x13
+ 393 00a1 00       		.byte	0
+ 394 00a2 00       		.byte	0
+ 395 00a3 0C       		.uleb128 0xc
+ 396 00a4 8A8201   		.uleb128 0x410a
+ 397 00a7 00       		.byte	0
+ 398 00a8 02       		.uleb128 0x2
+ 399 00a9 18       		.uleb128 0x18
+ 400 00aa 9142     		.uleb128 0x2111
+ 401 00ac 18       		.uleb128 0x18
+ 402 00ad 00       		.byte	0
+ 403 00ae 00       		.byte	0
+ 404 00af 0D       		.uleb128 0xd
+ 405 00b0 34       		.uleb128 0x34
+ 406 00b1 00       		.byte	0
+ 407 00b2 03       		.uleb128 0x3
+ 408 00b3 0E       		.uleb128 0xe
+ 409 00b4 3A       		.uleb128 0x3a
+ 410 00b5 0B       		.uleb128 0xb
+ 411 00b6 3B       		.uleb128 0x3b
+ 412 00b7 05       		.uleb128 0x5
+ 413 00b8 49       		.uleb128 0x49
+ 414 00b9 13       		.uleb128 0x13
+ 415 00ba 3F       		.uleb128 0x3f
+ 416 00bb 19       		.uleb128 0x19
+ 417 00bc 3C       		.uleb128 0x3c
+ 418 00bd 19       		.uleb128 0x19
+ 419 00be 00       		.byte	0
+ 420 00bf 00       		.byte	0
+ 421 00c0 0E       		.uleb128 0xe
+ 422 00c1 35       		.uleb128 0x35
+ 423 00c2 00       		.byte	0
+ 424 00c3 49       		.uleb128 0x49
+ 425 00c4 13       		.uleb128 0x13
+ 426 00c5 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 9
+
+
+ 427 00c6 00       		.byte	0
+ 428 00c7 0F       		.uleb128 0xf
+ 429 00c8 2E       		.uleb128 0x2e
+ 430 00c9 00       		.byte	0
+ 431 00ca 3F       		.uleb128 0x3f
+ 432 00cb 19       		.uleb128 0x19
+ 433 00cc 03       		.uleb128 0x3
+ 434 00cd 0E       		.uleb128 0xe
+ 435 00ce 3A       		.uleb128 0x3a
+ 436 00cf 0B       		.uleb128 0xb
+ 437 00d0 3B       		.uleb128 0x3b
+ 438 00d1 0B       		.uleb128 0xb
+ 439 00d2 27       		.uleb128 0x27
+ 440 00d3 19       		.uleb128 0x19
+ 441 00d4 3C       		.uleb128 0x3c
+ 442 00d5 19       		.uleb128 0x19
+ 443 00d6 00       		.byte	0
+ 444 00d7 00       		.byte	0
+ 445 00d8 10       		.uleb128 0x10
+ 446 00d9 2E       		.uleb128 0x2e
+ 447 00da 01       		.byte	0x1
+ 448 00db 3F       		.uleb128 0x3f
+ 449 00dc 19       		.uleb128 0x19
+ 450 00dd 03       		.uleb128 0x3
+ 451 00de 0E       		.uleb128 0xe
+ 452 00df 3A       		.uleb128 0x3a
+ 453 00e0 0B       		.uleb128 0xb
+ 454 00e1 3B       		.uleb128 0x3b
+ 455 00e2 0B       		.uleb128 0xb
+ 456 00e3 27       		.uleb128 0x27
+ 457 00e4 19       		.uleb128 0x19
+ 458 00e5 3C       		.uleb128 0x3c
+ 459 00e6 19       		.uleb128 0x19
+ 460 00e7 01       		.uleb128 0x1
+ 461 00e8 13       		.uleb128 0x13
+ 462 00e9 00       		.byte	0
+ 463 00ea 00       		.byte	0
+ 464 00eb 11       		.uleb128 0x11
+ 465 00ec 05       		.uleb128 0x5
+ 466 00ed 00       		.byte	0
+ 467 00ee 49       		.uleb128 0x49
+ 468 00ef 13       		.uleb128 0x13
+ 469 00f0 00       		.byte	0
+ 470 00f1 00       		.byte	0
+ 471 00f2 12       		.uleb128 0x12
+ 472 00f3 26       		.uleb128 0x26
+ 473 00f4 00       		.byte	0
+ 474 00f5 49       		.uleb128 0x49
+ 475 00f6 13       		.uleb128 0x13
+ 476 00f7 00       		.byte	0
+ 477 00f8 00       		.byte	0
+ 478 00f9 00       		.byte	0
+ 479              		.section	.debug_loc,"",%progbits
+ 480              	.Ldebug_loc0:
+ 481              	.LLST0:
+ 482 0000 00000000 		.4byte	.LVL2
+ 483 0004 05000000 		.4byte	.LVL3-1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 10
+
+
+ 484 0008 0100     		.2byte	0x1
+ 485 000a 50       		.byte	0x50
+ 486 000b 05000000 		.4byte	.LVL3-1
+ 487 000f 08000000 		.4byte	.LFE64
+ 488 0013 0400     		.2byte	0x4
+ 489 0015 F3       		.byte	0xf3
+ 490 0016 01       		.uleb128 0x1
+ 491 0017 50       		.byte	0x50
+ 492 0018 9F       		.byte	0x9f
+ 493 0019 00000000 		.4byte	0
+ 494 001d 00000000 		.4byte	0
+ 495              		.section	.debug_aranges,"",%progbits
+ 496 0000 24000000 		.4byte	0x24
+ 497 0004 0200     		.2byte	0x2
+ 498 0006 00000000 		.4byte	.Ldebug_info0
+ 499 000a 04       		.byte	0x4
+ 500 000b 00       		.byte	0
+ 501 000c 0000     		.2byte	0
+ 502 000e 0000     		.2byte	0
+ 503 0010 00000000 		.4byte	.LFB63
+ 504 0014 0C000000 		.4byte	.LFE63-.LFB63
+ 505 0018 00000000 		.4byte	.LFB64
+ 506 001c 08000000 		.4byte	.LFE64-.LFB64
+ 507 0020 00000000 		.4byte	0
+ 508 0024 00000000 		.4byte	0
+ 509              		.section	.debug_ranges,"",%progbits
+ 510              	.Ldebug_ranges0:
+ 511 0000 00000000 		.4byte	.LFB63
+ 512 0004 0C000000 		.4byte	.LFE63
+ 513 0008 00000000 		.4byte	.LFB64
+ 514 000c 08000000 		.4byte	.LFE64
+ 515 0010 00000000 		.4byte	0
+ 516 0014 00000000 		.4byte	0
+ 517              		.section	.debug_line,"",%progbits
+ 518              	.Ldebug_line0:
+ 519 0000 83010000 		.section	.debug_str,"MS",%progbits,1
+ 519      02005C01 
+ 519      00000201 
+ 519      FB0E0D00 
+ 519      01010101 
+ 520              	.LASF6:
+ 521 0000 6C6F6E67 		.ascii	"long long int\000"
+ 521      206C6F6E 
+ 521      6720696E 
+ 521      7400
+ 522              	.LASF3:
+ 523 000e 73686F72 		.ascii	"short unsigned int\000"
+ 523      7420756E 
+ 523      7369676E 
+ 523      65642069 
+ 523      6E7400
+ 524              	.LASF8:
+ 525 0021 756E7369 		.ascii	"unsigned int\000"
+ 525      676E6564 
+ 525      20696E74 
+ 525      00
+ 526              	.LASF17:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 11
+
+
+ 527 002e 55415254 		.ascii	"UART_TO_DEBUG_Start\000"
+ 527      5F544F5F 
+ 527      44454255 
+ 527      475F5374 
+ 527      61727400 
+ 528              	.LASF10:
+ 529 0042 696E7433 		.ascii	"int32_t\000"
+ 529      325F7400 
+ 530              	.LASF5:
+ 531 004a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 531      20756E73 
+ 531      69676E65 
+ 531      6420696E 
+ 531      7400
+ 532              	.LASF22:
+ 533 005c 4442475F 		.ascii	"DBG_printf\000"
+ 533      7072696E 
+ 533      746600
+ 534              	.LASF7:
+ 535 0067 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 535      206C6F6E 
+ 535      6720756E 
+ 535      7369676E 
+ 535      65642069 
+ 536              	.LASF13:
+ 537 007e 63686172 		.ascii	"char8\000"
+ 537      3800
+ 538              	.LASF18:
+ 539 0084 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 539      4320342E 
+ 539      392E3320 
+ 539      32303135 
+ 539      30333033 
+ 540 00b7 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 540      20726576 
+ 540      6973696F 
+ 540      6E203232 
+ 540      31323230 
+ 541 00ea 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 541      66756E63 
+ 541      74696F6E 
+ 541      2D736563 
+ 541      74696F6E 
+ 542              	.LASF24:
+ 543 0112 55415254 		.ascii	"UART_TO_DEBUG_PutString\000"
+ 543      5F544F5F 
+ 543      44454255 
+ 543      475F5075 
+ 543      74537472 
+ 544              	.LASF21:
+ 545 012a 4442475F 		.ascii	"DBG_Init\000"
+ 545      496E6974 
+ 545      00
+ 546              	.LASF14:
+ 547 0133 63686172 		.ascii	"char\000"
+ 547      00
+ 548              	.LASF4:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc3E6idv.s 			page 12
+
+
+ 549 0138 6C6F6E67 		.ascii	"long int\000"
+ 549      20696E74 
+ 549      00
+ 550              	.LASF19:
+ 551 0141 44656275 		.ascii	"Debugs.c\000"
+ 551      67732E63 
+ 551      00
+ 552              	.LASF12:
+ 553 014a 646F7562 		.ascii	"double\000"
+ 553      6C6500
+ 554              	.LASF23:
+ 555 0151 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 555      52784275 
+ 555      66666572 
+ 555      00
+ 556              	.LASF0:
+ 557 015e 7369676E 		.ascii	"signed char\000"
+ 557      65642063 
+ 557      68617200 
+ 558              	.LASF1:
+ 559 016a 756E7369 		.ascii	"unsigned char\000"
+ 559      676E6564 
+ 559      20636861 
+ 559      7200
+ 560              	.LASF9:
+ 561 0178 5F5F696E 		.ascii	"__int32_t\000"
+ 561      7433325F 
+ 561      7400
+ 562              	.LASF11:
+ 563 0182 666C6F61 		.ascii	"float\000"
+ 563      7400
+ 564              	.LASF2:
+ 565 0188 73686F72 		.ascii	"short int\000"
+ 565      7420696E 
+ 565      7400
+ 566              	.LASF20:
+ 567 0192 433A5C55 		.ascii	"C:\\Users\\youkan\\Desktop\\came\\Workspace06\\Desi"
+ 567      73657273 
+ 567      5C796F75 
+ 567      6B616E5C 
+ 567      4465736B 
+ 568 01bf 676E3031 		.ascii	"gn01.cydsn\000"
+ 568      2E637964 
+ 568      736E00
+ 569              	.LASF15:
+ 570 01ca 73697A65 		.ascii	"sizetype\000"
+ 570      74797065 
+ 570      00
+ 571              	.LASF16:
+ 572 01d3 55415254 		.ascii	"UART_TO_DEBUG_Init\000"
+ 572      5F544F5F 
+ 572      44454255 
+ 572      475F496E 
+ 572      697400
+ 573              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

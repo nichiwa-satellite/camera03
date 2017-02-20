@@ -1,0 +1,1618 @@
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"Timer1.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.Timer1_Enable,"ax",%progbits
+  19              		.align	2
+  20              		.global	Timer1_Enable
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	Timer1_Enable, %function
+  24              	Timer1_Enable:
+  25              	.LFB2:
+  26              		.file 1 "Generated_Source\\PSoC5\\Timer1.c"
+   1:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/Timer1.c **** * File Name: Timer1.c
+   3:Generated_Source\PSoC5/Timer1.c **** * Version 3.20
+   4:Generated_Source\PSoC5/Timer1.c **** *
+   5:Generated_Source\PSoC5/Timer1.c **** * Description:
+   6:Generated_Source\PSoC5/Timer1.c **** *  This file provides the source code to API for the Sleep Timer.
+   7:Generated_Source\PSoC5/Timer1.c **** *
+   8:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+   9:Generated_Source\PSoC5/Timer1.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  10:Generated_Source\PSoC5/Timer1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC5/Timer1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC5/Timer1.c **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+  14:Generated_Source\PSoC5/Timer1.c **** 
+  15:Generated_Source\PSoC5/Timer1.c **** #include "Timer1.h"
+  16:Generated_Source\PSoC5/Timer1.c **** #include "CyLib.h"
+  17:Generated_Source\PSoC5/Timer1.c **** 
+  18:Generated_Source\PSoC5/Timer1.c **** /* Variables were not initialized */
+  19:Generated_Source\PSoC5/Timer1.c **** uint8 Timer1_initVar = 0u;
+  20:Generated_Source\PSoC5/Timer1.c **** 
+  21:Generated_Source\PSoC5/Timer1.c **** 
+  22:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+  23:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_Start
+  24:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+  25:Generated_Source\PSoC5/Timer1.c **** *
+  26:Generated_Source\PSoC5/Timer1.c **** * Summary:
+  27:Generated_Source\PSoC5/Timer1.c **** *  This is the preferred method to begin component operation. SleepTimer_Start()
+  28:Generated_Source\PSoC5/Timer1.c **** *  sets the initVar variable, calls the SleepTimer_Init() function, and then
+  29:Generated_Source\PSoC5/Timer1.c **** *  calls the SleepTimer_Enable() function. It enables the 1-kHz ILO clock and
+  30:Generated_Source\PSoC5/Timer1.c **** *  leaves it enabled after the Sleep Timer component is stopped.
+  31:Generated_Source\PSoC5/Timer1.c **** *
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 2
+
+
+  32:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+  33:Generated_Source\PSoC5/Timer1.c **** *  None
+  34:Generated_Source\PSoC5/Timer1.c **** *
+  35:Generated_Source\PSoC5/Timer1.c **** * Return:
+  36:Generated_Source\PSoC5/Timer1.c **** *  None
+  37:Generated_Source\PSoC5/Timer1.c **** *
+  38:Generated_Source\PSoC5/Timer1.c **** * Global variables:
+  39:Generated_Source\PSoC5/Timer1.c **** *  The Timer1_initVar variable is used to indicate initial
+  40:Generated_Source\PSoC5/Timer1.c **** *  configuration of this component.  The variable is initialized to zero and
+  41:Generated_Source\PSoC5/Timer1.c **** *  set to 1 the first time Timer1_Start() is called. This allows for
+  42:Generated_Source\PSoC5/Timer1.c **** *  component initialization without re-initialization in all subsequent calls
+  43:Generated_Source\PSoC5/Timer1.c **** *  to the Timer1_Start() routine.
+  44:Generated_Source\PSoC5/Timer1.c **** *
+  45:Generated_Source\PSoC5/Timer1.c **** * Reentrant:
+  46:Generated_Source\PSoC5/Timer1.c **** *  No
+  47:Generated_Source\PSoC5/Timer1.c **** *
+  48:Generated_Source\PSoC5/Timer1.c **** * Side Effects:
+  49:Generated_Source\PSoC5/Timer1.c **** *  If the initVar variable is already set, this function only calls the
+  50:Generated_Source\PSoC5/Timer1.c **** *  SleepTimer_Enable() function.
+  51:Generated_Source\PSoC5/Timer1.c **** *
+  52:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+  53:Generated_Source\PSoC5/Timer1.c **** void Timer1_Start(void) 
+  54:Generated_Source\PSoC5/Timer1.c **** {
+  55:Generated_Source\PSoC5/Timer1.c ****     /* Execute once in normal flow */
+  56:Generated_Source\PSoC5/Timer1.c ****     if (0u == Timer1_initVar)
+  57:Generated_Source\PSoC5/Timer1.c ****     {
+  58:Generated_Source\PSoC5/Timer1.c ****         Timer1_Init();
+  59:Generated_Source\PSoC5/Timer1.c ****         Timer1_initVar = 1u;
+  60:Generated_Source\PSoC5/Timer1.c ****     }
+  61:Generated_Source\PSoC5/Timer1.c **** 
+  62:Generated_Source\PSoC5/Timer1.c ****     /* Enables the component operation */
+  63:Generated_Source\PSoC5/Timer1.c ****     Timer1_Enable();
+  64:Generated_Source\PSoC5/Timer1.c **** }
+  65:Generated_Source\PSoC5/Timer1.c **** 
+  66:Generated_Source\PSoC5/Timer1.c **** 
+  67:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+  68:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_Init
+  69:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+  70:Generated_Source\PSoC5/Timer1.c **** *
+  71:Generated_Source\PSoC5/Timer1.c **** * Summary:
+  72:Generated_Source\PSoC5/Timer1.c **** *  This function initializes or restores the component according to the
+  73:Generated_Source\PSoC5/Timer1.c **** *  customizer Configure dialog settings. It is not necessary to call
+  74:Generated_Source\PSoC5/Timer1.c **** *  SleepTimer_Init() because the SleepTimer_Start() API calls this function and
+  75:Generated_Source\PSoC5/Timer1.c **** *  is the preferred method to begin component operation. Sets CTW interval
+  76:Generated_Source\PSoC5/Timer1.c **** *  period and enables or disables CTW interrupt (according to the customizer's
+  77:Generated_Source\PSoC5/Timer1.c **** *  settings).
+  78:Generated_Source\PSoC5/Timer1.c **** *
+  79:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+  80:Generated_Source\PSoC5/Timer1.c **** *  None
+  81:Generated_Source\PSoC5/Timer1.c **** *
+  82:Generated_Source\PSoC5/Timer1.c **** * Return:
+  83:Generated_Source\PSoC5/Timer1.c **** *  None
+  84:Generated_Source\PSoC5/Timer1.c **** *
+  85:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+  86:Generated_Source\PSoC5/Timer1.c **** void Timer1_Init(void)  
+  87:Generated_Source\PSoC5/Timer1.c **** {
+  88:Generated_Source\PSoC5/Timer1.c ****     /* Sets default (passed from customizer) interval */
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 3
+
+
+  89:Generated_Source\PSoC5/Timer1.c ****     Timer1_SetInterval(Timer1_INTERVAL);
+  90:Generated_Source\PSoC5/Timer1.c **** 
+  91:Generated_Source\PSoC5/Timer1.c ****     /* Check if user sets to issue an interrupt in customizer */
+  92:Generated_Source\PSoC5/Timer1.c ****     #if (1u == Timer1_ENABLE_INTERRUPT)
+  93:Generated_Source\PSoC5/Timer1.c ****     {
+  94:Generated_Source\PSoC5/Timer1.c ****         /* Enable interrupt */
+  95:Generated_Source\PSoC5/Timer1.c ****         Timer1_EnableInt();
+  96:Generated_Source\PSoC5/Timer1.c ****     }
+  97:Generated_Source\PSoC5/Timer1.c ****     #else /* interrupt should be disabled */
+  98:Generated_Source\PSoC5/Timer1.c ****     {
+  99:Generated_Source\PSoC5/Timer1.c ****         /* Disable interrupt */
+ 100:Generated_Source\PSoC5/Timer1.c ****         Timer1_DisableInt();
+ 101:Generated_Source\PSoC5/Timer1.c ****     }   /* Interrupt is disabled  */
+ 102:Generated_Source\PSoC5/Timer1.c ****     #endif  /* (1u == Timer1_ENABLE_INTERRUPT) */
+ 103:Generated_Source\PSoC5/Timer1.c **** }
+ 104:Generated_Source\PSoC5/Timer1.c **** 
+ 105:Generated_Source\PSoC5/Timer1.c **** 
+ 106:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+ 107:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_Enable
+ 108:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+ 109:Generated_Source\PSoC5/Timer1.c **** * Summary:
+ 110:Generated_Source\PSoC5/Timer1.c **** *  This function activates the 1-kHz ILO and the CTW and begins component
+ 111:Generated_Source\PSoC5/Timer1.c **** *  operation. It is not necessary to call SleepTimer_Enable() because the
+ 112:Generated_Source\PSoC5/Timer1.c **** *  SleepTimer_Start() API calls this function, which is the preferred method to
+ 113:Generated_Source\PSoC5/Timer1.c **** *  begin component operation.
+ 114:Generated_Source\PSoC5/Timer1.c **** *
+ 115:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+ 116:Generated_Source\PSoC5/Timer1.c **** *  None
+ 117:Generated_Source\PSoC5/Timer1.c **** *
+ 118:Generated_Source\PSoC5/Timer1.c **** * Return:
+ 119:Generated_Source\PSoC5/Timer1.c **** *  None
+ 120:Generated_Source\PSoC5/Timer1.c **** *
+ 121:Generated_Source\PSoC5/Timer1.c **** * Side Effects:
+ 122:Generated_Source\PSoC5/Timer1.c **** *  Enables 1 kHz ILO clocks and leaves it enabled after Sleep Time component
+ 123:Generated_Source\PSoC5/Timer1.c **** *  is stopped.
+ 124:Generated_Source\PSoC5/Timer1.c **** *
+ 125:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+ 126:Generated_Source\PSoC5/Timer1.c **** void Timer1_Enable(void) 
+ 127:Generated_Source\PSoC5/Timer1.c **** {
+  27              		.loc 1 127 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+ 128:Generated_Source\PSoC5/Timer1.c ****     uint8 interruptState;
+ 129:Generated_Source\PSoC5/Timer1.c **** 
+ 130:Generated_Source\PSoC5/Timer1.c ****     /* If 1kHz ILO is disabled */
+ 131:Generated_Source\PSoC5/Timer1.c ****     if(0u == (Timer1_ILO_CFG_REG & Timer1_ILO_1KHZ_EN))
+  35              		.loc 1 131 0
+  36 0002 0F4B     		ldr	r3, .L5
+  37 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  38 0006 13F0020F 		tst	r3, #2
+  39 000a 0ED1     		bne	.L2
+ 132:Generated_Source\PSoC5/Timer1.c ****     {
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 4
+
+
+ 133:Generated_Source\PSoC5/Timer1.c ****         /* Enter critical section */
+ 134:Generated_Source\PSoC5/Timer1.c ****         interruptState = CyEnterCriticalSection();
+  40              		.loc 1 134 0
+  41 000c FFF7FEFF 		bl	CyEnterCriticalSection
+  42              	.LVL0:
+ 135:Generated_Source\PSoC5/Timer1.c **** 
+ 136:Generated_Source\PSoC5/Timer1.c ****         /* Enable 1kHz ILO */
+ 137:Generated_Source\PSoC5/Timer1.c ****         Timer1_ILO_CFG_REG |=Timer1_ILO_1KHZ_EN;
+  43              		.loc 1 137 0
+  44 0010 0B4A     		ldr	r2, .L5
+  45 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  46 0014 43F00203 		orr	r3, r3, #2
+  47 0018 1370     		strb	r3, [r2]
+ 138:Generated_Source\PSoC5/Timer1.c **** 
+ 139:Generated_Source\PSoC5/Timer1.c ****         /* Enable the CTW counter */
+ 140:Generated_Source\PSoC5/Timer1.c ****         Timer1_TW_CFG_REG |= Timer1_CTW_EN;
+  48              		.loc 1 140 0
+  49 001a 8232     		adds	r2, r2, #130
+  50 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  51 001e 43F00403 		orr	r3, r3, #4
+  52 0022 1370     		strb	r3, [r2]
+ 141:Generated_Source\PSoC5/Timer1.c **** 
+ 142:Generated_Source\PSoC5/Timer1.c ****         /* Exit critical section */
+ 143:Generated_Source\PSoC5/Timer1.c ****         CyExitCriticalSection(interruptState);
+  53              		.loc 1 143 0
+  54 0024 FFF7FEFF 		bl	CyExitCriticalSection
+  55              	.LVL1:
+  56 0028 08BD     		pop	{r3, pc}
+  57              	.L2:
+ 144:Generated_Source\PSoC5/Timer1.c ****     }
+ 145:Generated_Source\PSoC5/Timer1.c ****     else /* If 1kHz ILO is enabled - enable CTW counter */
+ 146:Generated_Source\PSoC5/Timer1.c ****     {
+ 147:Generated_Source\PSoC5/Timer1.c ****         /* Enter critical section */
+ 148:Generated_Source\PSoC5/Timer1.c ****         interruptState = CyEnterCriticalSection();
+  58              		.loc 1 148 0
+  59 002a FFF7FEFF 		bl	CyEnterCriticalSection
+  60              	.LVL2:
+ 149:Generated_Source\PSoC5/Timer1.c **** 
+ 150:Generated_Source\PSoC5/Timer1.c ****         /* Enable the CTW counter */
+ 151:Generated_Source\PSoC5/Timer1.c ****         Timer1_TW_CFG_REG |= Timer1_CTW_EN;
+  61              		.loc 1 151 0
+  62 002e 054A     		ldr	r2, .L5+4
+  63 0030 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  64 0032 43F00403 		orr	r3, r3, #4
+  65 0036 1370     		strb	r3, [r2]
+ 152:Generated_Source\PSoC5/Timer1.c **** 
+ 153:Generated_Source\PSoC5/Timer1.c ****         /* Exit critical section */
+ 154:Generated_Source\PSoC5/Timer1.c ****         CyExitCriticalSection(interruptState);
+  66              		.loc 1 154 0
+  67 0038 FFF7FEFF 		bl	CyExitCriticalSection
+  68              	.LVL3:
+  69 003c 08BD     		pop	{r3, pc}
+  70              	.L6:
+  71 003e 00BF     		.align	2
+  72              	.L5:
+  73 0040 00430040 		.word	1073758976
+  74 0044 82430040 		.word	1073759106
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 5
+
+
+  75              		.cfi_endproc
+  76              	.LFE2:
+  77              		.size	Timer1_Enable, .-Timer1_Enable
+  78              		.section	.text.Timer1_Stop,"ax",%progbits
+  79              		.align	2
+  80              		.global	Timer1_Stop
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	Timer1_Stop, %function
+  84              	Timer1_Stop:
+  85              	.LFB3:
+ 155:Generated_Source\PSoC5/Timer1.c ****     }
+ 156:Generated_Source\PSoC5/Timer1.c **** }
+ 157:Generated_Source\PSoC5/Timer1.c **** 
+ 158:Generated_Source\PSoC5/Timer1.c **** 
+ 159:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+ 160:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_Stop
+ 161:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+ 162:Generated_Source\PSoC5/Timer1.c **** *
+ 163:Generated_Source\PSoC5/Timer1.c **** * Summary:
+ 164:Generated_Source\PSoC5/Timer1.c **** *  This function stops Sleep Timer operation and disables wakeup and interrupt.
+ 165:Generated_Source\PSoC5/Timer1.c **** *  The device does not wake up when the CTW counter reaches terminal count, and
+ 166:Generated_Source\PSoC5/Timer1.c **** *  an interrupt is not issued.
+ 167:Generated_Source\PSoC5/Timer1.c **** *
+ 168:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+ 169:Generated_Source\PSoC5/Timer1.c **** *  None
+ 170:Generated_Source\PSoC5/Timer1.c **** *
+ 171:Generated_Source\PSoC5/Timer1.c **** * Return:
+ 172:Generated_Source\PSoC5/Timer1.c **** *  None
+ 173:Generated_Source\PSoC5/Timer1.c **** *
+ 174:Generated_Source\PSoC5/Timer1.c **** * Side Effects:
+ 175:Generated_Source\PSoC5/Timer1.c **** *  Leaves the 1 kHz ILO clock enabled after Sleep Time component is stopped.
+ 176:Generated_Source\PSoC5/Timer1.c **** *
+ 177:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+ 178:Generated_Source\PSoC5/Timer1.c **** void Timer1_Stop(void) 
+ 179:Generated_Source\PSoC5/Timer1.c **** {
+  86              		.loc 1 179 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 0000 08B5     		push	{r3, lr}
+  91              		.cfi_def_cfa_offset 8
+  92              		.cfi_offset 3, -8
+  93              		.cfi_offset 14, -4
+ 180:Generated_Source\PSoC5/Timer1.c ****     uint8 interruptState;
+ 181:Generated_Source\PSoC5/Timer1.c **** 
+ 182:Generated_Source\PSoC5/Timer1.c ****     /* Enter critical section */
+ 183:Generated_Source\PSoC5/Timer1.c ****     interruptState = CyEnterCriticalSection();
+  94              		.loc 1 183 0
+  95 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+  96              	.LVL4:
+ 184:Generated_Source\PSoC5/Timer1.c **** 
+ 185:Generated_Source\PSoC5/Timer1.c ****     /* Disable CTW counter */
+ 186:Generated_Source\PSoC5/Timer1.c ****     Timer1_TW_CFG_REG &= (uint8)(~Timer1_CTW_EN);
+  97              		.loc 1 186 0
+  98 0006 044A     		ldr	r2, .L9
+  99 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 6
+
+
+ 100 000a 03F0FB03 		and	r3, r3, #251
+ 101 000e 1370     		strb	r3, [r2]
+ 187:Generated_Source\PSoC5/Timer1.c **** 
+ 188:Generated_Source\PSoC5/Timer1.c ****     /* Exit critical section */
+ 189:Generated_Source\PSoC5/Timer1.c ****     CyExitCriticalSection(interruptState);
+ 102              		.loc 1 189 0
+ 103 0010 FFF7FEFF 		bl	CyExitCriticalSection
+ 104              	.LVL5:
+ 105 0014 08BD     		pop	{r3, pc}
+ 106              	.L10:
+ 107 0016 00BF     		.align	2
+ 108              	.L9:
+ 109 0018 82430040 		.word	1073759106
+ 110              		.cfi_endproc
+ 111              	.LFE3:
+ 112              		.size	Timer1_Stop, .-Timer1_Stop
+ 113              		.section	.text.Timer1_EnableInt,"ax",%progbits
+ 114              		.align	2
+ 115              		.global	Timer1_EnableInt
+ 116              		.thumb
+ 117              		.thumb_func
+ 118              		.type	Timer1_EnableInt, %function
+ 119              	Timer1_EnableInt:
+ 120              	.LFB4:
+ 190:Generated_Source\PSoC5/Timer1.c **** }
+ 191:Generated_Source\PSoC5/Timer1.c **** 
+ 192:Generated_Source\PSoC5/Timer1.c **** 
+ 193:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+ 194:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_EnableInt
+ 195:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+ 196:Generated_Source\PSoC5/Timer1.c **** *
+ 197:Generated_Source\PSoC5/Timer1.c **** * Summary:
+ 198:Generated_Source\PSoC5/Timer1.c **** *  This function enables the CTW terminal count interrupt.
+ 199:Generated_Source\PSoC5/Timer1.c **** *
+ 200:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+ 201:Generated_Source\PSoC5/Timer1.c **** *  None
+ 202:Generated_Source\PSoC5/Timer1.c **** *
+ 203:Generated_Source\PSoC5/Timer1.c **** * Return:
+ 204:Generated_Source\PSoC5/Timer1.c **** *  None
+ 205:Generated_Source\PSoC5/Timer1.c **** *
+ 206:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+ 207:Generated_Source\PSoC5/Timer1.c **** void Timer1_EnableInt(void) 
+ 208:Generated_Source\PSoC5/Timer1.c **** {
+ 121              		.loc 1 208 0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 125 0000 08B5     		push	{r3, lr}
+ 126              		.cfi_def_cfa_offset 8
+ 127              		.cfi_offset 3, -8
+ 128              		.cfi_offset 14, -4
+ 209:Generated_Source\PSoC5/Timer1.c ****     uint8 interruptState;
+ 210:Generated_Source\PSoC5/Timer1.c **** 
+ 211:Generated_Source\PSoC5/Timer1.c ****     /* Enter critical section */
+ 212:Generated_Source\PSoC5/Timer1.c ****     interruptState = CyEnterCriticalSection();
+ 129              		.loc 1 212 0
+ 130 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 7
+
+
+ 131              	.LVL6:
+ 213:Generated_Source\PSoC5/Timer1.c **** 
+ 214:Generated_Source\PSoC5/Timer1.c ****      /* Enable interrupt on wake up */
+ 215:Generated_Source\PSoC5/Timer1.c ****     Timer1_TW_CFG_REG |= Timer1_CTW_IE;
+ 132              		.loc 1 215 0
+ 133 0006 044A     		ldr	r2, .L13
+ 134 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 135 000a 43F00803 		orr	r3, r3, #8
+ 136 000e 1370     		strb	r3, [r2]
+ 216:Generated_Source\PSoC5/Timer1.c **** 
+ 217:Generated_Source\PSoC5/Timer1.c ****     /* Exit critical section */
+ 218:Generated_Source\PSoC5/Timer1.c ****     CyExitCriticalSection(interruptState);
+ 137              		.loc 1 218 0
+ 138 0010 FFF7FEFF 		bl	CyExitCriticalSection
+ 139              	.LVL7:
+ 140 0014 08BD     		pop	{r3, pc}
+ 141              	.L14:
+ 142 0016 00BF     		.align	2
+ 143              	.L13:
+ 144 0018 82430040 		.word	1073759106
+ 145              		.cfi_endproc
+ 146              	.LFE4:
+ 147              		.size	Timer1_EnableInt, .-Timer1_EnableInt
+ 148              		.section	.text.Timer1_DisableInt,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	Timer1_DisableInt
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.type	Timer1_DisableInt, %function
+ 154              	Timer1_DisableInt:
+ 155              	.LFB5:
+ 219:Generated_Source\PSoC5/Timer1.c **** }
+ 220:Generated_Source\PSoC5/Timer1.c **** 
+ 221:Generated_Source\PSoC5/Timer1.c **** 
+ 222:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+ 223:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_DisableInt
+ 224:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+ 225:Generated_Source\PSoC5/Timer1.c **** *
+ 226:Generated_Source\PSoC5/Timer1.c **** * Summary:
+ 227:Generated_Source\PSoC5/Timer1.c **** *  This function disables the CTW terminal count interrupt.
+ 228:Generated_Source\PSoC5/Timer1.c **** *
+ 229:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+ 230:Generated_Source\PSoC5/Timer1.c **** *  None
+ 231:Generated_Source\PSoC5/Timer1.c **** *
+ 232:Generated_Source\PSoC5/Timer1.c **** * Return:
+ 233:Generated_Source\PSoC5/Timer1.c **** *  None
+ 234:Generated_Source\PSoC5/Timer1.c **** *
+ 235:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+ 236:Generated_Source\PSoC5/Timer1.c **** void Timer1_DisableInt(void) 
+ 237:Generated_Source\PSoC5/Timer1.c **** {
+ 156              		.loc 1 237 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160 0000 08B5     		push	{r3, lr}
+ 161              		.cfi_def_cfa_offset 8
+ 162              		.cfi_offset 3, -8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 8
+
+
+ 163              		.cfi_offset 14, -4
+ 238:Generated_Source\PSoC5/Timer1.c ****     uint8 interruptState;
+ 239:Generated_Source\PSoC5/Timer1.c **** 
+ 240:Generated_Source\PSoC5/Timer1.c ****     /* Enter critical section */
+ 241:Generated_Source\PSoC5/Timer1.c ****     interruptState = CyEnterCriticalSection();
+ 164              		.loc 1 241 0
+ 165 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ 166              	.LVL8:
+ 242:Generated_Source\PSoC5/Timer1.c **** 
+ 243:Generated_Source\PSoC5/Timer1.c ****     /* Disable interrupt on wake up */
+ 244:Generated_Source\PSoC5/Timer1.c ****     Timer1_TW_CFG_REG &= (uint8)(~Timer1_CTW_IE);
+ 167              		.loc 1 244 0
+ 168 0006 044A     		ldr	r2, .L17
+ 169 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 170 000a 03F0F703 		and	r3, r3, #247
+ 171 000e 1370     		strb	r3, [r2]
+ 245:Generated_Source\PSoC5/Timer1.c **** 
+ 246:Generated_Source\PSoC5/Timer1.c ****     /* Exit critical section */
+ 247:Generated_Source\PSoC5/Timer1.c ****     CyExitCriticalSection(interruptState);
+ 172              		.loc 1 247 0
+ 173 0010 FFF7FEFF 		bl	CyExitCriticalSection
+ 174              	.LVL9:
+ 175 0014 08BD     		pop	{r3, pc}
+ 176              	.L18:
+ 177 0016 00BF     		.align	2
+ 178              	.L17:
+ 179 0018 82430040 		.word	1073759106
+ 180              		.cfi_endproc
+ 181              	.LFE5:
+ 182              		.size	Timer1_DisableInt, .-Timer1_DisableInt
+ 183              		.section	.text.Timer1_SetInterval,"ax",%progbits
+ 184              		.align	2
+ 185              		.global	Timer1_SetInterval
+ 186              		.thumb
+ 187              		.thumb_func
+ 188              		.type	Timer1_SetInterval, %function
+ 189              	Timer1_SetInterval:
+ 190              	.LFB6:
+ 248:Generated_Source\PSoC5/Timer1.c **** }
+ 249:Generated_Source\PSoC5/Timer1.c **** 
+ 250:Generated_Source\PSoC5/Timer1.c **** 
+ 251:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+ 252:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_SetInterval
+ 253:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+ 254:Generated_Source\PSoC5/Timer1.c **** *
+ 255:Generated_Source\PSoC5/Timer1.c **** * Summary:
+ 256:Generated_Source\PSoC5/Timer1.c **** *  This function sets the CTW interval period. The first interval can range
+ 257:Generated_Source\PSoC5/Timer1.c **** *  from 1 to (period + 1) milliseconds. Additional intervals occur at the
+ 258:Generated_Source\PSoC5/Timer1.c **** *  nominal period. You can only change the interval value when CTW is disabled,
+ 259:Generated_Source\PSoC5/Timer1.c **** *  which you do by stopping the component.
+ 260:Generated_Source\PSoC5/Timer1.c **** *
+ 261:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+ 262:Generated_Source\PSoC5/Timer1.c **** *  uint8 interval: interval?s value for the CTW.
+ 263:Generated_Source\PSoC5/Timer1.c **** *
+ 264:Generated_Source\PSoC5/Timer1.c **** *  PSoC 5:
+ 265:Generated_Source\PSoC5/Timer1.c **** *  Only the 4-, 8-, 16-, 32-, 64-, 128-, and 256-ms selections are supported.
+ 266:Generated_Source\PSoC5/Timer1.c **** *
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 9
+
+
+ 267:Generated_Source\PSoC5/Timer1.c **** *           Name                    Value        Period
+ 268:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_2_MS      4'b0001        2 ms
+ 269:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_4_MS      4'b0010        4 ms
+ 270:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_8_MS      4'b0011        8 ms
+ 271:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_16_MS     4'b0100        16 ms
+ 272:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_32_MS     4'b0101        32 ms
+ 273:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_64_MS     4'b0110        64 ms
+ 274:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_128_MS    4'b0111        128 ms
+ 275:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_256_MS    4'b1000        256 ms
+ 276:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_512_MS    4'b1001        512 ms
+ 277:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_1024_MS   4'b1010        1024 ms
+ 278:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_2048_MS   4'b1011        2048 ms
+ 279:Generated_Source\PSoC5/Timer1.c **** *   Timer1__CTW_4096_MS   4'b1100        4096 ms
+ 280:Generated_Source\PSoC5/Timer1.c **** *
+ 281:Generated_Source\PSoC5/Timer1.c **** * Return:
+ 282:Generated_Source\PSoC5/Timer1.c **** *  None
+ 283:Generated_Source\PSoC5/Timer1.c **** *
+ 284:Generated_Source\PSoC5/Timer1.c **** * Side Effects:
+ 285:Generated_Source\PSoC5/Timer1.c **** *  Interval value can be only changed when component is stopped (CTW is
+ 286:Generated_Source\PSoC5/Timer1.c **** *  disabled).
+ 287:Generated_Source\PSoC5/Timer1.c **** *
+ 288:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+ 289:Generated_Source\PSoC5/Timer1.c **** void Timer1_SetInterval(uint8 interval) 
+ 290:Generated_Source\PSoC5/Timer1.c **** {
+ 191              		.loc 1 290 0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 0
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195              		@ link register save eliminated.
+ 196              	.LVL10:
+ 291:Generated_Source\PSoC5/Timer1.c ****     /* Check if CTW is disabled */
+ 292:Generated_Source\PSoC5/Timer1.c ****     if (0u == (Timer1_TW_CFG_REG & Timer1_CTW_EN))
+ 197              		.loc 1 292 0
+ 198 0000 064B     		ldr	r3, .L21
+ 199 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 200 0004 13F0040F 		tst	r3, #4
+ 201 0008 07D1     		bne	.L19
+ 293:Generated_Source\PSoC5/Timer1.c ****     {
+ 294:Generated_Source\PSoC5/Timer1.c ****         #if(CY_PSOC5A)
+ 295:Generated_Source\PSoC5/Timer1.c **** 
+ 296:Generated_Source\PSoC5/Timer1.c ****             CYASSERT((Timer1__CTW_4_MS   == interval) ||
+ 297:Generated_Source\PSoC5/Timer1.c ****                      (Timer1__CTW_8_MS   == interval) ||
+ 298:Generated_Source\PSoC5/Timer1.c ****                      (Timer1__CTW_16_MS  == interval) ||
+ 299:Generated_Source\PSoC5/Timer1.c ****                      (Timer1__CTW_32_MS  == interval) ||
+ 300:Generated_Source\PSoC5/Timer1.c ****                      (Timer1__CTW_64_MS  == interval) ||
+ 301:Generated_Source\PSoC5/Timer1.c ****                      (Timer1__CTW_128_MS == interval) ||
+ 302:Generated_Source\PSoC5/Timer1.c ****                      (Timer1__CTW_256_MS == interval));
+ 303:Generated_Source\PSoC5/Timer1.c **** 
+ 304:Generated_Source\PSoC5/Timer1.c ****         #endif  /* (CY_PSOC5A) */
+ 305:Generated_Source\PSoC5/Timer1.c **** 
+ 306:Generated_Source\PSoC5/Timer1.c ****         /* Set CTW interval */
+ 307:Generated_Source\PSoC5/Timer1.c ****         Timer1_CTW_INTERVAL_REG = \
+ 308:Generated_Source\PSoC5/Timer1.c ****             (Timer1_CTW_INTERVAL_REG & ((uint8)~Timer1_INTERVAL_MASK)) | \
+ 202              		.loc 1 308 0
+ 203 000a 054A     		ldr	r2, .L21+4
+ 204 000c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 307:Generated_Source\PSoC5/Timer1.c ****             (Timer1_CTW_INTERVAL_REG & ((uint8)~Timer1_INTERVAL_MASK)) | \
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 10
+
+
+ 205              		.loc 1 307 0
+ 206 000e 03F0F003 		and	r3, r3, #240
+ 207 0012 00F00F00 		and	r0, r0, #15
+ 208              	.LVL11:
+ 209 0016 1843     		orrs	r0, r0, r3
+ 210 0018 1070     		strb	r0, [r2]
+ 211              	.L19:
+ 212 001a 7047     		bx	lr
+ 213              	.L22:
+ 214              		.align	2
+ 215              	.L21:
+ 216 001c 82430040 		.word	1073759106
+ 217 0020 81430040 		.word	1073759105
+ 218              		.cfi_endproc
+ 219              	.LFE6:
+ 220              		.size	Timer1_SetInterval, .-Timer1_SetInterval
+ 221              		.section	.text.Timer1_Init,"ax",%progbits
+ 222              		.align	2
+ 223              		.global	Timer1_Init
+ 224              		.thumb
+ 225              		.thumb_func
+ 226              		.type	Timer1_Init, %function
+ 227              	Timer1_Init:
+ 228              	.LFB1:
+  87:Generated_Source\PSoC5/Timer1.c ****     /* Sets default (passed from customizer) interval */
+ 229              		.loc 1 87 0
+ 230              		.cfi_startproc
+ 231              		@ args = 0, pretend = 0, frame = 0
+ 232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 233 0000 08B5     		push	{r3, lr}
+ 234              		.cfi_def_cfa_offset 8
+ 235              		.cfi_offset 3, -8
+ 236              		.cfi_offset 14, -4
+  89:Generated_Source\PSoC5/Timer1.c **** 
+ 237              		.loc 1 89 0
+ 238 0002 0420     		movs	r0, #4
+ 239 0004 FFF7FEFF 		bl	Timer1_SetInterval
+ 240              	.LVL12:
+  95:Generated_Source\PSoC5/Timer1.c ****     }
+ 241              		.loc 1 95 0
+ 242 0008 FFF7FEFF 		bl	Timer1_EnableInt
+ 243              	.LVL13:
+ 244 000c 08BD     		pop	{r3, pc}
+ 245              		.cfi_endproc
+ 246              	.LFE1:
+ 247              		.size	Timer1_Init, .-Timer1_Init
+ 248 000e 00BF     		.section	.text.Timer1_Start,"ax",%progbits
+ 249              		.align	2
+ 250              		.global	Timer1_Start
+ 251              		.thumb
+ 252              		.thumb_func
+ 253              		.type	Timer1_Start, %function
+ 254              	Timer1_Start:
+ 255              	.LFB0:
+  54:Generated_Source\PSoC5/Timer1.c ****     /* Execute once in normal flow */
+ 256              		.loc 1 54 0
+ 257              		.cfi_startproc
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 11
+
+
+ 258              		@ args = 0, pretend = 0, frame = 0
+ 259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 260 0000 08B5     		push	{r3, lr}
+ 261              		.cfi_def_cfa_offset 8
+ 262              		.cfi_offset 3, -8
+ 263              		.cfi_offset 14, -4
+  56:Generated_Source\PSoC5/Timer1.c ****     {
+ 264              		.loc 1 56 0
+ 265 0002 054B     		ldr	r3, .L28
+ 266 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 267 0006 23B9     		cbnz	r3, .L26
+  58:Generated_Source\PSoC5/Timer1.c ****         Timer1_initVar = 1u;
+ 268              		.loc 1 58 0
+ 269 0008 FFF7FEFF 		bl	Timer1_Init
+ 270              	.LVL14:
+  59:Generated_Source\PSoC5/Timer1.c ****     }
+ 271              		.loc 1 59 0
+ 272 000c 0122     		movs	r2, #1
+ 273 000e 024B     		ldr	r3, .L28
+ 274 0010 1A70     		strb	r2, [r3]
+ 275              	.L26:
+  63:Generated_Source\PSoC5/Timer1.c **** }
+ 276              		.loc 1 63 0
+ 277 0012 FFF7FEFF 		bl	Timer1_Enable
+ 278              	.LVL15:
+ 279 0016 08BD     		pop	{r3, pc}
+ 280              	.L29:
+ 281              		.align	2
+ 282              	.L28:
+ 283 0018 00000000 		.word	.LANCHOR0
+ 284              		.cfi_endproc
+ 285              	.LFE0:
+ 286              		.size	Timer1_Start, .-Timer1_Start
+ 287              		.section	.text.Timer1_GetStatus,"ax",%progbits
+ 288              		.align	2
+ 289              		.global	Timer1_GetStatus
+ 290              		.thumb
+ 291              		.thumb_func
+ 292              		.type	Timer1_GetStatus, %function
+ 293              	Timer1_GetStatus:
+ 294              	.LFB7:
+ 309:Generated_Source\PSoC5/Timer1.c ****             (interval & Timer1_INTERVAL_MASK);
+ 310:Generated_Source\PSoC5/Timer1.c ****     }
+ 311:Generated_Source\PSoC5/Timer1.c ****     /* Do nothing if CTW is enabled. */
+ 312:Generated_Source\PSoC5/Timer1.c **** }
+ 313:Generated_Source\PSoC5/Timer1.c **** 
+ 314:Generated_Source\PSoC5/Timer1.c **** 
+ 315:Generated_Source\PSoC5/Timer1.c **** /*******************************************************************************
+ 316:Generated_Source\PSoC5/Timer1.c **** * Function Name: Timer1_GetStatus
+ 317:Generated_Source\PSoC5/Timer1.c **** ********************************************************************************
+ 318:Generated_Source\PSoC5/Timer1.c **** *
+ 319:Generated_Source\PSoC5/Timer1.c **** * Summary:
+ 320:Generated_Source\PSoC5/Timer1.c **** *  This function returns the state of the Sleep Timer's status register, and
+ 321:Generated_Source\PSoC5/Timer1.c **** *  clears the pending interrupt status bit. The application code must always
+ 322:Generated_Source\PSoC5/Timer1.c **** *  call this function after wakeup to clear the ctw_int status bit. The code
+ 323:Generated_Source\PSoC5/Timer1.c **** *  must call this function whether the Sleep Timer's interrupt is disabled or
+ 324:Generated_Source\PSoC5/Timer1.c **** *  enabled.
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 12
+
+
+ 325:Generated_Source\PSoC5/Timer1.c **** *
+ 326:Generated_Source\PSoC5/Timer1.c **** * Parameters:
+ 327:Generated_Source\PSoC5/Timer1.c **** *  None
+ 328:Generated_Source\PSoC5/Timer1.c **** *
+ 329:Generated_Source\PSoC5/Timer1.c **** * Return:
+ 330:Generated_Source\PSoC5/Timer1.c **** *  Returns an 8-bit value (uint8) with bits set if a corresponding event has
+ 331:Generated_Source\PSoC5/Timer1.c **** *  occurred. The constants shown in the following table describe the two-bit
+ 332:Generated_Source\PSoC5/Timer1.c **** *  masks for the two events that this return value can contain.
+ 333:Generated_Source\PSoC5/Timer1.c **** *
+ 334:Generated_Source\PSoC5/Timer1.c **** *            Name                             Description
+ 335:Generated_Source\PSoC5/Timer1.c **** *  Timer1_PM_INT_SR_ONEPPSP  A onepps event has occured
+ 336:Generated_Source\PSoC5/Timer1.c **** *  Timer1_PM_INT_SR_CTW      A central timewheel event occured
+ 337:Generated_Source\PSoC5/Timer1.c **** *  Timer1_PM_INT_SR_FTW      A fast timewheel event occured
+ 338:Generated_Source\PSoC5/Timer1.c **** *
+ 339:Generated_Source\PSoC5/Timer1.c **** * Side Effects:
+ 340:Generated_Source\PSoC5/Timer1.c **** *  If the SleepTimer_GetStatus() function is not called in an interrupt
+ 341:Generated_Source\PSoC5/Timer1.c **** *  associated with the SleepTimer, the interrupt is not cleared and as soon as
+ 342:Generated_Source\PSoC5/Timer1.c **** *  the interrupt is exited it is re-entered.
+ 343:Generated_Source\PSoC5/Timer1.c **** *
+ 344:Generated_Source\PSoC5/Timer1.c **** *  After the Sleep Timer has expired, the sleep interval is functionally 0 ms,
+ 345:Generated_Source\PSoC5/Timer1.c **** *  because the interrupt is called until the ctw_int flag is cleared by the
+ 346:Generated_Source\PSoC5/Timer1.c **** *  SleepTimer_GetStatus() function.
+ 347:Generated_Source\PSoC5/Timer1.c **** *
+ 348:Generated_Source\PSoC5/Timer1.c **** *  If an interrupt is generated at the same time as a register read/clear, the
+ 349:Generated_Source\PSoC5/Timer1.c **** *  bit remains set (which causes another interrupt).
+ 350:Generated_Source\PSoC5/Timer1.c **** *
+ 351:Generated_Source\PSoC5/Timer1.c **** *  Reports and then clears all interrupt status bits in the Power Manager
+ 352:Generated_Source\PSoC5/Timer1.c **** *  Interrupt Status register. Some of the bits are not relevant to this
+ 353:Generated_Source\PSoC5/Timer1.c **** *  component's operation.
+ 354:Generated_Source\PSoC5/Timer1.c **** *
+ 355:Generated_Source\PSoC5/Timer1.c **** *  The application code must always call this function (when the Sleep Timer's
+ 356:Generated_Source\PSoC5/Timer1.c **** *  interrupt is disabled or enabled) after wakeup to clear the ctw_int status
+ 357:Generated_Source\PSoC5/Timer1.c **** *  bit. The code must call SleepTimer_GetStatus() within 1 ms (1 clock cycle of
+ 358:Generated_Source\PSoC5/Timer1.c **** *  the ILO) after the CTW event occurred.
+ 359:Generated_Source\PSoC5/Timer1.c **** *
+ 360:Generated_Source\PSoC5/Timer1.c **** *******************************************************************************/
+ 361:Generated_Source\PSoC5/Timer1.c **** uint8 Timer1_GetStatus(void) 
+ 362:Generated_Source\PSoC5/Timer1.c **** {
+ 295              		.loc 1 362 0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 0
+ 298              		@ frame_needed = 0, uses_anonymous_args = 0
+ 299 0000 08B5     		push	{r3, lr}
+ 300              		.cfi_def_cfa_offset 8
+ 301              		.cfi_offset 3, -8
+ 302              		.cfi_offset 14, -4
+ 363:Generated_Source\PSoC5/Timer1.c ****     /* Read to clear  */
+ 364:Generated_Source\PSoC5/Timer1.c ****     return CyPmReadStatus(CY_PM_CTW_INT);
+ 303              		.loc 1 364 0
+ 304 0002 0220     		movs	r0, #2
+ 305 0004 FFF7FEFF 		bl	CyPmReadStatus
+ 306              	.LVL16:
+ 365:Generated_Source\PSoC5/Timer1.c **** }
+ 307              		.loc 1 365 0
+ 308 0008 08BD     		pop	{r3, pc}
+ 309              		.cfi_endproc
+ 310              	.LFE7:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 13
+
+
+ 311              		.size	Timer1_GetStatus, .-Timer1_GetStatus
+ 312              		.global	Timer1_initVar
+ 313 000a 00BF     		.bss
+ 314              		.set	.LANCHOR0,. + 0
+ 315              		.type	Timer1_initVar, %object
+ 316              		.size	Timer1_initVar, 1
+ 317              	Timer1_initVar:
+ 318 0000 00       		.space	1
+ 319              		.text
+ 320              	.Letext0:
+ 321              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 322              		.file 3 "Generated_Source\\PSoC5\\CyLib.h"
+ 323              		.file 4 "Generated_Source\\PSoC5\\cyPm.h"
+ 324              		.section	.debug_info,"",%progbits
+ 325              	.Ldebug_info0:
+ 326 0000 78020000 		.4byte	0x278
+ 327 0004 0400     		.2byte	0x4
+ 328 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 329 000a 04       		.byte	0x4
+ 330 000b 01       		.uleb128 0x1
+ 331 000c 91000000 		.4byte	.LASF25
+ 332 0010 01       		.byte	0x1
+ 333 0011 10020000 		.4byte	.LASF26
+ 334 0015 73010000 		.4byte	.LASF27
+ 335 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 336 001d 00000000 		.4byte	0
+ 337 0021 00000000 		.4byte	.Ldebug_line0
+ 338 0025 02       		.uleb128 0x2
+ 339 0026 01       		.byte	0x1
+ 340 0027 06       		.byte	0x6
+ 341 0028 3C020000 		.4byte	.LASF0
+ 342 002c 02       		.uleb128 0x2
+ 343 002d 01       		.byte	0x1
+ 344 002e 08       		.byte	0x8
+ 345 002f 43000000 		.4byte	.LASF1
+ 346 0033 02       		.uleb128 0x2
+ 347 0034 02       		.byte	0x2
+ 348 0035 05       		.byte	0x5
+ 349 0036 D1010000 		.4byte	.LASF2
+ 350 003a 02       		.uleb128 0x2
+ 351 003b 02       		.byte	0x2
+ 352 003c 07       		.byte	0x7
+ 353 003d 00000000 		.4byte	.LASF3
+ 354 0041 02       		.uleb128 0x2
+ 355 0042 04       		.byte	0x4
+ 356 0043 05       		.byte	0x5
+ 357 0044 07020000 		.4byte	.LASF4
+ 358 0048 02       		.uleb128 0x2
+ 359 0049 04       		.byte	0x4
+ 360 004a 07       		.byte	0x7
+ 361 004b 65000000 		.4byte	.LASF5
+ 362 004f 02       		.uleb128 0x2
+ 363 0050 08       		.byte	0x8
+ 364 0051 05       		.byte	0x5
+ 365 0052 AF010000 		.4byte	.LASF6
+ 366 0056 02       		.uleb128 0x2
+ 367 0057 08       		.byte	0x8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 14
+
+
+ 368 0058 07       		.byte	0x7
+ 369 0059 2C000000 		.4byte	.LASF7
+ 370 005d 03       		.uleb128 0x3
+ 371 005e 04       		.byte	0x4
+ 372 005f 05       		.byte	0x5
+ 373 0060 696E7400 		.ascii	"int\000"
+ 374 0064 02       		.uleb128 0x2
+ 375 0065 04       		.byte	0x4
+ 376 0066 07       		.byte	0x7
+ 377 0067 42010000 		.4byte	.LASF8
+ 378 006b 04       		.uleb128 0x4
+ 379 006c 77000000 		.4byte	.LASF12
+ 380 0070 02       		.byte	0x2
+ 381 0071 9201     		.2byte	0x192
+ 382 0073 2C000000 		.4byte	0x2c
+ 383 0077 02       		.uleb128 0x2
+ 384 0078 04       		.byte	0x4
+ 385 0079 04       		.byte	0x4
+ 386 007a 26000000 		.4byte	.LASF9
+ 387 007e 02       		.uleb128 0x2
+ 388 007f 08       		.byte	0x8
+ 389 0080 04       		.byte	0x4
+ 390 0081 7D000000 		.4byte	.LASF10
+ 391 0085 02       		.uleb128 0x2
+ 392 0086 01       		.byte	0x1
+ 393 0087 08       		.byte	0x8
+ 394 0088 BD010000 		.4byte	.LASF11
+ 395 008c 04       		.uleb128 0x4
+ 396 008d 51000000 		.4byte	.LASF13
+ 397 0091 02       		.byte	0x2
+ 398 0092 3C02     		.2byte	0x23c
+ 399 0094 98000000 		.4byte	0x98
+ 400 0098 05       		.uleb128 0x5
+ 401 0099 6B000000 		.4byte	0x6b
+ 402 009d 02       		.uleb128 0x2
+ 403 009e 04       		.byte	0x4
+ 404 009f 07       		.byte	0x7
+ 405 00a0 A6010000 		.4byte	.LASF14
+ 406 00a4 06       		.uleb128 0x6
+ 407 00a5 65010000 		.4byte	.LASF15
+ 408 00a9 01       		.byte	0x1
+ 409 00aa 7E       		.byte	0x7e
+ 410 00ab 00000000 		.4byte	.LFB2
+ 411 00af 48000000 		.4byte	.LFE2-.LFB2
+ 412 00b3 01       		.uleb128 0x1
+ 413 00b4 9C       		.byte	0x9c
+ 414 00b5 ED000000 		.4byte	0xed
+ 415 00b9 07       		.uleb128 0x7
+ 416 00ba 56000000 		.4byte	.LASF17
+ 417 00be 01       		.byte	0x1
+ 418 00bf 80       		.byte	0x80
+ 419 00c0 6B000000 		.4byte	0x6b
+ 420 00c4 00000000 		.4byte	.LLST0
+ 421 00c8 08       		.uleb128 0x8
+ 422 00c9 10000000 		.4byte	.LVL0
+ 423 00cd 4E020000 		.4byte	0x24e
+ 424 00d1 08       		.uleb128 0x8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 15
+
+
+ 425 00d2 28000000 		.4byte	.LVL1
+ 426 00d6 59020000 		.4byte	0x259
+ 427 00da 08       		.uleb128 0x8
+ 428 00db 2E000000 		.4byte	.LVL2
+ 429 00df 4E020000 		.4byte	0x24e
+ 430 00e3 08       		.uleb128 0x8
+ 431 00e4 3C000000 		.4byte	.LVL3
+ 432 00e8 59020000 		.4byte	0x259
+ 433 00ec 00       		.byte	0
+ 434 00ed 06       		.uleb128 0x6
+ 435 00ee 30020000 		.4byte	.LASF16
+ 436 00f2 01       		.byte	0x1
+ 437 00f3 B2       		.byte	0xb2
+ 438 00f4 00000000 		.4byte	.LFB3
+ 439 00f8 1C000000 		.4byte	.LFE3-.LFB3
+ 440 00fc 01       		.uleb128 0x1
+ 441 00fd 9C       		.byte	0x9c
+ 442 00fe 24010000 		.4byte	0x124
+ 443 0102 07       		.uleb128 0x7
+ 444 0103 56000000 		.4byte	.LASF17
+ 445 0107 01       		.byte	0x1
+ 446 0108 B4       		.byte	0xb4
+ 447 0109 6B000000 		.4byte	0x6b
+ 448 010d 1E000000 		.4byte	.LLST1
+ 449 0111 08       		.uleb128 0x8
+ 450 0112 06000000 		.4byte	.LVL4
+ 451 0116 4E020000 		.4byte	0x24e
+ 452 011a 08       		.uleb128 0x8
+ 453 011b 14000000 		.4byte	.LVL5
+ 454 011f 59020000 		.4byte	0x259
+ 455 0123 00       		.byte	0
+ 456 0124 06       		.uleb128 0x6
+ 457 0125 DB010000 		.4byte	.LASF18
+ 458 0129 01       		.byte	0x1
+ 459 012a CF       		.byte	0xcf
+ 460 012b 00000000 		.4byte	.LFB4
+ 461 012f 1C000000 		.4byte	.LFE4-.LFB4
+ 462 0133 01       		.uleb128 0x1
+ 463 0134 9C       		.byte	0x9c
+ 464 0135 5B010000 		.4byte	0x15b
+ 465 0139 07       		.uleb128 0x7
+ 466 013a 56000000 		.4byte	.LASF17
+ 467 013e 01       		.byte	0x1
+ 468 013f D1       		.byte	0xd1
+ 469 0140 6B000000 		.4byte	0x6b
+ 470 0144 31000000 		.4byte	.LLST2
+ 471 0148 08       		.uleb128 0x8
+ 472 0149 06000000 		.4byte	.LVL6
+ 473 014d 4E020000 		.4byte	0x24e
+ 474 0151 08       		.uleb128 0x8
+ 475 0152 14000000 		.4byte	.LVL7
+ 476 0156 59020000 		.4byte	0x259
+ 477 015a 00       		.byte	0
+ 478 015b 06       		.uleb128 0x6
+ 479 015c F5010000 		.4byte	.LASF19
+ 480 0160 01       		.byte	0x1
+ 481 0161 EC       		.byte	0xec
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 16
+
+
+ 482 0162 00000000 		.4byte	.LFB5
+ 483 0166 1C000000 		.4byte	.LFE5-.LFB5
+ 484 016a 01       		.uleb128 0x1
+ 485 016b 9C       		.byte	0x9c
+ 486 016c 92010000 		.4byte	0x192
+ 487 0170 07       		.uleb128 0x7
+ 488 0171 56000000 		.4byte	.LASF17
+ 489 0175 01       		.byte	0x1
+ 490 0176 EE       		.byte	0xee
+ 491 0177 6B000000 		.4byte	0x6b
+ 492 017b 44000000 		.4byte	.LLST3
+ 493 017f 08       		.uleb128 0x8
+ 494 0180 06000000 		.4byte	.LVL8
+ 495 0184 4E020000 		.4byte	0x24e
+ 496 0188 08       		.uleb128 0x8
+ 497 0189 14000000 		.4byte	.LVL9
+ 498 018d 59020000 		.4byte	0x259
+ 499 0191 00       		.byte	0
+ 500 0192 09       		.uleb128 0x9
+ 501 0193 13000000 		.4byte	.LASF20
+ 502 0197 01       		.byte	0x1
+ 503 0198 2101     		.2byte	0x121
+ 504 019a 00000000 		.4byte	.LFB6
+ 505 019e 24000000 		.4byte	.LFE6-.LFB6
+ 506 01a2 01       		.uleb128 0x1
+ 507 01a3 9C       		.byte	0x9c
+ 508 01a4 B9010000 		.4byte	0x1b9
+ 509 01a8 0A       		.uleb128 0xa
+ 510 01a9 EC010000 		.4byte	.LASF28
+ 511 01ad 01       		.byte	0x1
+ 512 01ae 2101     		.2byte	0x121
+ 513 01b0 6B000000 		.4byte	0x6b
+ 514 01b4 57000000 		.4byte	.LLST4
+ 515 01b8 00       		.byte	0
+ 516 01b9 06       		.uleb128 0x6
+ 517 01ba 36010000 		.4byte	.LASF21
+ 518 01be 01       		.byte	0x1
+ 519 01bf 56       		.byte	0x56
+ 520 01c0 00000000 		.4byte	.LFB1
+ 521 01c4 0E000000 		.4byte	.LFE1-.LFB1
+ 522 01c8 01       		.uleb128 0x1
+ 523 01c9 9C       		.byte	0x9c
+ 524 01ca EB010000 		.4byte	0x1eb
+ 525 01ce 0B       		.uleb128 0xb
+ 526 01cf 08000000 		.4byte	.LVL12
+ 527 01d3 92010000 		.4byte	0x192
+ 528 01d7 E1010000 		.4byte	0x1e1
+ 529 01db 0C       		.uleb128 0xc
+ 530 01dc 01       		.uleb128 0x1
+ 531 01dd 50       		.byte	0x50
+ 532 01de 01       		.uleb128 0x1
+ 533 01df 34       		.byte	0x34
+ 534 01e0 00       		.byte	0
+ 535 01e1 08       		.uleb128 0x8
+ 536 01e2 0C000000 		.4byte	.LVL13
+ 537 01e6 24010000 		.4byte	0x124
+ 538 01ea 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 17
+
+
+ 539 01eb 06       		.uleb128 0x6
+ 540 01ec 84000000 		.4byte	.LASF22
+ 541 01f0 01       		.byte	0x1
+ 542 01f1 35       		.byte	0x35
+ 543 01f2 00000000 		.4byte	.LFB0
+ 544 01f6 1C000000 		.4byte	.LFE0-.LFB0
+ 545 01fa 01       		.uleb128 0x1
+ 546 01fb 9C       		.byte	0x9c
+ 547 01fc 13020000 		.4byte	0x213
+ 548 0200 08       		.uleb128 0x8
+ 549 0201 0C000000 		.4byte	.LVL14
+ 550 0205 B9010000 		.4byte	0x1b9
+ 551 0209 08       		.uleb128 0x8
+ 552 020a 16000000 		.4byte	.LVL15
+ 553 020e A4000000 		.4byte	0xa4
+ 554 0212 00       		.byte	0
+ 555 0213 0D       		.uleb128 0xd
+ 556 0214 48020000 		.4byte	.LASF29
+ 557 0218 01       		.byte	0x1
+ 558 0219 6901     		.2byte	0x169
+ 559 021b 6B000000 		.4byte	0x6b
+ 560 021f 00000000 		.4byte	.LFB7
+ 561 0223 0A000000 		.4byte	.LFE7-.LFB7
+ 562 0227 01       		.uleb128 0x1
+ 563 0228 9C       		.byte	0x9c
+ 564 0229 3D020000 		.4byte	0x23d
+ 565 022d 0E       		.uleb128 0xe
+ 566 022e 08000000 		.4byte	.LVL16
+ 567 0232 6A020000 		.4byte	0x26a
+ 568 0236 0C       		.uleb128 0xc
+ 569 0237 01       		.uleb128 0x1
+ 570 0238 50       		.byte	0x50
+ 571 0239 01       		.uleb128 0x1
+ 572 023a 32       		.byte	0x32
+ 573 023b 00       		.byte	0
+ 574 023c 00       		.byte	0
+ 575 023d 0F       		.uleb128 0xf
+ 576 023e C2010000 		.4byte	.LASF30
+ 577 0242 01       		.byte	0x1
+ 578 0243 13       		.byte	0x13
+ 579 0244 6B000000 		.4byte	0x6b
+ 580 0248 05       		.uleb128 0x5
+ 581 0249 03       		.byte	0x3
+ 582 024a 00000000 		.4byte	Timer1_initVar
+ 583 024e 10       		.uleb128 0x10
+ 584 024f 1F010000 		.4byte	.LASF31
+ 585 0253 03       		.byte	0x3
+ 586 0254 7D       		.byte	0x7d
+ 587 0255 6B000000 		.4byte	0x6b
+ 588 0259 11       		.uleb128 0x11
+ 589 025a 4F010000 		.4byte	.LASF23
+ 590 025e 03       		.byte	0x3
+ 591 025f 7E       		.byte	0x7e
+ 592 0260 6A020000 		.4byte	0x26a
+ 593 0264 12       		.uleb128 0x12
+ 594 0265 6B000000 		.4byte	0x6b
+ 595 0269 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 18
+
+
+ 596 026a 13       		.uleb128 0x13
+ 597 026b 59020000 		.4byte	.LASF24
+ 598 026f 04       		.byte	0x4
+ 599 0270 26       		.byte	0x26
+ 600 0271 6B000000 		.4byte	0x6b
+ 601 0275 12       		.uleb128 0x12
+ 602 0276 6B000000 		.4byte	0x6b
+ 603 027a 00       		.byte	0
+ 604 027b 00       		.byte	0
+ 605              		.section	.debug_abbrev,"",%progbits
+ 606              	.Ldebug_abbrev0:
+ 607 0000 01       		.uleb128 0x1
+ 608 0001 11       		.uleb128 0x11
+ 609 0002 01       		.byte	0x1
+ 610 0003 25       		.uleb128 0x25
+ 611 0004 0E       		.uleb128 0xe
+ 612 0005 13       		.uleb128 0x13
+ 613 0006 0B       		.uleb128 0xb
+ 614 0007 03       		.uleb128 0x3
+ 615 0008 0E       		.uleb128 0xe
+ 616 0009 1B       		.uleb128 0x1b
+ 617 000a 0E       		.uleb128 0xe
+ 618 000b 55       		.uleb128 0x55
+ 619 000c 17       		.uleb128 0x17
+ 620 000d 11       		.uleb128 0x11
+ 621 000e 01       		.uleb128 0x1
+ 622 000f 10       		.uleb128 0x10
+ 623 0010 17       		.uleb128 0x17
+ 624 0011 00       		.byte	0
+ 625 0012 00       		.byte	0
+ 626 0013 02       		.uleb128 0x2
+ 627 0014 24       		.uleb128 0x24
+ 628 0015 00       		.byte	0
+ 629 0016 0B       		.uleb128 0xb
+ 630 0017 0B       		.uleb128 0xb
+ 631 0018 3E       		.uleb128 0x3e
+ 632 0019 0B       		.uleb128 0xb
+ 633 001a 03       		.uleb128 0x3
+ 634 001b 0E       		.uleb128 0xe
+ 635 001c 00       		.byte	0
+ 636 001d 00       		.byte	0
+ 637 001e 03       		.uleb128 0x3
+ 638 001f 24       		.uleb128 0x24
+ 639 0020 00       		.byte	0
+ 640 0021 0B       		.uleb128 0xb
+ 641 0022 0B       		.uleb128 0xb
+ 642 0023 3E       		.uleb128 0x3e
+ 643 0024 0B       		.uleb128 0xb
+ 644 0025 03       		.uleb128 0x3
+ 645 0026 08       		.uleb128 0x8
+ 646 0027 00       		.byte	0
+ 647 0028 00       		.byte	0
+ 648 0029 04       		.uleb128 0x4
+ 649 002a 16       		.uleb128 0x16
+ 650 002b 00       		.byte	0
+ 651 002c 03       		.uleb128 0x3
+ 652 002d 0E       		.uleb128 0xe
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 19
+
+
+ 653 002e 3A       		.uleb128 0x3a
+ 654 002f 0B       		.uleb128 0xb
+ 655 0030 3B       		.uleb128 0x3b
+ 656 0031 05       		.uleb128 0x5
+ 657 0032 49       		.uleb128 0x49
+ 658 0033 13       		.uleb128 0x13
+ 659 0034 00       		.byte	0
+ 660 0035 00       		.byte	0
+ 661 0036 05       		.uleb128 0x5
+ 662 0037 35       		.uleb128 0x35
+ 663 0038 00       		.byte	0
+ 664 0039 49       		.uleb128 0x49
+ 665 003a 13       		.uleb128 0x13
+ 666 003b 00       		.byte	0
+ 667 003c 00       		.byte	0
+ 668 003d 06       		.uleb128 0x6
+ 669 003e 2E       		.uleb128 0x2e
+ 670 003f 01       		.byte	0x1
+ 671 0040 3F       		.uleb128 0x3f
+ 672 0041 19       		.uleb128 0x19
+ 673 0042 03       		.uleb128 0x3
+ 674 0043 0E       		.uleb128 0xe
+ 675 0044 3A       		.uleb128 0x3a
+ 676 0045 0B       		.uleb128 0xb
+ 677 0046 3B       		.uleb128 0x3b
+ 678 0047 0B       		.uleb128 0xb
+ 679 0048 27       		.uleb128 0x27
+ 680 0049 19       		.uleb128 0x19
+ 681 004a 11       		.uleb128 0x11
+ 682 004b 01       		.uleb128 0x1
+ 683 004c 12       		.uleb128 0x12
+ 684 004d 06       		.uleb128 0x6
+ 685 004e 40       		.uleb128 0x40
+ 686 004f 18       		.uleb128 0x18
+ 687 0050 9742     		.uleb128 0x2117
+ 688 0052 19       		.uleb128 0x19
+ 689 0053 01       		.uleb128 0x1
+ 690 0054 13       		.uleb128 0x13
+ 691 0055 00       		.byte	0
+ 692 0056 00       		.byte	0
+ 693 0057 07       		.uleb128 0x7
+ 694 0058 34       		.uleb128 0x34
+ 695 0059 00       		.byte	0
+ 696 005a 03       		.uleb128 0x3
+ 697 005b 0E       		.uleb128 0xe
+ 698 005c 3A       		.uleb128 0x3a
+ 699 005d 0B       		.uleb128 0xb
+ 700 005e 3B       		.uleb128 0x3b
+ 701 005f 0B       		.uleb128 0xb
+ 702 0060 49       		.uleb128 0x49
+ 703 0061 13       		.uleb128 0x13
+ 704 0062 02       		.uleb128 0x2
+ 705 0063 17       		.uleb128 0x17
+ 706 0064 00       		.byte	0
+ 707 0065 00       		.byte	0
+ 708 0066 08       		.uleb128 0x8
+ 709 0067 898201   		.uleb128 0x4109
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 20
+
+
+ 710 006a 00       		.byte	0
+ 711 006b 11       		.uleb128 0x11
+ 712 006c 01       		.uleb128 0x1
+ 713 006d 31       		.uleb128 0x31
+ 714 006e 13       		.uleb128 0x13
+ 715 006f 00       		.byte	0
+ 716 0070 00       		.byte	0
+ 717 0071 09       		.uleb128 0x9
+ 718 0072 2E       		.uleb128 0x2e
+ 719 0073 01       		.byte	0x1
+ 720 0074 3F       		.uleb128 0x3f
+ 721 0075 19       		.uleb128 0x19
+ 722 0076 03       		.uleb128 0x3
+ 723 0077 0E       		.uleb128 0xe
+ 724 0078 3A       		.uleb128 0x3a
+ 725 0079 0B       		.uleb128 0xb
+ 726 007a 3B       		.uleb128 0x3b
+ 727 007b 05       		.uleb128 0x5
+ 728 007c 27       		.uleb128 0x27
+ 729 007d 19       		.uleb128 0x19
+ 730 007e 11       		.uleb128 0x11
+ 731 007f 01       		.uleb128 0x1
+ 732 0080 12       		.uleb128 0x12
+ 733 0081 06       		.uleb128 0x6
+ 734 0082 40       		.uleb128 0x40
+ 735 0083 18       		.uleb128 0x18
+ 736 0084 9742     		.uleb128 0x2117
+ 737 0086 19       		.uleb128 0x19
+ 738 0087 01       		.uleb128 0x1
+ 739 0088 13       		.uleb128 0x13
+ 740 0089 00       		.byte	0
+ 741 008a 00       		.byte	0
+ 742 008b 0A       		.uleb128 0xa
+ 743 008c 05       		.uleb128 0x5
+ 744 008d 00       		.byte	0
+ 745 008e 03       		.uleb128 0x3
+ 746 008f 0E       		.uleb128 0xe
+ 747 0090 3A       		.uleb128 0x3a
+ 748 0091 0B       		.uleb128 0xb
+ 749 0092 3B       		.uleb128 0x3b
+ 750 0093 05       		.uleb128 0x5
+ 751 0094 49       		.uleb128 0x49
+ 752 0095 13       		.uleb128 0x13
+ 753 0096 02       		.uleb128 0x2
+ 754 0097 17       		.uleb128 0x17
+ 755 0098 00       		.byte	0
+ 756 0099 00       		.byte	0
+ 757 009a 0B       		.uleb128 0xb
+ 758 009b 898201   		.uleb128 0x4109
+ 759 009e 01       		.byte	0x1
+ 760 009f 11       		.uleb128 0x11
+ 761 00a0 01       		.uleb128 0x1
+ 762 00a1 31       		.uleb128 0x31
+ 763 00a2 13       		.uleb128 0x13
+ 764 00a3 01       		.uleb128 0x1
+ 765 00a4 13       		.uleb128 0x13
+ 766 00a5 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 21
+
+
+ 767 00a6 00       		.byte	0
+ 768 00a7 0C       		.uleb128 0xc
+ 769 00a8 8A8201   		.uleb128 0x410a
+ 770 00ab 00       		.byte	0
+ 771 00ac 02       		.uleb128 0x2
+ 772 00ad 18       		.uleb128 0x18
+ 773 00ae 9142     		.uleb128 0x2111
+ 774 00b0 18       		.uleb128 0x18
+ 775 00b1 00       		.byte	0
+ 776 00b2 00       		.byte	0
+ 777 00b3 0D       		.uleb128 0xd
+ 778 00b4 2E       		.uleb128 0x2e
+ 779 00b5 01       		.byte	0x1
+ 780 00b6 3F       		.uleb128 0x3f
+ 781 00b7 19       		.uleb128 0x19
+ 782 00b8 03       		.uleb128 0x3
+ 783 00b9 0E       		.uleb128 0xe
+ 784 00ba 3A       		.uleb128 0x3a
+ 785 00bb 0B       		.uleb128 0xb
+ 786 00bc 3B       		.uleb128 0x3b
+ 787 00bd 05       		.uleb128 0x5
+ 788 00be 27       		.uleb128 0x27
+ 789 00bf 19       		.uleb128 0x19
+ 790 00c0 49       		.uleb128 0x49
+ 791 00c1 13       		.uleb128 0x13
+ 792 00c2 11       		.uleb128 0x11
+ 793 00c3 01       		.uleb128 0x1
+ 794 00c4 12       		.uleb128 0x12
+ 795 00c5 06       		.uleb128 0x6
+ 796 00c6 40       		.uleb128 0x40
+ 797 00c7 18       		.uleb128 0x18
+ 798 00c8 9742     		.uleb128 0x2117
+ 799 00ca 19       		.uleb128 0x19
+ 800 00cb 01       		.uleb128 0x1
+ 801 00cc 13       		.uleb128 0x13
+ 802 00cd 00       		.byte	0
+ 803 00ce 00       		.byte	0
+ 804 00cf 0E       		.uleb128 0xe
+ 805 00d0 898201   		.uleb128 0x4109
+ 806 00d3 01       		.byte	0x1
+ 807 00d4 11       		.uleb128 0x11
+ 808 00d5 01       		.uleb128 0x1
+ 809 00d6 31       		.uleb128 0x31
+ 810 00d7 13       		.uleb128 0x13
+ 811 00d8 00       		.byte	0
+ 812 00d9 00       		.byte	0
+ 813 00da 0F       		.uleb128 0xf
+ 814 00db 34       		.uleb128 0x34
+ 815 00dc 00       		.byte	0
+ 816 00dd 03       		.uleb128 0x3
+ 817 00de 0E       		.uleb128 0xe
+ 818 00df 3A       		.uleb128 0x3a
+ 819 00e0 0B       		.uleb128 0xb
+ 820 00e1 3B       		.uleb128 0x3b
+ 821 00e2 0B       		.uleb128 0xb
+ 822 00e3 49       		.uleb128 0x49
+ 823 00e4 13       		.uleb128 0x13
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 22
+
+
+ 824 00e5 3F       		.uleb128 0x3f
+ 825 00e6 19       		.uleb128 0x19
+ 826 00e7 02       		.uleb128 0x2
+ 827 00e8 18       		.uleb128 0x18
+ 828 00e9 00       		.byte	0
+ 829 00ea 00       		.byte	0
+ 830 00eb 10       		.uleb128 0x10
+ 831 00ec 2E       		.uleb128 0x2e
+ 832 00ed 00       		.byte	0
+ 833 00ee 3F       		.uleb128 0x3f
+ 834 00ef 19       		.uleb128 0x19
+ 835 00f0 03       		.uleb128 0x3
+ 836 00f1 0E       		.uleb128 0xe
+ 837 00f2 3A       		.uleb128 0x3a
+ 838 00f3 0B       		.uleb128 0xb
+ 839 00f4 3B       		.uleb128 0x3b
+ 840 00f5 0B       		.uleb128 0xb
+ 841 00f6 27       		.uleb128 0x27
+ 842 00f7 19       		.uleb128 0x19
+ 843 00f8 49       		.uleb128 0x49
+ 844 00f9 13       		.uleb128 0x13
+ 845 00fa 3C       		.uleb128 0x3c
+ 846 00fb 19       		.uleb128 0x19
+ 847 00fc 00       		.byte	0
+ 848 00fd 00       		.byte	0
+ 849 00fe 11       		.uleb128 0x11
+ 850 00ff 2E       		.uleb128 0x2e
+ 851 0100 01       		.byte	0x1
+ 852 0101 3F       		.uleb128 0x3f
+ 853 0102 19       		.uleb128 0x19
+ 854 0103 03       		.uleb128 0x3
+ 855 0104 0E       		.uleb128 0xe
+ 856 0105 3A       		.uleb128 0x3a
+ 857 0106 0B       		.uleb128 0xb
+ 858 0107 3B       		.uleb128 0x3b
+ 859 0108 0B       		.uleb128 0xb
+ 860 0109 27       		.uleb128 0x27
+ 861 010a 19       		.uleb128 0x19
+ 862 010b 3C       		.uleb128 0x3c
+ 863 010c 19       		.uleb128 0x19
+ 864 010d 01       		.uleb128 0x1
+ 865 010e 13       		.uleb128 0x13
+ 866 010f 00       		.byte	0
+ 867 0110 00       		.byte	0
+ 868 0111 12       		.uleb128 0x12
+ 869 0112 05       		.uleb128 0x5
+ 870 0113 00       		.byte	0
+ 871 0114 49       		.uleb128 0x49
+ 872 0115 13       		.uleb128 0x13
+ 873 0116 00       		.byte	0
+ 874 0117 00       		.byte	0
+ 875 0118 13       		.uleb128 0x13
+ 876 0119 2E       		.uleb128 0x2e
+ 877 011a 01       		.byte	0x1
+ 878 011b 3F       		.uleb128 0x3f
+ 879 011c 19       		.uleb128 0x19
+ 880 011d 03       		.uleb128 0x3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 23
+
+
+ 881 011e 0E       		.uleb128 0xe
+ 882 011f 3A       		.uleb128 0x3a
+ 883 0120 0B       		.uleb128 0xb
+ 884 0121 3B       		.uleb128 0x3b
+ 885 0122 0B       		.uleb128 0xb
+ 886 0123 27       		.uleb128 0x27
+ 887 0124 19       		.uleb128 0x19
+ 888 0125 49       		.uleb128 0x49
+ 889 0126 13       		.uleb128 0x13
+ 890 0127 3C       		.uleb128 0x3c
+ 891 0128 19       		.uleb128 0x19
+ 892 0129 00       		.byte	0
+ 893 012a 00       		.byte	0
+ 894 012b 00       		.byte	0
+ 895              		.section	.debug_loc,"",%progbits
+ 896              	.Ldebug_loc0:
+ 897              	.LLST0:
+ 898 0000 10000000 		.4byte	.LVL0
+ 899 0004 27000000 		.4byte	.LVL1-1
+ 900 0008 0100     		.2byte	0x1
+ 901 000a 50       		.byte	0x50
+ 902 000b 2E000000 		.4byte	.LVL2
+ 903 000f 3B000000 		.4byte	.LVL3-1
+ 904 0013 0100     		.2byte	0x1
+ 905 0015 50       		.byte	0x50
+ 906 0016 00000000 		.4byte	0
+ 907 001a 00000000 		.4byte	0
+ 908              	.LLST1:
+ 909 001e 06000000 		.4byte	.LVL4
+ 910 0022 13000000 		.4byte	.LVL5-1
+ 911 0026 0100     		.2byte	0x1
+ 912 0028 50       		.byte	0x50
+ 913 0029 00000000 		.4byte	0
+ 914 002d 00000000 		.4byte	0
+ 915              	.LLST2:
+ 916 0031 06000000 		.4byte	.LVL6
+ 917 0035 13000000 		.4byte	.LVL7-1
+ 918 0039 0100     		.2byte	0x1
+ 919 003b 50       		.byte	0x50
+ 920 003c 00000000 		.4byte	0
+ 921 0040 00000000 		.4byte	0
+ 922              	.LLST3:
+ 923 0044 06000000 		.4byte	.LVL8
+ 924 0048 13000000 		.4byte	.LVL9-1
+ 925 004c 0100     		.2byte	0x1
+ 926 004e 50       		.byte	0x50
+ 927 004f 00000000 		.4byte	0
+ 928 0053 00000000 		.4byte	0
+ 929              	.LLST4:
+ 930 0057 00000000 		.4byte	.LVL10
+ 931 005b 16000000 		.4byte	.LVL11
+ 932 005f 0100     		.2byte	0x1
+ 933 0061 50       		.byte	0x50
+ 934 0062 16000000 		.4byte	.LVL11
+ 935 0066 24000000 		.4byte	.LFE6
+ 936 006a 0400     		.2byte	0x4
+ 937 006c F3       		.byte	0xf3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 24
+
+
+ 938 006d 01       		.uleb128 0x1
+ 939 006e 50       		.byte	0x50
+ 940 006f 9F       		.byte	0x9f
+ 941 0070 00000000 		.4byte	0
+ 942 0074 00000000 		.4byte	0
+ 943              		.section	.debug_aranges,"",%progbits
+ 944 0000 54000000 		.4byte	0x54
+ 945 0004 0200     		.2byte	0x2
+ 946 0006 00000000 		.4byte	.Ldebug_info0
+ 947 000a 04       		.byte	0x4
+ 948 000b 00       		.byte	0
+ 949 000c 0000     		.2byte	0
+ 950 000e 0000     		.2byte	0
+ 951 0010 00000000 		.4byte	.LFB2
+ 952 0014 48000000 		.4byte	.LFE2-.LFB2
+ 953 0018 00000000 		.4byte	.LFB3
+ 954 001c 1C000000 		.4byte	.LFE3-.LFB3
+ 955 0020 00000000 		.4byte	.LFB4
+ 956 0024 1C000000 		.4byte	.LFE4-.LFB4
+ 957 0028 00000000 		.4byte	.LFB5
+ 958 002c 1C000000 		.4byte	.LFE5-.LFB5
+ 959 0030 00000000 		.4byte	.LFB6
+ 960 0034 24000000 		.4byte	.LFE6-.LFB6
+ 961 0038 00000000 		.4byte	.LFB1
+ 962 003c 0E000000 		.4byte	.LFE1-.LFB1
+ 963 0040 00000000 		.4byte	.LFB0
+ 964 0044 1C000000 		.4byte	.LFE0-.LFB0
+ 965 0048 00000000 		.4byte	.LFB7
+ 966 004c 0A000000 		.4byte	.LFE7-.LFB7
+ 967 0050 00000000 		.4byte	0
+ 968 0054 00000000 		.4byte	0
+ 969              		.section	.debug_ranges,"",%progbits
+ 970              	.Ldebug_ranges0:
+ 971 0000 00000000 		.4byte	.LFB2
+ 972 0004 48000000 		.4byte	.LFE2
+ 973 0008 00000000 		.4byte	.LFB3
+ 974 000c 1C000000 		.4byte	.LFE3
+ 975 0010 00000000 		.4byte	.LFB4
+ 976 0014 1C000000 		.4byte	.LFE4
+ 977 0018 00000000 		.4byte	.LFB5
+ 978 001c 1C000000 		.4byte	.LFE5
+ 979 0020 00000000 		.4byte	.LFB6
+ 980 0024 24000000 		.4byte	.LFE6
+ 981 0028 00000000 		.4byte	.LFB1
+ 982 002c 0E000000 		.4byte	.LFE1
+ 983 0030 00000000 		.4byte	.LFB0
+ 984 0034 1C000000 		.4byte	.LFE0
+ 985 0038 00000000 		.4byte	.LFB7
+ 986 003c 0A000000 		.4byte	.LFE7
+ 987 0040 00000000 		.4byte	0
+ 988 0044 00000000 		.4byte	0
+ 989              		.section	.debug_line,"",%progbits
+ 990              	.Ldebug_line0:
+ 991 0000 FB000000 		.section	.debug_str,"MS",%progbits,1
+ 991      02005800 
+ 991      00000201 
+ 991      FB0E0D00 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 25
+
+
+ 991      01010101 
+ 992              	.LASF3:
+ 993 0000 73686F72 		.ascii	"short unsigned int\000"
+ 993      7420756E 
+ 993      7369676E 
+ 993      65642069 
+ 993      6E7400
+ 994              	.LASF20:
+ 995 0013 54696D65 		.ascii	"Timer1_SetInterval\000"
+ 995      72315F53 
+ 995      6574496E 
+ 995      74657276 
+ 995      616C00
+ 996              	.LASF9:
+ 997 0026 666C6F61 		.ascii	"float\000"
+ 997      7400
+ 998              	.LASF7:
+ 999 002c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 999      206C6F6E 
+ 999      6720756E 
+ 999      7369676E 
+ 999      65642069 
+ 1000              	.LASF1:
+ 1001 0043 756E7369 		.ascii	"unsigned char\000"
+ 1001      676E6564 
+ 1001      20636861 
+ 1001      7200
+ 1002              	.LASF13:
+ 1003 0051 72656738 		.ascii	"reg8\000"
+ 1003      00
+ 1004              	.LASF17:
+ 1005 0056 696E7465 		.ascii	"interruptState\000"
+ 1005      72727570 
+ 1005      74537461 
+ 1005      746500
+ 1006              	.LASF5:
+ 1007 0065 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1007      20756E73 
+ 1007      69676E65 
+ 1007      6420696E 
+ 1007      7400
+ 1008              	.LASF12:
+ 1009 0077 75696E74 		.ascii	"uint8\000"
+ 1009      3800
+ 1010              	.LASF10:
+ 1011 007d 646F7562 		.ascii	"double\000"
+ 1011      6C6500
+ 1012              	.LASF22:
+ 1013 0084 54696D65 		.ascii	"Timer1_Start\000"
+ 1013      72315F53 
+ 1013      74617274 
+ 1013      00
+ 1014              	.LASF25:
+ 1015 0091 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1015      4320342E 
+ 1015      392E3320 
+ 1015      32303135 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 26
+
+
+ 1015      30333033 
+ 1016 00c4 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1016      20726576 
+ 1016      6973696F 
+ 1016      6E203232 
+ 1016      31323230 
+ 1017 00f7 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1017      66756E63 
+ 1017      74696F6E 
+ 1017      2D736563 
+ 1017      74696F6E 
+ 1018              	.LASF31:
+ 1019 011f 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 1019      74657243 
+ 1019      72697469 
+ 1019      63616C53 
+ 1019      65637469 
+ 1020              	.LASF21:
+ 1021 0136 54696D65 		.ascii	"Timer1_Init\000"
+ 1021      72315F49 
+ 1021      6E697400 
+ 1022              	.LASF8:
+ 1023 0142 756E7369 		.ascii	"unsigned int\000"
+ 1023      676E6564 
+ 1023      20696E74 
+ 1023      00
+ 1024              	.LASF23:
+ 1025 014f 43794578 		.ascii	"CyExitCriticalSection\000"
+ 1025      69744372 
+ 1025      69746963 
+ 1025      616C5365 
+ 1025      6374696F 
+ 1026              	.LASF15:
+ 1027 0165 54696D65 		.ascii	"Timer1_Enable\000"
+ 1027      72315F45 
+ 1027      6E61626C 
+ 1027      6500
+ 1028              	.LASF27:
+ 1029 0173 433A5C55 		.ascii	"C:\\Users\\youkan\\Desktop\\Workspace05\\Design01.c"
+ 1029      73657273 
+ 1029      5C796F75 
+ 1029      6B616E5C 
+ 1029      4465736B 
+ 1030 01a1 7964736E 		.ascii	"ydsn\000"
+ 1030      00
+ 1031              	.LASF14:
+ 1032 01a6 73697A65 		.ascii	"sizetype\000"
+ 1032      74797065 
+ 1032      00
+ 1033              	.LASF6:
+ 1034 01af 6C6F6E67 		.ascii	"long long int\000"
+ 1034      206C6F6E 
+ 1034      6720696E 
+ 1034      7400
+ 1035              	.LASF11:
+ 1036 01bd 63686172 		.ascii	"char\000"
+ 1036      00
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccUxTBdd.s 			page 27
+
+
+ 1037              	.LASF30:
+ 1038 01c2 54696D65 		.ascii	"Timer1_initVar\000"
+ 1038      72315F69 
+ 1038      6E697456 
+ 1038      617200
+ 1039              	.LASF2:
+ 1040 01d1 73686F72 		.ascii	"short int\000"
+ 1040      7420696E 
+ 1040      7400
+ 1041              	.LASF18:
+ 1042 01db 54696D65 		.ascii	"Timer1_EnableInt\000"
+ 1042      72315F45 
+ 1042      6E61626C 
+ 1042      65496E74 
+ 1042      00
+ 1043              	.LASF28:
+ 1044 01ec 696E7465 		.ascii	"interval\000"
+ 1044      7276616C 
+ 1044      00
+ 1045              	.LASF19:
+ 1046 01f5 54696D65 		.ascii	"Timer1_DisableInt\000"
+ 1046      72315F44 
+ 1046      69736162 
+ 1046      6C65496E 
+ 1046      7400
+ 1047              	.LASF4:
+ 1048 0207 6C6F6E67 		.ascii	"long int\000"
+ 1048      20696E74 
+ 1048      00
+ 1049              	.LASF26:
+ 1050 0210 47656E65 		.ascii	"Generated_Source\\PSoC5\\Timer1.c\000"
+ 1050      72617465 
+ 1050      645F536F 
+ 1050      75726365 
+ 1050      5C50536F 
+ 1051              	.LASF16:
+ 1052 0230 54696D65 		.ascii	"Timer1_Stop\000"
+ 1052      72315F53 
+ 1052      746F7000 
+ 1053              	.LASF0:
+ 1054 023c 7369676E 		.ascii	"signed char\000"
+ 1054      65642063 
+ 1054      68617200 
+ 1055              	.LASF29:
+ 1056 0248 54696D65 		.ascii	"Timer1_GetStatus\000"
+ 1056      72315F47 
+ 1056      65745374 
+ 1056      61747573 
+ 1056      00
+ 1057              	.LASF24:
+ 1058 0259 4379506D 		.ascii	"CyPmReadStatus\000"
+ 1058      52656164 
+ 1058      53746174 
+ 1058      757300
+ 1059              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

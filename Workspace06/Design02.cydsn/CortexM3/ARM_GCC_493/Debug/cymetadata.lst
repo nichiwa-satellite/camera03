@@ -1,0 +1,494 @@
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"cymetadata.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	cy_metadata
+  19              		.global	cy_meta_flashprotect
+  20              		.global	cy_meta_wonvl
+  21              		.global	cy_meta_custnvl
+  22              		.global	cy_meta_configecc
+  23              		.section	.cyconfigecc,"a",%progbits
+  24              		.align	2
+  25              		.type	cy_meta_configecc, %object
+  26              		.size	cy_meta_configecc, 8
+  27              	cy_meta_configecc:
+  28 0000 00       		.byte	0
+  29 0001 0B       		.byte	11
+  30 0002 0B       		.byte	11
+  31 0003 00       		.byte	0
+  32 0004 00       		.byte	0
+  33 0005 00       		.byte	0
+  34 0006 00       		.byte	0
+  35 0007 00       		.byte	0
+  36              		.section	.cywolatch,"a",%progbits
+  37              		.align	2
+  38              		.type	cy_meta_wonvl, %object
+  39              		.size	cy_meta_wonvl, 4
+  40              	cy_meta_wonvl:
+  41 0000 BC       		.byte	-68
+  42 0001 90       		.byte	-112
+  43 0002 AC       		.byte	-84
+  44 0003 AF       		.byte	-81
+  45              		.section	.cycustnvl,"a",%progbits
+  46              		.align	2
+  47              		.type	cy_meta_custnvl, %object
+  48              		.size	cy_meta_custnvl, 4
+  49              	cy_meta_custnvl:
+  50 0000 00       		.byte	0
+  51 0001 00       		.byte	0
+  52 0002 40       		.byte	64
+  53 0003 05       		.byte	5
+  54              		.section	.cymeta,"a",%progbits
+  55              		.align	2
+  56              		.type	cy_metadata, %object
+  57              		.size	cy_metadata, 12
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 2
+
+
+  58              	cy_metadata:
+  59 0000 00       		.byte	0
+  60 0001 01       		.byte	1
+  61 0002 2E       		.byte	46
+  62 0003 16       		.byte	22
+  63 0004 10       		.byte	16
+  64 0005 69       		.byte	105
+  65 0006 00       		.byte	0
+  66 0007 01       		.byte	1
+  67 0008 00       		.byte	0
+  68 0009 00       		.byte	0
+  69 000a 00       		.byte	0
+  70 000b 00       		.byte	0
+  71              		.section	.cyflashprotect,"a",%progbits
+  72              		.align	2
+  73              		.type	cy_meta_flashprotect, %object
+  74              		.size	cy_meta_flashprotect, 256
+  75              	cy_meta_flashprotect:
+  76 0000 00000000 		.space	256
+  76      00000000 
+  76      00000000 
+  76      00000000 
+  76      00000000 
+  77              		.text
+  78              	.Letext0:
+  79              		.file 1 "Generated_Source\\PSoC5\\cymetadata.c"
+  80              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+  81              		.section	.debug_info,"",%progbits
+  82              	.Ldebug_info0:
+  83 0000 36010000 		.4byte	0x136
+  84 0004 0400     		.2byte	0x4
+  85 0006 00000000 		.4byte	.Ldebug_abbrev0
+  86 000a 04       		.byte	0x4
+  87 000b 01       		.uleb128 0x1
+  88 000c A5000000 		.4byte	.LASF18
+  89 0010 01       		.byte	0x1
+  90 0011 BB010000 		.4byte	.LASF19
+  91 0015 00000000 		.4byte	.LASF20
+  92 0019 00000000 		.4byte	.Ldebug_line0
+  93 001d 02       		.uleb128 0x2
+  94 001e 01       		.byte	0x1
+  95 001f 06       		.byte	0x6
+  96 0020 AF010000 		.4byte	.LASF0
+  97 0024 02       		.uleb128 0x2
+  98 0025 01       		.byte	0x1
+  99 0026 08       		.byte	0x8
+ 100 0027 49000000 		.4byte	.LASF1
+ 101 002b 02       		.uleb128 0x2
+ 102 002c 02       		.byte	0x2
+ 103 002d 05       		.byte	0x5
+ 104 002e 96010000 		.4byte	.LASF2
+ 105 0032 02       		.uleb128 0x2
+ 106 0033 02       		.byte	0x2
+ 107 0034 07       		.byte	0x7
+ 108 0035 69000000 		.4byte	.LASF3
+ 109 0039 02       		.uleb128 0x2
+ 110 003a 04       		.byte	0x4
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 3
+
+
+ 111 003b 05       		.byte	0x5
+ 112 003c A6010000 		.4byte	.LASF4
+ 113 0040 02       		.uleb128 0x2
+ 114 0041 04       		.byte	0x4
+ 115 0042 07       		.byte	0x7
+ 116 0043 57000000 		.4byte	.LASF5
+ 117 0047 02       		.uleb128 0x2
+ 118 0048 08       		.byte	0x8
+ 119 0049 05       		.byte	0x5
+ 120 004a 83010000 		.4byte	.LASF6
+ 121 004e 02       		.uleb128 0x2
+ 122 004f 08       		.byte	0x8
+ 123 0050 07       		.byte	0x7
+ 124 0051 40010000 		.4byte	.LASF7
+ 125 0055 03       		.uleb128 0x3
+ 126 0056 04       		.byte	0x4
+ 127 0057 05       		.byte	0x5
+ 128 0058 696E7400 		.ascii	"int\000"
+ 129 005c 02       		.uleb128 0x2
+ 130 005d 04       		.byte	0x4
+ 131 005e 07       		.byte	0x7
+ 132 005f 33010000 		.4byte	.LASF8
+ 133 0063 04       		.uleb128 0x4
+ 134 0064 A0010000 		.4byte	.LASF21
+ 135 0068 02       		.byte	0x2
+ 136 0069 9201     		.2byte	0x192
+ 137 006b 24000000 		.4byte	0x24
+ 138 006f 02       		.uleb128 0x2
+ 139 0070 04       		.byte	0x4
+ 140 0071 04       		.byte	0x4
+ 141 0072 43000000 		.4byte	.LASF9
+ 142 0076 02       		.uleb128 0x2
+ 143 0077 08       		.byte	0x8
+ 144 0078 04       		.byte	0x4
+ 145 0079 7C000000 		.4byte	.LASF10
+ 146 007d 02       		.uleb128 0x2
+ 147 007e 01       		.byte	0x1
+ 148 007f 08       		.byte	0x8
+ 149 0080 91010000 		.4byte	.LASF11
+ 150 0084 05       		.uleb128 0x5
+ 151 0085 63000000 		.4byte	0x63
+ 152 0089 94000000 		.4byte	0x94
+ 153 008d 06       		.uleb128 0x6
+ 154 008e 94000000 		.4byte	0x94
+ 155 0092 07       		.byte	0x7
+ 156 0093 00       		.byte	0
+ 157 0094 02       		.uleb128 0x2
+ 158 0095 04       		.byte	0x4
+ 159 0096 07       		.byte	0x7
+ 160 0097 7A010000 		.4byte	.LASF12
+ 161 009b 07       		.uleb128 0x7
+ 162 009c 93000000 		.4byte	.LASF13
+ 163 00a0 01       		.byte	0x1
+ 164 00a1 1F       		.byte	0x1f
+ 165 00a2 AC000000 		.4byte	0xac
+ 166 00a6 05       		.uleb128 0x5
+ 167 00a7 03       		.byte	0x3
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 4
+
+
+ 168 00a8 00000000 		.4byte	cy_meta_configecc
+ 169 00ac 08       		.uleb128 0x8
+ 170 00ad 84000000 		.4byte	0x84
+ 171 00b1 05       		.uleb128 0x5
+ 172 00b2 63000000 		.4byte	0x63
+ 173 00b6 C1000000 		.4byte	0xc1
+ 174 00ba 06       		.uleb128 0x6
+ 175 00bb 94000000 		.4byte	0x94
+ 176 00bf 03       		.byte	0x3
+ 177 00c0 00       		.byte	0
+ 178 00c1 07       		.uleb128 0x7
+ 179 00c2 83000000 		.4byte	.LASF14
+ 180 00c6 01       		.byte	0x1
+ 181 00c7 2D       		.byte	0x2d
+ 182 00c8 D2000000 		.4byte	0xd2
+ 183 00cc 05       		.uleb128 0x5
+ 184 00cd 03       		.byte	0x3
+ 185 00ce 00000000 		.4byte	cy_meta_custnvl
+ 186 00d2 08       		.uleb128 0x8
+ 187 00d3 B1000000 		.4byte	0xb1
+ 188 00d7 07       		.uleb128 0x7
+ 189 00d8 6C010000 		.4byte	.LASF15
+ 190 00dc 01       		.byte	0x1
+ 191 00dd 3B       		.byte	0x3b
+ 192 00de E8000000 		.4byte	0xe8
+ 193 00e2 05       		.uleb128 0x5
+ 194 00e3 03       		.byte	0x3
+ 195 00e4 00000000 		.4byte	cy_meta_wonvl
+ 196 00e8 08       		.uleb128 0x8
+ 197 00e9 B1000000 		.4byte	0xb1
+ 198 00ed 05       		.uleb128 0x5
+ 199 00ee 63000000 		.4byte	0x63
+ 200 00f2 FD000000 		.4byte	0xfd
+ 201 00f6 06       		.uleb128 0x6
+ 202 00f7 94000000 		.4byte	0x94
+ 203 00fb FF       		.byte	0xff
+ 204 00fc 00       		.byte	0
+ 205 00fd 07       		.uleb128 0x7
+ 206 00fe 57010000 		.4byte	.LASF16
+ 207 0102 01       		.byte	0x1
+ 208 0103 49       		.byte	0x49
+ 209 0104 0E010000 		.4byte	0x10e
+ 210 0108 05       		.uleb128 0x5
+ 211 0109 03       		.byte	0x3
+ 212 010a 00000000 		.4byte	cy_meta_flashprotect
+ 213 010e 08       		.uleb128 0x8
+ 214 010f ED000000 		.4byte	0xed
+ 215 0113 05       		.uleb128 0x5
+ 216 0114 63000000 		.4byte	0x63
+ 217 0118 23010000 		.4byte	0x123
+ 218 011c 06       		.uleb128 0x6
+ 219 011d 94000000 		.4byte	0x94
+ 220 0121 0B       		.byte	0xb
+ 221 0122 00       		.byte	0
+ 222 0123 07       		.uleb128 0x7
+ 223 0124 37000000 		.4byte	.LASF17
+ 224 0128 01       		.byte	0x1
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 5
+
+
+ 225 0129 76       		.byte	0x76
+ 226 012a 34010000 		.4byte	0x134
+ 227 012e 05       		.uleb128 0x5
+ 228 012f 03       		.byte	0x3
+ 229 0130 00000000 		.4byte	cy_metadata
+ 230 0134 08       		.uleb128 0x8
+ 231 0135 13010000 		.4byte	0x113
+ 232 0139 00       		.byte	0
+ 233              		.section	.debug_abbrev,"",%progbits
+ 234              	.Ldebug_abbrev0:
+ 235 0000 01       		.uleb128 0x1
+ 236 0001 11       		.uleb128 0x11
+ 237 0002 01       		.byte	0x1
+ 238 0003 25       		.uleb128 0x25
+ 239 0004 0E       		.uleb128 0xe
+ 240 0005 13       		.uleb128 0x13
+ 241 0006 0B       		.uleb128 0xb
+ 242 0007 03       		.uleb128 0x3
+ 243 0008 0E       		.uleb128 0xe
+ 244 0009 1B       		.uleb128 0x1b
+ 245 000a 0E       		.uleb128 0xe
+ 246 000b 10       		.uleb128 0x10
+ 247 000c 17       		.uleb128 0x17
+ 248 000d 00       		.byte	0
+ 249 000e 00       		.byte	0
+ 250 000f 02       		.uleb128 0x2
+ 251 0010 24       		.uleb128 0x24
+ 252 0011 00       		.byte	0
+ 253 0012 0B       		.uleb128 0xb
+ 254 0013 0B       		.uleb128 0xb
+ 255 0014 3E       		.uleb128 0x3e
+ 256 0015 0B       		.uleb128 0xb
+ 257 0016 03       		.uleb128 0x3
+ 258 0017 0E       		.uleb128 0xe
+ 259 0018 00       		.byte	0
+ 260 0019 00       		.byte	0
+ 261 001a 03       		.uleb128 0x3
+ 262 001b 24       		.uleb128 0x24
+ 263 001c 00       		.byte	0
+ 264 001d 0B       		.uleb128 0xb
+ 265 001e 0B       		.uleb128 0xb
+ 266 001f 3E       		.uleb128 0x3e
+ 267 0020 0B       		.uleb128 0xb
+ 268 0021 03       		.uleb128 0x3
+ 269 0022 08       		.uleb128 0x8
+ 270 0023 00       		.byte	0
+ 271 0024 00       		.byte	0
+ 272 0025 04       		.uleb128 0x4
+ 273 0026 16       		.uleb128 0x16
+ 274 0027 00       		.byte	0
+ 275 0028 03       		.uleb128 0x3
+ 276 0029 0E       		.uleb128 0xe
+ 277 002a 3A       		.uleb128 0x3a
+ 278 002b 0B       		.uleb128 0xb
+ 279 002c 3B       		.uleb128 0x3b
+ 280 002d 05       		.uleb128 0x5
+ 281 002e 49       		.uleb128 0x49
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 6
+
+
+ 282 002f 13       		.uleb128 0x13
+ 283 0030 00       		.byte	0
+ 284 0031 00       		.byte	0
+ 285 0032 05       		.uleb128 0x5
+ 286 0033 01       		.uleb128 0x1
+ 287 0034 01       		.byte	0x1
+ 288 0035 49       		.uleb128 0x49
+ 289 0036 13       		.uleb128 0x13
+ 290 0037 01       		.uleb128 0x1
+ 291 0038 13       		.uleb128 0x13
+ 292 0039 00       		.byte	0
+ 293 003a 00       		.byte	0
+ 294 003b 06       		.uleb128 0x6
+ 295 003c 21       		.uleb128 0x21
+ 296 003d 00       		.byte	0
+ 297 003e 49       		.uleb128 0x49
+ 298 003f 13       		.uleb128 0x13
+ 299 0040 2F       		.uleb128 0x2f
+ 300 0041 0B       		.uleb128 0xb
+ 301 0042 00       		.byte	0
+ 302 0043 00       		.byte	0
+ 303 0044 07       		.uleb128 0x7
+ 304 0045 34       		.uleb128 0x34
+ 305 0046 00       		.byte	0
+ 306 0047 03       		.uleb128 0x3
+ 307 0048 0E       		.uleb128 0xe
+ 308 0049 3A       		.uleb128 0x3a
+ 309 004a 0B       		.uleb128 0xb
+ 310 004b 3B       		.uleb128 0x3b
+ 311 004c 0B       		.uleb128 0xb
+ 312 004d 49       		.uleb128 0x49
+ 313 004e 13       		.uleb128 0x13
+ 314 004f 3F       		.uleb128 0x3f
+ 315 0050 19       		.uleb128 0x19
+ 316 0051 02       		.uleb128 0x2
+ 317 0052 18       		.uleb128 0x18
+ 318 0053 00       		.byte	0
+ 319 0054 00       		.byte	0
+ 320 0055 08       		.uleb128 0x8
+ 321 0056 26       		.uleb128 0x26
+ 322 0057 00       		.byte	0
+ 323 0058 49       		.uleb128 0x49
+ 324 0059 13       		.uleb128 0x13
+ 325 005a 00       		.byte	0
+ 326 005b 00       		.byte	0
+ 327 005c 00       		.byte	0
+ 328              		.section	.debug_aranges,"",%progbits
+ 329 0000 14000000 		.4byte	0x14
+ 330 0004 0200     		.2byte	0x2
+ 331 0006 00000000 		.4byte	.Ldebug_info0
+ 332 000a 04       		.byte	0x4
+ 333 000b 00       		.byte	0
+ 334 000c 0000     		.2byte	0
+ 335 000e 0000     		.2byte	0
+ 336 0010 00000000 		.4byte	0
+ 337 0014 00000000 		.4byte	0
+ 338              		.section	.debug_line,"",%progbits
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 7
+
+
+ 339              	.Ldebug_line0:
+ 340 0000 4D000000 		.section	.debug_str,"MS",%progbits,1
+ 340      02004700 
+ 340      00000201 
+ 340      FB0E0D00 
+ 340      01010101 
+ 341              	.LASF20:
+ 342 0000 433A5C55 		.ascii	"C:\\Users\\localadmin\\Desktop\\Workspace06\\Design"
+ 342      73657273 
+ 342      5C6C6F63 
+ 342      616C6164 
+ 342      6D696E5C 
+ 343 002e 30322E63 		.ascii	"02.cydsn\000"
+ 343      7964736E 
+ 343      00
+ 344              	.LASF17:
+ 345 0037 63795F6D 		.ascii	"cy_metadata\000"
+ 345      65746164 
+ 345      61746100 
+ 346              	.LASF9:
+ 347 0043 666C6F61 		.ascii	"float\000"
+ 347      7400
+ 348              	.LASF1:
+ 349 0049 756E7369 		.ascii	"unsigned char\000"
+ 349      676E6564 
+ 349      20636861 
+ 349      7200
+ 350              	.LASF5:
+ 351 0057 6C6F6E67 		.ascii	"long unsigned int\000"
+ 351      20756E73 
+ 351      69676E65 
+ 351      6420696E 
+ 351      7400
+ 352              	.LASF3:
+ 353 0069 73686F72 		.ascii	"short unsigned int\000"
+ 353      7420756E 
+ 353      7369676E 
+ 353      65642069 
+ 353      6E7400
+ 354              	.LASF10:
+ 355 007c 646F7562 		.ascii	"double\000"
+ 355      6C6500
+ 356              	.LASF14:
+ 357 0083 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 357      6574615F 
+ 357      63757374 
+ 357      6E766C00 
+ 358              	.LASF13:
+ 359 0093 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 359      6574615F 
+ 359      636F6E66 
+ 359      69676563 
+ 359      6300
+ 360              	.LASF18:
+ 361 00a5 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 361      4320342E 
+ 361      392E3320 
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 8
+
+
+ 361      32303135 
+ 361      30333033 
+ 362 00d8 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 362      20726576 
+ 362      6973696F 
+ 362      6E203232 
+ 362      31323230 
+ 363 010b 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 363      66756E63 
+ 363      74696F6E 
+ 363      2D736563 
+ 363      74696F6E 
+ 364              	.LASF8:
+ 365 0133 756E7369 		.ascii	"unsigned int\000"
+ 365      676E6564 
+ 365      20696E74 
+ 365      00
+ 366              	.LASF7:
+ 367 0140 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 367      206C6F6E 
+ 367      6720756E 
+ 367      7369676E 
+ 367      65642069 
+ 368              	.LASF16:
+ 369 0157 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 369      6574615F 
+ 369      666C6173 
+ 369      6870726F 
+ 369      74656374 
+ 370              	.LASF15:
+ 371 016c 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 371      6574615F 
+ 371      776F6E76 
+ 371      6C00
+ 372              	.LASF12:
+ 373 017a 73697A65 		.ascii	"sizetype\000"
+ 373      74797065 
+ 373      00
+ 374              	.LASF6:
+ 375 0183 6C6F6E67 		.ascii	"long long int\000"
+ 375      206C6F6E 
+ 375      6720696E 
+ 375      7400
+ 376              	.LASF11:
+ 377 0191 63686172 		.ascii	"char\000"
+ 377      00
+ 378              	.LASF2:
+ 379 0196 73686F72 		.ascii	"short int\000"
+ 379      7420696E 
+ 379      7400
+ 380              	.LASF21:
+ 381 01a0 75696E74 		.ascii	"uint8\000"
+ 381      3800
+ 382              	.LASF4:
+ 383 01a6 6C6F6E67 		.ascii	"long int\000"
+ 383      20696E74 
+ 383      00
+ARM GAS  C:\Users\LOCALA~1\AppData\Local\Temp\ccwQ2rMa.s 			page 9
+
+
+ 384              	.LASF0:
+ 385 01af 7369676E 		.ascii	"signed char\000"
+ 385      65642063 
+ 385      68617200 
+ 386              	.LASF19:
+ 387 01bb 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 387      72617465 
+ 387      645F536F 
+ 387      75726365 
+ 387      5C50536F 
+ 388              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

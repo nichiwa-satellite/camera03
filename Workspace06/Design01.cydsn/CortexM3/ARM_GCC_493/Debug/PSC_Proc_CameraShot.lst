@@ -1,0 +1,3656 @@
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"PSC_Proc_CameraShot.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.PSC_Proc_CameraShot_Init,"ax",%progbits
+  19              		.align	2
+  20              		.global	PSC_Proc_CameraShot_Init
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	PSC_Proc_CameraShot_Init, %function
+  24              	PSC_Proc_CameraShot_Init:
+  25              	.LFB63:
+  26              		.file 1 "PSC_Proc_CameraShot.c"
+   1:PSC_Proc_CameraShot.c **** /* ========================================
+   2:PSC_Proc_CameraShot.c ****  *
+   3:PSC_Proc_CameraShot.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:PSC_Proc_CameraShot.c ****  * All Rights Reserved
+   5:PSC_Proc_CameraShot.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:PSC_Proc_CameraShot.c ****  *
+   7:PSC_Proc_CameraShot.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:PSC_Proc_CameraShot.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:PSC_Proc_CameraShot.c ****  *
+  10:PSC_Proc_CameraShot.c ****  * ========================================
+  11:PSC_Proc_CameraShot.c **** */
+  12:PSC_Proc_CameraShot.c **** 
+  13:PSC_Proc_CameraShot.c **** /* [] END OF FILE */
+  14:PSC_Proc_CameraShot.c **** 
+  15:PSC_Proc_CameraShot.c **** 
+  16:PSC_Proc_CameraShot.c **** #include "PSC_Types.h"
+  17:PSC_Proc_CameraShot.c **** #include "PSC_CMD_API.h"
+  18:PSC_Proc_CameraShot.c **** #include "PSC_Camera.h"
+  19:PSC_Proc_CameraShot.c **** #include "PSC_Communicate.h"
+  20:PSC_Proc_CameraShot.c **** #include "PSC_Proc_Common.h"
+  21:PSC_Proc_CameraShot.c **** #include "PSC_Proc_CameraShot.h"
+  22:PSC_Proc_CameraShot.c **** #include "project.h"
+  23:PSC_Proc_CameraShot.c **** #include "Debugs.h"
+  24:PSC_Proc_CameraShot.c **** 
+  25:PSC_Proc_CameraShot.c **** typedef enum PSC_PROC_STATE_CAMERASHOTtag
+  26:PSC_Proc_CameraShot.c **** {
+  27:PSC_Proc_CameraShot.c ****     PR_STATE_CS_INIT,
+  28:PSC_Proc_CameraShot.c ****     PR_STATE_CS_GET,
+  29:PSC_Proc_CameraShot.c ****     PR_STATE_CS_RESET_CAMERA,
+  30:PSC_Proc_CameraShot.c ****     PR_STATE_CS_BAURATE,
+  31:PSC_Proc_CameraShot.c ****     PR_STATE_CS_CONFIG_DATASIZE,
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 2
+
+
+  32:PSC_Proc_CameraShot.c ****     PR_STATE_CS_TAKE_PICTURE,
+  33:PSC_Proc_CameraShot.c ****     PR_STATE_CS_LOAD_DATA,
+  34:PSC_Proc_CameraShot.c ****     PR_STATE_CS_MAX
+  35:PSC_Proc_CameraShot.c **** }PSC_PROC_STATE_CAMERASHOT;
+  36:PSC_Proc_CameraShot.c **** 
+  37:PSC_Proc_CameraShot.c **** 
+  38:PSC_Proc_CameraShot.c **** static PSC_PROC_STATE_CAMERASHOT svPSC_PROC_STATE_CAMERASHOT;
+  39:PSC_Proc_CameraShot.c **** PSC_PROC_STATE gsvPSC_PROC_STATE;
+  40:PSC_Proc_CameraShot.c **** 
+  41:PSC_Proc_CameraShot.c **** PSC_RET PSC_Proc_CameraShot_Init(PSC_RET (**)(PSC_ST_CMD*));
+  42:PSC_Proc_CameraShot.c **** PSC_RET PSC_Proc_CameraShot_Main(PSC_ST_CMD*);
+  43:PSC_Proc_CameraShot.c **** 
+  44:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_Complete();
+  45:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD*);
+  46:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_ResetCamera(PSC_ST_CMD*);
+  47:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_Baurate(PSC_ST_CMD*);
+  48:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_ConfigDataSize(PSC_ST_CMD*);
+  49:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD*);
+  50:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD*);
+  51:PSC_Proc_CameraShot.c **** 
+  52:PSC_Proc_CameraShot.c **** 
+  53:PSC_Proc_CameraShot.c **** PSC_RET PSC_Proc_CameraShot_Init(PSC_RET (**pFunc)(PSC_ST_CMD*))
+  54:PSC_Proc_CameraShot.c **** {
+  27              		.loc 1 54 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              	.LVL0:
+  55:PSC_Proc_CameraShot.c ****     gsvPSC_PROC_STATE = PSC_PROC_ACTIVE;
+  33              		.loc 1 55 0
+  34 0000 0023     		movs	r3, #0
+  35 0002 044A     		ldr	r2, .L2
+  36 0004 1370     		strb	r3, [r2]
+  56:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT = PR_STATE_CS_INIT;
+  37              		.loc 1 56 0
+  38 0006 044A     		ldr	r2, .L2+4
+  39 0008 1370     		strb	r3, [r2]
+  57:PSC_Proc_CameraShot.c ****     *pFunc = &PSC_Proc_CameraShot_Main;
+  40              		.loc 1 57 0
+  41 000a 044A     		ldr	r2, .L2+8
+  42 000c 0260     		str	r2, [r0]
+  58:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+  59:PSC_Proc_CameraShot.c **** }
+  43              		.loc 1 59 0
+  44 000e 1846     		mov	r0, r3
+  45              	.LVL1:
+  46 0010 7047     		bx	lr
+  47              	.L3:
+  48 0012 00BF     		.align	2
+  49              	.L2:
+  50 0014 00000000 		.word	gsvPSC_PROC_STATE
+  51 0018 00000000 		.word	.LANCHOR0
+  52 001c 00000000 		.word	PSC_Proc_CameraShot_Main
+  53              		.cfi_endproc
+  54              	.LFE63:
+  55              		.size	PSC_Proc_CameraShot_Init, .-PSC_Proc_CameraShot_Init
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 3
+
+
+  56              		.section	.text.psc_Proc_CameraShot_Complete,"ax",%progbits
+  57              		.align	2
+  58              		.global	psc_Proc_CameraShot_Complete
+  59              		.thumb
+  60              		.thumb_func
+  61              		.type	psc_Proc_CameraShot_Complete, %function
+  62              	psc_Proc_CameraShot_Complete:
+  63              	.LFB65:
+  60:PSC_Proc_CameraShot.c **** 
+  61:PSC_Proc_CameraShot.c **** PSC_RET PSC_Proc_CameraShot_Main(PSC_ST_CMD* pstData)
+  62:PSC_Proc_CameraShot.c **** {
+  63:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+  64:PSC_Proc_CameraShot.c **** 
+  65:PSC_Proc_CameraShot.c ****     ret = PSC_RET_SUCCESS;
+  66:PSC_Proc_CameraShot.c ****     
+  67:PSC_Proc_CameraShot.c ****     switch(svPSC_PROC_STATE_CAMERASHOT)
+  68:PSC_Proc_CameraShot.c ****     {
+  69:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_INIT:
+  70:PSC_Proc_CameraShot.c ****             DBG_printf("TRACE Proc CS Init \n\r");
+  71:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_Get(pstData);
+  72:PSC_Proc_CameraShot.c ****             break;
+  73:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_GET:
+  74:PSC_Proc_CameraShot.c ****             DBG_printf("TRACE Proc CS Get \n\r");
+  75:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_ResetCamera(pstData);
+  76:PSC_Proc_CameraShot.c ****             break;
+  77:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_RESET_CAMERA:
+  78:PSC_Proc_CameraShot.c ****             DBG_printf("TRACE Proc CS Camera \n\r");
+  79:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_Baurate(pstData);
+  80:PSC_Proc_CameraShot.c ****             break;
+  81:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_BAURATE:
+  82:PSC_Proc_CameraShot.c ****             DBG_printf("TRACE Proc CS Baurate \n\r");
+  83:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_ConfigDataSize(pstData);
+  84:PSC_Proc_CameraShot.c ****             break;
+  85:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_CONFIG_DATASIZE:
+  86:PSC_Proc_CameraShot.c ****             DBG_printf("TRACE Proc CS Datasize \n\r");
+  87:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_TakePicture(pstData);
+  88:PSC_Proc_CameraShot.c ****             break;
+  89:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_TAKE_PICTURE:
+  90:PSC_Proc_CameraShot.c ****             DBG_printf("TRACE Proc CS take picture \n\r");
+  91:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_LoadData(pstData);
+  92:PSC_Proc_CameraShot.c ****             break;
+  93:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_LOAD_DATA:
+  94:PSC_Proc_CameraShot.c ****             DBG_printf("TRACE Proc CS Load Data \n\r");
+  95:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_Complete();
+  96:PSC_Proc_CameraShot.c ****             break;
+  97:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_MAX:
+  98:PSC_Proc_CameraShot.c ****             break;
+  99:PSC_Proc_CameraShot.c ****         default:
+ 100:PSC_Proc_CameraShot.c ****             ret = PSC_RET_INTERNAL_ERROR;
+ 101:PSC_Proc_CameraShot.c ****             break;
+ 102:PSC_Proc_CameraShot.c ****         
+ 103:PSC_Proc_CameraShot.c ****     }
+ 104:PSC_Proc_CameraShot.c ****     CyDelay(500);
+ 105:PSC_Proc_CameraShot.c **** //    if( ret == PSC_RET_SUCCESS )
+ 106:PSC_Proc_CameraShot.c **** //    {
+ 107:PSC_Proc_CameraShot.c **** //        svPSC_PROC_STATE_CAMERASHOT++;
+ 108:PSC_Proc_CameraShot.c **** //    }
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 4
+
+
+ 109:PSC_Proc_CameraShot.c ****     
+ 110:PSC_Proc_CameraShot.c ****     return ret;
+ 111:PSC_Proc_CameraShot.c **** }
+ 112:PSC_Proc_CameraShot.c **** 
+ 113:PSC_Proc_CameraShot.c **** 
+ 114:PSC_Proc_CameraShot.c **** 
+ 115:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_Complete()
+ 116:PSC_Proc_CameraShot.c **** {
+  64              		.loc 1 116 0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+ 117:PSC_Proc_CameraShot.c ****     
+ 118:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+  69              		.loc 1 118 0
+  70 0000 044A     		ldr	r2, .L5
+  71 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  72 0004 0133     		adds	r3, r3, #1
+  73 0006 1370     		strb	r3, [r2]
+ 119:PSC_Proc_CameraShot.c ****     gsvPSC_PROC_STATE = PSC_PROC_SLEEP;
+  74              		.loc 1 119 0
+  75 0008 0122     		movs	r2, #1
+  76 000a 034B     		ldr	r3, .L5+4
+  77 000c 1A70     		strb	r2, [r3]
+ 120:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 121:PSC_Proc_CameraShot.c **** }
+  78              		.loc 1 121 0
+  79 000e 0020     		movs	r0, #0
+  80 0010 7047     		bx	lr
+  81              	.L6:
+  82 0012 00BF     		.align	2
+  83              	.L5:
+  84 0014 00000000 		.word	.LANCHOR0
+  85 0018 00000000 		.word	gsvPSC_PROC_STATE
+  86              		.cfi_endproc
+  87              	.LFE65:
+  88              		.size	psc_Proc_CameraShot_Complete, .-psc_Proc_CameraShot_Complete
+  89              		.section	.text.psc_Proc_CameraShot_Get,"ax",%progbits
+  90              		.align	2
+  91              		.global	psc_Proc_CameraShot_Get
+  92              		.thumb
+  93              		.thumb_func
+  94              		.type	psc_Proc_CameraShot_Get, %function
+  95              	psc_Proc_CameraShot_Get:
+  96              	.LFB66:
+ 122:PSC_Proc_CameraShot.c **** 
+ 123:PSC_Proc_CameraShot.c **** 
+ 124:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
+ 125:PSC_Proc_CameraShot.c **** {
+  97              		.loc 1 125 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              	.LVL2:
+ 102 0000 10B5     		push	{r4, lr}
+ 103              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 5
+
+
+ 104              		.cfi_offset 4, -8
+ 105              		.cfi_offset 14, -4
+ 106 0002 0446     		mov	r4, r0
+ 126:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+ 127:PSC_Proc_CameraShot.c ****     
+ 128:PSC_Proc_CameraShot.c ****   
+ 129:PSC_Proc_CameraShot.c ****     ret = PSC_Comm_SndCommand(DEV_ID_CAM,get,get_size);
+ 107              		.loc 1 129 0
+ 108 0004 0120     		movs	r0, #1
+ 109              	.LVL3:
+ 110 0006 0849     		ldr	r1, .L12
+ 111 0008 1022     		movs	r2, #16
+ 112 000a FFF7FEFF 		bl	PSC_Comm_SndCommand
+ 113              	.LVL4:
+ 130:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 114              		.loc 1 130 0
+ 115 000e 48B9     		cbnz	r0, .L9
+ 131:PSC_Proc_CameraShot.c ****     {
+ 132:PSC_Proc_CameraShot.c ****         return ret;
+ 133:PSC_Proc_CameraShot.c ****     }
+ 134:PSC_Proc_CameraShot.c **** 
+ 135:PSC_Proc_CameraShot.c ****     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
+ 116              		.loc 1 135 0
+ 117 0010 2046     		mov	r0, r4
+ 118              	.LVL5:
+ 119 0012 0121     		movs	r1, #1
+ 120 0014 FFF7FEFF 		bl	PSC_CMD_SET_DEVICE_ID
+ 121              	.LVL6:
+ 136:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 122              		.loc 1 136 0
+ 123 0018 28B9     		cbnz	r0, .L10
+ 137:PSC_Proc_CameraShot.c ****     {
+ 138:PSC_Proc_CameraShot.c ****         return ret;
+ 139:PSC_Proc_CameraShot.c ****     }
+ 140:PSC_Proc_CameraShot.c **** 
+ 141:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+ 124              		.loc 1 141 0
+ 125 001a 044A     		ldr	r2, .L12+4
+ 126 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 127 001e 0133     		adds	r3, r3, #1
+ 128 0020 1370     		strb	r3, [r2]
+ 142:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 129              		.loc 1 142 0
+ 130 0022 10BD     		pop	{r4, pc}
+ 131              	.LVL7:
+ 132              	.L9:
+ 133 0024 10BD     		pop	{r4, pc}
+ 134              	.LVL8:
+ 135              	.L10:
+ 143:PSC_Proc_CameraShot.c **** }
+ 136              		.loc 1 143 0
+ 137 0026 10BD     		pop	{r4, pc}
+ 138              	.LVL9:
+ 139              	.L13:
+ 140              		.align	2
+ 141              	.L12:
+ 142 0028 00000000 		.word	.LANCHOR1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 6
+
+
+ 143 002c 00000000 		.word	.LANCHOR0
+ 144              		.cfi_endproc
+ 145              	.LFE66:
+ 146              		.size	psc_Proc_CameraShot_Get, .-psc_Proc_CameraShot_Get
+ 147              		.section	.text.psc_Proc_CameraShot_ResetCamera,"ax",%progbits
+ 148              		.align	2
+ 149              		.global	psc_Proc_CameraShot_ResetCamera
+ 150              		.thumb
+ 151              		.thumb_func
+ 152              		.type	psc_Proc_CameraShot_ResetCamera, %function
+ 153              	psc_Proc_CameraShot_ResetCamera:
+ 154              	.LFB67:
+ 144:PSC_Proc_CameraShot.c **** 
+ 145:PSC_Proc_CameraShot.c **** 
+ 146:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_ResetCamera(PSC_ST_CMD* pstData)
+ 147:PSC_Proc_CameraShot.c **** {
+ 155              		.loc 1 147 0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159              	.LVL10:
+ 160 0000 10B5     		push	{r4, lr}
+ 161              		.cfi_def_cfa_offset 8
+ 162              		.cfi_offset 4, -8
+ 163              		.cfi_offset 14, -4
+ 164 0002 0446     		mov	r4, r0
+ 148:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+ 149:PSC_Proc_CameraShot.c ****     //TODO: Return Value Check from CAM
+ 150:PSC_Proc_CameraShot.c ****     //      That is in pstData->
+ 151:PSC_Proc_CameraShot.c ****     
+ 152:PSC_Proc_CameraShot.c ****     ret = PSC_Comm_SndCommand(DEV_ID_CAM,reset_camera,read_datasize_size);
+ 165              		.loc 1 152 0
+ 166 0004 0120     		movs	r0, #1
+ 167              	.LVL11:
+ 168 0006 0849     		ldr	r1, .L19
+ 169 0008 1422     		movs	r2, #20
+ 170 000a FFF7FEFF 		bl	PSC_Comm_SndCommand
+ 171              	.LVL12:
+ 153:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 172              		.loc 1 153 0
+ 173 000e 48B9     		cbnz	r0, .L16
+ 154:PSC_Proc_CameraShot.c ****     {
+ 155:PSC_Proc_CameraShot.c ****         return ret;
+ 156:PSC_Proc_CameraShot.c ****         
+ 157:PSC_Proc_CameraShot.c ****     }
+ 158:PSC_Proc_CameraShot.c **** 
+ 159:PSC_Proc_CameraShot.c ****     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
+ 174              		.loc 1 159 0
+ 175 0010 2046     		mov	r0, r4
+ 176              	.LVL13:
+ 177 0012 0121     		movs	r1, #1
+ 178 0014 FFF7FEFF 		bl	PSC_CMD_SET_DEVICE_ID
+ 179              	.LVL14:
+ 160:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 180              		.loc 1 160 0
+ 181 0018 28B9     		cbnz	r0, .L17
+ 161:PSC_Proc_CameraShot.c ****     {
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 7
+
+
+ 162:PSC_Proc_CameraShot.c ****         return ret;
+ 163:PSC_Proc_CameraShot.c ****     }
+ 164:PSC_Proc_CameraShot.c ****     
+ 165:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+ 182              		.loc 1 165 0
+ 183 001a 044A     		ldr	r2, .L19+4
+ 184 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 185 001e 0133     		adds	r3, r3, #1
+ 186 0020 1370     		strb	r3, [r2]
+ 166:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 187              		.loc 1 166 0
+ 188 0022 10BD     		pop	{r4, pc}
+ 189              	.LVL15:
+ 190              	.L16:
+ 191 0024 10BD     		pop	{r4, pc}
+ 192              	.LVL16:
+ 193              	.L17:
+ 167:PSC_Proc_CameraShot.c **** }
+ 194              		.loc 1 167 0
+ 195 0026 10BD     		pop	{r4, pc}
+ 196              	.LVL17:
+ 197              	.L20:
+ 198              		.align	2
+ 199              	.L19:
+ 200 0028 04000000 		.word	.LANCHOR1+4
+ 201 002c 00000000 		.word	.LANCHOR0
+ 202              		.cfi_endproc
+ 203              	.LFE67:
+ 204              		.size	psc_Proc_CameraShot_ResetCamera, .-psc_Proc_CameraShot_ResetCamera
+ 205              		.section	.text.psc_Proc_CameraShot_Baurate,"ax",%progbits
+ 206              		.align	2
+ 207              		.global	psc_Proc_CameraShot_Baurate
+ 208              		.thumb
+ 209              		.thumb_func
+ 210              		.type	psc_Proc_CameraShot_Baurate, %function
+ 211              	psc_Proc_CameraShot_Baurate:
+ 212              	.LFB68:
+ 168:PSC_Proc_CameraShot.c **** 
+ 169:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_Baurate(PSC_ST_CMD* pstData)
+ 170:PSC_Proc_CameraShot.c **** {
+ 213              		.loc 1 170 0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217              		@ link register save eliminated.
+ 218              	.LVL18:
+ 171:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+ 172:PSC_Proc_CameraShot.c ****     //TODO: Return Value Check from CAM
+ 173:PSC_Proc_CameraShot.c ****     //      That is in pstData->
+ 174:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+ 219              		.loc 1 174 0
+ 220 0000 024A     		ldr	r2, .L22
+ 221 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 222 0004 0133     		adds	r3, r3, #1
+ 223 0006 1370     		strb	r3, [r2]
+ 175:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 176:PSC_Proc_CameraShot.c ****     //ret = PSC_Comm_SndCommand(DEV_ID_CAM,baurate,sizeof(baurate));
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 8
+
+
+ 177:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 178:PSC_Proc_CameraShot.c ****     {
+ 179:PSC_Proc_CameraShot.c ****         //return ret;
+ 180:PSC_Proc_CameraShot.c ****         
+ 181:PSC_Proc_CameraShot.c ****     }
+ 182:PSC_Proc_CameraShot.c **** 
+ 183:PSC_Proc_CameraShot.c ****     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
+ 184:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 185:PSC_Proc_CameraShot.c ****     {
+ 186:PSC_Proc_CameraShot.c ****         return ret;
+ 187:PSC_Proc_CameraShot.c ****     }
+ 188:PSC_Proc_CameraShot.c ****     
+ 189:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+ 190:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 191:PSC_Proc_CameraShot.c **** }
+ 224              		.loc 1 191 0
+ 225 0008 0020     		movs	r0, #0
+ 226              	.LVL19:
+ 227 000a 7047     		bx	lr
+ 228              	.L23:
+ 229              		.align	2
+ 230              	.L22:
+ 231 000c 00000000 		.word	.LANCHOR0
+ 232              		.cfi_endproc
+ 233              	.LFE68:
+ 234              		.size	psc_Proc_CameraShot_Baurate, .-psc_Proc_CameraShot_Baurate
+ 235              		.section	.text.psc_Proc_CameraShot_ConfigDataSize,"ax",%progbits
+ 236              		.align	2
+ 237              		.global	psc_Proc_CameraShot_ConfigDataSize
+ 238              		.thumb
+ 239              		.thumb_func
+ 240              		.type	psc_Proc_CameraShot_ConfigDataSize, %function
+ 241              	psc_Proc_CameraShot_ConfigDataSize:
+ 242              	.LFB69:
+ 192:PSC_Proc_CameraShot.c **** 
+ 193:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_ConfigDataSize(PSC_ST_CMD* pstData)
+ 194:PSC_Proc_CameraShot.c **** {
+ 243              		.loc 1 194 0
+ 244              		.cfi_startproc
+ 245              		@ args = 0, pretend = 0, frame = 0
+ 246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 247              	.LVL20:
+ 248 0000 10B5     		push	{r4, lr}
+ 249              		.cfi_def_cfa_offset 8
+ 250              		.cfi_offset 4, -8
+ 251              		.cfi_offset 14, -4
+ 252 0002 0446     		mov	r4, r0
+ 195:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+ 196:PSC_Proc_CameraShot.c ****     
+ 197:PSC_Proc_CameraShot.c ****     ret = PSC_Comm_SndCommand(DEV_ID_CAM,config_datasize,config_datasize_size);
+ 253              		.loc 1 197 0
+ 254 0004 0120     		movs	r0, #1
+ 255              	.LVL21:
+ 256 0006 0849     		ldr	r1, .L29
+ 257 0008 2422     		movs	r2, #36
+ 258 000a FFF7FEFF 		bl	PSC_Comm_SndCommand
+ 259              	.LVL22:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 9
+
+
+ 198:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 260              		.loc 1 198 0
+ 261 000e 48B9     		cbnz	r0, .L26
+ 199:PSC_Proc_CameraShot.c ****     {
+ 200:PSC_Proc_CameraShot.c ****         return ret;
+ 201:PSC_Proc_CameraShot.c ****         
+ 202:PSC_Proc_CameraShot.c ****     }
+ 203:PSC_Proc_CameraShot.c **** 
+ 204:PSC_Proc_CameraShot.c ****     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
+ 262              		.loc 1 204 0
+ 263 0010 2046     		mov	r0, r4
+ 264              	.LVL23:
+ 265 0012 0121     		movs	r1, #1
+ 266 0014 FFF7FEFF 		bl	PSC_CMD_SET_DEVICE_ID
+ 267              	.LVL24:
+ 205:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 268              		.loc 1 205 0
+ 269 0018 28B9     		cbnz	r0, .L27
+ 206:PSC_Proc_CameraShot.c ****     {
+ 207:PSC_Proc_CameraShot.c ****         return ret;
+ 208:PSC_Proc_CameraShot.c ****     }
+ 209:PSC_Proc_CameraShot.c ****     
+ 210:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+ 270              		.loc 1 210 0
+ 271 001a 044A     		ldr	r2, .L29+4
+ 272 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 273 001e 0133     		adds	r3, r3, #1
+ 274 0020 1370     		strb	r3, [r2]
+ 211:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 275              		.loc 1 211 0
+ 276 0022 10BD     		pop	{r4, pc}
+ 277              	.LVL25:
+ 278              	.L26:
+ 279 0024 10BD     		pop	{r4, pc}
+ 280              	.LVL26:
+ 281              	.L27:
+ 212:PSC_Proc_CameraShot.c **** }
+ 282              		.loc 1 212 0
+ 283 0026 10BD     		pop	{r4, pc}
+ 284              	.LVL27:
+ 285              	.L30:
+ 286              		.align	2
+ 287              	.L29:
+ 288 0028 08000000 		.word	.LANCHOR1+8
+ 289 002c 00000000 		.word	.LANCHOR0
+ 290              		.cfi_endproc
+ 291              	.LFE69:
+ 292              		.size	psc_Proc_CameraShot_ConfigDataSize, .-psc_Proc_CameraShot_ConfigDataSize
+ 293              		.section	.text.psc_Proc_CameraShot_TakePicture,"ax",%progbits
+ 294              		.align	2
+ 295              		.global	psc_Proc_CameraShot_TakePicture
+ 296              		.thumb
+ 297              		.thumb_func
+ 298              		.type	psc_Proc_CameraShot_TakePicture, %function
+ 299              	psc_Proc_CameraShot_TakePicture:
+ 300              	.LFB70:
+ 213:PSC_Proc_CameraShot.c **** 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 10
+
+
+ 214:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD* pstData)
+ 215:PSC_Proc_CameraShot.c **** {
+ 301              		.loc 1 215 0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305              	.LVL28:
+ 306 0000 10B5     		push	{r4, lr}
+ 307              		.cfi_def_cfa_offset 8
+ 308              		.cfi_offset 4, -8
+ 309              		.cfi_offset 14, -4
+ 310 0002 0446     		mov	r4, r0
+ 216:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+ 217:PSC_Proc_CameraShot.c ****     
+ 218:PSC_Proc_CameraShot.c ****     //TODO: Return Value Check from CAM
+ 219:PSC_Proc_CameraShot.c ****     //      That is in pstData->
+ 220:PSC_Proc_CameraShot.c ****     ret = PSC_Comm_SndCommand(DEV_ID_CAM,take_picture,tack_picture_size);
+ 311              		.loc 1 220 0
+ 312 0004 0120     		movs	r0, #1
+ 313              	.LVL29:
+ 314 0006 0849     		ldr	r1, .L36
+ 315 0008 1422     		movs	r2, #20
+ 316 000a FFF7FEFF 		bl	PSC_Comm_SndCommand
+ 317              	.LVL30:
+ 221:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 318              		.loc 1 221 0
+ 319 000e 48B9     		cbnz	r0, .L33
+ 222:PSC_Proc_CameraShot.c ****     {
+ 223:PSC_Proc_CameraShot.c ****         return ret;
+ 224:PSC_Proc_CameraShot.c ****         
+ 225:PSC_Proc_CameraShot.c ****     }
+ 226:PSC_Proc_CameraShot.c **** 
+ 227:PSC_Proc_CameraShot.c ****     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
+ 320              		.loc 1 227 0
+ 321 0010 2046     		mov	r0, r4
+ 322              	.LVL31:
+ 323 0012 0121     		movs	r1, #1
+ 324 0014 FFF7FEFF 		bl	PSC_CMD_SET_DEVICE_ID
+ 325              	.LVL32:
+ 228:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 326              		.loc 1 228 0
+ 327 0018 28B9     		cbnz	r0, .L34
+ 229:PSC_Proc_CameraShot.c ****     {
+ 230:PSC_Proc_CameraShot.c ****         return ret;
+ 231:PSC_Proc_CameraShot.c ****     }
+ 232:PSC_Proc_CameraShot.c ****     
+ 233:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+ 328              		.loc 1 233 0
+ 329 001a 044A     		ldr	r2, .L36+4
+ 330 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 331 001e 0133     		adds	r3, r3, #1
+ 332 0020 1370     		strb	r3, [r2]
+ 234:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 333              		.loc 1 234 0
+ 334 0022 10BD     		pop	{r4, pc}
+ 335              	.LVL33:
+ 336              	.L33:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 11
+
+
+ 337 0024 10BD     		pop	{r4, pc}
+ 338              	.LVL34:
+ 339              	.L34:
+ 235:PSC_Proc_CameraShot.c **** }
+ 340              		.loc 1 235 0
+ 341 0026 10BD     		pop	{r4, pc}
+ 342              	.LVL35:
+ 343              	.L37:
+ 344              		.align	2
+ 345              	.L36:
+ 346 0028 14000000 		.word	.LANCHOR1+20
+ 347 002c 00000000 		.word	.LANCHOR0
+ 348              		.cfi_endproc
+ 349              	.LFE70:
+ 350              		.size	psc_Proc_CameraShot_TakePicture, .-psc_Proc_CameraShot_TakePicture
+ 351              		.section	.text.psc_Proc_CameraShot_LoadData,"ax",%progbits
+ 352              		.align	2
+ 353              		.global	psc_Proc_CameraShot_LoadData
+ 354              		.thumb
+ 355              		.thumb_func
+ 356              		.type	psc_Proc_CameraShot_LoadData, %function
+ 357              	psc_Proc_CameraShot_LoadData:
+ 358              	.LFB71:
+ 236:PSC_Proc_CameraShot.c **** 
+ 237:PSC_Proc_CameraShot.c **** PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD* pstData)
+ 238:PSC_Proc_CameraShot.c **** {
+ 359              		.loc 1 238 0
+ 360              		.cfi_startproc
+ 361              		@ args = 0, pretend = 0, frame = 0
+ 362              		@ frame_needed = 0, uses_anonymous_args = 0
+ 363              	.LVL36:
+ 364 0000 10B5     		push	{r4, lr}
+ 365              		.cfi_def_cfa_offset 8
+ 366              		.cfi_offset 4, -8
+ 367              		.cfi_offset 14, -4
+ 368 0002 0446     		mov	r4, r0
+ 239:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+ 240:PSC_Proc_CameraShot.c ****     
+ 241:PSC_Proc_CameraShot.c ****     ret = PSC_Comm_SndCommand(DEV_ID_CAM,load_data,load_data_size);
+ 369              		.loc 1 241 0
+ 370 0004 0120     		movs	r0, #1
+ 371              	.LVL37:
+ 372 0006 0849     		ldr	r1, .L43
+ 373 0008 4022     		movs	r2, #64
+ 374 000a FFF7FEFF 		bl	PSC_Comm_SndCommand
+ 375              	.LVL38:
+ 242:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 376              		.loc 1 242 0
+ 377 000e 48B9     		cbnz	r0, .L40
+ 243:PSC_Proc_CameraShot.c ****     {
+ 244:PSC_Proc_CameraShot.c ****         return ret;
+ 245:PSC_Proc_CameraShot.c ****         
+ 246:PSC_Proc_CameraShot.c ****     }
+ 247:PSC_Proc_CameraShot.c **** 
+ 248:PSC_Proc_CameraShot.c ****     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
+ 378              		.loc 1 248 0
+ 379 0010 2046     		mov	r0, r4
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 12
+
+
+ 380              	.LVL39:
+ 381 0012 0121     		movs	r1, #1
+ 382 0014 FFF7FEFF 		bl	PSC_CMD_SET_DEVICE_ID
+ 383              	.LVL40:
+ 249:PSC_Proc_CameraShot.c ****     if( ret != PSC_RET_SUCCESS )
+ 384              		.loc 1 249 0
+ 385 0018 28B9     		cbnz	r0, .L41
+ 250:PSC_Proc_CameraShot.c ****     {
+ 251:PSC_Proc_CameraShot.c ****         return ret;
+ 252:PSC_Proc_CameraShot.c ****     }
+ 253:PSC_Proc_CameraShot.c ****     
+ 254:PSC_Proc_CameraShot.c ****     svPSC_PROC_STATE_CAMERASHOT++;
+ 386              		.loc 1 254 0
+ 387 001a 044A     		ldr	r2, .L43+4
+ 388 001c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 389 001e 0133     		adds	r3, r3, #1
+ 390 0020 1370     		strb	r3, [r2]
+ 255:PSC_Proc_CameraShot.c ****     return PSC_RET_SUCCESS;
+ 391              		.loc 1 255 0
+ 392 0022 10BD     		pop	{r4, pc}
+ 393              	.LVL41:
+ 394              	.L40:
+ 395 0024 10BD     		pop	{r4, pc}
+ 396              	.LVL42:
+ 397              	.L41:
+ 256:PSC_Proc_CameraShot.c **** }
+ 398              		.loc 1 256 0
+ 399 0026 10BD     		pop	{r4, pc}
+ 400              	.LVL43:
+ 401              	.L44:
+ 402              		.align	2
+ 403              	.L43:
+ 404 0028 1C000000 		.word	.LANCHOR1+28
+ 405 002c 00000000 		.word	.LANCHOR0
+ 406              		.cfi_endproc
+ 407              	.LFE71:
+ 408              		.size	psc_Proc_CameraShot_LoadData, .-psc_Proc_CameraShot_LoadData
+ 409              		.section	.text.PSC_Proc_CameraShot_Main,"ax",%progbits
+ 410              		.align	2
+ 411              		.global	PSC_Proc_CameraShot_Main
+ 412              		.thumb
+ 413              		.thumb_func
+ 414              		.type	PSC_Proc_CameraShot_Main, %function
+ 415              	PSC_Proc_CameraShot_Main:
+ 416              	.LFB64:
+  62:PSC_Proc_CameraShot.c ****     PSC_RET ret;
+ 417              		.loc 1 62 0
+ 418              		.cfi_startproc
+ 419              		@ args = 0, pretend = 0, frame = 0
+ 420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 421              	.LVL44:
+ 422 0000 10B5     		push	{r4, lr}
+ 423              		.cfi_def_cfa_offset 8
+ 424              		.cfi_offset 4, -8
+ 425              		.cfi_offset 14, -4
+ 426 0002 0446     		mov	r4, r0
+ 427              	.LVL45:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 13
+
+
+  67:PSC_Proc_CameraShot.c ****     {
+ 428              		.loc 1 67 0
+ 429 0004 244B     		ldr	r3, .L58
+ 430 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 431 0008 072B     		cmp	r3, #7
+ 432 000a 3ED8     		bhi	.L56
+ 433 000c DFE803F0 		tbb	[pc, r3]
+ 434              	.L48:
+ 435 0010 06       		.byte	(.L47-.L48)/2
+ 436 0011 0E       		.byte	(.L49-.L48)/2
+ 437 0012 16       		.byte	(.L50-.L48)/2
+ 438 0013 1E       		.byte	(.L51-.L48)/2
+ 439 0014 26       		.byte	(.L52-.L48)/2
+ 440 0015 2E       		.byte	(.L53-.L48)/2
+ 441 0016 36       		.byte	(.L54-.L48)/2
+ 442 0017 04       		.byte	(.L55-.L48)/2
+ 443              		.p2align 1
+ 444              	.L55:
+  65:PSC_Proc_CameraShot.c ****     
+ 445              		.loc 1 65 0
+ 446 0018 0024     		movs	r4, #0
+ 447 001a 37E0     		b	.L46
+ 448              	.L47:
+  70:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_Get(pstData);
+ 449              		.loc 1 70 0
+ 450 001c 1F48     		ldr	r0, .L58+4
+ 451              	.LVL46:
+ 452 001e FFF7FEFF 		bl	DBG_printf
+ 453              	.LVL47:
+  71:PSC_Proc_CameraShot.c ****             break;
+ 454              		.loc 1 71 0
+ 455 0022 2046     		mov	r0, r4
+ 456 0024 FFF7FEFF 		bl	psc_Proc_CameraShot_Get
+ 457              	.LVL48:
+ 458 0028 0446     		mov	r4, r0
+ 459              	.LVL49:
+  72:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_GET:
+ 460              		.loc 1 72 0
+ 461 002a 2FE0     		b	.L46
+ 462              	.LVL50:
+ 463              	.L49:
+  74:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_ResetCamera(pstData);
+ 464              		.loc 1 74 0
+ 465 002c 1C48     		ldr	r0, .L58+8
+ 466              	.LVL51:
+ 467 002e FFF7FEFF 		bl	DBG_printf
+ 468              	.LVL52:
+  75:PSC_Proc_CameraShot.c ****             break;
+ 469              		.loc 1 75 0
+ 470 0032 2046     		mov	r0, r4
+ 471 0034 FFF7FEFF 		bl	psc_Proc_CameraShot_ResetCamera
+ 472              	.LVL53:
+ 473 0038 0446     		mov	r4, r0
+ 474              	.LVL54:
+  76:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_RESET_CAMERA:
+ 475              		.loc 1 76 0
+ 476 003a 27E0     		b	.L46
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 14
+
+
+ 477              	.LVL55:
+ 478              	.L50:
+  78:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_Baurate(pstData);
+ 479              		.loc 1 78 0
+ 480 003c 1948     		ldr	r0, .L58+12
+ 481              	.LVL56:
+ 482 003e FFF7FEFF 		bl	DBG_printf
+ 483              	.LVL57:
+  79:PSC_Proc_CameraShot.c ****             break;
+ 484              		.loc 1 79 0
+ 485 0042 2046     		mov	r0, r4
+ 486 0044 FFF7FEFF 		bl	psc_Proc_CameraShot_Baurate
+ 487              	.LVL58:
+ 488 0048 0446     		mov	r4, r0
+ 489              	.LVL59:
+  80:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_BAURATE:
+ 490              		.loc 1 80 0
+ 491 004a 1FE0     		b	.L46
+ 492              	.LVL60:
+ 493              	.L51:
+  82:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_ConfigDataSize(pstData);
+ 494              		.loc 1 82 0
+ 495 004c 1648     		ldr	r0, .L58+16
+ 496              	.LVL61:
+ 497 004e FFF7FEFF 		bl	DBG_printf
+ 498              	.LVL62:
+  83:PSC_Proc_CameraShot.c ****             break;
+ 499              		.loc 1 83 0
+ 500 0052 2046     		mov	r0, r4
+ 501 0054 FFF7FEFF 		bl	psc_Proc_CameraShot_ConfigDataSize
+ 502              	.LVL63:
+ 503 0058 0446     		mov	r4, r0
+ 504              	.LVL64:
+  84:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_CONFIG_DATASIZE:
+ 505              		.loc 1 84 0
+ 506 005a 17E0     		b	.L46
+ 507              	.LVL65:
+ 508              	.L52:
+  86:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_TakePicture(pstData);
+ 509              		.loc 1 86 0
+ 510 005c 1348     		ldr	r0, .L58+20
+ 511              	.LVL66:
+ 512 005e FFF7FEFF 		bl	DBG_printf
+ 513              	.LVL67:
+  87:PSC_Proc_CameraShot.c ****             break;
+ 514              		.loc 1 87 0
+ 515 0062 2046     		mov	r0, r4
+ 516 0064 FFF7FEFF 		bl	psc_Proc_CameraShot_TakePicture
+ 517              	.LVL68:
+ 518 0068 0446     		mov	r4, r0
+ 519              	.LVL69:
+  88:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_TAKE_PICTURE:
+ 520              		.loc 1 88 0
+ 521 006a 0FE0     		b	.L46
+ 522              	.LVL70:
+ 523              	.L53:
+  90:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_LoadData(pstData);
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 15
+
+
+ 524              		.loc 1 90 0
+ 525 006c 1048     		ldr	r0, .L58+24
+ 526              	.LVL71:
+ 527 006e FFF7FEFF 		bl	DBG_printf
+ 528              	.LVL72:
+  91:PSC_Proc_CameraShot.c ****             break;
+ 529              		.loc 1 91 0
+ 530 0072 2046     		mov	r0, r4
+ 531 0074 FFF7FEFF 		bl	psc_Proc_CameraShot_LoadData
+ 532              	.LVL73:
+ 533 0078 0446     		mov	r4, r0
+ 534              	.LVL74:
+  92:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_LOAD_DATA:
+ 535              		.loc 1 92 0
+ 536 007a 07E0     		b	.L46
+ 537              	.LVL75:
+ 538              	.L54:
+  94:PSC_Proc_CameraShot.c ****             ret = psc_Proc_CameraShot_Complete();
+ 539              		.loc 1 94 0
+ 540 007c 0D48     		ldr	r0, .L58+28
+ 541              	.LVL76:
+ 542 007e FFF7FEFF 		bl	DBG_printf
+ 543              	.LVL77:
+  95:PSC_Proc_CameraShot.c ****             break;
+ 544              		.loc 1 95 0
+ 545 0082 FFF7FEFF 		bl	psc_Proc_CameraShot_Complete
+ 546              	.LVL78:
+ 547 0086 0446     		mov	r4, r0
+ 548              	.LVL79:
+  96:PSC_Proc_CameraShot.c ****         case PR_STATE_CS_MAX:
+ 549              		.loc 1 96 0
+ 550 0088 00E0     		b	.L46
+ 551              	.LVL80:
+ 552              	.L56:
+ 100:PSC_Proc_CameraShot.c ****             break;
+ 553              		.loc 1 100 0
+ 554 008a 0124     		movs	r4, #1
+ 555              	.LVL81:
+ 556              	.L46:
+ 104:PSC_Proc_CameraShot.c **** //    if( ret == PSC_RET_SUCCESS )
+ 557              		.loc 1 104 0
+ 558 008c 4FF4FA70 		mov	r0, #500
+ 559 0090 FFF7FEFF 		bl	CyDelay
+ 560              	.LVL82:
+ 111:PSC_Proc_CameraShot.c **** 
+ 561              		.loc 1 111 0
+ 562 0094 2046     		mov	r0, r4
+ 563 0096 10BD     		pop	{r4, pc}
+ 564              	.LVL83:
+ 565              	.L59:
+ 566              		.align	2
+ 567              	.L58:
+ 568 0098 00000000 		.word	.LANCHOR0
+ 569 009c 00000000 		.word	.LC0
+ 570 00a0 18000000 		.word	.LC1
+ 571 00a4 30000000 		.word	.LC2
+ 572 00a8 48000000 		.word	.LC3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 16
+
+
+ 573 00ac 64000000 		.word	.LC4
+ 574 00b0 80000000 		.word	.LC5
+ 575 00b4 A0000000 		.word	.LC6
+ 576              		.cfi_endproc
+ 577              	.LFE64:
+ 578              		.size	PSC_Proc_CameraShot_Main, .-PSC_Proc_CameraShot_Main
+ 579              		.comm	gsvPSC_PROC_STATE,1,1
+ 580              		.data
+ 581              		.align	2
+ 582              		.set	.LANCHOR1,. + 0
+ 583              		.type	get, %object
+ 584              		.size	get, 4
+ 585              	get:
+ 586 0000 56       		.byte	86
+ 587 0001 00       		.byte	0
+ 588 0002 11       		.byte	17
+ 589 0003 00       		.byte	0
+ 590              		.type	reset_camera, %object
+ 591              		.size	reset_camera, 4
+ 592              	reset_camera:
+ 593 0004 56       		.byte	86
+ 594 0005 00       		.byte	0
+ 595 0006 26       		.byte	38
+ 596 0007 00       		.byte	0
+ 597              		.type	config_datasize, %object
+ 598              		.size	config_datasize, 9
+ 599              	config_datasize:
+ 600 0008 56       		.byte	86
+ 601 0009 00       		.byte	0
+ 602 000a 31       		.byte	49
+ 603 000b 05       		.byte	5
+ 604 000c 04       		.byte	4
+ 605 000d 01       		.byte	1
+ 606 000e 00       		.byte	0
+ 607 000f 19       		.byte	25
+ 608 0010 00       		.byte	0
+ 609 0011 000000   		.space	3
+ 610              		.type	take_picture, %object
+ 611              		.size	take_picture, 5
+ 612              	take_picture:
+ 613 0014 56       		.byte	86
+ 614 0015 00       		.byte	0
+ 615 0016 36       		.byte	54
+ 616 0017 01       		.byte	1
+ 617 0018 00       		.byte	0
+ 618 0019 000000   		.space	3
+ 619              		.type	load_data, %object
+ 620              		.size	load_data, 16
+ 621              	load_data:
+ 622 001c 56       		.byte	86
+ 623 001d 00       		.byte	0
+ 624 001e 32       		.byte	50
+ 625 001f 0C       		.byte	12
+ 626 0020 00       		.byte	0
+ 627 0021 0A       		.byte	10
+ 628 0022 00       		.byte	0
+ 629 0023 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 17
+
+
+ 630 0024 00       		.byte	0
+ 631 0025 00       		.byte	0
+ 632 0026 00       		.byte	0
+ 633 0027 00       		.byte	0
+ 634 0028 CA       		.byte	-54
+ 635 0029 6C       		.byte	108
+ 636 002a 00       		.byte	0
+ 637 002b FF       		.byte	-1
+ 638              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 639              		.align	2
+ 640              	.LC0:
+ 641 0000 54524143 		.ascii	"TRACE Proc CS Init \012\015\000"
+ 641      45205072 
+ 641      6F632043 
+ 641      5320496E 
+ 641      6974200A 
+ 642 0016 0000     		.space	2
+ 643              	.LC1:
+ 644 0018 54524143 		.ascii	"TRACE Proc CS Get \012\015\000"
+ 644      45205072 
+ 644      6F632043 
+ 644      53204765 
+ 644      74200A0D 
+ 645 002d 000000   		.space	3
+ 646              	.LC2:
+ 647 0030 54524143 		.ascii	"TRACE Proc CS Camera \012\015\000"
+ 647      45205072 
+ 647      6F632043 
+ 647      53204361 
+ 647      6D657261 
+ 648              	.LC3:
+ 649 0048 54524143 		.ascii	"TRACE Proc CS Baurate \012\015\000"
+ 649      45205072 
+ 649      6F632043 
+ 649      53204261 
+ 649      75726174 
+ 650 0061 000000   		.space	3
+ 651              	.LC4:
+ 652 0064 54524143 		.ascii	"TRACE Proc CS Datasize \012\015\000"
+ 652      45205072 
+ 652      6F632043 
+ 652      53204461 
+ 652      74617369 
+ 653 007e 0000     		.space	2
+ 654              	.LC5:
+ 655 0080 54524143 		.ascii	"TRACE Proc CS take picture \012\015\000"
+ 655      45205072 
+ 655      6F632043 
+ 655      53207461 
+ 655      6B652070 
+ 656 009e 0000     		.space	2
+ 657              	.LC6:
+ 658 00a0 54524143 		.ascii	"TRACE Proc CS Load Data \012\015\000"
+ 658      45205072 
+ 658      6F632043 
+ 658      53204C6F 
+ 658      61642044 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 18
+
+
+ 659 00bb 00       		.bss
+ 660              		.set	.LANCHOR0,. + 0
+ 661              		.type	svPSC_PROC_STATE_CAMERASHOT, %object
+ 662              		.size	svPSC_PROC_STATE_CAMERASHOT, 1
+ 663              	svPSC_PROC_STATE_CAMERASHOT:
+ 664 0000 00       		.space	1
+ 665              		.text
+ 666              	.Letext0:
+ 667              		.file 2 "PSC_Types.h"
+ 668              		.file 3 "PSC_CMD_API.h"
+ 669              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 670              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 671              		.file 6 "Generated_Source\\PSoC5/cytypes.h"
+ 672              		.file 7 "PSC_Proc_Common.h"
+ 673              		.file 8 "PSC_Camera.h"
+ 674              		.file 9 "Generated_Source\\PSoC5/core_cm3.h"
+ 675              		.file 10 "PSC_Communicate.h"
+ 676              		.file 11 "Debugs.h"
+ 677              		.file 12 "Generated_Source\\PSoC5/CyLib.h"
+ 678              		.section	.debug_info,"",%progbits
+ 679              	.Ldebug_info0:
+ 680 0000 88080000 		.4byte	0x888
+ 681 0004 0400     		.2byte	0x4
+ 682 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 683 000a 04       		.byte	0x4
+ 684 000b 01       		.uleb128 0x1
+ 685 000c 7B030000 		.4byte	.LASF95
+ 686 0010 01       		.byte	0x1
+ 687 0011 66040000 		.4byte	.LASF96
+ 688 0015 7C040000 		.4byte	.LASF97
+ 689 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 690 001d 00000000 		.4byte	0
+ 691 0021 00000000 		.4byte	.Ldebug_line0
+ 692 0025 02       		.uleb128 0x2
+ 693 0026 09040000 		.4byte	.LASF0
+ 694 002a 02       		.byte	0x2
+ 695 002b 22       		.byte	0x22
+ 696 002c 30000000 		.4byte	0x30
+ 697 0030 03       		.uleb128 0x3
+ 698 0031 04       		.byte	0x4
+ 699 0032 07       		.byte	0x7
+ 700 0033 F8020000 		.4byte	.LASF2
+ 701 0037 02       		.uleb128 0x2
+ 702 0038 C8040000 		.4byte	.LASF1
+ 703 003c 02       		.byte	0x2
+ 704 003d 23       		.byte	0x23
+ 705 003e 42000000 		.4byte	0x42
+ 706 0042 03       		.uleb128 0x3
+ 707 0043 01       		.byte	0x1
+ 708 0044 08       		.byte	0x8
+ 709 0045 6D020000 		.4byte	.LASF3
+ 710 0049 04       		.uleb128 0x4
+ 711 004a 58050000 		.4byte	.LASF7
+ 712 004e 01       		.byte	0x1
+ 713 004f 02       		.byte	0x2
+ 714 0050 25       		.byte	0x25
+ 715 0051 62000000 		.4byte	0x62
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 19
+
+
+ 716 0055 05       		.uleb128 0x5
+ 717 0056 30040000 		.4byte	.LASF4
+ 718 005a 00       		.sleb128 0
+ 719 005b 05       		.uleb128 0x5
+ 720 005c C7050000 		.4byte	.LASF5
+ 721 0060 01       		.sleb128 1
+ 722 0061 00       		.byte	0
+ 723 0062 02       		.uleb128 0x2
+ 724 0063 34020000 		.4byte	.LASF6
+ 725 0067 02       		.byte	0x2
+ 726 0068 29       		.byte	0x29
+ 727 0069 49000000 		.4byte	0x49
+ 728 006d 04       		.uleb128 0x4
+ 729 006e 9B050000 		.4byte	.LASF8
+ 730 0072 01       		.byte	0x1
+ 731 0073 02       		.byte	0x2
+ 732 0074 2B       		.byte	0x2b
+ 733 0075 8C000000 		.4byte	0x8c
+ 734 0079 05       		.uleb128 0x5
+ 735 007a 13030000 		.4byte	.LASF9
+ 736 007e 00       		.sleb128 0
+ 737 007f 05       		.uleb128 0x5
+ 738 0080 7B020000 		.4byte	.LASF10
+ 739 0084 01       		.sleb128 1
+ 740 0085 05       		.uleb128 0x5
+ 741 0086 ED010000 		.4byte	.LASF11
+ 742 008a 02       		.sleb128 2
+ 743 008b 00       		.byte	0
+ 744 008c 02       		.uleb128 0x2
+ 745 008d 60000000 		.4byte	.LASF12
+ 746 0091 02       		.byte	0x2
+ 747 0092 30       		.byte	0x30
+ 748 0093 6D000000 		.4byte	0x6d
+ 749 0097 04       		.uleb128 0x4
+ 750 0098 DC000000 		.4byte	.LASF13
+ 751 009c 01       		.byte	0x1
+ 752 009d 02       		.byte	0x2
+ 753 009e 32       		.byte	0x32
+ 754 009f C8000000 		.4byte	0xc8
+ 755 00a3 05       		.uleb128 0x5
+ 756 00a4 D1040000 		.4byte	.LASF14
+ 757 00a8 00       		.sleb128 0
+ 758 00a9 05       		.uleb128 0x5
+ 759 00aa E7000000 		.4byte	.LASF15
+ 760 00ae 01       		.sleb128 1
+ 761 00af 05       		.uleb128 0x5
+ 762 00b0 70000000 		.4byte	.LASF16
+ 763 00b4 02       		.sleb128 2
+ 764 00b5 05       		.uleb128 0x5
+ 765 00b6 14050000 		.4byte	.LASF17
+ 766 00ba 03       		.sleb128 3
+ 767 00bb 05       		.uleb128 0x5
+ 768 00bc FE000000 		.4byte	.LASF18
+ 769 00c0 04       		.sleb128 4
+ 770 00c1 05       		.uleb128 0x5
+ 771 00c2 E8020000 		.4byte	.LASF19
+ 772 00c6 05       		.sleb128 5
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 20
+
+
+ 773 00c7 00       		.byte	0
+ 774 00c8 02       		.uleb128 0x2
+ 775 00c9 12010000 		.4byte	.LASF20
+ 776 00cd 02       		.byte	0x2
+ 777 00ce 3A       		.byte	0x3a
+ 778 00cf 97000000 		.4byte	0x97
+ 779 00d3 06       		.uleb128 0x6
+ 780 00d4 64050000 		.4byte	.LASF28
+ 781 00d8 07       		.byte	0x7
+ 782 00d9 03       		.byte	0x3
+ 783 00da 1F       		.byte	0x1f
+ 784 00db 1C010000 		.4byte	0x11c
+ 785 00df 07       		.uleb128 0x7
+ 786 00e0 1A010000 		.4byte	.LASF21
+ 787 00e4 03       		.byte	0x3
+ 788 00e5 21       		.byte	0x21
+ 789 00e6 62000000 		.4byte	0x62
+ 790 00ea 00       		.byte	0
+ 791 00eb 07       		.uleb128 0x7
+ 792 00ec 4F030000 		.4byte	.LASF22
+ 793 00f0 03       		.byte	0x3
+ 794 00f1 22       		.byte	0x22
+ 795 00f2 62000000 		.4byte	0x62
+ 796 00f6 01       		.byte	0x1
+ 797 00f7 07       		.uleb128 0x7
+ 798 00f8 4B000000 		.4byte	.LASF23
+ 799 00fc 03       		.byte	0x3
+ 800 00fd 23       		.byte	0x23
+ 801 00fe 62000000 		.4byte	0x62
+ 802 0102 02       		.byte	0x2
+ 803 0103 07       		.uleb128 0x7
+ 804 0104 B7050000 		.4byte	.LASF24
+ 805 0108 03       		.byte	0x3
+ 806 0109 24       		.byte	0x24
+ 807 010a 42000000 		.4byte	0x42
+ 808 010e 03       		.byte	0x3
+ 809 010f 07       		.uleb128 0x7
+ 810 0110 21010000 		.4byte	.LASF25
+ 811 0114 03       		.byte	0x3
+ 812 0115 25       		.byte	0x25
+ 813 0116 1C010000 		.4byte	0x11c
+ 814 011a 04       		.byte	0x4
+ 815 011b 00       		.byte	0
+ 816 011c 08       		.uleb128 0x8
+ 817 011d 62000000 		.4byte	0x62
+ 818 0121 2C010000 		.4byte	0x12c
+ 819 0125 09       		.uleb128 0x9
+ 820 0126 2C010000 		.4byte	0x12c
+ 821 012a 02       		.byte	0x2
+ 822 012b 00       		.byte	0
+ 823 012c 03       		.uleb128 0x3
+ 824 012d 04       		.byte	0x4
+ 825 012e 07       		.byte	0x7
+ 826 012f 67000000 		.4byte	.LASF26
+ 827 0133 02       		.uleb128 0x2
+ 828 0134 86020000 		.4byte	.LASF27
+ 829 0138 03       		.byte	0x3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 21
+
+
+ 830 0139 27       		.byte	0x27
+ 831 013a D3000000 		.4byte	0xd3
+ 832 013e 06       		.uleb128 0x6
+ 833 013f 86000000 		.4byte	.LASF29
+ 834 0143 34       		.byte	0x34
+ 835 0144 03       		.byte	0x3
+ 836 0145 29       		.byte	0x29
+ 837 0146 7B010000 		.4byte	0x17b
+ 838 014a 07       		.uleb128 0x7
+ 839 014b 8E050000 		.4byte	.LASF30
+ 840 014f 03       		.byte	0x3
+ 841 0150 2B       		.byte	0x2b
+ 842 0151 42000000 		.4byte	0x42
+ 843 0155 00       		.byte	0
+ 844 0156 07       		.uleb128 0x7
+ 845 0157 A5060000 		.4byte	.LASF31
+ 846 015b 03       		.byte	0x3
+ 847 015c 2C       		.byte	0x2c
+ 848 015d 25000000 		.4byte	0x25
+ 849 0161 04       		.byte	0x4
+ 850 0162 07       		.uleb128 0x7
+ 851 0163 AA000000 		.4byte	.LASF32
+ 852 0167 03       		.byte	0x3
+ 853 0168 2D       		.byte	0x2d
+ 854 0169 7B010000 		.4byte	0x17b
+ 855 016d 08       		.byte	0x8
+ 856 016e 07       		.uleb128 0x7
+ 857 016f C8060000 		.4byte	.LASF33
+ 858 0173 03       		.byte	0x3
+ 859 0174 2E       		.byte	0x2e
+ 860 0175 33010000 		.4byte	0x133
+ 861 0179 2C       		.byte	0x2c
+ 862 017a 00       		.byte	0
+ 863 017b 08       		.uleb128 0x8
+ 864 017c 37000000 		.4byte	0x37
+ 865 0180 8B010000 		.4byte	0x18b
+ 866 0184 09       		.uleb128 0x9
+ 867 0185 2C010000 		.4byte	0x12c
+ 868 0189 23       		.byte	0x23
+ 869 018a 00       		.byte	0
+ 870 018b 02       		.uleb128 0x2
+ 871 018c C6010000 		.4byte	.LASF34
+ 872 0190 03       		.byte	0x3
+ 873 0191 2F       		.byte	0x2f
+ 874 0192 3E010000 		.4byte	0x13e
+ 875 0196 06       		.uleb128 0x6
+ 876 0197 9A060000 		.4byte	.LASF35
+ 877 019b 38       		.byte	0x38
+ 878 019c 03       		.byte	0x3
+ 879 019d 33       		.byte	0x33
+ 880 019e BB010000 		.4byte	0x1bb
+ 881 01a2 07       		.uleb128 0x7
+ 882 01a3 44000000 		.4byte	.LASF36
+ 883 01a7 03       		.byte	0x3
+ 884 01a8 35       		.byte	0x35
+ 885 01a9 8C000000 		.4byte	0x8c
+ 886 01ad 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 22
+
+
+ 887 01ae 07       		.uleb128 0x7
+ 888 01af 38030000 		.4byte	.LASF37
+ 889 01b3 03       		.byte	0x3
+ 890 01b4 36       		.byte	0x36
+ 891 01b5 8B010000 		.4byte	0x18b
+ 892 01b9 04       		.byte	0x4
+ 893 01ba 00       		.byte	0
+ 894 01bb 02       		.uleb128 0x2
+ 895 01bc AD060000 		.4byte	.LASF38
+ 896 01c0 03       		.byte	0x3
+ 897 01c1 37       		.byte	0x37
+ 898 01c2 96010000 		.4byte	0x196
+ 899 01c6 03       		.uleb128 0x3
+ 900 01c7 01       		.byte	0x1
+ 901 01c8 06       		.byte	0x6
+ 902 01c9 C6020000 		.4byte	.LASF39
+ 903 01cd 03       		.uleb128 0x3
+ 904 01ce 02       		.byte	0x2
+ 905 01cf 05       		.byte	0x5
+ 906 01d0 56000000 		.4byte	.LASF40
+ 907 01d4 03       		.uleb128 0x3
+ 908 01d5 02       		.byte	0x2
+ 909 01d6 07       		.byte	0x7
+ 910 01d7 1D040000 		.4byte	.LASF41
+ 911 01db 02       		.uleb128 0x2
+ 912 01dc FA040000 		.4byte	.LASF42
+ 913 01e0 04       		.byte	0x4
+ 914 01e1 3F       		.byte	0x3f
+ 915 01e2 E6010000 		.4byte	0x1e6
+ 916 01e6 03       		.uleb128 0x3
+ 917 01e7 04       		.byte	0x4
+ 918 01e8 05       		.byte	0x5
+ 919 01e9 D7010000 		.4byte	.LASF43
+ 920 01ed 03       		.uleb128 0x3
+ 921 01ee 04       		.byte	0x4
+ 922 01ef 07       		.byte	0x7
+ 923 01f0 F8010000 		.4byte	.LASF44
+ 924 01f4 03       		.uleb128 0x3
+ 925 01f5 08       		.byte	0x8
+ 926 01f6 05       		.byte	0x5
+ 927 01f7 A1010000 		.4byte	.LASF45
+ 928 01fb 03       		.uleb128 0x3
+ 929 01fc 08       		.byte	0x8
+ 930 01fd 07       		.byte	0x7
+ 931 01fe AF010000 		.4byte	.LASF46
+ 932 0202 0A       		.uleb128 0xa
+ 933 0203 04       		.byte	0x4
+ 934 0204 05       		.byte	0x5
+ 935 0205 696E7400 		.ascii	"int\000"
+ 936 0209 02       		.uleb128 0x2
+ 937 020a 15040000 		.4byte	.LASF47
+ 938 020e 05       		.byte	0x5
+ 939 020f 2C       		.byte	0x2c
+ 940 0210 DB010000 		.4byte	0x1db
+ 941 0214 0B       		.uleb128 0xb
+ 942 0215 44010000 		.4byte	.LASF48
+ 943 0219 06       		.byte	0x6
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 23
+
+
+ 944 021a 9201     		.2byte	0x192
+ 945 021c 42000000 		.4byte	0x42
+ 946 0220 0B       		.uleb128 0xb
+ 947 0221 B4040000 		.4byte	.LASF49
+ 948 0225 06       		.byte	0x6
+ 949 0226 9401     		.2byte	0x194
+ 950 0228 ED010000 		.4byte	0x1ed
+ 951 022c 03       		.uleb128 0x3
+ 952 022d 04       		.byte	0x4
+ 953 022e 04       		.byte	0x4
+ 954 022f 88010000 		.4byte	.LASF50
+ 955 0233 03       		.uleb128 0x3
+ 956 0234 08       		.byte	0x8
+ 957 0235 04       		.byte	0x4
+ 958 0236 25000000 		.4byte	.LASF51
+ 959 023a 03       		.uleb128 0x3
+ 960 023b 01       		.byte	0x1
+ 961 023c 08       		.byte	0x8
+ 962 023d 56030000 		.4byte	.LASF52
+ 963 0241 08       		.uleb128 0x8
+ 964 0242 42000000 		.4byte	0x42
+ 965 0246 51020000 		.4byte	0x251
+ 966 024a 09       		.uleb128 0x9
+ 967 024b 2C010000 		.4byte	0x12c
+ 968 024f 03       		.byte	0x3
+ 969 0250 00       		.byte	0
+ 970 0251 0C       		.uleb128 0xc
+ 971 0252 04       		.byte	0x4
+ 972 0253 3A020000 		.4byte	0x23a
+ 973 0257 04       		.uleb128 0x4
+ 974 0258 3D030000 		.4byte	.LASF53
+ 975 025c 01       		.byte	0x1
+ 976 025d 07       		.byte	0x7
+ 977 025e 13       		.byte	0x13
+ 978 025f 70020000 		.4byte	0x270
+ 979 0263 05       		.uleb128 0x5
+ 980 0264 04050000 		.4byte	.LASF54
+ 981 0268 00       		.sleb128 0
+ 982 0269 05       		.uleb128 0x5
+ 983 026a 45040000 		.4byte	.LASF55
+ 984 026e 01       		.sleb128 1
+ 985 026f 00       		.byte	0
+ 986 0270 02       		.uleb128 0x2
+ 987 0271 B4000000 		.4byte	.LASF56
+ 988 0275 07       		.byte	0x7
+ 989 0276 17       		.byte	0x17
+ 990 0277 57020000 		.4byte	0x257
+ 991 027b 04       		.uleb128 0x4
+ 992 027c F1050000 		.4byte	.LASF57
+ 993 0280 01       		.byte	0x1
+ 994 0281 01       		.byte	0x1
+ 995 0282 19       		.byte	0x19
+ 996 0283 B8020000 		.4byte	0x2b8
+ 997 0287 05       		.uleb128 0x5
+ 998 0288 77010000 		.4byte	.LASF58
+ 999 028c 00       		.sleb128 0
+ 1000 028d 05       		.uleb128 0x5
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 24
+
+
+ 1001 028e B8060000 		.4byte	.LASF59
+ 1002 0292 01       		.sleb128 1
+ 1003 0293 05       		.uleb128 0x5
+ 1004 0294 C3000000 		.4byte	.LASF60
+ 1005 0298 02       		.sleb128 2
+ 1006 0299 05       		.uleb128 0x5
+ 1007 029a 20020000 		.4byte	.LASF61
+ 1008 029e 03       		.sleb128 3
+ 1009 029f 05       		.uleb128 0x5
+ 1010 02a0 AA020000 		.4byte	.LASF62
+ 1011 02a4 04       		.sleb128 4
+ 1012 02a5 05       		.uleb128 0x5
+ 1013 02a6 1F030000 		.4byte	.LASF63
+ 1014 02aa 05       		.sleb128 5
+ 1015 02ab 05       		.uleb128 0x5
+ 1016 02ac 0A020000 		.4byte	.LASF64
+ 1017 02b0 06       		.sleb128 6
+ 1018 02b1 05       		.uleb128 0x5
+ 1019 02b2 34010000 		.4byte	.LASF65
+ 1020 02b6 07       		.sleb128 7
+ 1021 02b7 00       		.byte	0
+ 1022 02b8 02       		.uleb128 0x2
+ 1023 02b9 0E060000 		.4byte	.LASF66
+ 1024 02bd 01       		.byte	0x1
+ 1025 02be 23       		.byte	0x23
+ 1026 02bf 7B020000 		.4byte	0x27b
+ 1027 02c3 0D       		.uleb128 0xd
+ 1028 02c4 4A010000 		.4byte	.LASF67
+ 1029 02c8 01       		.byte	0x1
+ 1030 02c9 35       		.byte	0x35
+ 1031 02ca C8000000 		.4byte	0xc8
+ 1032 02ce 00000000 		.4byte	.LFB63
+ 1033 02d2 20000000 		.4byte	.LFE63-.LFB63
+ 1034 02d6 01       		.uleb128 0x1
+ 1035 02d7 9C       		.byte	0x9c
+ 1036 02d8 EC020000 		.4byte	0x2ec
+ 1037 02dc 0E       		.uleb128 0xe
+ 1038 02dd 3F040000 		.4byte	.LASF69
+ 1039 02e1 01       		.byte	0x1
+ 1040 02e2 35       		.byte	0x35
+ 1041 02e3 01030000 		.4byte	0x301
+ 1042 02e7 00000000 		.4byte	.LLST0
+ 1043 02eb 00       		.byte	0
+ 1044 02ec 0F       		.uleb128 0xf
+ 1045 02ed C8000000 		.4byte	0xc8
+ 1046 02f1 FB020000 		.4byte	0x2fb
+ 1047 02f5 10       		.uleb128 0x10
+ 1048 02f6 FB020000 		.4byte	0x2fb
+ 1049 02fa 00       		.byte	0
+ 1050 02fb 0C       		.uleb128 0xc
+ 1051 02fc 04       		.byte	0x4
+ 1052 02fd BB010000 		.4byte	0x1bb
+ 1053 0301 0C       		.uleb128 0xc
+ 1054 0302 04       		.byte	0x4
+ 1055 0303 07030000 		.4byte	0x307
+ 1056 0307 0C       		.uleb128 0xc
+ 1057 0308 04       		.byte	0x4
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 25
+
+
+ 1058 0309 EC020000 		.4byte	0x2ec
+ 1059 030d 11       		.uleb128 0x11
+ 1060 030e 3D020000 		.4byte	.LASF98
+ 1061 0312 01       		.byte	0x1
+ 1062 0313 73       		.byte	0x73
+ 1063 0314 C8000000 		.4byte	0xc8
+ 1064 0318 00000000 		.4byte	.LFB65
+ 1065 031c 1C000000 		.4byte	.LFE65-.LFB65
+ 1066 0320 01       		.uleb128 0x1
+ 1067 0321 9C       		.byte	0x9c
+ 1068 0322 0D       		.uleb128 0xd
+ 1069 0323 2C000000 		.4byte	.LASF68
+ 1070 0327 01       		.byte	0x1
+ 1071 0328 7C       		.byte	0x7c
+ 1072 0329 C8000000 		.4byte	0xc8
+ 1073 032d 00000000 		.4byte	.LFB66
+ 1074 0331 30000000 		.4byte	.LFE66-.LFB66
+ 1075 0335 01       		.uleb128 0x1
+ 1076 0336 9C       		.byte	0x9c
+ 1077 0337 90030000 		.4byte	0x390
+ 1078 033b 0E       		.uleb128 0xe
+ 1079 033c 5A020000 		.4byte	.LASF70
+ 1080 0340 01       		.byte	0x1
+ 1081 0341 7C       		.byte	0x7c
+ 1082 0342 FB020000 		.4byte	0x2fb
+ 1083 0346 21000000 		.4byte	.LLST1
+ 1084 034a 12       		.uleb128 0x12
+ 1085 034b 72657400 		.ascii	"ret\000"
+ 1086 034f 01       		.byte	0x1
+ 1087 0350 7E       		.byte	0x7e
+ 1088 0351 C8000000 		.4byte	0xc8
+ 1089 0355 4D000000 		.4byte	.LLST2
+ 1090 0359 13       		.uleb128 0x13
+ 1091 035a 0E000000 		.4byte	.LVL4
+ 1092 035e 2E080000 		.4byte	0x82e
+ 1093 0362 7A030000 		.4byte	0x37a
+ 1094 0366 14       		.uleb128 0x14
+ 1095 0367 01       		.uleb128 0x1
+ 1096 0368 52       		.byte	0x52
+ 1097 0369 01       		.uleb128 0x1
+ 1098 036a 40       		.byte	0x40
+ 1099 036b 14       		.uleb128 0x14
+ 1100 036c 01       		.uleb128 0x1
+ 1101 036d 51       		.byte	0x51
+ 1102 036e 05       		.uleb128 0x5
+ 1103 036f 03       		.byte	0x3
+ 1104 0370 00000000 		.4byte	.LANCHOR1
+ 1105 0374 14       		.uleb128 0x14
+ 1106 0375 01       		.uleb128 0x1
+ 1107 0376 50       		.byte	0x50
+ 1108 0377 01       		.uleb128 0x1
+ 1109 0378 31       		.byte	0x31
+ 1110 0379 00       		.byte	0
+ 1111 037a 15       		.uleb128 0x15
+ 1112 037b 18000000 		.4byte	.LVL6
+ 1113 037f 53080000 		.4byte	0x853
+ 1114 0383 14       		.uleb128 0x14
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 26
+
+
+ 1115 0384 01       		.uleb128 0x1
+ 1116 0385 51       		.byte	0x51
+ 1117 0386 01       		.uleb128 0x1
+ 1118 0387 31       		.byte	0x31
+ 1119 0388 14       		.uleb128 0x14
+ 1120 0389 01       		.uleb128 0x1
+ 1121 038a 50       		.byte	0x50
+ 1122 038b 02       		.uleb128 0x2
+ 1123 038c 74       		.byte	0x74
+ 1124 038d 00       		.sleb128 0
+ 1125 038e 00       		.byte	0
+ 1126 038f 00       		.byte	0
+ 1127 0390 0D       		.uleb128 0xd
+ 1128 0391 5B030000 		.4byte	.LASF71
+ 1129 0395 01       		.byte	0x1
+ 1130 0396 92       		.byte	0x92
+ 1131 0397 C8000000 		.4byte	0xc8
+ 1132 039b 00000000 		.4byte	.LFB67
+ 1133 039f 30000000 		.4byte	.LFE67-.LFB67
+ 1134 03a3 01       		.uleb128 0x1
+ 1135 03a4 9C       		.byte	0x9c
+ 1136 03a5 FE030000 		.4byte	0x3fe
+ 1137 03a9 0E       		.uleb128 0xe
+ 1138 03aa 5A020000 		.4byte	.LASF70
+ 1139 03ae 01       		.byte	0x1
+ 1140 03af 92       		.byte	0x92
+ 1141 03b0 FB020000 		.4byte	0x2fb
+ 1142 03b4 6B000000 		.4byte	.LLST3
+ 1143 03b8 12       		.uleb128 0x12
+ 1144 03b9 72657400 		.ascii	"ret\000"
+ 1145 03bd 01       		.byte	0x1
+ 1146 03be 94       		.byte	0x94
+ 1147 03bf C8000000 		.4byte	0xc8
+ 1148 03c3 97000000 		.4byte	.LLST4
+ 1149 03c7 13       		.uleb128 0x13
+ 1150 03c8 0E000000 		.4byte	.LVL12
+ 1151 03cc 2E080000 		.4byte	0x82e
+ 1152 03d0 E8030000 		.4byte	0x3e8
+ 1153 03d4 14       		.uleb128 0x14
+ 1154 03d5 01       		.uleb128 0x1
+ 1155 03d6 52       		.byte	0x52
+ 1156 03d7 01       		.uleb128 0x1
+ 1157 03d8 44       		.byte	0x44
+ 1158 03d9 14       		.uleb128 0x14
+ 1159 03da 01       		.uleb128 0x1
+ 1160 03db 51       		.byte	0x51
+ 1161 03dc 05       		.uleb128 0x5
+ 1162 03dd 03       		.byte	0x3
+ 1163 03de 04000000 		.4byte	.LANCHOR1+4
+ 1164 03e2 14       		.uleb128 0x14
+ 1165 03e3 01       		.uleb128 0x1
+ 1166 03e4 50       		.byte	0x50
+ 1167 03e5 01       		.uleb128 0x1
+ 1168 03e6 31       		.byte	0x31
+ 1169 03e7 00       		.byte	0
+ 1170 03e8 15       		.uleb128 0x15
+ 1171 03e9 18000000 		.4byte	.LVL14
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 27
+
+
+ 1172 03ed 53080000 		.4byte	0x853
+ 1173 03f1 14       		.uleb128 0x14
+ 1174 03f2 01       		.uleb128 0x1
+ 1175 03f3 51       		.byte	0x51
+ 1176 03f4 01       		.uleb128 0x1
+ 1177 03f5 31       		.byte	0x31
+ 1178 03f6 14       		.uleb128 0x14
+ 1179 03f7 01       		.uleb128 0x1
+ 1180 03f8 50       		.byte	0x50
+ 1181 03f9 02       		.uleb128 0x2
+ 1182 03fa 74       		.byte	0x74
+ 1183 03fb 00       		.sleb128 0
+ 1184 03fc 00       		.byte	0
+ 1185 03fd 00       		.byte	0
+ 1186 03fe 0D       		.uleb128 0xd
+ 1187 03ff 27050000 		.4byte	.LASF72
+ 1188 0403 01       		.byte	0x1
+ 1189 0404 A9       		.byte	0xa9
+ 1190 0405 C8000000 		.4byte	0xc8
+ 1191 0409 00000000 		.4byte	.LFB68
+ 1192 040d 10000000 		.4byte	.LFE68-.LFB68
+ 1193 0411 01       		.uleb128 0x1
+ 1194 0412 9C       		.byte	0x9c
+ 1195 0413 32040000 		.4byte	0x432
+ 1196 0417 0E       		.uleb128 0xe
+ 1197 0418 5A020000 		.4byte	.LASF70
+ 1198 041c 01       		.byte	0x1
+ 1199 041d A9       		.byte	0xa9
+ 1200 041e FB020000 		.4byte	0x2fb
+ 1201 0422 B5000000 		.4byte	.LLST5
+ 1202 0426 16       		.uleb128 0x16
+ 1203 0427 72657400 		.ascii	"ret\000"
+ 1204 042b 01       		.byte	0x1
+ 1205 042c AB       		.byte	0xab
+ 1206 042d C8000000 		.4byte	0xc8
+ 1207 0431 00       		.byte	0
+ 1208 0432 0D       		.uleb128 0xd
+ 1209 0433 77060000 		.4byte	.LASF73
+ 1210 0437 01       		.byte	0x1
+ 1211 0438 C1       		.byte	0xc1
+ 1212 0439 C8000000 		.4byte	0xc8
+ 1213 043d 00000000 		.4byte	.LFB69
+ 1214 0441 30000000 		.4byte	.LFE69-.LFB69
+ 1215 0445 01       		.uleb128 0x1
+ 1216 0446 9C       		.byte	0x9c
+ 1217 0447 A1040000 		.4byte	0x4a1
+ 1218 044b 0E       		.uleb128 0xe
+ 1219 044c 5A020000 		.4byte	.LASF70
+ 1220 0450 01       		.byte	0x1
+ 1221 0451 C1       		.byte	0xc1
+ 1222 0452 FB020000 		.4byte	0x2fb
+ 1223 0456 D6000000 		.4byte	.LLST6
+ 1224 045a 12       		.uleb128 0x12
+ 1225 045b 72657400 		.ascii	"ret\000"
+ 1226 045f 01       		.byte	0x1
+ 1227 0460 C3       		.byte	0xc3
+ 1228 0461 C8000000 		.4byte	0xc8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 28
+
+
+ 1229 0465 02010000 		.4byte	.LLST7
+ 1230 0469 13       		.uleb128 0x13
+ 1231 046a 0E000000 		.4byte	.LVL22
+ 1232 046e 2E080000 		.4byte	0x82e
+ 1233 0472 8B040000 		.4byte	0x48b
+ 1234 0476 14       		.uleb128 0x14
+ 1235 0477 01       		.uleb128 0x1
+ 1236 0478 52       		.byte	0x52
+ 1237 0479 02       		.uleb128 0x2
+ 1238 047a 08       		.byte	0x8
+ 1239 047b 24       		.byte	0x24
+ 1240 047c 14       		.uleb128 0x14
+ 1241 047d 01       		.uleb128 0x1
+ 1242 047e 51       		.byte	0x51
+ 1243 047f 05       		.uleb128 0x5
+ 1244 0480 03       		.byte	0x3
+ 1245 0481 08000000 		.4byte	.LANCHOR1+8
+ 1246 0485 14       		.uleb128 0x14
+ 1247 0486 01       		.uleb128 0x1
+ 1248 0487 50       		.byte	0x50
+ 1249 0488 01       		.uleb128 0x1
+ 1250 0489 31       		.byte	0x31
+ 1251 048a 00       		.byte	0
+ 1252 048b 15       		.uleb128 0x15
+ 1253 048c 18000000 		.4byte	.LVL24
+ 1254 0490 53080000 		.4byte	0x853
+ 1255 0494 14       		.uleb128 0x14
+ 1256 0495 01       		.uleb128 0x1
+ 1257 0496 51       		.byte	0x51
+ 1258 0497 01       		.uleb128 0x1
+ 1259 0498 31       		.byte	0x31
+ 1260 0499 14       		.uleb128 0x14
+ 1261 049a 01       		.uleb128 0x1
+ 1262 049b 50       		.byte	0x50
+ 1263 049c 02       		.uleb128 0x2
+ 1264 049d 74       		.byte	0x74
+ 1265 049e 00       		.sleb128 0
+ 1266 049f 00       		.byte	0
+ 1267 04a0 00       		.byte	0
+ 1268 04a1 0D       		.uleb128 0xd
+ 1269 04a2 57060000 		.4byte	.LASF74
+ 1270 04a6 01       		.byte	0x1
+ 1271 04a7 D6       		.byte	0xd6
+ 1272 04a8 C8000000 		.4byte	0xc8
+ 1273 04ac 00000000 		.4byte	.LFB70
+ 1274 04b0 30000000 		.4byte	.LFE70-.LFB70
+ 1275 04b4 01       		.uleb128 0x1
+ 1276 04b5 9C       		.byte	0x9c
+ 1277 04b6 0F050000 		.4byte	0x50f
+ 1278 04ba 0E       		.uleb128 0xe
+ 1279 04bb 5A020000 		.4byte	.LASF70
+ 1280 04bf 01       		.byte	0x1
+ 1281 04c0 D6       		.byte	0xd6
+ 1282 04c1 FB020000 		.4byte	0x2fb
+ 1283 04c5 20010000 		.4byte	.LLST8
+ 1284 04c9 12       		.uleb128 0x12
+ 1285 04ca 72657400 		.ascii	"ret\000"
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 29
+
+
+ 1286 04ce 01       		.byte	0x1
+ 1287 04cf D8       		.byte	0xd8
+ 1288 04d0 C8000000 		.4byte	0xc8
+ 1289 04d4 4C010000 		.4byte	.LLST9
+ 1290 04d8 13       		.uleb128 0x13
+ 1291 04d9 0E000000 		.4byte	.LVL30
+ 1292 04dd 2E080000 		.4byte	0x82e
+ 1293 04e1 F9040000 		.4byte	0x4f9
+ 1294 04e5 14       		.uleb128 0x14
+ 1295 04e6 01       		.uleb128 0x1
+ 1296 04e7 52       		.byte	0x52
+ 1297 04e8 01       		.uleb128 0x1
+ 1298 04e9 44       		.byte	0x44
+ 1299 04ea 14       		.uleb128 0x14
+ 1300 04eb 01       		.uleb128 0x1
+ 1301 04ec 51       		.byte	0x51
+ 1302 04ed 05       		.uleb128 0x5
+ 1303 04ee 03       		.byte	0x3
+ 1304 04ef 14000000 		.4byte	.LANCHOR1+20
+ 1305 04f3 14       		.uleb128 0x14
+ 1306 04f4 01       		.uleb128 0x1
+ 1307 04f5 50       		.byte	0x50
+ 1308 04f6 01       		.uleb128 0x1
+ 1309 04f7 31       		.byte	0x31
+ 1310 04f8 00       		.byte	0
+ 1311 04f9 15       		.uleb128 0x15
+ 1312 04fa 18000000 		.4byte	.LVL32
+ 1313 04fe 53080000 		.4byte	0x853
+ 1314 0502 14       		.uleb128 0x14
+ 1315 0503 01       		.uleb128 0x1
+ 1316 0504 51       		.byte	0x51
+ 1317 0505 01       		.uleb128 0x1
+ 1318 0506 31       		.byte	0x31
+ 1319 0507 14       		.uleb128 0x14
+ 1320 0508 01       		.uleb128 0x1
+ 1321 0509 50       		.byte	0x50
+ 1322 050a 02       		.uleb128 0x2
+ 1323 050b 74       		.byte	0x74
+ 1324 050c 00       		.sleb128 0
+ 1325 050d 00       		.byte	0
+ 1326 050e 00       		.byte	0
+ 1327 050f 0D       		.uleb128 0xd
+ 1328 0510 3A060000 		.4byte	.LASF75
+ 1329 0514 01       		.byte	0x1
+ 1330 0515 ED       		.byte	0xed
+ 1331 0516 C8000000 		.4byte	0xc8
+ 1332 051a 00000000 		.4byte	.LFB71
+ 1333 051e 30000000 		.4byte	.LFE71-.LFB71
+ 1334 0522 01       		.uleb128 0x1
+ 1335 0523 9C       		.byte	0x9c
+ 1336 0524 7E050000 		.4byte	0x57e
+ 1337 0528 0E       		.uleb128 0xe
+ 1338 0529 5A020000 		.4byte	.LASF70
+ 1339 052d 01       		.byte	0x1
+ 1340 052e ED       		.byte	0xed
+ 1341 052f FB020000 		.4byte	0x2fb
+ 1342 0533 6A010000 		.4byte	.LLST10
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 30
+
+
+ 1343 0537 12       		.uleb128 0x12
+ 1344 0538 72657400 		.ascii	"ret\000"
+ 1345 053c 01       		.byte	0x1
+ 1346 053d EF       		.byte	0xef
+ 1347 053e C8000000 		.4byte	0xc8
+ 1348 0542 96010000 		.4byte	.LLST11
+ 1349 0546 13       		.uleb128 0x13
+ 1350 0547 0E000000 		.4byte	.LVL38
+ 1351 054b 2E080000 		.4byte	0x82e
+ 1352 054f 68050000 		.4byte	0x568
+ 1353 0553 14       		.uleb128 0x14
+ 1354 0554 01       		.uleb128 0x1
+ 1355 0555 52       		.byte	0x52
+ 1356 0556 02       		.uleb128 0x2
+ 1357 0557 08       		.byte	0x8
+ 1358 0558 40       		.byte	0x40
+ 1359 0559 14       		.uleb128 0x14
+ 1360 055a 01       		.uleb128 0x1
+ 1361 055b 51       		.byte	0x51
+ 1362 055c 05       		.uleb128 0x5
+ 1363 055d 03       		.byte	0x3
+ 1364 055e 1C000000 		.4byte	.LANCHOR1+28
+ 1365 0562 14       		.uleb128 0x14
+ 1366 0563 01       		.uleb128 0x1
+ 1367 0564 50       		.byte	0x50
+ 1368 0565 01       		.uleb128 0x1
+ 1369 0566 31       		.byte	0x31
+ 1370 0567 00       		.byte	0
+ 1371 0568 15       		.uleb128 0x15
+ 1372 0569 18000000 		.4byte	.LVL40
+ 1373 056d 53080000 		.4byte	0x853
+ 1374 0571 14       		.uleb128 0x14
+ 1375 0572 01       		.uleb128 0x1
+ 1376 0573 51       		.byte	0x51
+ 1377 0574 01       		.uleb128 0x1
+ 1378 0575 31       		.byte	0x31
+ 1379 0576 14       		.uleb128 0x14
+ 1380 0577 01       		.uleb128 0x1
+ 1381 0578 50       		.byte	0x50
+ 1382 0579 02       		.uleb128 0x2
+ 1383 057a 74       		.byte	0x74
+ 1384 057b 00       		.sleb128 0
+ 1385 057c 00       		.byte	0
+ 1386 057d 00       		.byte	0
+ 1387 057e 0D       		.uleb128 0xd
+ 1388 057f E1040000 		.4byte	.LASF76
+ 1389 0583 01       		.byte	0x1
+ 1390 0584 3D       		.byte	0x3d
+ 1391 0585 C8000000 		.4byte	0xc8
+ 1392 0589 00000000 		.4byte	.LFB64
+ 1393 058d B8000000 		.4byte	.LFE64-.LFB64
+ 1394 0591 01       		.uleb128 0x1
+ 1395 0592 9C       		.byte	0x9c
+ 1396 0593 E9060000 		.4byte	0x6e9
+ 1397 0597 0E       		.uleb128 0xe
+ 1398 0598 5A020000 		.4byte	.LASF70
+ 1399 059c 01       		.byte	0x1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 31
+
+
+ 1400 059d 3D       		.byte	0x3d
+ 1401 059e FB020000 		.4byte	0x2fb
+ 1402 05a2 B4010000 		.4byte	.LLST12
+ 1403 05a6 12       		.uleb128 0x12
+ 1404 05a7 72657400 		.ascii	"ret\000"
+ 1405 05ab 01       		.byte	0x1
+ 1406 05ac 3F       		.byte	0x3f
+ 1407 05ad C8000000 		.4byte	0xc8
+ 1408 05b1 D1020000 		.4byte	.LLST13
+ 1409 05b5 13       		.uleb128 0x13
+ 1410 05b6 22000000 		.4byte	.LVL47
+ 1411 05ba 6D080000 		.4byte	0x86d
+ 1412 05be CC050000 		.4byte	0x5cc
+ 1413 05c2 14       		.uleb128 0x14
+ 1414 05c3 01       		.uleb128 0x1
+ 1415 05c4 50       		.byte	0x50
+ 1416 05c5 05       		.uleb128 0x5
+ 1417 05c6 03       		.byte	0x3
+ 1418 05c7 00000000 		.4byte	.LC0
+ 1419 05cb 00       		.byte	0
+ 1420 05cc 13       		.uleb128 0x13
+ 1421 05cd 28000000 		.4byte	.LVL48
+ 1422 05d1 22030000 		.4byte	0x322
+ 1423 05d5 E0050000 		.4byte	0x5e0
+ 1424 05d9 14       		.uleb128 0x14
+ 1425 05da 01       		.uleb128 0x1
+ 1426 05db 50       		.byte	0x50
+ 1427 05dc 02       		.uleb128 0x2
+ 1428 05dd 74       		.byte	0x74
+ 1429 05de 00       		.sleb128 0
+ 1430 05df 00       		.byte	0
+ 1431 05e0 13       		.uleb128 0x13
+ 1432 05e1 32000000 		.4byte	.LVL52
+ 1433 05e5 6D080000 		.4byte	0x86d
+ 1434 05e9 F7050000 		.4byte	0x5f7
+ 1435 05ed 14       		.uleb128 0x14
+ 1436 05ee 01       		.uleb128 0x1
+ 1437 05ef 50       		.byte	0x50
+ 1438 05f0 05       		.uleb128 0x5
+ 1439 05f1 03       		.byte	0x3
+ 1440 05f2 18000000 		.4byte	.LC1
+ 1441 05f6 00       		.byte	0
+ 1442 05f7 13       		.uleb128 0x13
+ 1443 05f8 38000000 		.4byte	.LVL53
+ 1444 05fc 90030000 		.4byte	0x390
+ 1445 0600 0B060000 		.4byte	0x60b
+ 1446 0604 14       		.uleb128 0x14
+ 1447 0605 01       		.uleb128 0x1
+ 1448 0606 50       		.byte	0x50
+ 1449 0607 02       		.uleb128 0x2
+ 1450 0608 74       		.byte	0x74
+ 1451 0609 00       		.sleb128 0
+ 1452 060a 00       		.byte	0
+ 1453 060b 13       		.uleb128 0x13
+ 1454 060c 42000000 		.4byte	.LVL57
+ 1455 0610 6D080000 		.4byte	0x86d
+ 1456 0614 22060000 		.4byte	0x622
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 32
+
+
+ 1457 0618 14       		.uleb128 0x14
+ 1458 0619 01       		.uleb128 0x1
+ 1459 061a 50       		.byte	0x50
+ 1460 061b 05       		.uleb128 0x5
+ 1461 061c 03       		.byte	0x3
+ 1462 061d 30000000 		.4byte	.LC2
+ 1463 0621 00       		.byte	0
+ 1464 0622 13       		.uleb128 0x13
+ 1465 0623 48000000 		.4byte	.LVL58
+ 1466 0627 FE030000 		.4byte	0x3fe
+ 1467 062b 36060000 		.4byte	0x636
+ 1468 062f 14       		.uleb128 0x14
+ 1469 0630 01       		.uleb128 0x1
+ 1470 0631 50       		.byte	0x50
+ 1471 0632 02       		.uleb128 0x2
+ 1472 0633 74       		.byte	0x74
+ 1473 0634 00       		.sleb128 0
+ 1474 0635 00       		.byte	0
+ 1475 0636 13       		.uleb128 0x13
+ 1476 0637 52000000 		.4byte	.LVL62
+ 1477 063b 6D080000 		.4byte	0x86d
+ 1478 063f 4D060000 		.4byte	0x64d
+ 1479 0643 14       		.uleb128 0x14
+ 1480 0644 01       		.uleb128 0x1
+ 1481 0645 50       		.byte	0x50
+ 1482 0646 05       		.uleb128 0x5
+ 1483 0647 03       		.byte	0x3
+ 1484 0648 48000000 		.4byte	.LC3
+ 1485 064c 00       		.byte	0
+ 1486 064d 13       		.uleb128 0x13
+ 1487 064e 58000000 		.4byte	.LVL63
+ 1488 0652 32040000 		.4byte	0x432
+ 1489 0656 61060000 		.4byte	0x661
+ 1490 065a 14       		.uleb128 0x14
+ 1491 065b 01       		.uleb128 0x1
+ 1492 065c 50       		.byte	0x50
+ 1493 065d 02       		.uleb128 0x2
+ 1494 065e 74       		.byte	0x74
+ 1495 065f 00       		.sleb128 0
+ 1496 0660 00       		.byte	0
+ 1497 0661 13       		.uleb128 0x13
+ 1498 0662 62000000 		.4byte	.LVL67
+ 1499 0666 6D080000 		.4byte	0x86d
+ 1500 066a 78060000 		.4byte	0x678
+ 1501 066e 14       		.uleb128 0x14
+ 1502 066f 01       		.uleb128 0x1
+ 1503 0670 50       		.byte	0x50
+ 1504 0671 05       		.uleb128 0x5
+ 1505 0672 03       		.byte	0x3
+ 1506 0673 64000000 		.4byte	.LC4
+ 1507 0677 00       		.byte	0
+ 1508 0678 13       		.uleb128 0x13
+ 1509 0679 68000000 		.4byte	.LVL68
+ 1510 067d A1040000 		.4byte	0x4a1
+ 1511 0681 8C060000 		.4byte	0x68c
+ 1512 0685 14       		.uleb128 0x14
+ 1513 0686 01       		.uleb128 0x1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 33
+
+
+ 1514 0687 50       		.byte	0x50
+ 1515 0688 02       		.uleb128 0x2
+ 1516 0689 74       		.byte	0x74
+ 1517 068a 00       		.sleb128 0
+ 1518 068b 00       		.byte	0
+ 1519 068c 13       		.uleb128 0x13
+ 1520 068d 72000000 		.4byte	.LVL72
+ 1521 0691 6D080000 		.4byte	0x86d
+ 1522 0695 A3060000 		.4byte	0x6a3
+ 1523 0699 14       		.uleb128 0x14
+ 1524 069a 01       		.uleb128 0x1
+ 1525 069b 50       		.byte	0x50
+ 1526 069c 05       		.uleb128 0x5
+ 1527 069d 03       		.byte	0x3
+ 1528 069e 80000000 		.4byte	.LC5
+ 1529 06a2 00       		.byte	0
+ 1530 06a3 13       		.uleb128 0x13
+ 1531 06a4 78000000 		.4byte	.LVL73
+ 1532 06a8 0F050000 		.4byte	0x50f
+ 1533 06ac B7060000 		.4byte	0x6b7
+ 1534 06b0 14       		.uleb128 0x14
+ 1535 06b1 01       		.uleb128 0x1
+ 1536 06b2 50       		.byte	0x50
+ 1537 06b3 02       		.uleb128 0x2
+ 1538 06b4 74       		.byte	0x74
+ 1539 06b5 00       		.sleb128 0
+ 1540 06b6 00       		.byte	0
+ 1541 06b7 13       		.uleb128 0x13
+ 1542 06b8 82000000 		.4byte	.LVL77
+ 1543 06bc 6D080000 		.4byte	0x86d
+ 1544 06c0 CE060000 		.4byte	0x6ce
+ 1545 06c4 14       		.uleb128 0x14
+ 1546 06c5 01       		.uleb128 0x1
+ 1547 06c6 50       		.byte	0x50
+ 1548 06c7 05       		.uleb128 0x5
+ 1549 06c8 03       		.byte	0x3
+ 1550 06c9 A0000000 		.4byte	.LC6
+ 1551 06cd 00       		.byte	0
+ 1552 06ce 17       		.uleb128 0x17
+ 1553 06cf 86000000 		.4byte	.LVL78
+ 1554 06d3 0D030000 		.4byte	0x30d
+ 1555 06d7 15       		.uleb128 0x15
+ 1556 06d8 94000000 		.4byte	.LVL82
+ 1557 06dc 7E080000 		.4byte	0x87e
+ 1558 06e0 14       		.uleb128 0x14
+ 1559 06e1 01       		.uleb128 0x1
+ 1560 06e2 50       		.byte	0x50
+ 1561 06e3 03       		.uleb128 0x3
+ 1562 06e4 0A       		.byte	0xa
+ 1563 06e5 F401     		.2byte	0x1f4
+ 1564 06e7 00       		.byte	0
+ 1565 06e8 00       		.byte	0
+ 1566 06e9 18       		.uleb128 0x18
+ 1567 06ea 67657400 		.ascii	"get\000"
+ 1568 06ee 08       		.byte	0x8
+ 1569 06ef 15       		.byte	0x15
+ 1570 06f0 41020000 		.4byte	0x241
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 34
+
+
+ 1571 06f4 05       		.uleb128 0x5
+ 1572 06f5 03       		.byte	0x3
+ 1573 06f6 00000000 		.4byte	get
+ 1574 06fa 19       		.uleb128 0x19
+ 1575 06fb 1C000000 		.4byte	.LASF77
+ 1576 06ff 08       		.byte	0x8
+ 1577 0700 16       		.byte	0x16
+ 1578 0701 06070000 		.4byte	0x706
+ 1579 0705 10       		.byte	0x10
+ 1580 0706 1A       		.uleb128 0x1a
+ 1581 0707 14020000 		.4byte	0x214
+ 1582 070b 1B       		.uleb128 0x1b
+ 1583 070c 4B050000 		.4byte	.LASF78
+ 1584 0710 08       		.byte	0x8
+ 1585 0711 17       		.byte	0x17
+ 1586 0712 41020000 		.4byte	0x241
+ 1587 0716 05       		.uleb128 0x5
+ 1588 0717 03       		.byte	0x3
+ 1589 0718 04000000 		.4byte	reset_camera
+ 1590 071c 19       		.uleb128 0x19
+ 1591 071d 98020000 		.4byte	.LASF79
+ 1592 0721 08       		.byte	0x8
+ 1593 0722 18       		.byte	0x18
+ 1594 0723 14020000 		.4byte	0x214
+ 1595 0727 10       		.byte	0x10
+ 1596 0728 08       		.uleb128 0x8
+ 1597 0729 42000000 		.4byte	0x42
+ 1598 072d 38070000 		.4byte	0x738
+ 1599 0731 09       		.uleb128 0x9
+ 1600 0732 2C010000 		.4byte	0x12c
+ 1601 0736 06       		.byte	0x6
+ 1602 0737 00       		.byte	0
+ 1603 0738 1C       		.uleb128 0x1c
+ 1604 0739 43050000 		.4byte	.LASF80
+ 1605 073d 08       		.byte	0x8
+ 1606 073e 19       		.byte	0x19
+ 1607 073f 28070000 		.4byte	0x728
+ 1608 0743 07       		.byte	0x7
+ 1609 0744 56       		.byte	0x56
+ 1610 0745 00       		.byte	0
+ 1611 0746 24       		.byte	0x24
+ 1612 0747 16       		.byte	0x16
+ 1613 0748 01       		.byte	0x1
+ 1614 0749 2A       		.byte	0x2a
+ 1615 074a F2       		.byte	0xf2
+ 1616 074b 19       		.uleb128 0x19
+ 1617 074c E0010000 		.4byte	.LASF81
+ 1618 0750 08       		.byte	0x8
+ 1619 0751 1A       		.byte	0x1a
+ 1620 0752 14020000 		.4byte	0x214
+ 1621 0756 1C       		.byte	0x1c
+ 1622 0757 08       		.uleb128 0x8
+ 1623 0758 42000000 		.4byte	0x42
+ 1624 075c 67070000 		.4byte	0x767
+ 1625 0760 09       		.uleb128 0x9
+ 1626 0761 2C010000 		.4byte	0x12c
+ 1627 0765 08       		.byte	0x8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 35
+
+
+ 1628 0766 00       		.byte	0
+ 1629 0767 1B       		.uleb128 0x1b
+ 1630 0768 9A000000 		.4byte	.LASF82
+ 1631 076c 08       		.byte	0x8
+ 1632 076d 1B       		.byte	0x1b
+ 1633 076e 57070000 		.4byte	0x757
+ 1634 0772 05       		.uleb128 0x5
+ 1635 0773 03       		.byte	0x3
+ 1636 0774 08000000 		.4byte	config_datasize
+ 1637 0778 19       		.uleb128 0x19
+ 1638 0779 79050000 		.4byte	.LASF83
+ 1639 077d 08       		.byte	0x8
+ 1640 077e 1C       		.byte	0x1c
+ 1641 077f 06070000 		.4byte	0x706
+ 1642 0783 24       		.byte	0x24
+ 1643 0784 08       		.uleb128 0x8
+ 1644 0785 42000000 		.4byte	0x42
+ 1645 0789 94070000 		.4byte	0x794
+ 1646 078d 09       		.uleb128 0x9
+ 1647 078e 2C010000 		.4byte	0x12c
+ 1648 0792 04       		.byte	0x4
+ 1649 0793 00       		.byte	0
+ 1650 0794 1B       		.uleb128 0x1b
+ 1651 0795 BB040000 		.4byte	.LASF84
+ 1652 0799 08       		.byte	0x8
+ 1653 079a 1D       		.byte	0x1d
+ 1654 079b 84070000 		.4byte	0x784
+ 1655 079f 05       		.uleb128 0x5
+ 1656 07a0 03       		.byte	0x3
+ 1657 07a1 14000000 		.4byte	take_picture
+ 1658 07a5 19       		.uleb128 0x19
+ 1659 07a6 A5050000 		.4byte	.LASF85
+ 1660 07aa 08       		.byte	0x8
+ 1661 07ab 1E       		.byte	0x1e
+ 1662 07ac 06070000 		.4byte	0x706
+ 1663 07b0 14       		.byte	0x14
+ 1664 07b1 1C       		.uleb128 0x1c
+ 1665 07b2 05030000 		.4byte	.LASF86
+ 1666 07b6 08       		.byte	0x8
+ 1667 07b7 1F       		.byte	0x1f
+ 1668 07b8 84070000 		.4byte	0x784
+ 1669 07bc 05       		.byte	0x5
+ 1670 07bd 56       		.byte	0x56
+ 1671 07be 00       		.byte	0
+ 1672 07bf 34       		.byte	0x34
+ 1673 07c0 01       		.byte	0x1
+ 1674 07c1 00       		.byte	0
+ 1675 07c2 19       		.uleb128 0x19
+ 1676 07c3 8E010000 		.4byte	.LASF87
+ 1677 07c7 08       		.byte	0x8
+ 1678 07c8 20       		.byte	0x20
+ 1679 07c9 06070000 		.4byte	0x706
+ 1680 07cd 14       		.byte	0x14
+ 1681 07ce 08       		.uleb128 0x8
+ 1682 07cf 42000000 		.4byte	0x42
+ 1683 07d3 DE070000 		.4byte	0x7de
+ 1684 07d7 09       		.uleb128 0x9
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 36
+
+
+ 1685 07d8 2C010000 		.4byte	0x12c
+ 1686 07dc 0F       		.byte	0xf
+ 1687 07dd 00       		.byte	0
+ 1688 07de 1B       		.uleb128 0x1b
+ 1689 07df 30060000 		.4byte	.LASF88
+ 1690 07e3 08       		.byte	0x8
+ 1691 07e4 21       		.byte	0x21
+ 1692 07e5 CE070000 		.4byte	0x7ce
+ 1693 07e9 05       		.uleb128 0x5
+ 1694 07ea 03       		.byte	0x3
+ 1695 07eb 1C000000 		.4byte	load_data
+ 1696 07ef 19       		.uleb128 0x19
+ 1697 07f0 D5050000 		.4byte	.LASF89
+ 1698 07f4 08       		.byte	0x8
+ 1699 07f5 22       		.byte	0x22
+ 1700 07f6 06070000 		.4byte	0x706
+ 1701 07fa 40       		.byte	0x40
+ 1702 07fb 1B       		.uleb128 0x1b
+ 1703 07fc 00000000 		.4byte	.LASF90
+ 1704 0800 01       		.byte	0x1
+ 1705 0801 26       		.byte	0x26
+ 1706 0802 B8020000 		.4byte	0x2b8
+ 1707 0806 05       		.uleb128 0x5
+ 1708 0807 03       		.byte	0x3
+ 1709 0808 00000000 		.4byte	svPSC_PROC_STATE_CAMERASHOT
+ 1710 080c 1D       		.uleb128 0x1d
+ 1711 080d E4050000 		.4byte	.LASF91
+ 1712 0811 09       		.byte	0x9
+ 1713 0812 9606     		.2byte	0x696
+ 1714 0814 18080000 		.4byte	0x818
+ 1715 0818 1E       		.uleb128 0x1e
+ 1716 0819 09020000 		.4byte	0x209
+ 1717 081d 1F       		.uleb128 0x1f
+ 1718 081e 54040000 		.4byte	.LASF92
+ 1719 0822 01       		.byte	0x1
+ 1720 0823 27       		.byte	0x27
+ 1721 0824 70020000 		.4byte	0x270
+ 1722 0828 05       		.uleb128 0x5
+ 1723 0829 03       		.byte	0x3
+ 1724 082a 00000000 		.4byte	gsvPSC_PROC_STATE
+ 1725 082e 20       		.uleb128 0x20
+ 1726 082f 63010000 		.4byte	.LASF93
+ 1727 0833 0A       		.byte	0xa
+ 1728 0834 19       		.byte	0x19
+ 1729 0835 C8000000 		.4byte	0xc8
+ 1730 0839 4D080000 		.4byte	0x84d
+ 1731 083d 10       		.uleb128 0x10
+ 1732 083e 8C000000 		.4byte	0x8c
+ 1733 0842 10       		.uleb128 0x10
+ 1734 0843 4D080000 		.4byte	0x84d
+ 1735 0847 10       		.uleb128 0x10
+ 1736 0848 14020000 		.4byte	0x214
+ 1737 084c 00       		.byte	0
+ 1738 084d 0C       		.uleb128 0xc
+ 1739 084e 04       		.byte	0x4
+ 1740 084f 37000000 		.4byte	0x37
+ 1741 0853 20       		.uleb128 0x20
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 37
+
+
+ 1742 0854 D2020000 		.4byte	.LASF94
+ 1743 0858 03       		.byte	0x3
+ 1744 0859 3D       		.byte	0x3d
+ 1745 085a C8000000 		.4byte	0xc8
+ 1746 085e 6D080000 		.4byte	0x86d
+ 1747 0862 10       		.uleb128 0x10
+ 1748 0863 FB020000 		.4byte	0x2fb
+ 1749 0867 10       		.uleb128 0x10
+ 1750 0868 8C000000 		.4byte	0x8c
+ 1751 086c 00       		.byte	0
+ 1752 086d 21       		.uleb128 0x21
+ 1753 086e 62020000 		.4byte	.LASF99
+ 1754 0872 0B       		.byte	0xb
+ 1755 0873 13       		.byte	0x13
+ 1756 0874 7E080000 		.4byte	0x87e
+ 1757 0878 10       		.uleb128 0x10
+ 1758 0879 51020000 		.4byte	0x251
+ 1759 087d 00       		.byte	0
+ 1760 087e 22       		.uleb128 0x22
+ 1761 087f 28060000 		.4byte	.LASF100
+ 1762 0883 0C       		.byte	0xc
+ 1763 0884 76       		.byte	0x76
+ 1764 0885 10       		.uleb128 0x10
+ 1765 0886 20020000 		.4byte	0x220
+ 1766 088a 00       		.byte	0
+ 1767 088b 00       		.byte	0
+ 1768              		.section	.debug_abbrev,"",%progbits
+ 1769              	.Ldebug_abbrev0:
+ 1770 0000 01       		.uleb128 0x1
+ 1771 0001 11       		.uleb128 0x11
+ 1772 0002 01       		.byte	0x1
+ 1773 0003 25       		.uleb128 0x25
+ 1774 0004 0E       		.uleb128 0xe
+ 1775 0005 13       		.uleb128 0x13
+ 1776 0006 0B       		.uleb128 0xb
+ 1777 0007 03       		.uleb128 0x3
+ 1778 0008 0E       		.uleb128 0xe
+ 1779 0009 1B       		.uleb128 0x1b
+ 1780 000a 0E       		.uleb128 0xe
+ 1781 000b 55       		.uleb128 0x55
+ 1782 000c 17       		.uleb128 0x17
+ 1783 000d 11       		.uleb128 0x11
+ 1784 000e 01       		.uleb128 0x1
+ 1785 000f 10       		.uleb128 0x10
+ 1786 0010 17       		.uleb128 0x17
+ 1787 0011 00       		.byte	0
+ 1788 0012 00       		.byte	0
+ 1789 0013 02       		.uleb128 0x2
+ 1790 0014 16       		.uleb128 0x16
+ 1791 0015 00       		.byte	0
+ 1792 0016 03       		.uleb128 0x3
+ 1793 0017 0E       		.uleb128 0xe
+ 1794 0018 3A       		.uleb128 0x3a
+ 1795 0019 0B       		.uleb128 0xb
+ 1796 001a 3B       		.uleb128 0x3b
+ 1797 001b 0B       		.uleb128 0xb
+ 1798 001c 49       		.uleb128 0x49
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 38
+
+
+ 1799 001d 13       		.uleb128 0x13
+ 1800 001e 00       		.byte	0
+ 1801 001f 00       		.byte	0
+ 1802 0020 03       		.uleb128 0x3
+ 1803 0021 24       		.uleb128 0x24
+ 1804 0022 00       		.byte	0
+ 1805 0023 0B       		.uleb128 0xb
+ 1806 0024 0B       		.uleb128 0xb
+ 1807 0025 3E       		.uleb128 0x3e
+ 1808 0026 0B       		.uleb128 0xb
+ 1809 0027 03       		.uleb128 0x3
+ 1810 0028 0E       		.uleb128 0xe
+ 1811 0029 00       		.byte	0
+ 1812 002a 00       		.byte	0
+ 1813 002b 04       		.uleb128 0x4
+ 1814 002c 04       		.uleb128 0x4
+ 1815 002d 01       		.byte	0x1
+ 1816 002e 03       		.uleb128 0x3
+ 1817 002f 0E       		.uleb128 0xe
+ 1818 0030 0B       		.uleb128 0xb
+ 1819 0031 0B       		.uleb128 0xb
+ 1820 0032 3A       		.uleb128 0x3a
+ 1821 0033 0B       		.uleb128 0xb
+ 1822 0034 3B       		.uleb128 0x3b
+ 1823 0035 0B       		.uleb128 0xb
+ 1824 0036 01       		.uleb128 0x1
+ 1825 0037 13       		.uleb128 0x13
+ 1826 0038 00       		.byte	0
+ 1827 0039 00       		.byte	0
+ 1828 003a 05       		.uleb128 0x5
+ 1829 003b 28       		.uleb128 0x28
+ 1830 003c 00       		.byte	0
+ 1831 003d 03       		.uleb128 0x3
+ 1832 003e 0E       		.uleb128 0xe
+ 1833 003f 1C       		.uleb128 0x1c
+ 1834 0040 0D       		.uleb128 0xd
+ 1835 0041 00       		.byte	0
+ 1836 0042 00       		.byte	0
+ 1837 0043 06       		.uleb128 0x6
+ 1838 0044 13       		.uleb128 0x13
+ 1839 0045 01       		.byte	0x1
+ 1840 0046 03       		.uleb128 0x3
+ 1841 0047 0E       		.uleb128 0xe
+ 1842 0048 0B       		.uleb128 0xb
+ 1843 0049 0B       		.uleb128 0xb
+ 1844 004a 3A       		.uleb128 0x3a
+ 1845 004b 0B       		.uleb128 0xb
+ 1846 004c 3B       		.uleb128 0x3b
+ 1847 004d 0B       		.uleb128 0xb
+ 1848 004e 01       		.uleb128 0x1
+ 1849 004f 13       		.uleb128 0x13
+ 1850 0050 00       		.byte	0
+ 1851 0051 00       		.byte	0
+ 1852 0052 07       		.uleb128 0x7
+ 1853 0053 0D       		.uleb128 0xd
+ 1854 0054 00       		.byte	0
+ 1855 0055 03       		.uleb128 0x3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 39
+
+
+ 1856 0056 0E       		.uleb128 0xe
+ 1857 0057 3A       		.uleb128 0x3a
+ 1858 0058 0B       		.uleb128 0xb
+ 1859 0059 3B       		.uleb128 0x3b
+ 1860 005a 0B       		.uleb128 0xb
+ 1861 005b 49       		.uleb128 0x49
+ 1862 005c 13       		.uleb128 0x13
+ 1863 005d 38       		.uleb128 0x38
+ 1864 005e 0B       		.uleb128 0xb
+ 1865 005f 00       		.byte	0
+ 1866 0060 00       		.byte	0
+ 1867 0061 08       		.uleb128 0x8
+ 1868 0062 01       		.uleb128 0x1
+ 1869 0063 01       		.byte	0x1
+ 1870 0064 49       		.uleb128 0x49
+ 1871 0065 13       		.uleb128 0x13
+ 1872 0066 01       		.uleb128 0x1
+ 1873 0067 13       		.uleb128 0x13
+ 1874 0068 00       		.byte	0
+ 1875 0069 00       		.byte	0
+ 1876 006a 09       		.uleb128 0x9
+ 1877 006b 21       		.uleb128 0x21
+ 1878 006c 00       		.byte	0
+ 1879 006d 49       		.uleb128 0x49
+ 1880 006e 13       		.uleb128 0x13
+ 1881 006f 2F       		.uleb128 0x2f
+ 1882 0070 0B       		.uleb128 0xb
+ 1883 0071 00       		.byte	0
+ 1884 0072 00       		.byte	0
+ 1885 0073 0A       		.uleb128 0xa
+ 1886 0074 24       		.uleb128 0x24
+ 1887 0075 00       		.byte	0
+ 1888 0076 0B       		.uleb128 0xb
+ 1889 0077 0B       		.uleb128 0xb
+ 1890 0078 3E       		.uleb128 0x3e
+ 1891 0079 0B       		.uleb128 0xb
+ 1892 007a 03       		.uleb128 0x3
+ 1893 007b 08       		.uleb128 0x8
+ 1894 007c 00       		.byte	0
+ 1895 007d 00       		.byte	0
+ 1896 007e 0B       		.uleb128 0xb
+ 1897 007f 16       		.uleb128 0x16
+ 1898 0080 00       		.byte	0
+ 1899 0081 03       		.uleb128 0x3
+ 1900 0082 0E       		.uleb128 0xe
+ 1901 0083 3A       		.uleb128 0x3a
+ 1902 0084 0B       		.uleb128 0xb
+ 1903 0085 3B       		.uleb128 0x3b
+ 1904 0086 05       		.uleb128 0x5
+ 1905 0087 49       		.uleb128 0x49
+ 1906 0088 13       		.uleb128 0x13
+ 1907 0089 00       		.byte	0
+ 1908 008a 00       		.byte	0
+ 1909 008b 0C       		.uleb128 0xc
+ 1910 008c 0F       		.uleb128 0xf
+ 1911 008d 00       		.byte	0
+ 1912 008e 0B       		.uleb128 0xb
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 40
+
+
+ 1913 008f 0B       		.uleb128 0xb
+ 1914 0090 49       		.uleb128 0x49
+ 1915 0091 13       		.uleb128 0x13
+ 1916 0092 00       		.byte	0
+ 1917 0093 00       		.byte	0
+ 1918 0094 0D       		.uleb128 0xd
+ 1919 0095 2E       		.uleb128 0x2e
+ 1920 0096 01       		.byte	0x1
+ 1921 0097 3F       		.uleb128 0x3f
+ 1922 0098 19       		.uleb128 0x19
+ 1923 0099 03       		.uleb128 0x3
+ 1924 009a 0E       		.uleb128 0xe
+ 1925 009b 3A       		.uleb128 0x3a
+ 1926 009c 0B       		.uleb128 0xb
+ 1927 009d 3B       		.uleb128 0x3b
+ 1928 009e 0B       		.uleb128 0xb
+ 1929 009f 27       		.uleb128 0x27
+ 1930 00a0 19       		.uleb128 0x19
+ 1931 00a1 49       		.uleb128 0x49
+ 1932 00a2 13       		.uleb128 0x13
+ 1933 00a3 11       		.uleb128 0x11
+ 1934 00a4 01       		.uleb128 0x1
+ 1935 00a5 12       		.uleb128 0x12
+ 1936 00a6 06       		.uleb128 0x6
+ 1937 00a7 40       		.uleb128 0x40
+ 1938 00a8 18       		.uleb128 0x18
+ 1939 00a9 9742     		.uleb128 0x2117
+ 1940 00ab 19       		.uleb128 0x19
+ 1941 00ac 01       		.uleb128 0x1
+ 1942 00ad 13       		.uleb128 0x13
+ 1943 00ae 00       		.byte	0
+ 1944 00af 00       		.byte	0
+ 1945 00b0 0E       		.uleb128 0xe
+ 1946 00b1 05       		.uleb128 0x5
+ 1947 00b2 00       		.byte	0
+ 1948 00b3 03       		.uleb128 0x3
+ 1949 00b4 0E       		.uleb128 0xe
+ 1950 00b5 3A       		.uleb128 0x3a
+ 1951 00b6 0B       		.uleb128 0xb
+ 1952 00b7 3B       		.uleb128 0x3b
+ 1953 00b8 0B       		.uleb128 0xb
+ 1954 00b9 49       		.uleb128 0x49
+ 1955 00ba 13       		.uleb128 0x13
+ 1956 00bb 02       		.uleb128 0x2
+ 1957 00bc 17       		.uleb128 0x17
+ 1958 00bd 00       		.byte	0
+ 1959 00be 00       		.byte	0
+ 1960 00bf 0F       		.uleb128 0xf
+ 1961 00c0 15       		.uleb128 0x15
+ 1962 00c1 01       		.byte	0x1
+ 1963 00c2 27       		.uleb128 0x27
+ 1964 00c3 19       		.uleb128 0x19
+ 1965 00c4 49       		.uleb128 0x49
+ 1966 00c5 13       		.uleb128 0x13
+ 1967 00c6 01       		.uleb128 0x1
+ 1968 00c7 13       		.uleb128 0x13
+ 1969 00c8 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 41
+
+
+ 1970 00c9 00       		.byte	0
+ 1971 00ca 10       		.uleb128 0x10
+ 1972 00cb 05       		.uleb128 0x5
+ 1973 00cc 00       		.byte	0
+ 1974 00cd 49       		.uleb128 0x49
+ 1975 00ce 13       		.uleb128 0x13
+ 1976 00cf 00       		.byte	0
+ 1977 00d0 00       		.byte	0
+ 1978 00d1 11       		.uleb128 0x11
+ 1979 00d2 2E       		.uleb128 0x2e
+ 1980 00d3 00       		.byte	0
+ 1981 00d4 3F       		.uleb128 0x3f
+ 1982 00d5 19       		.uleb128 0x19
+ 1983 00d6 03       		.uleb128 0x3
+ 1984 00d7 0E       		.uleb128 0xe
+ 1985 00d8 3A       		.uleb128 0x3a
+ 1986 00d9 0B       		.uleb128 0xb
+ 1987 00da 3B       		.uleb128 0x3b
+ 1988 00db 0B       		.uleb128 0xb
+ 1989 00dc 49       		.uleb128 0x49
+ 1990 00dd 13       		.uleb128 0x13
+ 1991 00de 11       		.uleb128 0x11
+ 1992 00df 01       		.uleb128 0x1
+ 1993 00e0 12       		.uleb128 0x12
+ 1994 00e1 06       		.uleb128 0x6
+ 1995 00e2 40       		.uleb128 0x40
+ 1996 00e3 18       		.uleb128 0x18
+ 1997 00e4 9742     		.uleb128 0x2117
+ 1998 00e6 19       		.uleb128 0x19
+ 1999 00e7 00       		.byte	0
+ 2000 00e8 00       		.byte	0
+ 2001 00e9 12       		.uleb128 0x12
+ 2002 00ea 34       		.uleb128 0x34
+ 2003 00eb 00       		.byte	0
+ 2004 00ec 03       		.uleb128 0x3
+ 2005 00ed 08       		.uleb128 0x8
+ 2006 00ee 3A       		.uleb128 0x3a
+ 2007 00ef 0B       		.uleb128 0xb
+ 2008 00f0 3B       		.uleb128 0x3b
+ 2009 00f1 0B       		.uleb128 0xb
+ 2010 00f2 49       		.uleb128 0x49
+ 2011 00f3 13       		.uleb128 0x13
+ 2012 00f4 02       		.uleb128 0x2
+ 2013 00f5 17       		.uleb128 0x17
+ 2014 00f6 00       		.byte	0
+ 2015 00f7 00       		.byte	0
+ 2016 00f8 13       		.uleb128 0x13
+ 2017 00f9 898201   		.uleb128 0x4109
+ 2018 00fc 01       		.byte	0x1
+ 2019 00fd 11       		.uleb128 0x11
+ 2020 00fe 01       		.uleb128 0x1
+ 2021 00ff 31       		.uleb128 0x31
+ 2022 0100 13       		.uleb128 0x13
+ 2023 0101 01       		.uleb128 0x1
+ 2024 0102 13       		.uleb128 0x13
+ 2025 0103 00       		.byte	0
+ 2026 0104 00       		.byte	0
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 42
+
+
+ 2027 0105 14       		.uleb128 0x14
+ 2028 0106 8A8201   		.uleb128 0x410a
+ 2029 0109 00       		.byte	0
+ 2030 010a 02       		.uleb128 0x2
+ 2031 010b 18       		.uleb128 0x18
+ 2032 010c 9142     		.uleb128 0x2111
+ 2033 010e 18       		.uleb128 0x18
+ 2034 010f 00       		.byte	0
+ 2035 0110 00       		.byte	0
+ 2036 0111 15       		.uleb128 0x15
+ 2037 0112 898201   		.uleb128 0x4109
+ 2038 0115 01       		.byte	0x1
+ 2039 0116 11       		.uleb128 0x11
+ 2040 0117 01       		.uleb128 0x1
+ 2041 0118 31       		.uleb128 0x31
+ 2042 0119 13       		.uleb128 0x13
+ 2043 011a 00       		.byte	0
+ 2044 011b 00       		.byte	0
+ 2045 011c 16       		.uleb128 0x16
+ 2046 011d 34       		.uleb128 0x34
+ 2047 011e 00       		.byte	0
+ 2048 011f 03       		.uleb128 0x3
+ 2049 0120 08       		.uleb128 0x8
+ 2050 0121 3A       		.uleb128 0x3a
+ 2051 0122 0B       		.uleb128 0xb
+ 2052 0123 3B       		.uleb128 0x3b
+ 2053 0124 0B       		.uleb128 0xb
+ 2054 0125 49       		.uleb128 0x49
+ 2055 0126 13       		.uleb128 0x13
+ 2056 0127 00       		.byte	0
+ 2057 0128 00       		.byte	0
+ 2058 0129 17       		.uleb128 0x17
+ 2059 012a 898201   		.uleb128 0x4109
+ 2060 012d 00       		.byte	0
+ 2061 012e 11       		.uleb128 0x11
+ 2062 012f 01       		.uleb128 0x1
+ 2063 0130 31       		.uleb128 0x31
+ 2064 0131 13       		.uleb128 0x13
+ 2065 0132 00       		.byte	0
+ 2066 0133 00       		.byte	0
+ 2067 0134 18       		.uleb128 0x18
+ 2068 0135 34       		.uleb128 0x34
+ 2069 0136 00       		.byte	0
+ 2070 0137 03       		.uleb128 0x3
+ 2071 0138 08       		.uleb128 0x8
+ 2072 0139 3A       		.uleb128 0x3a
+ 2073 013a 0B       		.uleb128 0xb
+ 2074 013b 3B       		.uleb128 0x3b
+ 2075 013c 0B       		.uleb128 0xb
+ 2076 013d 49       		.uleb128 0x49
+ 2077 013e 13       		.uleb128 0x13
+ 2078 013f 02       		.uleb128 0x2
+ 2079 0140 18       		.uleb128 0x18
+ 2080 0141 00       		.byte	0
+ 2081 0142 00       		.byte	0
+ 2082 0143 19       		.uleb128 0x19
+ 2083 0144 34       		.uleb128 0x34
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 43
+
+
+ 2084 0145 00       		.byte	0
+ 2085 0146 03       		.uleb128 0x3
+ 2086 0147 0E       		.uleb128 0xe
+ 2087 0148 3A       		.uleb128 0x3a
+ 2088 0149 0B       		.uleb128 0xb
+ 2089 014a 3B       		.uleb128 0x3b
+ 2090 014b 0B       		.uleb128 0xb
+ 2091 014c 49       		.uleb128 0x49
+ 2092 014d 13       		.uleb128 0x13
+ 2093 014e 1C       		.uleb128 0x1c
+ 2094 014f 0B       		.uleb128 0xb
+ 2095 0150 00       		.byte	0
+ 2096 0151 00       		.byte	0
+ 2097 0152 1A       		.uleb128 0x1a
+ 2098 0153 26       		.uleb128 0x26
+ 2099 0154 00       		.byte	0
+ 2100 0155 49       		.uleb128 0x49
+ 2101 0156 13       		.uleb128 0x13
+ 2102 0157 00       		.byte	0
+ 2103 0158 00       		.byte	0
+ 2104 0159 1B       		.uleb128 0x1b
+ 2105 015a 34       		.uleb128 0x34
+ 2106 015b 00       		.byte	0
+ 2107 015c 03       		.uleb128 0x3
+ 2108 015d 0E       		.uleb128 0xe
+ 2109 015e 3A       		.uleb128 0x3a
+ 2110 015f 0B       		.uleb128 0xb
+ 2111 0160 3B       		.uleb128 0x3b
+ 2112 0161 0B       		.uleb128 0xb
+ 2113 0162 49       		.uleb128 0x49
+ 2114 0163 13       		.uleb128 0x13
+ 2115 0164 02       		.uleb128 0x2
+ 2116 0165 18       		.uleb128 0x18
+ 2117 0166 00       		.byte	0
+ 2118 0167 00       		.byte	0
+ 2119 0168 1C       		.uleb128 0x1c
+ 2120 0169 34       		.uleb128 0x34
+ 2121 016a 00       		.byte	0
+ 2122 016b 03       		.uleb128 0x3
+ 2123 016c 0E       		.uleb128 0xe
+ 2124 016d 3A       		.uleb128 0x3a
+ 2125 016e 0B       		.uleb128 0xb
+ 2126 016f 3B       		.uleb128 0x3b
+ 2127 0170 0B       		.uleb128 0xb
+ 2128 0171 49       		.uleb128 0x49
+ 2129 0172 13       		.uleb128 0x13
+ 2130 0173 1C       		.uleb128 0x1c
+ 2131 0174 0A       		.uleb128 0xa
+ 2132 0175 00       		.byte	0
+ 2133 0176 00       		.byte	0
+ 2134 0177 1D       		.uleb128 0x1d
+ 2135 0178 34       		.uleb128 0x34
+ 2136 0179 00       		.byte	0
+ 2137 017a 03       		.uleb128 0x3
+ 2138 017b 0E       		.uleb128 0xe
+ 2139 017c 3A       		.uleb128 0x3a
+ 2140 017d 0B       		.uleb128 0xb
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 44
+
+
+ 2141 017e 3B       		.uleb128 0x3b
+ 2142 017f 05       		.uleb128 0x5
+ 2143 0180 49       		.uleb128 0x49
+ 2144 0181 13       		.uleb128 0x13
+ 2145 0182 3F       		.uleb128 0x3f
+ 2146 0183 19       		.uleb128 0x19
+ 2147 0184 3C       		.uleb128 0x3c
+ 2148 0185 19       		.uleb128 0x19
+ 2149 0186 00       		.byte	0
+ 2150 0187 00       		.byte	0
+ 2151 0188 1E       		.uleb128 0x1e
+ 2152 0189 35       		.uleb128 0x35
+ 2153 018a 00       		.byte	0
+ 2154 018b 49       		.uleb128 0x49
+ 2155 018c 13       		.uleb128 0x13
+ 2156 018d 00       		.byte	0
+ 2157 018e 00       		.byte	0
+ 2158 018f 1F       		.uleb128 0x1f
+ 2159 0190 34       		.uleb128 0x34
+ 2160 0191 00       		.byte	0
+ 2161 0192 03       		.uleb128 0x3
+ 2162 0193 0E       		.uleb128 0xe
+ 2163 0194 3A       		.uleb128 0x3a
+ 2164 0195 0B       		.uleb128 0xb
+ 2165 0196 3B       		.uleb128 0x3b
+ 2166 0197 0B       		.uleb128 0xb
+ 2167 0198 49       		.uleb128 0x49
+ 2168 0199 13       		.uleb128 0x13
+ 2169 019a 3F       		.uleb128 0x3f
+ 2170 019b 19       		.uleb128 0x19
+ 2171 019c 02       		.uleb128 0x2
+ 2172 019d 18       		.uleb128 0x18
+ 2173 019e 00       		.byte	0
+ 2174 019f 00       		.byte	0
+ 2175 01a0 20       		.uleb128 0x20
+ 2176 01a1 2E       		.uleb128 0x2e
+ 2177 01a2 01       		.byte	0x1
+ 2178 01a3 3F       		.uleb128 0x3f
+ 2179 01a4 19       		.uleb128 0x19
+ 2180 01a5 03       		.uleb128 0x3
+ 2181 01a6 0E       		.uleb128 0xe
+ 2182 01a7 3A       		.uleb128 0x3a
+ 2183 01a8 0B       		.uleb128 0xb
+ 2184 01a9 3B       		.uleb128 0x3b
+ 2185 01aa 0B       		.uleb128 0xb
+ 2186 01ab 27       		.uleb128 0x27
+ 2187 01ac 19       		.uleb128 0x19
+ 2188 01ad 49       		.uleb128 0x49
+ 2189 01ae 13       		.uleb128 0x13
+ 2190 01af 3C       		.uleb128 0x3c
+ 2191 01b0 19       		.uleb128 0x19
+ 2192 01b1 01       		.uleb128 0x1
+ 2193 01b2 13       		.uleb128 0x13
+ 2194 01b3 00       		.byte	0
+ 2195 01b4 00       		.byte	0
+ 2196 01b5 21       		.uleb128 0x21
+ 2197 01b6 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 45
+
+
+ 2198 01b7 01       		.byte	0x1
+ 2199 01b8 3F       		.uleb128 0x3f
+ 2200 01b9 19       		.uleb128 0x19
+ 2201 01ba 03       		.uleb128 0x3
+ 2202 01bb 0E       		.uleb128 0xe
+ 2203 01bc 3A       		.uleb128 0x3a
+ 2204 01bd 0B       		.uleb128 0xb
+ 2205 01be 3B       		.uleb128 0x3b
+ 2206 01bf 0B       		.uleb128 0xb
+ 2207 01c0 27       		.uleb128 0x27
+ 2208 01c1 19       		.uleb128 0x19
+ 2209 01c2 3C       		.uleb128 0x3c
+ 2210 01c3 19       		.uleb128 0x19
+ 2211 01c4 01       		.uleb128 0x1
+ 2212 01c5 13       		.uleb128 0x13
+ 2213 01c6 00       		.byte	0
+ 2214 01c7 00       		.byte	0
+ 2215 01c8 22       		.uleb128 0x22
+ 2216 01c9 2E       		.uleb128 0x2e
+ 2217 01ca 01       		.byte	0x1
+ 2218 01cb 3F       		.uleb128 0x3f
+ 2219 01cc 19       		.uleb128 0x19
+ 2220 01cd 03       		.uleb128 0x3
+ 2221 01ce 0E       		.uleb128 0xe
+ 2222 01cf 3A       		.uleb128 0x3a
+ 2223 01d0 0B       		.uleb128 0xb
+ 2224 01d1 3B       		.uleb128 0x3b
+ 2225 01d2 0B       		.uleb128 0xb
+ 2226 01d3 27       		.uleb128 0x27
+ 2227 01d4 19       		.uleb128 0x19
+ 2228 01d5 3C       		.uleb128 0x3c
+ 2229 01d6 19       		.uleb128 0x19
+ 2230 01d7 00       		.byte	0
+ 2231 01d8 00       		.byte	0
+ 2232 01d9 00       		.byte	0
+ 2233              		.section	.debug_loc,"",%progbits
+ 2234              	.Ldebug_loc0:
+ 2235              	.LLST0:
+ 2236 0000 00000000 		.4byte	.LVL0
+ 2237 0004 10000000 		.4byte	.LVL1
+ 2238 0008 0100     		.2byte	0x1
+ 2239 000a 50       		.byte	0x50
+ 2240 000b 10000000 		.4byte	.LVL1
+ 2241 000f 20000000 		.4byte	.LFE63
+ 2242 0013 0400     		.2byte	0x4
+ 2243 0015 F3       		.byte	0xf3
+ 2244 0016 01       		.uleb128 0x1
+ 2245 0017 50       		.byte	0x50
+ 2246 0018 9F       		.byte	0x9f
+ 2247 0019 00000000 		.4byte	0
+ 2248 001d 00000000 		.4byte	0
+ 2249              	.LLST1:
+ 2250 0021 00000000 		.4byte	.LVL2
+ 2251 0025 06000000 		.4byte	.LVL3
+ 2252 0029 0100     		.2byte	0x1
+ 2253 002b 50       		.byte	0x50
+ 2254 002c 06000000 		.4byte	.LVL3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 46
+
+
+ 2255 0030 28000000 		.4byte	.LVL9
+ 2256 0034 0100     		.2byte	0x1
+ 2257 0036 54       		.byte	0x54
+ 2258 0037 28000000 		.4byte	.LVL9
+ 2259 003b 30000000 		.4byte	.LFE66
+ 2260 003f 0400     		.2byte	0x4
+ 2261 0041 F3       		.byte	0xf3
+ 2262 0042 01       		.uleb128 0x1
+ 2263 0043 50       		.byte	0x50
+ 2264 0044 9F       		.byte	0x9f
+ 2265 0045 00000000 		.4byte	0
+ 2266 0049 00000000 		.4byte	0
+ 2267              	.LLST2:
+ 2268 004d 0E000000 		.4byte	.LVL4
+ 2269 0051 12000000 		.4byte	.LVL5
+ 2270 0055 0100     		.2byte	0x1
+ 2271 0057 50       		.byte	0x50
+ 2272 0058 18000000 		.4byte	.LVL6
+ 2273 005c 30000000 		.4byte	.LFE66
+ 2274 0060 0100     		.2byte	0x1
+ 2275 0062 50       		.byte	0x50
+ 2276 0063 00000000 		.4byte	0
+ 2277 0067 00000000 		.4byte	0
+ 2278              	.LLST3:
+ 2279 006b 00000000 		.4byte	.LVL10
+ 2280 006f 06000000 		.4byte	.LVL11
+ 2281 0073 0100     		.2byte	0x1
+ 2282 0075 50       		.byte	0x50
+ 2283 0076 06000000 		.4byte	.LVL11
+ 2284 007a 28000000 		.4byte	.LVL17
+ 2285 007e 0100     		.2byte	0x1
+ 2286 0080 54       		.byte	0x54
+ 2287 0081 28000000 		.4byte	.LVL17
+ 2288 0085 30000000 		.4byte	.LFE67
+ 2289 0089 0400     		.2byte	0x4
+ 2290 008b F3       		.byte	0xf3
+ 2291 008c 01       		.uleb128 0x1
+ 2292 008d 50       		.byte	0x50
+ 2293 008e 9F       		.byte	0x9f
+ 2294 008f 00000000 		.4byte	0
+ 2295 0093 00000000 		.4byte	0
+ 2296              	.LLST4:
+ 2297 0097 0E000000 		.4byte	.LVL12
+ 2298 009b 12000000 		.4byte	.LVL13
+ 2299 009f 0100     		.2byte	0x1
+ 2300 00a1 50       		.byte	0x50
+ 2301 00a2 18000000 		.4byte	.LVL14
+ 2302 00a6 30000000 		.4byte	.LFE67
+ 2303 00aa 0100     		.2byte	0x1
+ 2304 00ac 50       		.byte	0x50
+ 2305 00ad 00000000 		.4byte	0
+ 2306 00b1 00000000 		.4byte	0
+ 2307              	.LLST5:
+ 2308 00b5 00000000 		.4byte	.LVL18
+ 2309 00b9 0A000000 		.4byte	.LVL19
+ 2310 00bd 0100     		.2byte	0x1
+ 2311 00bf 50       		.byte	0x50
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 47
+
+
+ 2312 00c0 0A000000 		.4byte	.LVL19
+ 2313 00c4 10000000 		.4byte	.LFE68
+ 2314 00c8 0400     		.2byte	0x4
+ 2315 00ca F3       		.byte	0xf3
+ 2316 00cb 01       		.uleb128 0x1
+ 2317 00cc 50       		.byte	0x50
+ 2318 00cd 9F       		.byte	0x9f
+ 2319 00ce 00000000 		.4byte	0
+ 2320 00d2 00000000 		.4byte	0
+ 2321              	.LLST6:
+ 2322 00d6 00000000 		.4byte	.LVL20
+ 2323 00da 06000000 		.4byte	.LVL21
+ 2324 00de 0100     		.2byte	0x1
+ 2325 00e0 50       		.byte	0x50
+ 2326 00e1 06000000 		.4byte	.LVL21
+ 2327 00e5 28000000 		.4byte	.LVL27
+ 2328 00e9 0100     		.2byte	0x1
+ 2329 00eb 54       		.byte	0x54
+ 2330 00ec 28000000 		.4byte	.LVL27
+ 2331 00f0 30000000 		.4byte	.LFE69
+ 2332 00f4 0400     		.2byte	0x4
+ 2333 00f6 F3       		.byte	0xf3
+ 2334 00f7 01       		.uleb128 0x1
+ 2335 00f8 50       		.byte	0x50
+ 2336 00f9 9F       		.byte	0x9f
+ 2337 00fa 00000000 		.4byte	0
+ 2338 00fe 00000000 		.4byte	0
+ 2339              	.LLST7:
+ 2340 0102 0E000000 		.4byte	.LVL22
+ 2341 0106 12000000 		.4byte	.LVL23
+ 2342 010a 0100     		.2byte	0x1
+ 2343 010c 50       		.byte	0x50
+ 2344 010d 18000000 		.4byte	.LVL24
+ 2345 0111 30000000 		.4byte	.LFE69
+ 2346 0115 0100     		.2byte	0x1
+ 2347 0117 50       		.byte	0x50
+ 2348 0118 00000000 		.4byte	0
+ 2349 011c 00000000 		.4byte	0
+ 2350              	.LLST8:
+ 2351 0120 00000000 		.4byte	.LVL28
+ 2352 0124 06000000 		.4byte	.LVL29
+ 2353 0128 0100     		.2byte	0x1
+ 2354 012a 50       		.byte	0x50
+ 2355 012b 06000000 		.4byte	.LVL29
+ 2356 012f 28000000 		.4byte	.LVL35
+ 2357 0133 0100     		.2byte	0x1
+ 2358 0135 54       		.byte	0x54
+ 2359 0136 28000000 		.4byte	.LVL35
+ 2360 013a 30000000 		.4byte	.LFE70
+ 2361 013e 0400     		.2byte	0x4
+ 2362 0140 F3       		.byte	0xf3
+ 2363 0141 01       		.uleb128 0x1
+ 2364 0142 50       		.byte	0x50
+ 2365 0143 9F       		.byte	0x9f
+ 2366 0144 00000000 		.4byte	0
+ 2367 0148 00000000 		.4byte	0
+ 2368              	.LLST9:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 48
+
+
+ 2369 014c 0E000000 		.4byte	.LVL30
+ 2370 0150 12000000 		.4byte	.LVL31
+ 2371 0154 0100     		.2byte	0x1
+ 2372 0156 50       		.byte	0x50
+ 2373 0157 18000000 		.4byte	.LVL32
+ 2374 015b 30000000 		.4byte	.LFE70
+ 2375 015f 0100     		.2byte	0x1
+ 2376 0161 50       		.byte	0x50
+ 2377 0162 00000000 		.4byte	0
+ 2378 0166 00000000 		.4byte	0
+ 2379              	.LLST10:
+ 2380 016a 00000000 		.4byte	.LVL36
+ 2381 016e 06000000 		.4byte	.LVL37
+ 2382 0172 0100     		.2byte	0x1
+ 2383 0174 50       		.byte	0x50
+ 2384 0175 06000000 		.4byte	.LVL37
+ 2385 0179 28000000 		.4byte	.LVL43
+ 2386 017d 0100     		.2byte	0x1
+ 2387 017f 54       		.byte	0x54
+ 2388 0180 28000000 		.4byte	.LVL43
+ 2389 0184 30000000 		.4byte	.LFE71
+ 2390 0188 0400     		.2byte	0x4
+ 2391 018a F3       		.byte	0xf3
+ 2392 018b 01       		.uleb128 0x1
+ 2393 018c 50       		.byte	0x50
+ 2394 018d 9F       		.byte	0x9f
+ 2395 018e 00000000 		.4byte	0
+ 2396 0192 00000000 		.4byte	0
+ 2397              	.LLST11:
+ 2398 0196 0E000000 		.4byte	.LVL38
+ 2399 019a 12000000 		.4byte	.LVL39
+ 2400 019e 0100     		.2byte	0x1
+ 2401 01a0 50       		.byte	0x50
+ 2402 01a1 18000000 		.4byte	.LVL40
+ 2403 01a5 30000000 		.4byte	.LFE71
+ 2404 01a9 0100     		.2byte	0x1
+ 2405 01ab 50       		.byte	0x50
+ 2406 01ac 00000000 		.4byte	0
+ 2407 01b0 00000000 		.4byte	0
+ 2408              	.LLST12:
+ 2409 01b4 00000000 		.4byte	.LVL44
+ 2410 01b8 1E000000 		.4byte	.LVL46
+ 2411 01bc 0100     		.2byte	0x1
+ 2412 01be 50       		.byte	0x50
+ 2413 01bf 1E000000 		.4byte	.LVL46
+ 2414 01c3 2A000000 		.4byte	.LVL49
+ 2415 01c7 0100     		.2byte	0x1
+ 2416 01c9 54       		.byte	0x54
+ 2417 01ca 2A000000 		.4byte	.LVL49
+ 2418 01ce 2C000000 		.4byte	.LVL50
+ 2419 01d2 0400     		.2byte	0x4
+ 2420 01d4 F3       		.byte	0xf3
+ 2421 01d5 01       		.uleb128 0x1
+ 2422 01d6 50       		.byte	0x50
+ 2423 01d7 9F       		.byte	0x9f
+ 2424 01d8 2C000000 		.4byte	.LVL50
+ 2425 01dc 2E000000 		.4byte	.LVL51
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 49
+
+
+ 2426 01e0 0100     		.2byte	0x1
+ 2427 01e2 50       		.byte	0x50
+ 2428 01e3 2E000000 		.4byte	.LVL51
+ 2429 01e7 3A000000 		.4byte	.LVL54
+ 2430 01eb 0100     		.2byte	0x1
+ 2431 01ed 54       		.byte	0x54
+ 2432 01ee 3A000000 		.4byte	.LVL54
+ 2433 01f2 3C000000 		.4byte	.LVL55
+ 2434 01f6 0400     		.2byte	0x4
+ 2435 01f8 F3       		.byte	0xf3
+ 2436 01f9 01       		.uleb128 0x1
+ 2437 01fa 50       		.byte	0x50
+ 2438 01fb 9F       		.byte	0x9f
+ 2439 01fc 3C000000 		.4byte	.LVL55
+ 2440 0200 3E000000 		.4byte	.LVL56
+ 2441 0204 0100     		.2byte	0x1
+ 2442 0206 50       		.byte	0x50
+ 2443 0207 3E000000 		.4byte	.LVL56
+ 2444 020b 4A000000 		.4byte	.LVL59
+ 2445 020f 0100     		.2byte	0x1
+ 2446 0211 54       		.byte	0x54
+ 2447 0212 4A000000 		.4byte	.LVL59
+ 2448 0216 4C000000 		.4byte	.LVL60
+ 2449 021a 0400     		.2byte	0x4
+ 2450 021c F3       		.byte	0xf3
+ 2451 021d 01       		.uleb128 0x1
+ 2452 021e 50       		.byte	0x50
+ 2453 021f 9F       		.byte	0x9f
+ 2454 0220 4C000000 		.4byte	.LVL60
+ 2455 0224 4E000000 		.4byte	.LVL61
+ 2456 0228 0100     		.2byte	0x1
+ 2457 022a 50       		.byte	0x50
+ 2458 022b 4E000000 		.4byte	.LVL61
+ 2459 022f 5A000000 		.4byte	.LVL64
+ 2460 0233 0100     		.2byte	0x1
+ 2461 0235 54       		.byte	0x54
+ 2462 0236 5A000000 		.4byte	.LVL64
+ 2463 023a 5C000000 		.4byte	.LVL65
+ 2464 023e 0400     		.2byte	0x4
+ 2465 0240 F3       		.byte	0xf3
+ 2466 0241 01       		.uleb128 0x1
+ 2467 0242 50       		.byte	0x50
+ 2468 0243 9F       		.byte	0x9f
+ 2469 0244 5C000000 		.4byte	.LVL65
+ 2470 0248 5E000000 		.4byte	.LVL66
+ 2471 024c 0100     		.2byte	0x1
+ 2472 024e 50       		.byte	0x50
+ 2473 024f 5E000000 		.4byte	.LVL66
+ 2474 0253 6A000000 		.4byte	.LVL69
+ 2475 0257 0100     		.2byte	0x1
+ 2476 0259 54       		.byte	0x54
+ 2477 025a 6A000000 		.4byte	.LVL69
+ 2478 025e 6C000000 		.4byte	.LVL70
+ 2479 0262 0400     		.2byte	0x4
+ 2480 0264 F3       		.byte	0xf3
+ 2481 0265 01       		.uleb128 0x1
+ 2482 0266 50       		.byte	0x50
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 50
+
+
+ 2483 0267 9F       		.byte	0x9f
+ 2484 0268 6C000000 		.4byte	.LVL70
+ 2485 026c 6E000000 		.4byte	.LVL71
+ 2486 0270 0100     		.2byte	0x1
+ 2487 0272 50       		.byte	0x50
+ 2488 0273 6E000000 		.4byte	.LVL71
+ 2489 0277 7A000000 		.4byte	.LVL74
+ 2490 027b 0100     		.2byte	0x1
+ 2491 027d 54       		.byte	0x54
+ 2492 027e 7A000000 		.4byte	.LVL74
+ 2493 0282 7C000000 		.4byte	.LVL75
+ 2494 0286 0400     		.2byte	0x4
+ 2495 0288 F3       		.byte	0xf3
+ 2496 0289 01       		.uleb128 0x1
+ 2497 028a 50       		.byte	0x50
+ 2498 028b 9F       		.byte	0x9f
+ 2499 028c 7C000000 		.4byte	.LVL75
+ 2500 0290 7E000000 		.4byte	.LVL76
+ 2501 0294 0100     		.2byte	0x1
+ 2502 0296 50       		.byte	0x50
+ 2503 0297 7E000000 		.4byte	.LVL76
+ 2504 029b 88000000 		.4byte	.LVL79
+ 2505 029f 0100     		.2byte	0x1
+ 2506 02a1 54       		.byte	0x54
+ 2507 02a2 88000000 		.4byte	.LVL79
+ 2508 02a6 8A000000 		.4byte	.LVL80
+ 2509 02aa 0400     		.2byte	0x4
+ 2510 02ac F3       		.byte	0xf3
+ 2511 02ad 01       		.uleb128 0x1
+ 2512 02ae 50       		.byte	0x50
+ 2513 02af 9F       		.byte	0x9f
+ 2514 02b0 8A000000 		.4byte	.LVL80
+ 2515 02b4 8C000000 		.4byte	.LVL81
+ 2516 02b8 0100     		.2byte	0x1
+ 2517 02ba 50       		.byte	0x50
+ 2518 02bb 8C000000 		.4byte	.LVL81
+ 2519 02bf B8000000 		.4byte	.LFE64
+ 2520 02c3 0400     		.2byte	0x4
+ 2521 02c5 F3       		.byte	0xf3
+ 2522 02c6 01       		.uleb128 0x1
+ 2523 02c7 50       		.byte	0x50
+ 2524 02c8 9F       		.byte	0x9f
+ 2525 02c9 00000000 		.4byte	0
+ 2526 02cd 00000000 		.4byte	0
+ 2527              	.LLST13:
+ 2528 02d1 04000000 		.4byte	.LVL45
+ 2529 02d5 2A000000 		.4byte	.LVL49
+ 2530 02d9 0200     		.2byte	0x2
+ 2531 02db 30       		.byte	0x30
+ 2532 02dc 9F       		.byte	0x9f
+ 2533 02dd 2A000000 		.4byte	.LVL49
+ 2534 02e1 2C000000 		.4byte	.LVL50
+ 2535 02e5 0100     		.2byte	0x1
+ 2536 02e7 54       		.byte	0x54
+ 2537 02e8 2C000000 		.4byte	.LVL50
+ 2538 02ec 3A000000 		.4byte	.LVL54
+ 2539 02f0 0200     		.2byte	0x2
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 51
+
+
+ 2540 02f2 30       		.byte	0x30
+ 2541 02f3 9F       		.byte	0x9f
+ 2542 02f4 3A000000 		.4byte	.LVL54
+ 2543 02f8 3C000000 		.4byte	.LVL55
+ 2544 02fc 0100     		.2byte	0x1
+ 2545 02fe 54       		.byte	0x54
+ 2546 02ff 3C000000 		.4byte	.LVL55
+ 2547 0303 4A000000 		.4byte	.LVL59
+ 2548 0307 0200     		.2byte	0x2
+ 2549 0309 30       		.byte	0x30
+ 2550 030a 9F       		.byte	0x9f
+ 2551 030b 4A000000 		.4byte	.LVL59
+ 2552 030f 4C000000 		.4byte	.LVL60
+ 2553 0313 0100     		.2byte	0x1
+ 2554 0315 54       		.byte	0x54
+ 2555 0316 4C000000 		.4byte	.LVL60
+ 2556 031a 5A000000 		.4byte	.LVL64
+ 2557 031e 0200     		.2byte	0x2
+ 2558 0320 30       		.byte	0x30
+ 2559 0321 9F       		.byte	0x9f
+ 2560 0322 5A000000 		.4byte	.LVL64
+ 2561 0326 5C000000 		.4byte	.LVL65
+ 2562 032a 0100     		.2byte	0x1
+ 2563 032c 54       		.byte	0x54
+ 2564 032d 5C000000 		.4byte	.LVL65
+ 2565 0331 6A000000 		.4byte	.LVL69
+ 2566 0335 0200     		.2byte	0x2
+ 2567 0337 30       		.byte	0x30
+ 2568 0338 9F       		.byte	0x9f
+ 2569 0339 6A000000 		.4byte	.LVL69
+ 2570 033d 6C000000 		.4byte	.LVL70
+ 2571 0341 0100     		.2byte	0x1
+ 2572 0343 54       		.byte	0x54
+ 2573 0344 6C000000 		.4byte	.LVL70
+ 2574 0348 7A000000 		.4byte	.LVL74
+ 2575 034c 0200     		.2byte	0x2
+ 2576 034e 30       		.byte	0x30
+ 2577 034f 9F       		.byte	0x9f
+ 2578 0350 7A000000 		.4byte	.LVL74
+ 2579 0354 7C000000 		.4byte	.LVL75
+ 2580 0358 0100     		.2byte	0x1
+ 2581 035a 54       		.byte	0x54
+ 2582 035b 7C000000 		.4byte	.LVL75
+ 2583 035f 88000000 		.4byte	.LVL79
+ 2584 0363 0200     		.2byte	0x2
+ 2585 0365 30       		.byte	0x30
+ 2586 0366 9F       		.byte	0x9f
+ 2587 0367 88000000 		.4byte	.LVL79
+ 2588 036b 8A000000 		.4byte	.LVL80
+ 2589 036f 0100     		.2byte	0x1
+ 2590 0371 54       		.byte	0x54
+ 2591 0372 8A000000 		.4byte	.LVL80
+ 2592 0376 8C000000 		.4byte	.LVL81
+ 2593 037a 0200     		.2byte	0x2
+ 2594 037c 30       		.byte	0x30
+ 2595 037d 9F       		.byte	0x9f
+ 2596 037e 8C000000 		.4byte	.LVL81
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 52
+
+
+ 2597 0382 98000000 		.4byte	.LVL83
+ 2598 0386 0100     		.2byte	0x1
+ 2599 0388 54       		.byte	0x54
+ 2600 0389 00000000 		.4byte	0
+ 2601 038d 00000000 		.4byte	0
+ 2602              		.section	.debug_aranges,"",%progbits
+ 2603 0000 5C000000 		.4byte	0x5c
+ 2604 0004 0200     		.2byte	0x2
+ 2605 0006 00000000 		.4byte	.Ldebug_info0
+ 2606 000a 04       		.byte	0x4
+ 2607 000b 00       		.byte	0
+ 2608 000c 0000     		.2byte	0
+ 2609 000e 0000     		.2byte	0
+ 2610 0010 00000000 		.4byte	.LFB63
+ 2611 0014 20000000 		.4byte	.LFE63-.LFB63
+ 2612 0018 00000000 		.4byte	.LFB65
+ 2613 001c 1C000000 		.4byte	.LFE65-.LFB65
+ 2614 0020 00000000 		.4byte	.LFB66
+ 2615 0024 30000000 		.4byte	.LFE66-.LFB66
+ 2616 0028 00000000 		.4byte	.LFB67
+ 2617 002c 30000000 		.4byte	.LFE67-.LFB67
+ 2618 0030 00000000 		.4byte	.LFB68
+ 2619 0034 10000000 		.4byte	.LFE68-.LFB68
+ 2620 0038 00000000 		.4byte	.LFB69
+ 2621 003c 30000000 		.4byte	.LFE69-.LFB69
+ 2622 0040 00000000 		.4byte	.LFB70
+ 2623 0044 30000000 		.4byte	.LFE70-.LFB70
+ 2624 0048 00000000 		.4byte	.LFB71
+ 2625 004c 30000000 		.4byte	.LFE71-.LFB71
+ 2626 0050 00000000 		.4byte	.LFB64
+ 2627 0054 B8000000 		.4byte	.LFE64-.LFB64
+ 2628 0058 00000000 		.4byte	0
+ 2629 005c 00000000 		.4byte	0
+ 2630              		.section	.debug_ranges,"",%progbits
+ 2631              	.Ldebug_ranges0:
+ 2632 0000 00000000 		.4byte	.LFB63
+ 2633 0004 20000000 		.4byte	.LFE63
+ 2634 0008 00000000 		.4byte	.LFB65
+ 2635 000c 1C000000 		.4byte	.LFE65
+ 2636 0010 00000000 		.4byte	.LFB66
+ 2637 0014 30000000 		.4byte	.LFE66
+ 2638 0018 00000000 		.4byte	.LFB67
+ 2639 001c 30000000 		.4byte	.LFE67
+ 2640 0020 00000000 		.4byte	.LFB68
+ 2641 0024 10000000 		.4byte	.LFE68
+ 2642 0028 00000000 		.4byte	.LFB69
+ 2643 002c 30000000 		.4byte	.LFE69
+ 2644 0030 00000000 		.4byte	.LFB70
+ 2645 0034 30000000 		.4byte	.LFE70
+ 2646 0038 00000000 		.4byte	.LFB71
+ 2647 003c 30000000 		.4byte	.LFE71
+ 2648 0040 00000000 		.4byte	.LFB64
+ 2649 0044 B8000000 		.4byte	.LFE64
+ 2650 0048 00000000 		.4byte	0
+ 2651 004c 00000000 		.4byte	0
+ 2652              		.section	.debug_line,"",%progbits
+ 2653              	.Ldebug_line0:
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 53
+
+
+ 2654 0000 A3020000 		.section	.debug_str,"MS",%progbits,1
+ 2654      0200C701 
+ 2654      00000201 
+ 2654      FB0E0D00 
+ 2654      01010101 
+ 2655              	.LASF90:
+ 2656 0000 73765053 		.ascii	"svPSC_PROC_STATE_CAMERASHOT\000"
+ 2656      435F5052 
+ 2656      4F435F53 
+ 2656      54415445 
+ 2656      5F43414D 
+ 2657              	.LASF77:
+ 2658 001c 6765745F 		.ascii	"get_size\000"
+ 2658      73697A65 
+ 2658      00
+ 2659              	.LASF51:
+ 2660 0025 646F7562 		.ascii	"double\000"
+ 2660      6C6500
+ 2661              	.LASF68:
+ 2662 002c 7073635F 		.ascii	"psc_Proc_CameraShot_Get\000"
+ 2662      50726F63 
+ 2662      5F43616D 
+ 2662      65726153 
+ 2662      686F745F 
+ 2663              	.LASF36:
+ 2664 0044 6465765F 		.ascii	"dev_id\000"
+ 2664      696400
+ 2665              	.LASF23:
+ 2666 004b 45786563 		.ascii	"Executable\000"
+ 2666      75746162 
+ 2666      6C6500
+ 2667              	.LASF40:
+ 2668 0056 73686F72 		.ascii	"short int\000"
+ 2668      7420696E 
+ 2668      7400
+ 2669              	.LASF12:
+ 2670 0060 4445565F 		.ascii	"DEV_ID\000"
+ 2670      494400
+ 2671              	.LASF26:
+ 2672 0067 73697A65 		.ascii	"sizetype\000"
+ 2672      74797065 
+ 2672      00
+ 2673              	.LASF16:
+ 2674 0070 5053435F 		.ascii	"PSC_RET_INVALID_PARAM\000"
+ 2674      5245545F 
+ 2674      494E5641 
+ 2674      4C49445F 
+ 2674      50415241 
+ 2675              	.LASF29:
+ 2676 0086 5053435F 		.ascii	"PSC_CMD_RCV_DATAtag\000"
+ 2676      434D445F 
+ 2676      5243565F 
+ 2676      44415441 
+ 2676      74616700 
+ 2677              	.LASF82:
+ 2678 009a 636F6E66 		.ascii	"config_datasize\000"
+ 2678      69675F64 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 54
+
+
+ 2678      61746173 
+ 2678      697A6500 
+ 2679              	.LASF32:
+ 2680 00aa 72656376 		.ascii	"recv_data\000"
+ 2680      5F646174 
+ 2680      6100
+ 2681              	.LASF56:
+ 2682 00b4 5053435F 		.ascii	"PSC_PROC_STATE\000"
+ 2682      50524F43 
+ 2682      5F535441 
+ 2682      544500
+ 2683              	.LASF60:
+ 2684 00c3 50525F53 		.ascii	"PR_STATE_CS_RESET_CAMERA\000"
+ 2684      54415445 
+ 2684      5F43535F 
+ 2684      52455345 
+ 2684      545F4341 
+ 2685              	.LASF13:
+ 2686 00dc 5053435F 		.ascii	"PSC_RETtag\000"
+ 2686      52455474 
+ 2686      616700
+ 2687              	.LASF15:
+ 2688 00e7 5053435F 		.ascii	"PSC_RET_INTERNAL_ERROR\000"
+ 2688      5245545F 
+ 2688      494E5445 
+ 2688      524E414C 
+ 2688      5F455252 
+ 2689              	.LASF18:
+ 2690 00fe 5053435F 		.ascii	"PSC_RET_PARTY_ERROR\000"
+ 2690      5245545F 
+ 2690      50415254 
+ 2690      595F4552 
+ 2690      524F5200 
+ 2691              	.LASF20:
+ 2692 0112 5053435F 		.ascii	"PSC_RET\000"
+ 2692      52455400 
+ 2693              	.LASF21:
+ 2694 011a 52657375 		.ascii	"Result\000"
+ 2694      6C7400
+ 2695              	.LASF25:
+ 2696 0121 50726F70 		.ascii	"PropertyCorruption\000"
+ 2696      65727479 
+ 2696      436F7272 
+ 2696      75707469 
+ 2696      6F6E00
+ 2697              	.LASF65:
+ 2698 0134 50525F53 		.ascii	"PR_STATE_CS_MAX\000"
+ 2698      54415445 
+ 2698      5F43535F 
+ 2698      4D415800 
+ 2699              	.LASF48:
+ 2700 0144 75696E74 		.ascii	"uint8\000"
+ 2700      3800
+ 2701              	.LASF67:
+ 2702 014a 5053435F 		.ascii	"PSC_Proc_CameraShot_Init\000"
+ 2702      50726F63 
+ 2702      5F43616D 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 55
+
+
+ 2702      65726153 
+ 2702      686F745F 
+ 2703              	.LASF93:
+ 2704 0163 5053435F 		.ascii	"PSC_Comm_SndCommand\000"
+ 2704      436F6D6D 
+ 2704      5F536E64 
+ 2704      436F6D6D 
+ 2704      616E6400 
+ 2705              	.LASF58:
+ 2706 0177 50525F53 		.ascii	"PR_STATE_CS_INIT\000"
+ 2706      54415445 
+ 2706      5F43535F 
+ 2706      494E4954 
+ 2706      00
+ 2707              	.LASF50:
+ 2708 0188 666C6F61 		.ascii	"float\000"
+ 2708      7400
+ 2709              	.LASF87:
+ 2710 018e 72656164 		.ascii	"read_datasize_size\000"
+ 2710      5F646174 
+ 2710      6173697A 
+ 2710      655F7369 
+ 2710      7A6500
+ 2711              	.LASF45:
+ 2712 01a1 6C6F6E67 		.ascii	"long long int\000"
+ 2712      206C6F6E 
+ 2712      6720696E 
+ 2712      7400
+ 2713              	.LASF46:
+ 2714 01af 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2714      206C6F6E 
+ 2714      6720756E 
+ 2714      7369676E 
+ 2714      65642069 
+ 2715              	.LASF34:
+ 2716 01c6 5053435F 		.ascii	"PSC_CMD_RCV_DATA\000"
+ 2716      434D445F 
+ 2716      5243565F 
+ 2716      44415441 
+ 2716      00
+ 2717              	.LASF43:
+ 2718 01d7 6C6F6E67 		.ascii	"long int\000"
+ 2718      20696E74 
+ 2718      00
+ 2719              	.LASF81:
+ 2720 01e0 62617572 		.ascii	"baurate_size\000"
+ 2720      6174655F 
+ 2720      73697A65 
+ 2720      00
+ 2721              	.LASF11:
+ 2722 01ed 4445565F 		.ascii	"DEV_ID_MAX\000"
+ 2722      49445F4D 
+ 2722      415800
+ 2723              	.LASF44:
+ 2724 01f8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2724      20756E73 
+ 2724      69676E65 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 56
+
+
+ 2724      6420696E 
+ 2724      7400
+ 2725              	.LASF64:
+ 2726 020a 50525F53 		.ascii	"PR_STATE_CS_LOAD_DATA\000"
+ 2726      54415445 
+ 2726      5F43535F 
+ 2726      4C4F4144 
+ 2726      5F444154 
+ 2727              	.LASF61:
+ 2728 0220 50525F53 		.ascii	"PR_STATE_CS_BAURATE\000"
+ 2728      54415445 
+ 2728      5F43535F 
+ 2728      42415552 
+ 2728      41544500 
+ 2729              	.LASF6:
+ 2730 0234 5053435F 		.ascii	"PSC_BOOL\000"
+ 2730      424F4F4C 
+ 2730      00
+ 2731              	.LASF98:
+ 2732 023d 7073635F 		.ascii	"psc_Proc_CameraShot_Complete\000"
+ 2732      50726F63 
+ 2732      5F43616D 
+ 2732      65726153 
+ 2732      686F745F 
+ 2733              	.LASF70:
+ 2734 025a 70737444 		.ascii	"pstData\000"
+ 2734      61746100 
+ 2735              	.LASF99:
+ 2736 0262 4442475F 		.ascii	"DBG_printf\000"
+ 2736      7072696E 
+ 2736      746600
+ 2737              	.LASF3:
+ 2738 026d 756E7369 		.ascii	"unsigned char\000"
+ 2738      676E6564 
+ 2738      20636861 
+ 2738      7200
+ 2739              	.LASF10:
+ 2740 027b 4445565F 		.ascii	"DEV_ID_CAM\000"
+ 2740      49445F43 
+ 2740      414D00
+ 2741              	.LASF27:
+ 2742 0286 5053435F 		.ascii	"PSC_CMD_INTEGRITY\000"
+ 2742      434D445F 
+ 2742      494E5445 
+ 2742      47524954 
+ 2742      5900
+ 2743              	.LASF79:
+ 2744 0298 72657365 		.ascii	"reset_camera_size\000"
+ 2744      745F6361 
+ 2744      6D657261 
+ 2744      5F73697A 
+ 2744      6500
+ 2745              	.LASF62:
+ 2746 02aa 50525F53 		.ascii	"PR_STATE_CS_CONFIG_DATASIZE\000"
+ 2746      54415445 
+ 2746      5F43535F 
+ 2746      434F4E46 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 57
+
+
+ 2746      49475F44 
+ 2747              	.LASF39:
+ 2748 02c6 7369676E 		.ascii	"signed char\000"
+ 2748      65642063 
+ 2748      68617200 
+ 2749              	.LASF94:
+ 2750 02d2 5053435F 		.ascii	"PSC_CMD_SET_DEVICE_ID\000"
+ 2750      434D445F 
+ 2750      5345545F 
+ 2750      44455649 
+ 2750      43455F49 
+ 2751              	.LASF19:
+ 2752 02e8 5053435F 		.ascii	"PSC_RET_TIMEOUT\000"
+ 2752      5245545F 
+ 2752      54494D45 
+ 2752      4F555400 
+ 2753              	.LASF2:
+ 2754 02f8 756E7369 		.ascii	"unsigned int\000"
+ 2754      676E6564 
+ 2754      20696E74 
+ 2754      00
+ 2755              	.LASF86:
+ 2756 0305 72656164 		.ascii	"read_datasize\000"
+ 2756      5F646174 
+ 2756      6173697A 
+ 2756      6500
+ 2757              	.LASF9:
+ 2758 0313 4445565F 		.ascii	"DEV_ID_COMM\000"
+ 2758      49445F43 
+ 2758      4F4D4D00 
+ 2759              	.LASF63:
+ 2760 031f 50525F53 		.ascii	"PR_STATE_CS_TAKE_PICTURE\000"
+ 2760      54415445 
+ 2760      5F43535F 
+ 2760      54414B45 
+ 2760      5F504943 
+ 2761              	.LASF37:
+ 2762 0338 44617461 		.ascii	"Data\000"
+ 2762      00
+ 2763              	.LASF53:
+ 2764 033d 5053435F 		.ascii	"PSC_PROC_STATEtag\000"
+ 2764      50524F43 
+ 2764      5F535441 
+ 2764      54457461 
+ 2764      6700
+ 2765              	.LASF22:
+ 2766 034f 50617269 		.ascii	"Parity\000"
+ 2766      747900
+ 2767              	.LASF52:
+ 2768 0356 63686172 		.ascii	"char\000"
+ 2768      00
+ 2769              	.LASF71:
+ 2770 035b 7073635F 		.ascii	"psc_Proc_CameraShot_ResetCamera\000"
+ 2770      50726F63 
+ 2770      5F43616D 
+ 2770      65726153 
+ 2770      686F745F 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 58
+
+
+ 2771              	.LASF95:
+ 2772 037b 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 2772      4320342E 
+ 2772      392E3320 
+ 2772      32303135 
+ 2772      30333033 
+ 2773 03ae 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 2773      20726576 
+ 2773      6973696F 
+ 2773      6E203232 
+ 2773      31323230 
+ 2774 03e1 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2774      66756E63 
+ 2774      74696F6E 
+ 2774      2D736563 
+ 2774      74696F6E 
+ 2775              	.LASF0:
+ 2776 0409 5053435F 		.ascii	"PSC_COMMAND\000"
+ 2776      434F4D4D 
+ 2776      414E4400 
+ 2777              	.LASF47:
+ 2778 0415 696E7433 		.ascii	"int32_t\000"
+ 2778      325F7400 
+ 2779              	.LASF41:
+ 2780 041d 73686F72 		.ascii	"short unsigned int\000"
+ 2780      7420756E 
+ 2780      7369676E 
+ 2780      65642069 
+ 2780      6E7400
+ 2781              	.LASF4:
+ 2782 0430 5053435F 		.ascii	"PSC_BOOL_FALSE\000"
+ 2782      424F4F4C 
+ 2782      5F46414C 
+ 2782      534500
+ 2783              	.LASF69:
+ 2784 043f 7046756E 		.ascii	"pFunc\000"
+ 2784      6300
+ 2785              	.LASF55:
+ 2786 0445 5053435F 		.ascii	"PSC_PROC_SLEEP\000"
+ 2786      50524F43 
+ 2786      5F534C45 
+ 2786      455000
+ 2787              	.LASF92:
+ 2788 0454 67737650 		.ascii	"gsvPSC_PROC_STATE\000"
+ 2788      53435F50 
+ 2788      524F435F 
+ 2788      53544154 
+ 2788      4500
+ 2789              	.LASF96:
+ 2790 0466 5053435F 		.ascii	"PSC_Proc_CameraShot.c\000"
+ 2790      50726F63 
+ 2790      5F43616D 
+ 2790      65726153 
+ 2790      686F742E 
+ 2791              	.LASF97:
+ 2792 047c 433A5C55 		.ascii	"C:\\Users\\youkan\\Desktop\\came\\Workspace06\\Desi"
+ 2792      73657273 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 59
+
+
+ 2792      5C796F75 
+ 2792      6B616E5C 
+ 2792      4465736B 
+ 2793 04a9 676E3031 		.ascii	"gn01.cydsn\000"
+ 2793      2E637964 
+ 2793      736E00
+ 2794              	.LASF49:
+ 2795 04b4 75696E74 		.ascii	"uint32\000"
+ 2795      333200
+ 2796              	.LASF84:
+ 2797 04bb 74616B65 		.ascii	"take_picture\000"
+ 2797      5F706963 
+ 2797      74757265 
+ 2797      00
+ 2798              	.LASF1:
+ 2799 04c8 5053435F 		.ascii	"PSC_CHAR\000"
+ 2799      43484152 
+ 2799      00
+ 2800              	.LASF14:
+ 2801 04d1 5053435F 		.ascii	"PSC_RET_SUCCESS\000"
+ 2801      5245545F 
+ 2801      53554343 
+ 2801      45535300 
+ 2802              	.LASF76:
+ 2803 04e1 5053435F 		.ascii	"PSC_Proc_CameraShot_Main\000"
+ 2803      50726F63 
+ 2803      5F43616D 
+ 2803      65726153 
+ 2803      686F745F 
+ 2804              	.LASF42:
+ 2805 04fa 5F5F696E 		.ascii	"__int32_t\000"
+ 2805      7433325F 
+ 2805      7400
+ 2806              	.LASF54:
+ 2807 0504 5053435F 		.ascii	"PSC_PROC_ACTIVE\000"
+ 2807      50524F43 
+ 2807      5F414354 
+ 2807      49564500 
+ 2808              	.LASF17:
+ 2809 0514 5053435F 		.ascii	"PSC_RET_RECV_FAILD\000"
+ 2809      5245545F 
+ 2809      52454356 
+ 2809      5F464149 
+ 2809      4C4400
+ 2810              	.LASF72:
+ 2811 0527 7073635F 		.ascii	"psc_Proc_CameraShot_Baurate\000"
+ 2811      50726F63 
+ 2811      5F43616D 
+ 2811      65726153 
+ 2811      686F745F 
+ 2812              	.LASF80:
+ 2813 0543 62617572 		.ascii	"baurate\000"
+ 2813      61746500 
+ 2814              	.LASF78:
+ 2815 054b 72657365 		.ascii	"reset_camera\000"
+ 2815      745F6361 
+ 2815      6D657261 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 60
+
+
+ 2815      00
+ 2816              	.LASF7:
+ 2817 0558 5053435F 		.ascii	"PSC_BOOLtag\000"
+ 2817      424F4F4C 
+ 2817      74616700 
+ 2818              	.LASF28:
+ 2819 0564 5053435F 		.ascii	"PSC_CMD_INTEGRITYtag\000"
+ 2819      434D445F 
+ 2819      494E5445 
+ 2819      47524954 
+ 2819      59746167 
+ 2820              	.LASF83:
+ 2821 0579 636F6E66 		.ascii	"config_datasize_size\000"
+ 2821      69675F64 
+ 2821      61746173 
+ 2821      697A655F 
+ 2821      73697A65 
+ 2822              	.LASF30:
+ 2823 058e 52656376 		.ascii	"RecvDataSize\000"
+ 2823      44617461 
+ 2823      53697A65 
+ 2823      00
+ 2824              	.LASF8:
+ 2825 059b 4445565F 		.ascii	"DEV_IDtag\000"
+ 2825      49447461 
+ 2825      6700
+ 2826              	.LASF85:
+ 2827 05a5 7461636B 		.ascii	"tack_picture_size\000"
+ 2827      5F706963 
+ 2827      74757265 
+ 2827      5F73697A 
+ 2827      6500
+ 2828              	.LASF24:
+ 2829 05b7 4572726F 		.ascii	"ErrorCorrection\000"
+ 2829      72436F72 
+ 2829      72656374 
+ 2829      696F6E00 
+ 2830              	.LASF5:
+ 2831 05c7 5053435F 		.ascii	"PSC_BOOL_TRUE\000"
+ 2831      424F4F4C 
+ 2831      5F545255 
+ 2831      4500
+ 2832              	.LASF89:
+ 2833 05d5 6C6F6164 		.ascii	"load_data_size\000"
+ 2833      5F646174 
+ 2833      615F7369 
+ 2833      7A6500
+ 2834              	.LASF91:
+ 2835 05e4 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2835      52784275 
+ 2835      66666572 
+ 2835      00
+ 2836              	.LASF57:
+ 2837 05f1 5053435F 		.ascii	"PSC_PROC_STATE_CAMERASHOTtag\000"
+ 2837      50524F43 
+ 2837      5F535441 
+ 2837      54455F43 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccJr5ZFd.s 			page 61
+
+
+ 2837      414D4552 
+ 2838              	.LASF66:
+ 2839 060e 5053435F 		.ascii	"PSC_PROC_STATE_CAMERASHOT\000"
+ 2839      50524F43 
+ 2839      5F535441 
+ 2839      54455F43 
+ 2839      414D4552 
+ 2840              	.LASF100:
+ 2841 0628 43794465 		.ascii	"CyDelay\000"
+ 2841      6C617900 
+ 2842              	.LASF88:
+ 2843 0630 6C6F6164 		.ascii	"load_data\000"
+ 2843      5F646174 
+ 2843      6100
+ 2844              	.LASF75:
+ 2845 063a 7073635F 		.ascii	"psc_Proc_CameraShot_LoadData\000"
+ 2845      50726F63 
+ 2845      5F43616D 
+ 2845      65726153 
+ 2845      686F745F 
+ 2846              	.LASF74:
+ 2847 0657 7073635F 		.ascii	"psc_Proc_CameraShot_TakePicture\000"
+ 2847      50726F63 
+ 2847      5F43616D 
+ 2847      65726153 
+ 2847      686F745F 
+ 2848              	.LASF73:
+ 2849 0677 7073635F 		.ascii	"psc_Proc_CameraShot_ConfigDataSize\000"
+ 2849      50726F63 
+ 2849      5F43616D 
+ 2849      65726153 
+ 2849      686F745F 
+ 2850              	.LASF35:
+ 2851 069a 5053435F 		.ascii	"PSC_CMDtag\000"
+ 2851      434D4474 
+ 2851      616700
+ 2852              	.LASF31:
+ 2853 06a5 636F6D6D 		.ascii	"command\000"
+ 2853      616E6400 
+ 2854              	.LASF38:
+ 2855 06ad 5053435F 		.ascii	"PSC_ST_CMD\000"
+ 2855      53545F43 
+ 2855      4D4400
+ 2856              	.LASF59:
+ 2857 06b8 50525F53 		.ascii	"PR_STATE_CS_GET\000"
+ 2857      54415445 
+ 2857      5F43535F 
+ 2857      47455400 
+ 2858              	.LASF33:
+ 2859 06c8 496E7465 		.ascii	"Integrity\000"
+ 2859      67726974 
+ 2859      7900
+ 2860              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
