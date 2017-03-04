@@ -1,5 +1,0 @@
-C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Design01.cyprj|8efb5353-e11c-4b18-8339-1f167fe2b906
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|588bbbb3-c858-4138-a4dd-4c4b1d564bb4
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|607bc8e2-fd79-4909-8788-7e646f5cddb2
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|e51026d3-b204-4890-8ca6-932d07711555
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|d1e0bc72-4ab9-4523-8dab-b36499eaa4ee
