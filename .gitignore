@@ -82,3 +82,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 *.log
+Workspace06/Design01.cydsn/codegentemp
+Debug
