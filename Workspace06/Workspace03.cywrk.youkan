@@ -234,32 +234,6 @@
 <VisibleNodeIds>
 <v>Workspace03</v>
 <v>Workspace03\Design01</v>
-<v>Workspace03\Design01\CortexM3</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cam_Rx_Intr.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cam_Tx_Intr.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Cm3Start.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Comm_Rx_Intr.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Comm_Tx_Intr.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyDmac.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CyLib.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cymetadata.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyPm.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\CySpc.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\cyutils.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Debugs.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\main.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Camera.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_CMD_API.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Communicate.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_MAIN.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Proc_CameraShot.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
