@@ -124,7 +124,6 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
 {
     char    tmpData[SZ_COMMAND];
     uint8   utmpData[SZ_COMMAND];
-    uint8 bufIndex = 0u;
     int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
@@ -132,15 +131,7 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
     {
         case DEV_ID_CAM:
             /* If not Initialized then skip this function */
-            if(UART_TO_DEBUG_initVar != 0u)
-            {
-                while(bufIndex < ucSize)
-                {
-                    UART_TO_DEBUG_PutChar(pChar[bufIndex]);
-                    bufIndex++;
-                }
-            }
-//            UART_TO_CAMERA_PutArray(pChar, ucSize);
+            UART_TO_DEBUG_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
             sprintf(tmpData,"TXDT %s",pChar);
