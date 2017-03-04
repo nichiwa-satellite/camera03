@@ -131,7 +131,7 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
     {
         case DEV_ID_CAM:
             /* If not Initialized then skip this function */
-            UART_TO_DEBUG_PutArray(pChar, ucSize);
+            UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
             sprintf(tmpData,"TXDT %s",pChar);
