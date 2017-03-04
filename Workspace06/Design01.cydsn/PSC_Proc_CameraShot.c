@@ -177,8 +177,6 @@ PSC_RET psc_Proc_CameraShot_Baurate(PSC_ST_CMD* pstData)
     PSC_RET ret;
     //TODO: Return Value Check from CAM
     //      That is in pstData->
-    svPSC_PROC_STATE_CAMERASHOT++;
-    return PSC_RET_SUCCESS;
     ret = PSC_Comm_SndCommand(DEV_ID_CAM,baurate,sizeof(baurate));
     if( ret != PSC_RET_SUCCESS )
     {

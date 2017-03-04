@@ -130,12 +130,8 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
     switch(dev_id)
     {
         case DEV_ID_CAM:
-            for(i = 0; i < ucSize; i++)
-            {
-                UART_TO_CAMERA_PutChar(pChar[i]);
-                CyDelay(30);
-            }
-//            UART_TO_CAMERA_PutArray(pChar, ucSize);
+            /* If not Initialized then skip this function */
+            UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
             sprintf(tmpData,"TXDT %s",pChar);
