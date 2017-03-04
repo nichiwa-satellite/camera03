@@ -124,16 +124,22 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
 {
     char    tmpData[SZ_COMMAND];
     uint8   utmpData[SZ_COMMAND];
+    uint8 bufIndex = 0u;
     int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
     switch(dev_id)
     {
         case DEV_ID_CAM:
-            for(i = 0; i < ucSize; i++)
+            /* If not Initialized then skip this function */
+            if(UART_TO_CAMERA_initVar != 0u)
             {
-                UART_TO_CAMERA_PutChar(pChar[i]);
-                CyDelay(30);
+                while(bufIndex < ucSize)
+                {
+                    UART_TO_CAMERA_PutChar(pChar[bufIndex]);
+                    bufIndex++;
+                    CyDelay(30);
+                }
             }
 //            UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
