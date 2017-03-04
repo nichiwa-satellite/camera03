@@ -138,7 +138,7 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
                 {
                     UART_TO_CAMERA_PutChar(pChar[bufIndex]);
                     bufIndex++;
-                    CyDelay(5);
+                    CyDelay(1);
                 }
             }
 //            UART_TO_CAMERA_PutArray(pChar, ucSize);
