@@ -132,13 +132,12 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
     {
         case DEV_ID_CAM:
             /* If not Initialized then skip this function */
-            if(UART_TO_CAMERA_initVar != 0u)
+            if(UART_TO_DEBUG_initVar != 0u)
             {
                 while(bufIndex < ucSize)
                 {
-                    UART_TO_CAMERA_PutChar(pChar[bufIndex]);
+                    UART_TO_DEBUG_PutChar(pChar[bufIndex]);
                     bufIndex++;
-                    CyDelay(1);
                 }
             }
 //            UART_TO_CAMERA_PutArray(pChar, ucSize);
