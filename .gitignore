@@ -88,3 +88,4 @@ Debug
 *.cyprj.*
 *.cywrk.*
 Workspace06/Design01.cydsn/Design01.rpt
+*.cyfit
