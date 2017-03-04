@@ -84,3 +84,6 @@ $RECYCLE.BIN/
 *.log
 Workspace06/Design01.cydsn/codegentemp
 Debug
+*_timing.html
+*.cyprj.*
+*.cywrk.*
