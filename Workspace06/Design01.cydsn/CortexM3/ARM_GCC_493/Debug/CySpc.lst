@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
   29:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_WR_USER_NVL              (0x06u)
   30:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_PRG_ROW                  (0x07u)
   31:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_ER_SECTOR                (0x08u)
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 2
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 2
 
 
   32:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_ER_ALL                   (0x09u)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
   75:Generated_Source\PSoC5/CySpc.c **** 
   76:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_ACT_REG  |= PM_SPC_PM_EN;
   38              		.loc 1 76 0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 3
 
 
   39 0006 064A     		ldr	r2, .L3
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
   76 0002 FFF7FEFF 		bl	CyEnterCriticalSection
   77              	.LVL2:
   94:Generated_Source\PSoC5/CySpc.c **** 
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 4
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 4
 
 
   95:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_ACT_REG  &= ((uint8)(~PM_SPC_PM_EN));
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  120:Generated_Source\PSoC5/CySpc.c **** {
  107              		.loc 1 120 0
  108              		.cfi_startproc
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 5
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 5
 
 
  109              		@ args = 0, pretend = 0, frame = 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  132:Generated_Source\PSoC5/CySpc.c ****     return(i);
  133:Generated_Source\PSoC5/CySpc.c **** }
  149              		.loc 1 133 0 is_stmt 1
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 6
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 6
 
 
  150 0028 2046     		mov	r0, r4
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  175 0000 30B4     		push	{r4, r5}
  176              		.cfi_def_cfa_offset 8
  177              		.cfi_offset 4, -8
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 7
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 7
 
 
  178              		.cfi_offset 5, -4
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  181:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = array;
  214              		.loc 1 181 0
  215 0034 0F4C     		ldr	r4, .L27+4
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 8
 
 
  216 0036 2070     		strb	r0, [r4]
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  195:Generated_Source\PSoC5/CySpc.c ****         }
  196:Generated_Source\PSoC5/CySpc.c ****         else
  197:Generated_Source\PSoC5/CySpc.c ****         {
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 9
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 9
 
 
  198:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_LOCKED;
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  296              	.LFB4:
  208:Generated_Source\PSoC5/CySpc.c **** 
  209:Generated_Source\PSoC5/CySpc.c **** 
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 10
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 10
 
 
  210:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  313 000c 104B     		ldr	r3, .L36+4
  314 000e B624     		movs	r4, #182
  315 0010 1C70     		strb	r4, [r3]
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 11
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 11
 
 
  247:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_ROW);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  258:Generated_Source\PSoC5/CySpc.c ****             }
  259:Generated_Source\PSoC5/CySpc.c ****         }
  260:Generated_Source\PSoC5/CySpc.c ****         else
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 12
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 12
 
 
  261:Generated_Source\PSoC5/CySpc.c ****         {
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  280:Generated_Source\PSoC5/CySpc.c **** *  will handle unmodified data preservation based on DWR settings and input
  281:Generated_Source\PSoC5/CySpc.c **** *  parameters.
  282:Generated_Source\PSoC5/CySpc.c **** *
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 13
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 13
 
 
  283:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  409 000e B625     		movs	r5, #182
  410 0010 2570     		strb	r5, [r4]
  318:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_ROW);
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 14
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 14
 
 
  411              		.loc 1 318 0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  428 002a 04E0     		b	.L40
  429              	.LVL40:
  430              	.L41:
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 15
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 15
 
 
  356:Generated_Source\PSoC5/CySpc.c ****             {
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  382:Generated_Source\PSoC5/CySpc.c ****                             ((uint32) array * CYDEV_ECC_SECTOR_SIZE) +
  455              		.loc 1 382 0
  456 004c 4801     		lsls	r0, r1, #5
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 16
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 16
 
 
  457              	.LVL45:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  408:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
  484              		.loc 1 408 0
  485 0066 0420     		movs	r0, #4
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 17
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 17
 
 
  486              	.LVL52:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  419:Generated_Source\PSoC5/CySpc.c **** *
  420:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
  421:Generated_Source\PSoC5/CySpc.c **** *   Id of the array.
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 18
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 18
 
 
  422:Generated_Source\PSoC5/CySpc.c **** *
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  553 0018 2570     		strb	r5, [r4]
  451:Generated_Source\PSoC5/CySpc.c **** 
  452:Generated_Source\PSoC5/CySpc.c ****         /* Make sure the command was accepted */
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 19
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 19
 
 
  453:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_BUSY)
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  469:Generated_Source\PSoC5/CySpc.c ****     }
  470:Generated_Source\PSoC5/CySpc.c **** 
  471:Generated_Source\PSoC5/CySpc.c ****     return(status);
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 20
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 20
 
 
  472:Generated_Source\PSoC5/CySpc.c **** }
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  618              		.loc 1 497 0
  619 0000 0C4B     		ldr	r3, .L62
  620 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 21
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 21
 
 
  621 0004 13F0020F 		tst	r3, #2
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  511:Generated_Source\PSoC5/CySpc.c ****         }
  655              		.loc 1 511 0
  656 0030 0920     		movs	r0, #9
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 22
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 22
 
 
  657              	.LVL73:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  681              	.LVL74:
  547:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
  548:Generated_Source\PSoC5/CySpc.c **** 
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 23
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 23
 
 
  549:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  715              	.LVL78:
  716              	.L67:
  563:Generated_Source\PSoC5/CySpc.c ****         }
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 24
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 24
 
 
  717              		.loc 1 563 0
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  747              		.loc 1 592 0
  748 0002 FFF7FEFF 		bl	CyEnterCriticalSection
  749              	.LVL81:
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 25
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 25
 
 
  593:Generated_Source\PSoC5/CySpc.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  785              		.thumb
  786 002c 0122     		movs	r2, #1
  787 002e 054B     		ldr	r3, .L75
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 26
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 26
 
 
  788 0030 5A60     		str	r2, [r3, #4]
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  625:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcUnlock
  626:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
  627:Generated_Source\PSoC5/CySpc.c **** *  Unlocks the SPC so it can be used by someone else:
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 27
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 27
 
 
  628:Generated_Source\PSoC5/CySpc.c **** *   - Restores wait-pipeline enable state (PSoC5)
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  857 001e 00BF     		NOP
  858              	
  859              	@ 0 "" 2
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 28
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 28
 
 
  651:Generated_Source\PSoC5/CySpc.c ****             CY_NOP;
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  674:Generated_Source\PSoC5/CySpc.c **** {
  891              		.loc 1 674 0
  892              		.cfi_startproc
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 29
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 29
 
 
  893              		@ args = 0, pretend = 0, frame = 0
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  930              		.bss
  931              		.align	2
  932              		.set	.LANCHOR0,. + 0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 30
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 30
 
 
  933              		.type	SpcLockState, %object
@@ -1761,17 +1761,17 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  950 0006 00000000 		.4byte	.Ldebug_abbrev0
  951 000a 04       		.byte	0x4
  952 000b 01       		.uleb128 0x1
- 953 000c 4D010000 		.4byte	.LASF43
+ 953 000c 15010000 		.4byte	.LASF43
  954 0010 01       		.byte	0x1
- 955 0011 F2010000 		.4byte	.LASF44
- 956 0015 E9000000 		.4byte	.LASF45
+ 955 0011 BA010000 		.4byte	.LASF44
+ 956 0015 74020000 		.4byte	.LASF45
  957 0019 00000000 		.4byte	.Ldebug_ranges0+0
  958 001d 00000000 		.4byte	0
  959 0021 00000000 		.4byte	.Ldebug_line0
  960 0025 02       		.uleb128 0x2
  961 0026 01       		.byte	0x1
  962 0027 06       		.byte	0x6
- 963 0028 EC020000 		.4byte	.LASF0
+ 963 0028 F9020000 		.4byte	.LASF0
  964 002c 02       		.uleb128 0x2
  965 002d 01       		.byte	0x1
  966 002e 08       		.byte	0x8
@@ -1779,7 +1779,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  968 0033 02       		.uleb128 0x2
  969 0034 02       		.byte	0x2
  970 0035 05       		.byte	0x5
- 971 0036 B3020000 		.4byte	.LASF2
+ 971 0036 C0020000 		.4byte	.LASF2
  972 003a 02       		.uleb128 0x2
  973 003b 02       		.byte	0x2
  974 003c 07       		.byte	0x7
@@ -1787,7 +1787,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  976 0041 02       		.uleb128 0x2
  977 0042 04       		.byte	0x4
  978 0043 05       		.byte	0x5
- 979 0044 D1020000 		.4byte	.LASF4
+ 979 0044 DE020000 		.4byte	.LASF4
  980 0048 02       		.uleb128 0x2
  981 0049 04       		.byte	0x4
  982 004a 07       		.byte	0x7
@@ -1795,10 +1795,10 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  984 004f 02       		.uleb128 0x2
  985 0050 08       		.byte	0x8
  986 0051 05       		.byte	0x5
- 987 0052 7D020000 		.4byte	.LASF6
+ 987 0052 45020000 		.4byte	.LASF6
  988 0056 02       		.uleb128 0x2
  989 0057 08       		.byte	0x8
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 31
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 31
 
 
  990 0058 07       		.byte	0x7
@@ -1810,19 +1810,19 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  996 0064 02       		.uleb128 0x2
  997 0065 04       		.byte	0x4
  998 0066 07       		.byte	0x7
- 999 0067 11020000 		.4byte	.LASF8
+ 999 0067 D9010000 		.4byte	.LASF8
  1000 006b 04       		.uleb128 0x4
  1001 006c B5000000 		.4byte	.LASF9
  1002 0070 02       		.byte	0x2
  1003 0071 9201     		.2byte	0x192
  1004 0073 2C000000 		.4byte	0x2c
  1005 0077 04       		.uleb128 0x4
- 1006 0078 35010000 		.4byte	.LASF10
+ 1006 0078 FD000000 		.4byte	.LASF10
  1007 007c 02       		.byte	0x2
  1008 007d 9301     		.2byte	0x193
  1009 007f 3A000000 		.4byte	0x3a
  1010 0083 04       		.uleb128 0x4
- 1011 0084 46010000 		.4byte	.LASF11
+ 1011 0084 0E010000 		.4byte	.LASF11
  1012 0088 02       		.byte	0x2
  1013 0089 9401     		.2byte	0x194
  1014 008b 48000000 		.4byte	0x48
@@ -1833,11 +1833,11 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1019 0096 02       		.uleb128 0x2
  1020 0097 08       		.byte	0x8
  1021 0098 04       		.byte	0x4
- 1022 0099 21010000 		.4byte	.LASF13
+ 1022 0099 E9000000 		.4byte	.LASF13
  1023 009d 02       		.uleb128 0x2
  1024 009e 01       		.byte	0x1
  1025 009f 08       		.byte	0x8
- 1026 00a0 95020000 		.4byte	.LASF14
+ 1026 00a0 5D020000 		.4byte	.LASF14
  1027 00a4 04       		.uleb128 0x4
  1028 00a5 13000000 		.4byte	.LASF15
  1029 00a9 02       		.byte	0x2
@@ -1858,12 +1858,12 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1044 00cd 05       		.uleb128 0x5
  1045 00ce 83000000 		.4byte	0x83
  1046 00d2 02       		.uleb128 0x2
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 32
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 32
 
 
  1047 00d3 04       		.byte	0x4
  1048 00d4 07       		.byte	0x7
- 1049 00d5 57020000 		.4byte	.LASF18
+ 1049 00d5 1F020000 		.4byte	.LASF18
  1050 00d9 06       		.uleb128 0x6
  1051 00da 22000000 		.4byte	.LASF19
  1052 00de 01       		.byte	0x1
@@ -1918,11 +1918,11 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1101 015a 01       		.uleb128 0x1
  1102 015b 9C       		.byte	0x9c
  1103 015c 9B010000 		.4byte	0x19b
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 33
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 33
 
 
  1104 0160 0A       		.uleb128 0xa
- 1105 0161 BD020000 		.4byte	.LASF22
+ 1105 0161 CA020000 		.4byte	.LASF22
  1106 0165 01       		.byte	0x1
  1107 0166 77       		.byte	0x77
  1108 0167 9B010000 		.4byte	0x19b
@@ -1969,16 +1969,16 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1149 01c1 6B000000 		.4byte	0x6b
  1150 01c5 9D000000 		.4byte	.LLST5
  1151 01c9 0A       		.uleb128 0xa
- 1152 01ca 1E020000 		.4byte	.LASF27
+ 1152 01ca E6010000 		.4byte	.LASF27
  1153 01ce 01       		.byte	0x1
  1154 01cf A0       		.byte	0xa0
  1155 01d0 77000000 		.4byte	0x77
  1156 01d4 2E010000 		.4byte	.LLST6
  1157 01d8 0F       		.uleb128 0xf
- 1158 01d9 BD020000 		.4byte	.LASF22
+ 1158 01d9 CA020000 		.4byte	.LASF22
  1159 01dd 01       		.byte	0x1
  1160 01de A0       		.byte	0xa0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 34
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 34
 
 
  1161 01df 0F020000 		.4byte	0x20f
@@ -2010,7 +2010,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1187 0215 10       		.uleb128 0x10
  1188 0216 6B000000 		.4byte	0x6b
  1189 021a 09       		.uleb128 0x9
- 1190 021b 4A020000 		.4byte	.LASF29
+ 1190 021b 12020000 		.4byte	.LASF29
  1191 021f 01       		.byte	0x1
  1192 0220 EE       		.byte	0xee
  1193 0221 A4000000 		.4byte	0xa4
@@ -2026,7 +2026,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1203 023a 6B000000 		.4byte	0x6b
  1204 023e B1010000 		.4byte	.LLST9
  1205 0242 0F       		.uleb128 0xf
- 1206 0243 BD020000 		.4byte	.LASF22
+ 1206 0243 CA020000 		.4byte	.LASF22
  1207 0247 01       		.byte	0x1
  1208 0248 EE       		.byte	0xee
  1209 0249 0F020000 		.4byte	0x20f
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1215 0255 EE       		.byte	0xee
  1216 0256 77000000 		.4byte	0x77
  1217 025a 01       		.uleb128 0x1
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 35
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 35
 
 
  1218 025b 52       		.byte	0x52
@@ -2056,7 +2056,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1230 0274 3A020000 		.4byte	.LLST11
  1231 0278 00       		.byte	0
  1232 0279 11       		.uleb128 0x11
- 1233 027a F8020000 		.4byte	.LASF30
+ 1233 027a 05030000 		.4byte	.LASF30
  1234 027e 01       		.byte	0x1
  1235 027f 3001     		.2byte	0x130
  1236 0281 A4000000 		.4byte	0xa4
@@ -2078,7 +2078,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1252 02ab 77000000 		.4byte	0x77
  1253 02af E9020000 		.4byte	.LLST13
  1254 02b3 12       		.uleb128 0x12
- 1255 02b4 BD020000 		.4byte	.LASF22
+ 1255 02b4 CA020000 		.4byte	.LASF22
  1256 02b8 01       		.byte	0x1
  1257 02b9 3001     		.2byte	0x130
  1258 02bb 0F020000 		.4byte	0x20f
@@ -2098,14 +2098,14 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1272 02e3 15       		.uleb128 0x15
  1273 02e4 6900     		.ascii	"i\000"
  1274 02e6 01       		.byte	0x1
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 36
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 36
 
 
  1275 02e7 3401     		.2byte	0x134
  1276 02e9 77000000 		.4byte	0x77
  1277 02ed B6030000 		.4byte	.LLST17
  1278 02f1 14       		.uleb128 0x14
- 1279 02f2 AC020000 		.4byte	.LASF31
+ 1279 02f2 B9020000 		.4byte	.LASF31
  1280 02f6 01       		.byte	0x1
  1281 02f7 3701     		.2byte	0x137
  1282 02f9 83000000 		.4byte	0x83
@@ -2128,7 +2128,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1299 0324 6B000000 		.4byte	0x6b
  1300 0328 20040000 		.4byte	.LLST19
  1301 032c 12       		.uleb128 0x12
- 1302 032d 1E020000 		.4byte	.LASF27
+ 1302 032d E6010000 		.4byte	.LASF27
  1303 0331 01       		.byte	0x1
  1304 0332 B801     		.2byte	0x1b8
  1305 0334 77000000 		.4byte	0x77
@@ -2141,7 +2141,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1312 0348 01       		.uleb128 0x1
  1313 0349 52       		.byte	0x52
  1314 034a 16       		.uleb128 0x16
- 1315 034b 3C020000 		.4byte	.LASF34
+ 1315 034b 04020000 		.4byte	.LASF34
  1316 034f 01       		.byte	0x1
  1317 0350 B801     		.2byte	0x1b8
  1318 0352 6B000000 		.4byte	0x6b
@@ -2155,10 +2155,10 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1326 0364 B9040000 		.4byte	.LLST21
  1327 0368 00       		.byte	0
  1328 0369 11       		.uleb128 0x11
- 1329 036a 6C020000 		.4byte	.LASF35
+ 1329 036a 34020000 		.4byte	.LASF35
  1330 036e 01       		.byte	0x1
  1331 036f EC01     		.2byte	0x1ec
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 37
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 37
 
 
  1332 0371 A4000000 		.4byte	0xa4
@@ -2174,7 +2174,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1342 038b 6B000000 		.4byte	0x6b
  1343 038f D8040000 		.4byte	.LLST22
  1344 0393 16       		.uleb128 0x16
- 1345 0394 C4020000 		.4byte	.LASF36
+ 1345 0394 D1020000 		.4byte	.LASF36
  1346 0398 01       		.byte	0x1
  1347 0399 EC01     		.2byte	0x1ec
  1348 039b 6B000000 		.4byte	0x6b
@@ -2188,7 +2188,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1356 03ad 2B050000 		.4byte	.LLST23
  1357 03b1 00       		.byte	0
  1358 03b2 11       		.uleb128 0x11
- 1359 03b3 28010000 		.4byte	.LASF37
+ 1359 03b3 F0000000 		.4byte	.LASF37
  1360 03b7 01       		.byte	0x1
  1361 03b8 2102     		.2byte	0x221
  1362 03ba A4000000 		.4byte	0xa4
@@ -2198,7 +2198,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1366 03c7 9C       		.byte	0x9c
  1367 03c8 ED030000 		.4byte	0x3ed
  1368 03cc 12       		.uleb128 0x12
- 1369 03cd 09030000 		.4byte	.LASF38
+ 1369 03cd 16030000 		.4byte	.LASF38
  1370 03d1 01       		.byte	0x1
  1371 03d2 2102     		.2byte	0x221
  1372 03d4 6B000000 		.4byte	0x6b
@@ -2211,14 +2211,14 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1379 03e8 9B050000 		.4byte	.LLST25
  1380 03ec 00       		.byte	0
  1381 03ed 11       		.uleb128 0x11
- 1382 03ee 3C010000 		.4byte	.LASF39
+ 1382 03ee 04010000 		.4byte	.LASF39
  1383 03f2 01       		.byte	0x1
  1384 03f3 4A02     		.2byte	0x24a
  1385 03f5 A4000000 		.4byte	0xa4
  1386 03f9 00000000 		.4byte	.LFB9
  1387 03fd 4C000000 		.4byte	.LFE9-.LFB9
  1388 0401 01       		.uleb128 0x1
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 38
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 38
 
 
  1389 0402 9C       		.byte	0x9c
@@ -2243,7 +2243,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1408 0435 CB040000 		.4byte	0x4cb
  1409 0439 00       		.byte	0
  1410 043a 17       		.uleb128 0x17
- 1411 043b 60020000 		.4byte	.LASF40
+ 1411 043b 28020000 		.4byte	.LASF40
  1412 043f 01       		.byte	0x1
  1413 0440 7702     		.2byte	0x277
  1414 0442 00000000 		.4byte	.LFB10
@@ -2265,7 +2265,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1430 046e CB040000 		.4byte	0x4cb
  1431 0472 00       		.byte	0
  1432 0473 11       		.uleb128 0x11
- 1433 0474 9A020000 		.4byte	.LASF41
+ 1433 0474 62020000 		.4byte	.LASF41
  1434 0478 01       		.byte	0x1
  1435 0479 A102     		.2byte	0x2a1
  1436 047b A4000000 		.4byte	0xa4
@@ -2278,14 +2278,14 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1443 048e 66000000 		.4byte	.LASF28
  1444 0492 01       		.byte	0x1
  1445 0493 A302     		.2byte	0x2a3
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 39
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 39
 
 
  1446 0495 A4000000 		.4byte	0xa4
  1447 0499 2E060000 		.4byte	.LLST29
  1448 049d 00       		.byte	0
  1449 049e 18       		.uleb128 0x18
- 1450 049f DA020000 		.4byte	.LASF42
+ 1450 049f E7020000 		.4byte	.LASF42
  1451 04a3 01       		.byte	0x1
  1452 04a4 3C       		.byte	0x3c
  1453 04a5 83000000 		.4byte	0x83
@@ -2301,12 +2301,12 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1463 04bb 03       		.byte	0x3
  1464 04bc 00000000 		.4byte	SpcLockState
  1465 04c0 1A       		.uleb128 0x1a
- 1466 04c1 DB010000 		.4byte	.LASF47
+ 1466 04c1 A3010000 		.4byte	.LASF47
  1467 04c5 03       		.byte	0x3
  1468 04c6 7D       		.byte	0x7d
  1469 04c7 6B000000 		.4byte	0x6b
  1470 04cb 1B       		.uleb128 0x1b
- 1471 04cc 26020000 		.4byte	.LASF48
+ 1471 04cc EE010000 		.4byte	.LASF48
  1472 04d0 03       		.byte	0x3
  1473 04d1 7E       		.byte	0x7e
  1474 04d2 DC040000 		.4byte	0x4dc
@@ -2314,7 +2314,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1476 04d7 6B000000 		.4byte	0x6b
  1477 04db 00       		.byte	0
  1478 04dc 1D       		.uleb128 0x1d
- 1479 04dd 8B020000 		.4byte	.LASF49
+ 1479 04dd 53020000 		.4byte	.LASF49
  1480 04e1 03       		.byte	0x3
  1481 04e2 77       		.byte	0x77
  1482 04e3 1C       		.uleb128 0x1c
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1500 000c 17       		.uleb128 0x17
  1501 000d 11       		.uleb128 0x11
  1502 000e 01       		.uleb128 0x1
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 40
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 40
 
 
  1503 000f 10       		.uleb128 0x10
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1557 0045 0B       		.uleb128 0xb
  1558 0046 3B       		.uleb128 0x3b
  1559 0047 0B       		.uleb128 0xb
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 41
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 41
 
 
  1560 0048 27       		.uleb128 0x27
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1614 0081 01       		.uleb128 0x1
  1615 0082 12       		.uleb128 0x12
  1616 0083 06       		.uleb128 0x6
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 42
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 42
 
 
  1617 0084 40       		.uleb128 0x40
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1671 00c0 00       		.byte	0
  1672 00c1 00       		.byte	0
  1673 00c2 0E       		.uleb128 0xe
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 43
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 43
 
 
  1674 00c3 0F       		.uleb128 0xf
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1728 00fa 13       		.uleb128 0x13
  1729 00fb 00       		.byte	0
  1730 00fc 00       		.byte	0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 44
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 44
 
 
  1731 00fd 12       		.uleb128 0x12
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1785 0133 49       		.uleb128 0x49
  1786 0134 13       		.uleb128 0x13
  1787 0135 02       		.uleb128 0x2
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 45
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 45
 
 
  1788 0136 17       		.uleb128 0x17
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1842 016d 02       		.uleb128 0x2
  1843 016e 18       		.uleb128 0x18
  1844 016f 00       		.byte	0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 46
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 46
 
 
  1845 0170 00       		.byte	0
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1899 01a6 00       		.byte	0
  1900 01a7 00       		.byte	0
  1901 01a8 1C       		.uleb128 0x1c
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 47
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 47
 
 
  1902 01a9 05       		.uleb128 0x5
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  1956 0048 50       		.byte	0x50
  1957 0049 9F       		.byte	0x9f
  1958 004a 00000000 		.4byte	0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 48
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 48
 
 
  1959 004e 00000000 		.4byte	0
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2013 00d5 0400     		.2byte	0x4
  2014 00d7 F3       		.byte	0xf3
  2015 00d8 01       		.uleb128 0x1
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 49
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 49
 
 
  2016 00d9 50       		.byte	0x50
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2070 0156 78000000 		.4byte	.LFE3
  2071 015a 0400     		.2byte	0x4
  2072 015c F3       		.byte	0xf3
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 50
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 50
 
 
  2073 015d 01       		.uleb128 0x1
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2127 01e1 50       		.byte	0x50
  2128 01e2 9F       		.byte	0x9f
  2129 01e3 42000000 		.4byte	.LVL35
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 51
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 51
 
 
  2130 01e7 44000000 		.4byte	.LVL36
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2184 026f 48000000 		.4byte	.LVL43
  2185 0273 66000000 		.4byte	.LVL51
  2186 0277 0400     		.2byte	0x4
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 52
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 52
 
 
  2187 0279 F3       		.byte	0xf3
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2241 02f3 51       		.byte	0x51
  2242 02f4 4C000000 		.4byte	.LVL44
  2243 02f8 66000000 		.4byte	.LVL51
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 53
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 53
 
 
  2244 02fc 0400     		.2byte	0x4
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2298 0375 9F       		.byte	0x9f
  2299 0376 66000000 		.4byte	.LVL51
  2300 037a 74000000 		.4byte	.LVL58
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 54
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 54
 
 
  2301 037e 0100     		.2byte	0x1
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2355 0405 00000000 		.4byte	0
  2356 0409 00000000 		.4byte	0
  2357              	.LLST18:
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 55
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 55
 
 
  2358 040d 4E000000 		.4byte	.LVL45
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2412 0492 0400     		.2byte	0x4
  2413 0494 F3       		.byte	0xf3
  2414 0495 01       		.uleb128 0x1
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 56
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 56
 
 
  2415 0496 51       		.byte	0x51
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2469 0515 32000000 		.4byte	.LVL73
  2470 0519 3C000000 		.4byte	.LFE7
  2471 051d 0400     		.2byte	0x4
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 57
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 57
 
 
  2472 051f F3       		.byte	0xf3
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2526 059f 30000000 		.4byte	.LVL79
  2527 05a3 0200     		.2byte	0x2
  2528 05a5 37       		.byte	0x37
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 58
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 58
 
 
  2529 05a6 9F       		.byte	0x9f
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2583 0632 1E000000 		.4byte	.LVL91
  2584 0636 0200     		.2byte	0x2
  2585 0638 37       		.byte	0x37
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 59
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 59
 
 
  2586 0639 9F       		.byte	0x9f
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2640 002c 80000000 		.4byte	.LFE5
  2641 0030 00000000 		.4byte	.LFB6
  2642 0034 4C000000 		.4byte	.LFE6
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 60
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 60
 
 
  2643 0038 00000000 		.4byte	.LFB7
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2673      64446174 
  2673      6100
  2674              	.LASF28:
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 61
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 61
 
 
  2675 0066 73746174 		.ascii	"status\000"
@@ -3650,163 +3650,165 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 1
  2697      676E6564 
  2697      20636861 
  2697      7200
- 2698              	.LASF45:
- 2699 00e9 433A5C55 		.ascii	"C:\\Users\\youkan\\Desktop\\came\\Workspace06\\Desi"
- 2699      73657273 
- 2699      5C796F75 
- 2699      6B616E5C 
- 2699      4465736B 
- 2700 0116 676E3031 		.ascii	"gn01.cydsn\000"
- 2700      2E637964 
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 62
+ 2698              	.LASF13:
+ 2699 00e9 646F7562 		.ascii	"double\000"
+ 2699      6C6500
+ 2700              	.LASF37:
+ 2701 00f0 43795370 		.ascii	"CySpcGetTemp\000"
+ 2701      63476574 
+ 2701      54656D70 
+ 2701      00
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 62
 
 
- 2700      736E00
- 2701              	.LASF13:
- 2702 0121 646F7562 		.ascii	"double\000"
- 2702      6C6500
- 2703              	.LASF37:
- 2704 0128 43795370 		.ascii	"CySpcGetTemp\000"
- 2704      63476574 
- 2704      54656D70 
- 2704      00
- 2705              	.LASF10:
- 2706 0135 75696E74 		.ascii	"uint16\000"
- 2706      313600
- 2707              	.LASF39:
- 2708 013c 43795370 		.ascii	"CySpcLock\000"
- 2708      634C6F63 
- 2708      6B00
- 2709              	.LASF11:
- 2710 0146 75696E74 		.ascii	"uint32\000"
- 2710      333200
- 2711              	.LASF43:
- 2712 014d 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
- 2712      4320342E 
- 2712      392E3320 
- 2712      32303135 
- 2712      30333033 
- 2713 0180 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
- 2713      20726576 
- 2713      6973696F 
- 2713      6E203232 
- 2713      31323230 
- 2714 01b3 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 2714      66756E63 
- 2714      74696F6E 
- 2714      2D736563 
- 2714      74696F6E 
- 2715              	.LASF47:
- 2716 01db 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 2716      74657243 
- 2716      72697469 
- 2716      63616C53 
- 2716      65637469 
- 2717              	.LASF44:
- 2718 01f2 47656E65 		.ascii	"Generated_Source\\PSoC5\\CySpc.c\000"
- 2718      72617465 
- 2718      645F536F 
- 2718      75726365 
- 2718      5C50536F 
- 2719              	.LASF8:
- 2720 0211 756E7369 		.ascii	"unsigned int\000"
- 2720      676E6564 
- 2720      20696E74 
- 2720      00
- 2721              	.LASF27:
- 2722 021e 61646472 		.ascii	"address\000"
- 2722      65737300 
- 2723              	.LASF48:
- 2724 0226 43794578 		.ascii	"CyExitCriticalSection\000"
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 63
+ 2702              	.LASF10:
+ 2703 00fd 75696E74 		.ascii	"uint16\000"
+ 2703      313600
+ 2704              	.LASF39:
+ 2705 0104 43795370 		.ascii	"CySpcLock\000"
+ 2705      634C6F63 
+ 2705      6B00
+ 2706              	.LASF11:
+ 2707 010e 75696E74 		.ascii	"uint32\000"
+ 2707      333200
+ 2708              	.LASF43:
+ 2709 0115 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 2709      4320342E 
+ 2709      392E3320 
+ 2709      32303135 
+ 2709      30333033 
+ 2710 0148 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 2710      20726576 
+ 2710      6973696F 
+ 2710      6E203232 
+ 2710      31323230 
+ 2711 017b 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2711      66756E63 
+ 2711      74696F6E 
+ 2711      2D736563 
+ 2711      74696F6E 
+ 2712              	.LASF47:
+ 2713 01a3 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 2713      74657243 
+ 2713      72697469 
+ 2713      63616C53 
+ 2713      65637469 
+ 2714              	.LASF44:
+ 2715 01ba 47656E65 		.ascii	"Generated_Source\\PSoC5\\CySpc.c\000"
+ 2715      72617465 
+ 2715      645F536F 
+ 2715      75726365 
+ 2715      5C50536F 
+ 2716              	.LASF8:
+ 2717 01d9 756E7369 		.ascii	"unsigned int\000"
+ 2717      676E6564 
+ 2717      20696E74 
+ 2717      00
+ 2718              	.LASF27:
+ 2719 01e6 61646472 		.ascii	"address\000"
+ 2719      65737300 
+ 2720              	.LASF48:
+ 2721 01ee 43794578 		.ascii	"CyExitCriticalSection\000"
+ 2721      69744372 
+ 2721      69746963 
+ 2721      616C5365 
+ 2721      6374696F 
+ 2722              	.LASF34:
+ 2723 0204 74656D70 		.ascii	"tempMagnitude\000"
+ 2723      4D61676E 
+ 2723      69747564 
+ 2723      6500
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 63
 
 
- 2724      69744372 
- 2724      69746963 
- 2724      616C5365 
- 2724      6374696F 
- 2725              	.LASF34:
- 2726 023c 74656D70 		.ascii	"tempMagnitude\000"
- 2726      4D61676E 
- 2726      69747564 
- 2726      6500
- 2727              	.LASF29:
- 2728 024a 43795370 		.ascii	"CySpcLoadRow\000"
- 2728      634C6F61 
- 2728      64526F77 
- 2728      00
- 2729              	.LASF18:
- 2730 0257 73697A65 		.ascii	"sizetype\000"
- 2730      74797065 
- 2730      00
- 2731              	.LASF40:
- 2732 0260 43795370 		.ascii	"CySpcUnlock\000"
- 2732      63556E6C 
- 2732      6F636B00 
- 2733              	.LASF35:
- 2734 026c 43795370 		.ascii	"CySpcEraseSector\000"
- 2734      63457261 
- 2734      73655365 
- 2734      63746F72 
- 2734      00
- 2735              	.LASF6:
- 2736 027d 6C6F6E67 		.ascii	"long long int\000"
- 2736      206C6F6E 
- 2736      6720696E 
- 2736      7400
- 2737              	.LASF49:
- 2738 028b 43794465 		.ascii	"CyDelayUs\000"
- 2738      6C617955 
- 2738      7300
- 2739              	.LASF14:
- 2740 0295 63686172 		.ascii	"char\000"
- 2740      00
- 2741              	.LASF41:
- 2742 029a 43795370 		.ascii	"CySpcGetAlgorithm\000"
- 2742      63476574 
- 2742      416C676F 
- 2742      72697468 
- 2742      6D00
+ 2724              	.LASF29:
+ 2725 0212 43795370 		.ascii	"CySpcLoadRow\000"
+ 2725      634C6F61 
+ 2725      64526F77 
+ 2725      00
+ 2726              	.LASF18:
+ 2727 021f 73697A65 		.ascii	"sizetype\000"
+ 2727      74797065 
+ 2727      00
+ 2728              	.LASF40:
+ 2729 0228 43795370 		.ascii	"CySpcUnlock\000"
+ 2729      63556E6C 
+ 2729      6F636B00 
+ 2730              	.LASF35:
+ 2731 0234 43795370 		.ascii	"CySpcEraseSector\000"
+ 2731      63457261 
+ 2731      73655365 
+ 2731      63746F72 
+ 2731      00
+ 2732              	.LASF6:
+ 2733 0245 6C6F6E67 		.ascii	"long long int\000"
+ 2733      206C6F6E 
+ 2733      6720696E 
+ 2733      7400
+ 2734              	.LASF49:
+ 2735 0253 43794465 		.ascii	"CyDelayUs\000"
+ 2735      6C617955 
+ 2735      7300
+ 2736              	.LASF14:
+ 2737 025d 63686172 		.ascii	"char\000"
+ 2737      00
+ 2738              	.LASF41:
+ 2739 0262 43795370 		.ascii	"CySpcGetAlgorithm\000"
+ 2739      63476574 
+ 2739      416C676F 
+ 2739      72697468 
+ 2739      6D00
+ 2740              	.LASF45:
+ 2741 0274 433A5C55 		.ascii	"C:\\Users\\youkan\\Documents\\GitHub\\camera03\\Wor"
+ 2741      73657273 
+ 2741      5C796F75 
+ 2741      6B616E5C 
+ 2741      446F6375 
+ 2742 02a1 6B737061 		.ascii	"kspace06\\Design01.cydsn\000"
+ 2742      63653036 
+ 2742      5C446573 
+ 2742      69676E30 
+ 2742      312E6379 
  2743              	.LASF31:
- 2744 02ac 6F666673 		.ascii	"offset\000"
+ 2744 02b9 6F666673 		.ascii	"offset\000"
  2744      657400
  2745              	.LASF2:
- 2746 02b3 73686F72 		.ascii	"short int\000"
+ 2746 02c0 73686F72 		.ascii	"short int\000"
  2746      7420696E 
  2746      7400
  2747              	.LASF22:
- 2748 02bd 62756666 		.ascii	"buffer\000"
+ 2748 02ca 62756666 		.ascii	"buffer\000"
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\cce7c1qm.s 			page 64
+
+
  2748      657200
  2749              	.LASF36:
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccDCTeHA.s 			page 64
-
-
- 2750 02c4 73656374 		.ascii	"sectorNumber\000"
+ 2750 02d1 73656374 		.ascii	"sectorNumber\000"
  2750      6F724E75 
  2750      6D626572 
  2750      00
  2751              	.LASF4:
- 2752 02d1 6C6F6E67 		.ascii	"long int\000"
+ 2752 02de 6C6F6E67 		.ascii	"long int\000"
  2752      20696E74 
  2752      00
  2753              	.LASF42:
- 2754 02da 73706357 		.ascii	"spcWaitPipeBypass\000"
+ 2754 02e7 73706357 		.ascii	"spcWaitPipeBypass\000"
  2754      61697450 
  2754      69706542 
  2754      79706173 
  2754      7300
  2755              	.LASF0:
- 2756 02ec 7369676E 		.ascii	"signed char\000"
+ 2756 02f9 7369676E 		.ascii	"signed char\000"
  2756      65642063 
  2756      68617200 
  2757              	.LASF30:
- 2758 02f8 43795370 		.ascii	"CySpcLoadRowFull\000"
+ 2758 0305 43795370 		.ascii	"CySpcLoadRowFull\000"
  2758      634C6F61 
  2758      64526F77 
  2758      46756C6C 
  2758      00
  2759              	.LASF38:
- 2760 0309 6E756D53 		.ascii	"numSamples\000"
+ 2760 0316 6E756D53 		.ascii	"numSamples\000"
  2760      616D706C 
  2760      657300
  2761              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

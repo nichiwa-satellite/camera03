@@ -1,18 +1,15 @@
---------------- Build Started: 02/20/2017 23:17:10 Project: Design01, Configuration: ARM GCC 4.9-2015-q1-update Debug ---------------
+--------------- Build Started: 03/04/2017 17:00:06 Project: Design01, Configuration: ARM GCC 4.9-2015-q1-update Debug ---------------
 The code generation step is up to date.
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Debug/PSC_Proc_CameraShot.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects -c PSC_Proc_CameraShot.c -o .\CortexM3\ARM_GCC_493\Debug\PSC_Proc_CameraShot.o
 In file included from PSC_Proc_CameraShot.c:18:0:
-PSC_Camera.h:25:22: warning: 'baurate' defined but not used [-Wunused-variable]
- static unsigned char baurate[]         =  { 0x56, 0x00, 0x24, 0x16, 0x01, 0x2A, 0xF2 };
-                      ^
 PSC_Camera.h:26:22: warning: 'baurate_size' defined but not used [-Wunused-variable]
- static uint8         baurate_size      = 7 * sizeof(uint8);
+ static uint8         baurate_size      = 7;
                       ^
 arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_493\Debug\Design01.a .\CortexM3\ARM_GCC_493\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_493\Debug\CyDmac.o .\CortexM3\ARM_GCC_493\Debug\CyFlash.o .\CortexM3\ARM_GCC_493\Debug\CyLib.o .\CortexM3\ARM_GCC_493\Debug\cyPm.o .\CortexM3\ARM_GCC_493\Debug\CySpc.o .\CortexM3\ARM_GCC_493\Debug\cyutils.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_COMM.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_COMM_PM.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_COMM_INT.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_COMM_BOOT.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_CAMERA.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_CAMERA_PM.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_CAMERA_INT.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_CAMERA_BOOT.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_COMM_IntClock.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_CAMERA_IntClock.o .\CortexM3\ARM_GCC_493\Debug\Comm_Tx_Intr.o .\CortexM3\ARM_GCC_493\Debug\Comm_Rx_Intr.o .\CortexM3\ARM_GCC_493\Debug\Cam_Tx_Intr.o .\CortexM3\ARM_GCC_493\Debug\Cam_Rx_Intr.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_DEBUG.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_DEBUG_PM.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_DEBUG_INT.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_DEBUG_BOOT.o .\CortexM3\ARM_GCC_493\Debug\UART_TO_DEBUG_IntClock.o .\CortexM3\ARM_GCC_493\Debug\CyBootAsmGnu.o
 arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_493\Debug\Design01.a
 arm-none-eabi-gcc.exe -Wl,--start-group -o .\CortexM3\ARM_GCC_493\Debug\Design01.elf .\CortexM3\ARM_GCC_493\Debug\main.o .\CortexM3\ARM_GCC_493\Debug\PSC_Communicate.o .\CortexM3\ARM_GCC_493\Debug\PSC_Camera.o .\CortexM3\ARM_GCC_493\Debug\PSC_MAIN.o .\CortexM3\ARM_GCC_493\Debug\PSC_CMD_API.o .\CortexM3\ARM_GCC_493\Debug\PSC_Proc_CameraShot.o .\CortexM3\ARM_GCC_493\Debug\Debugs.o .\CortexM3\ARM_GCC_493\Debug\cymetadata.o .\CortexM3\ARM_GCC_493\Debug\Cm3Start.o .\CortexM3\ARM_GCC_493\Debug\Design01.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_493\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -g -ffunction-sections -Og -ffat-lto-objects -L Generated_Source\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_493\Debug/Design01.map -T C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -Wl,--end-group
 cyelftool.exe -C C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\CortexM3\ARM_GCC_493\Debug\Design01.elf --flash_row_size 256 --flash_size 262144
 cyelftool.exe -S C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\CortexM3\ARM_GCC_493\Debug\Design01.elf
-Flash used: 7168 of 262144 bytes (2.7%).
+Flash used: 7080 of 262144 bytes (2.7%).
 SRAM used: 2893 of 65536 bytes (4.4%). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 02/20/2017 23:17:11 ---------------
+--------------- Build Succeeded: 03/04/2017 17:00:07 ---------------

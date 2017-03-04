@@ -24,7 +24,7 @@
 
 PSC_RET PSC_Comm_Initialize();
 PSC_RET PSC_Comm_GetCommand(PSC_ST_CMD*);    //Get Command form Device
-PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR [],uint8);    //Send Command to Device
+PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],uint8);    //Send Command to Device
 PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD*);
 PSC_RET psc_Comm_GetRecvChar(DEV_ID,PSC_CHAR*);
 PSC_RET psc_Comm_SndDataLine(PSC_ST_CMD*);
@@ -99,7 +99,7 @@ PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD* pstData)
 }
 
 
-PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR* pvData)
+PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR*  pvData)
 {
     PSC_CHAR    tmpData;
     int         i;
@@ -123,13 +123,19 @@ PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR* pvData)
 PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
 {
     char    tmpData[SZ_COMMAND];
+    uint8   utmpData[SZ_COMMAND];
+    int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
     switch(dev_id)
     {
         case DEV_ID_CAM:
-            //UART_TO_CAMERA_PutString(pChar);
-            UART_TO_CAMERA_PutArray(pChar, ucSize);
+            for(i = 0; i < ucSize; i++)
+            {
+                UART_TO_CAMERA_PutChar(pChar[i]);
+                CyDelay(30);
+            }
+//            UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
             sprintf(tmpData,"TXDT %s",pChar);

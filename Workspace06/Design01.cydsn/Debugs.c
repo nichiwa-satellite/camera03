@@ -27,5 +27,5 @@ void DBG_Init()
 
 void DBG_printf(char str[])
 {
-    UART_TO_DEBUG_PutString(str);
+    //UART_TO_DEBUG_PutString(str);
 }

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc92Br6D.s 			page 1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccNKQIoJ.s 			page 1
 
 
    1              		.syntax unified
@@ -23,33 +23,35 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\cc92Br6D.s 			page 1
   20              	.Ldebug_line0:
   21              		.section	.debug_str,"MS",%progbits,1
   22              	.LASF0:
-  23 0000 433A5C55 		.ascii	"C:\\Users\\youkan\\Desktop\\came\\Workspace06\\Desi"
-  23      73657273 
-  23      5C796F75 
-  23      6B616E5C 
-  23      4465736B 
-  24 002d 676E3031 		.ascii	"gn01.cydsn\000"
-  24      2E637964 
-  24      736E00
-  25              	.LASF1:
-  26 0038 5053435F 		.ascii	"PSC_Camera.c\000"
-  26      43616D65 
-  26      72612E63 
-  26      00
-  27              	.LASF2:
-  28 0045 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
-  28      4320342E 
-  28      392E3320 
-  28      32303135 
-  28      30333033 
-  29 0078 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
-  29      20726576 
-  29      6973696F 
-  29      6E203232 
-  29      31323230 
-  30 00ab 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
-  30      66756E63 
-  30      74696F6E 
-  30      2D736563 
-  30      74696F6E 
+  23 0000 5053435F 		.ascii	"PSC_Camera.c\000"
+  23      43616D65 
+  23      72612E63 
+  23      00
+  24              	.LASF1:
+  25 000d 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+  25      4320342E 
+  25      392E3320 
+  25      32303135 
+  25      30333033 
+  26 0040 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+  26      20726576 
+  26      6973696F 
+  26      6E203232 
+  26      31323230 
+  27 0073 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+  27      66756E63 
+  27      74696F6E 
+  27      2D736563 
+  27      74696F6E 
+  28              	.LASF2:
+  29 009b 433A5C55 		.ascii	"C:\\Users\\youkan\\Documents\\GitHub\\camera03\\Wor"
+  29      73657273 
+  29      5C796F75 
+  29      6B616E5C 
+  29      446F6375 
+  30 00c8 6B737061 		.ascii	"kspace06\\Design01.cydsn\000"
+  30      63653036 
+  30      5C446573 
+  30      69676E30 
+  30      312E6379 
   31              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

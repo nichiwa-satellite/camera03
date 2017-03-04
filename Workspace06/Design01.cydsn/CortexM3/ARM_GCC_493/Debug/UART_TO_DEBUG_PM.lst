@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
   29:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** 
   30:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** 
   31:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** 
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 2
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 2
 
 
   32:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** /*******************************************************************************
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
   69:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** *
   70:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** * Parameters:
   71:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** *  None.
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 3
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 3
 
 
   72:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** *
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  109:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** *
  110:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** * Return:
  111:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** *  None.
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 4
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 4
 
 
  112:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** *
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  141:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c **** 
  142:Generated_Source\PSoC5/UART_TO_DEBUG_PM.c ****     UART_TO_DEBUG_Stop();
   86              		.loc 1 142 0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 5
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 5
 
 
   87 001a FFF7FEFF 		bl	UART_TO_DEBUG_Stop
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  110 0000 08B5     		push	{r3, lr}
  111              		.cfi_def_cfa_offset 8
  112              		.cfi_offset 3, -8
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 6
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 6
 
 
  113              		.cfi_offset 14, -4
@@ -350,20 +350,20 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  148 0006 00000000 		.4byte	.Ldebug_abbrev0
  149 000a 04       		.byte	0x4
  150 000b 01       		.uleb128 0x1
- 151 000c CC000000 		.4byte	.LASF23
+ 151 000c C4000000 		.4byte	.LASF23
  152 0010 01       		.byte	0x1
- 153 0011 D6010000 		.4byte	.LASF24
- 154 0015 4A000000 		.4byte	.LASF25
+ 153 0011 CE010000 		.4byte	.LASF24
+ 154 0015 35000000 		.4byte	.LASF25
  155 0019 00000000 		.4byte	.Ldebug_ranges0+0
  156 001d 00000000 		.4byte	0
  157 0021 00000000 		.4byte	.Ldebug_line0
  158 0025 02       		.uleb128 0x2
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 7
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 7
 
 
  159 0026 01       		.byte	0x1
  160 0027 06       		.byte	0x6
- 161 0028 B1010000 		.4byte	.LASF0
+ 161 0028 A9010000 		.4byte	.LASF0
  162 002c 02       		.uleb128 0x2
  163 002d 01       		.byte	0x1
  164 002e 08       		.byte	0x8
@@ -371,19 +371,19 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  166 0033 02       		.uleb128 0x2
  167 0034 02       		.byte	0x2
  168 0035 05       		.byte	0x5
- 169 0036 45020000 		.4byte	.LASF2
+ 169 0036 3D020000 		.4byte	.LASF2
  170 003a 02       		.uleb128 0x2
  171 003b 02       		.byte	0x2
  172 003c 07       		.byte	0x7
- 173 003d 9E010000 		.4byte	.LASF3
+ 173 003d 96010000 		.4byte	.LASF3
  174 0041 02       		.uleb128 0x2
  175 0042 04       		.byte	0x4
  176 0043 05       		.byte	0x5
- 177 0044 8E010000 		.4byte	.LASF4
+ 177 0044 86010000 		.4byte	.LASF4
  178 0048 02       		.uleb128 0x2
  179 0049 04       		.byte	0x4
  180 004a 07       		.byte	0x7
- 181 004b 9D000000 		.4byte	.LASF5
+ 181 004b 95000000 		.4byte	.LASF5
  182 004f 02       		.uleb128 0x2
  183 0050 08       		.byte	0x8
  184 0051 05       		.byte	0x5
@@ -391,7 +391,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  186 0056 02       		.uleb128 0x2
  187 0057 08       		.byte	0x8
  188 0058 07       		.byte	0x7
- 189 0059 AF000000 		.4byte	.LASF7
+ 189 0059 A7000000 		.4byte	.LASF7
  190 005d 03       		.uleb128 0x3
  191 005e 04       		.byte	0x4
  192 005f 05       		.byte	0x5
@@ -401,27 +401,27 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  196 0066 07       		.byte	0x7
  197 0067 1A000000 		.4byte	.LASF8
  198 006b 04       		.uleb128 0x4
- 199 006c 97000000 		.4byte	.LASF12
+ 199 006c 8F000000 		.4byte	.LASF12
  200 0070 02       		.byte	0x2
  201 0071 9201     		.2byte	0x192
  202 0073 2C000000 		.4byte	0x2c
  203 0077 02       		.uleb128 0x2
  204 0078 04       		.byte	0x4
  205 0079 04       		.byte	0x4
- 206 007a C6000000 		.4byte	.LASF9
+ 206 007a BE000000 		.4byte	.LASF9
  207 007e 02       		.uleb128 0x2
  208 007f 08       		.byte	0x8
  209 0080 04       		.byte	0x4
- 210 0081 97010000 		.4byte	.LASF10
+ 210 0081 8F010000 		.4byte	.LASF10
  211 0085 02       		.uleb128 0x2
  212 0086 01       		.byte	0x1
  213 0087 08       		.byte	0x8
- 214 0088 6D010000 		.4byte	.LASF11
+ 214 0088 65010000 		.4byte	.LASF11
  215 008c 04       		.uleb128 0x4
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 8
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 8
 
 
- 216 008d 4F020000 		.4byte	.LASF13
+ 216 008d 47020000 		.4byte	.LASF13
  217 0091 02       		.byte	0x2
  218 0092 3C02     		.2byte	0x23c
  219 0094 98000000 		.4byte	0x98
@@ -430,9 +430,9 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  222 009d 02       		.uleb128 0x2
  223 009e 04       		.byte	0x4
  224 009f 07       		.byte	0x7
- 225 00a0 8C020000 		.4byte	.LASF14
+ 225 00a0 84020000 		.4byte	.LASF14
  226 00a4 06       		.uleb128 0x6
- 227 00a5 72010000 		.4byte	.LASF26
+ 227 00a5 6A010000 		.4byte	.LASF26
  228 00a9 01       		.byte	0x1
  229 00aa 03       		.byte	0x3
  230 00ab 45       		.byte	0x45
@@ -445,12 +445,12 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  237 00bb 00       		.byte	0
  238 00bc 00       		.byte	0
  239 00bd 08       		.uleb128 0x8
- 240 00be 54020000 		.4byte	.LASF15
+ 240 00be 4C020000 		.4byte	.LASF15
  241 00c2 03       		.byte	0x3
  242 00c3 4D       		.byte	0x4d
  243 00c4 A4000000 		.4byte	0xa4
  244 00c8 09       		.uleb128 0x9
- 245 00c9 BD010000 		.4byte	.LASF16
+ 245 00c9 B5010000 		.4byte	.LASF16
  246 00cd 01       		.byte	0x1
  247 00ce 36       		.byte	0x36
  248 00cf 00000000 		.4byte	.LFB0
@@ -458,7 +458,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  250 00d7 01       		.uleb128 0x1
  251 00d8 9C       		.byte	0x9c
  252 00d9 09       		.uleb128 0x9
- 253 00da 00020000 		.4byte	.LASF17
+ 253 00da F8010000 		.4byte	.LASF17
  254 00de 01       		.byte	0x1
  255 00df 57       		.byte	0x57
  256 00e0 00000000 		.4byte	.LFB1
@@ -466,7 +466,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  258 00e8 01       		.uleb128 0x1
  259 00e9 9C       		.byte	0x9c
  260 00ea 0A       		.uleb128 0xa
- 261 00eb 31020000 		.4byte	.LASF18
+ 261 00eb 29020000 		.4byte	.LASF18
  262 00ef 01       		.byte	0x1
  263 00f0 78       		.byte	0x78
  264 00f1 00000000 		.4byte	.LFB2
@@ -478,11 +478,11 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  270 0100 1E000000 		.4byte	.LVL0
  271 0104 42010000 		.4byte	0x142
  272 0108 00       		.byte	0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 9
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 9
 
 
  273 0109 0A       		.uleb128 0xa
- 274 010a 35000000 		.4byte	.LASF19
+ 274 010a 8D020000 		.4byte	.LASF19
  275 010e 01       		.byte	0x1
  276 010f AC       		.byte	0xac
  277 0110 00000000 		.4byte	.LFB3
@@ -498,7 +498,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  287 012c 50010000 		.4byte	0x150
  288 0130 00       		.byte	0
  289 0131 0C       		.uleb128 0xc
- 290 0132 1C020000 		.4byte	.LASF28
+ 290 0132 14020000 		.4byte	.LASF28
  291 0136 01       		.byte	0x1
  292 0137 18       		.byte	0x18
  293 0138 BD000000 		.4byte	0xbd
@@ -506,15 +506,15 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  295 013d 03       		.byte	0x3
  296 013e 00000000 		.4byte	UART_TO_DEBUG_backup
  297 0142 0D       		.uleb128 0xd
- 298 0143 5A010000 		.4byte	.LASF20
+ 298 0143 52010000 		.4byte	.LASF20
  299 0147 03       		.byte	0x3
  300 0148 55       		.byte	0x55
  301 0149 0D       		.uleb128 0xd
- 302 014a 70020000 		.4byte	.LASF21
+ 302 014a 68020000 		.4byte	.LASF21
  303 014e 03       		.byte	0x3
  304 014f 8F       		.byte	0x8f
  305 0150 0D       		.uleb128 0xd
- 306 0151 82000000 		.4byte	.LASF22
+ 306 0151 7A000000 		.4byte	.LASF22
  307 0155 03       		.byte	0x3
  308 0156 5A       		.byte	0x5a
  309 0157 00       		.byte	0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  327 000f 10       		.uleb128 0x10
  328 0010 17       		.uleb128 0x17
  329 0011 00       		.byte	0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 10
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 10
 
 
  330 0012 00       		.byte	0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  384 0048 01       		.uleb128 0x1
  385 0049 13       		.uleb128 0x13
  386 004a 00       		.byte	0
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 11
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 11
 
 
  387 004b 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  441 0082 01       		.byte	0x1
  442 0083 3F       		.uleb128 0x3f
  443 0084 19       		.uleb128 0x19
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 12
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 12
 
 
  444 0085 03       		.uleb128 0x3
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  498 00be 0B       		.uleb128 0xb
  499 00bf 27       		.uleb128 0x27
  500 00c0 19       		.uleb128 0x19
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 13
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 13
 
 
  501 00c1 3C       		.uleb128 0x3c
@@ -778,157 +778,159 @@ ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 1
  544      20696E74 
  544      00
  545              	.LASF1:
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 14
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 14
 
 
  546 0027 756E7369 		.ascii	"unsigned char\000"
  546      676E6564 
  546      20636861 
  546      7200
- 547              	.LASF19:
- 548 0035 55415254 		.ascii	"UART_TO_DEBUG_Wakeup\000"
- 548      5F544F5F 
- 548      44454255 
- 548      475F5761 
- 548      6B657570 
- 549              	.LASF25:
- 550 004a 433A5C55 		.ascii	"C:\\Users\\youkan\\Desktop\\came\\Workspace06\\Desi"
- 550      73657273 
- 550      5C796F75 
- 550      6B616E5C 
- 550      4465736B 
- 551 0077 676E3031 		.ascii	"gn01.cydsn\000"
- 551      2E637964 
- 551      736E00
- 552              	.LASF22:
- 553 0082 55415254 		.ascii	"UART_TO_DEBUG_Enable\000"
- 553      5F544F5F 
- 553      44454255 
- 553      475F456E 
- 553      61626C65 
- 554              	.LASF12:
- 555 0097 75696E74 		.ascii	"uint8\000"
- 555      3800
- 556              	.LASF5:
- 557 009d 6C6F6E67 		.ascii	"long unsigned int\000"
- 557      20756E73 
- 557      69676E65 
- 557      6420696E 
- 557      7400
- 558              	.LASF7:
- 559 00af 6C6F6E67 		.ascii	"long long unsigned int\000"
- 559      206C6F6E 
- 559      6720756E 
- 559      7369676E 
- 559      65642069 
- 560              	.LASF9:
- 561 00c6 666C6F61 		.ascii	"float\000"
- 561      7400
- 562              	.LASF23:
- 563 00cc 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
- 563      4320342E 
- 563      392E3320 
- 563      32303135 
- 563      30333033 
- 564 00ff 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
- 564      20726576 
- 564      6973696F 
- 564      6E203232 
- 564      31323230 
- 565 0132 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 565      66756E63 
- 565      74696F6E 
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 15
+ 547              	.LASF25:
+ 548 0035 433A5C55 		.ascii	"C:\\Users\\youkan\\Documents\\GitHub\\camera03\\Wor"
+ 548      73657273 
+ 548      5C796F75 
+ 548      6B616E5C 
+ 548      446F6375 
+ 549 0062 6B737061 		.ascii	"kspace06\\Design01.cydsn\000"
+ 549      63653036 
+ 549      5C446573 
+ 549      69676E30 
+ 549      312E6379 
+ 550              	.LASF22:
+ 551 007a 55415254 		.ascii	"UART_TO_DEBUG_Enable\000"
+ 551      5F544F5F 
+ 551      44454255 
+ 551      475F456E 
+ 551      61626C65 
+ 552              	.LASF12:
+ 553 008f 75696E74 		.ascii	"uint8\000"
+ 553      3800
+ 554              	.LASF5:
+ 555 0095 6C6F6E67 		.ascii	"long unsigned int\000"
+ 555      20756E73 
+ 555      69676E65 
+ 555      6420696E 
+ 555      7400
+ 556              	.LASF7:
+ 557 00a7 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 557      206C6F6E 
+ 557      6720756E 
+ 557      7369676E 
+ 557      65642069 
+ 558              	.LASF9:
+ 559 00be 666C6F61 		.ascii	"float\000"
+ 559      7400
+ 560              	.LASF23:
+ 561 00c4 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 561      4320342E 
+ 561      392E3320 
+ 561      32303135 
+ 561      30333033 
+ 562 00f7 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 562      20726576 
+ 562      6973696F 
+ 562      6E203232 
+ 562      31323230 
+ 563 012a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 563      66756E63 
+ 563      74696F6E 
+ 563      2D736563 
+ 563      74696F6E 
+ 564              	.LASF20:
+ 565 0152 55415254 		.ascii	"UART_TO_DEBUG_Stop\000"
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 15
 
 
- 565      2D736563 
- 565      74696F6E 
- 566              	.LASF20:
- 567 015a 55415254 		.ascii	"UART_TO_DEBUG_Stop\000"
- 567      5F544F5F 
- 567      44454255 
- 567      475F5374 
- 567      6F7000
- 568              	.LASF11:
- 569 016d 63686172 		.ascii	"char\000"
- 569      00
- 570              	.LASF26:
- 571 0172 55415254 		.ascii	"UART_TO_DEBUG_backupStruct_\000"
- 571      5F544F5F 
- 571      44454255 
- 571      475F6261 
- 571      636B7570 
- 572              	.LASF4:
- 573 018e 6C6F6E67 		.ascii	"long int\000"
- 573      20696E74 
- 573      00
- 574              	.LASF10:
- 575 0197 646F7562 		.ascii	"double\000"
- 575      6C6500
- 576              	.LASF3:
- 577 019e 73686F72 		.ascii	"short unsigned int\000"
- 577      7420756E 
- 577      7369676E 
- 577      65642069 
- 577      6E7400
- 578              	.LASF0:
- 579 01b1 7369676E 		.ascii	"signed char\000"
- 579      65642063 
- 579      68617200 
- 580              	.LASF16:
- 581 01bd 55415254 		.ascii	"UART_TO_DEBUG_SaveConfig\000"
- 581      5F544F5F 
- 581      44454255 
- 581      475F5361 
- 581      7665436F 
- 582              	.LASF24:
- 583 01d6 47656E65 		.ascii	"Generated_Source\\PSoC5\\UART_TO_DEBUG_PM.c\000"
- 583      72617465 
- 583      645F536F 
- 583      75726365 
- 583      5C50536F 
- 584              	.LASF17:
- 585 0200 55415254 		.ascii	"UART_TO_DEBUG_RestoreConfig\000"
+ 565      5F544F5F 
+ 565      44454255 
+ 565      475F5374 
+ 565      6F7000
+ 566              	.LASF11:
+ 567 0165 63686172 		.ascii	"char\000"
+ 567      00
+ 568              	.LASF26:
+ 569 016a 55415254 		.ascii	"UART_TO_DEBUG_backupStruct_\000"
+ 569      5F544F5F 
+ 569      44454255 
+ 569      475F6261 
+ 569      636B7570 
+ 570              	.LASF4:
+ 571 0186 6C6F6E67 		.ascii	"long int\000"
+ 571      20696E74 
+ 571      00
+ 572              	.LASF10:
+ 573 018f 646F7562 		.ascii	"double\000"
+ 573      6C6500
+ 574              	.LASF3:
+ 575 0196 73686F72 		.ascii	"short unsigned int\000"
+ 575      7420756E 
+ 575      7369676E 
+ 575      65642069 
+ 575      6E7400
+ 576              	.LASF0:
+ 577 01a9 7369676E 		.ascii	"signed char\000"
+ 577      65642063 
+ 577      68617200 
+ 578              	.LASF16:
+ 579 01b5 55415254 		.ascii	"UART_TO_DEBUG_SaveConfig\000"
+ 579      5F544F5F 
+ 579      44454255 
+ 579      475F5361 
+ 579      7665436F 
+ 580              	.LASF24:
+ 581 01ce 47656E65 		.ascii	"Generated_Source\\PSoC5\\UART_TO_DEBUG_PM.c\000"
+ 581      72617465 
+ 581      645F536F 
+ 581      75726365 
+ 581      5C50536F 
+ 582              	.LASF17:
+ 583 01f8 55415254 		.ascii	"UART_TO_DEBUG_RestoreConfig\000"
+ 583      5F544F5F 
+ 583      44454255 
+ 583      475F5265 
+ 583      73746F72 
+ 584              	.LASF28:
+ 585 0214 55415254 		.ascii	"UART_TO_DEBUG_backup\000"
  585      5F544F5F 
  585      44454255 
- 585      475F5265 
- 585      73746F72 
- 586              	.LASF28:
- 587 021c 55415254 		.ascii	"UART_TO_DEBUG_backup\000"
+ 585      475F6261 
+ 585      636B7570 
+ 586              	.LASF18:
+ 587 0229 55415254 		.ascii	"UART_TO_DEBUG_Sleep\000"
  587      5F544F5F 
+ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccIx2zfY.s 			page 16
+
+
  587      44454255 
- 587      475F6261 
-ARM GAS  C:\Users\youkan\AppData\Local\Temp\ccflnK26.s 			page 16
-
-
- 587      636B7570 
- 588              	.LASF18:
- 589 0231 55415254 		.ascii	"UART_TO_DEBUG_Sleep\000"
- 589      5F544F5F 
- 589      44454255 
- 589      475F536C 
- 589      65657000 
- 590              	.LASF2:
- 591 0245 73686F72 		.ascii	"short int\000"
- 591      7420696E 
- 591      7400
- 592              	.LASF13:
- 593 024f 72656738 		.ascii	"reg8\000"
- 593      00
- 594              	.LASF15:
- 595 0254 55415254 		.ascii	"UART_TO_DEBUG_BACKUP_STRUCT\000"
+ 587      475F536C 
+ 587      65657000 
+ 588              	.LASF2:
+ 589 023d 73686F72 		.ascii	"short int\000"
+ 589      7420696E 
+ 589      7400
+ 590              	.LASF13:
+ 591 0247 72656738 		.ascii	"reg8\000"
+ 591      00
+ 592              	.LASF15:
+ 593 024c 55415254 		.ascii	"UART_TO_DEBUG_BACKUP_STRUCT\000"
+ 593      5F544F5F 
+ 593      44454255 
+ 593      475F4241 
+ 593      434B5550 
+ 594              	.LASF21:
+ 595 0268 55415254 		.ascii	"UART_TO_DEBUG_ClearTxBuffer\000"
  595      5F544F5F 
  595      44454255 
- 595      475F4241 
- 595      434B5550 
- 596              	.LASF21:
- 597 0270 55415254 		.ascii	"UART_TO_DEBUG_ClearTxBuffer\000"
- 597      5F544F5F 
- 597      44454255 
- 597      475F436C 
- 597      65617254 
- 598              	.LASF14:
- 599 028c 73697A65 		.ascii	"sizetype\000"
- 599      74797065 
- 599      00
+ 595      475F436C 
+ 595      65617254 
+ 596              	.LASF14:
+ 597 0284 73697A65 		.ascii	"sizetype\000"
+ 597      74797065 
+ 597      00
+ 598              	.LASF19:
+ 599 028d 55415254 		.ascii	"UART_TO_DEBUG_Wakeup\000"
+ 599      5F544F5F 
+ 599      44454255 
+ 599      475F5761 
+ 599      6B657570 
  600              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

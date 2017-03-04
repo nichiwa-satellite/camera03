@@ -1,5 +1,5 @@
-C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Design01.cyprj|83892b54-9263-4173-935a-2a08f5236512
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|bf1c3973-770c-4821-8321-cbec069068bc
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|8c32e45c-aa51-4f65-b9b1-447034b4fcb6
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|6247d884-613a-44c4-8f05-0e9d6a35f2e6
-C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|60b7aea1-5b27-4a0f-80e6-3568c296d3e8
+C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Design01.cyprj|8efb5353-e11c-4b18-8339-1f167fe2b906
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|588bbbb3-c858-4138-a4dd-4c4b1d564bb4
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|607bc8e2-fd79-4909-8788-7e646f5cddb2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|e51026d3-b204-4890-8ca6-932d07711555
+C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|d1e0bc72-4ab9-4523-8dab-b36499eaa4ee

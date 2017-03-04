@@ -136,21 +136,6 @@
 <v>Workspace03\Design01\Generated_Source\PSoC5\project.h</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>Workspace03</v>
-<v>Workspace03\Design01</v>
-<v>Workspace03\Design01\TopDesign</v>
-<v>Workspace03\Design01\Design01.cydwr</v>
-<v>Workspace03\Design01\Design01.cydwr\Pins</v>
-<v>Workspace03\Design01\Design01.cydwr\Analog</v>
-<v>Workspace03\Design01\Design01.cydwr\Clocks</v>
-<v>Workspace03\Design01\Design01.cydwr\Interrupts</v>
-<v>Workspace03\Design01\Design01.cydwr\DMA</v>
-<v>Workspace03\Design01\Design01.cydwr\System</v>
-<v>Workspace03\Design01\Design01.cydwr\Directives</v>
-<v>Workspace03\Design01\Design01.cydwr\Flash Security</v>
-<v>Workspace03\Design01\Design01.cydwr\EEPROM</v>
-<v>Workspace03\Design01\Header Files</v>
-<v>Workspace03\Design01\Header Files\cyapicallbacks.h</v>
 <v>Workspace03\Design01\Header Files\Debugs.h</v>
 <v>Workspace03\Design01\Header Files\PSC_Camera.h</v>
 <v>Workspace03\Design01\Header Files\PSC_CMD_API.h</v>
@@ -179,14 +164,9 @@
 <v>Workspace03\Design01\Generated_Source\PSoC5\Comm_Rx_Intr\Comm_Rx_Intr.c</v>
 <v>Workspace03\Design01\Generated_Source\PSoC5\Comm_Rx_Intr\Comm_Rx_Intr.h</v>
 <v>Workspace03\Design01\Generated_Source\PSoC5\Comm_Tx_Intr</v>
-<v>Workspace03\Design01\Generated_Source\PSoC5\Comm_Tx_Intr\Comm_Tx_Intr.c</v>
-<v>Workspace03\Design01\Generated_Source\PSoC5\Comm_Tx_Intr\Comm_Tx_Intr.h</v>
-<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot</v>
-<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\cm3gcc.ld</v>
-<v>Workspace03\Design01\Generated_Source\PSoC5\cy_boot\Cm3Iar.icf</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace03">
 <ExpandedNodeIds>
 <v>Workspace03</v>
 <v>Workspace03\Design01</v>
@@ -280,26 +260,6 @@
 <v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_MAIN.lst</v>
 <v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\PSC_Proc_CameraShot.lst</v>
 <v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_BOOT.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_INT.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_IntClock.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_CAMERA_PM.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_BOOT.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_INT.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_IntClock.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_COMM_PM.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_DEBUG.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_DEBUG_BOOT.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_DEBUG_INT.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_DEBUG_IntClock.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\UART_TO_DEBUG_PM.lst</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Design01.elf</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Design01.hex</v>
-<v>Workspace03\Design01\CortexM3\ARM_GCC_493\Debug\Design01.map</v>
-<v>Workspace03\Design01\Design01.gpdsc</v>
-<v>Workspace03\Design01\Design01.rpt</v>
-<v>Workspace03\Design01\Design01_timing.html</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -361,6 +321,11 @@
 <name v=".\Design01.cydsn\cyapicallbacks.h" />
 <name v=".\Design01.cydsn\PSC_Camera.c" />
 <name v=".\Design01.cydsn\PSC_Types.h" />
+<name v=".\Design01.cydsn\Debugs.h" />
+<name v=".\Design01.cydsn\PSC_MAIN.h" />
+<name v=".\Design01.cydsn\PSC_Communicate.h" />
+<name v=".\Design01.cydsn\PSC_CMD_API.h" />
+<name v=".\Design01.cydsn\TopDesign\TopDesign.cysch" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -368,7 +333,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1439, 711" SelectedTabbedMdiWindow="2b914129-449a-45f5-9ce5-ec7716988bbb"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="0403172d-7318-4a87-bf2c-f1b976eb303d" /><DocumentWindow Key="413b48d5-686f-4d77-b48a-001890c4742a" Guid="c97ceb5d-e108-45ca-972b-f147f8939bcb" /><DocumentWindow Key="35148649-0684-421d-92c6-439e506e1fd0" Guid="2b914129-449a-45f5-9ce5-ec7716988bbb" /><DocumentWindow Key="41bce634-b443-4dff-bf9d-e7cd3770b2ba" Guid="329cc6bc-f995-48f4-aa30-fed336c3c3d2" /><DocumentWindow Key="c0937964-5779-4eda-b5ba-e141e53685e9" Guid="8088626a-da1e-4234-9a7c-b663f9f68567" /><DocumentWindow Key="cbf741bd-6a51-431d-84d9-c125bd2b47e7" Guid="86fae29b-c654-4b35-9422-a2d0c8dc8c58" /><DocumentWindow Key="789bb9cf-6aa0-4605-869b-dd68b6cf83c9" Guid="9b0311bf-4ce6-45fd-a4e7-67447671141a" /><DocumentWindow Key="649dd9d9-207c-441a-aace-000bc95fb39c" Guid="cc034001-9e20-4e6a-a7f4-aa43239f12f0" /><DocumentWindow Key="75f83e34-04ae-4c17-9a18-2c0ef936bc56" Guid="6c7dff80-0c7d-4c2a-8211-15c3fce6866f" /><DocumentWindow Key="7ab461f7-08a7-4801-b7e4-583a5ac6a5ba" Guid="ed11bbef-ebec-4961-893f-aa1b800349ad" /><DocumentWindow Key="3b03f524-e32d-4c2e-9170-fbdecd4163e7" Guid="c8f1081c-ecb2-427f-b637-6d63500adffd" /><DocumentWindow Key="09cd42ce-debf-4951-969c-b8a47c00259c" Guid="79051c40-7fea-46ba-a180-2f2455235652" /><DocumentWindow Key="40187bf7-9098-40a6-8d23-f54227c40db8" Guid="5734b937-cb6f-4cbf-b6ec-c48a95417669" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1439, 711" SelectedTabbedMdiWindow="a0ce4485-dee3-4b18-be17-9d859cea2467"><DocumentWindow Key="544397db-8e5f-46ac-ae0e-b37b35ccecc5" Guid="a0ce4485-dee3-4b18-be17-9d859cea2467" /><DocumentWindow Key="44793f61-0268-4b99-84a2-d3ddb9505aa9" Guid="407182de-247f-4084-a025-12cfe8f2de3d" /><DocumentWindow Key="5faac5e7-3d2d-4286-91ec-af3d4ea18121" Guid="3e87e0a5-edfd-411f-a649-bc6c935f36b7" /><DocumentWindow Key="48e5a555-7c24-4ffe-b33a-6aad2f180610" Guid="793ea225-f89b-4a38-841e-75f442f275db" /><DocumentWindow Key="776b4e8e-fb3c-4103-8d82-215f06ae94f8" Guid="4b108841-36d6-47ad-9aff-a8763eae4483" /><DocumentWindow Key="1ca26fe0-01a2-4b21-bb60-2cbf35a4a2c6" Guid="d0b129cc-b7e5-40e3-8b18-f931e4d8bc96" /><DocumentWindow Key="cbf73288-73ef-4a92-b5ed-7ab92ca697e8" Guid="01411051-d9b9-4e3d-b48b-58a27576c76a" /><DocumentWindow Key="cca37ecf-80ac-4b96-9cfe-912baafd31f6" Guid="af77d6d2-50fb-43ef-9d49-1b79b7416cbf" /><DocumentWindow Key="ac6ed62a-2f7c-4c0c-9922-4c4e53f338ad" Guid="17dcc596-01d2-4403-8567-8f3c46318d7e" /><DocumentWindow Key="b3164ba3-6466-4a70-97ca-92364cc48f05" Guid="34ca6772-f019-4c16-8859-e66d96e66701" /><DocumentWindow Key="b6209691-3097-4473-acf3-199a80f5532e" Guid="950a9c00-6b40-4e5c-8137-f4b27736f845" /><DocumentWindow Key="b7d2d01a-2385-49a9-9375-56cac44e4fda" Guid="9a0cf251-5263-449d-8936-061879e0b1b1" /><DocumentWindow Key="561112a2-6c90-4411-aa82-4697a3b740ec" Guid="e6a51fb6-6d8d-44f1-96dd-58dd7ccc3bcb" /><DocumentWindow Key="3c13f9e3-5135-4dab-94ba-e1da564025d2" Guid="92af65cd-8d76-42be-bdd3-c7edfd7eb4a9" /><DocumentWindow Key="98de3ac4-526c-47e2-aae6-022c01456664" Guid="0fbf78d3-720d-4ed2-8101-30e269954f9c" /><DocumentWindow Key="5d610fbf-3079-46b9-b63d-1a6f3c9aa9df" Guid="fd98088c-fff3-4443-84b6-3976e0b5b495" /><DocumentWindow Key="1ae2355a-9001-41ea-b712-a37e2a6d6d9d" Guid="9b7338eb-63b8-4165-8d8b-150d07231520" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="0403172d-7318-4a87-bf2c-f1b976eb303d" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
