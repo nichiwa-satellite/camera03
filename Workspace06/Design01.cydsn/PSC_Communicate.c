@@ -40,85 +40,67 @@ PSC_RET PSC_Comm_Initialize()
     return PSC_RET_SUCCESS;
 }
 
-PSC_RET PSC_Comm_GetCommand(PSC_ST_CMD* pstData)
+
+void PSC_Comm_GetCommand(PSC_CHAR *pstRecvData, unsigned short pstRecvDataSize)
 {
-    PSC_RET ret;
-    
-    ret = psc_Comm_GetRecvLine(pstData);
+    char[] retStr;
+
+    ret = psc_Comm_GetRecvLine(&pstRecvData, pstRecvDataSize);
     if( ret != PSC_RET_SUCCESS )
     {
-        return ret;
+        sprintf(retStr, "Uart Data Racv Err[%d].n\r", ret);
+        DBG_printf(retStr);
+        return;
     }
-    
-    return PSC_RET_SUCCESS;
+
+    psc_Comm_ErrorRepair();
+    return;
 }
 
 
-PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD* pstData)
+PSC_RET psc_Comm_GetRecvLine(PSC_CHAR* pstRecvData, unsigned short pstRecvDataSize)
 {
     PSC_RET ret;
     PSC_CHAR recv_data;
 
-    ret = PSC_CMD_RECV_SETUP(pstData);
-    if( ret != PSC_RET_SUCCESS )
-    {
-        return ret;
-    }
-    /* Debug */
-    DBG_printf("TRACE Start Get Command \n\r");
     while(1)
-    {   
-        ret = psc_Comm_GetRecvChar(pstData->dev_id,&recv_data);
-        if( ret != PSC_RET_SUCCESS )
-        {
-            return ret;
-        }
-        
-        ret = PSC_CMD_SET_RECV_DATA(pstData,&recv_data);
-        if( ret != PSC_RET_SUCCESS )
-        {
-            return ret;
-        }
-        
-        if(PSC_CMD_GET_RCV_STATE() == PSC_CMD_RCV_ST_COMPLETE)
+    {
+        recv_data = UART_TO_COMM_GetChar();
+
+        // Data Get Complete Check
+        if(PSC_CMD_SET_RECV_DATA(pstRecvData, &recv_data) == PSC_CMD_RCV_ST_COMPLETE)
         {
             break;
         }
     }
-    /* Debug */
-    DBG_printf("TRACE Complete Get Command \n\r");
-    ret = PSC_CMD_PARSE_COMMAND(pstData);
-    if( ret != PSC_RET_SUCCESS )
-    {
-        return ret;
-    }
-    
-
-
     return PSC_RET_SUCCESS;
 }
 
 
-PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR*  pvData)
+PSC_RET psc_Comm_ErrorRepair(PSC_CHAR* pstRecvData, unsigned short pstRecvDataSize)
 {
-    PSC_CHAR    tmpData;
-    int         i;
-    
-    switch(dev_id)
-    {
-        case DEV_ID_CAM:
-            tmpData = UART_TO_CAMERA_GetChar();
-            break;
-        case DEV_ID_COMM:
-            tmpData = UART_TO_COMM_GetChar();
-        default:
-            break;
-    }
-    
-    *pvData = tmpData;
     return PSC_RET_SUCCESS;
 }
 
+//PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR* pvData)
+//{
+//    PSC_CHAR    tmpData;
+//    int         i;
+//
+//    switch(dev_id)
+//    {
+//        case DEV_ID_CAM:
+//            tmpData = UART_TO_CAMERA_GetChar();
+//            break;
+//        case DEV_ID_COMM:
+//            tmpData = UART_TO_COMM_GetChar();
+//        default:
+//            break;
+//    }
+//
+//    *pvData = tmpData;
+//    return PSC_RET_SUCCESS;
+//}
 
 PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
 {
