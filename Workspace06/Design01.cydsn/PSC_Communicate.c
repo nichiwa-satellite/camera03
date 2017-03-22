@@ -126,8 +126,8 @@ PSC_RET psc_Comm_GetRecvCmd_For_Camera(DEV_ID dev_id, PSC_CHAR string[],  int si
     PSC_CHAR Data;
     for( i = 0; i < size ; i++ )
     {
-        (void)psc_Comm_GetRecvChar(dev_id, &Data );
-        string[i] = Data;
+        Data = UART_TO_CAMERA_GetChar();
+        string[i] = (Data + '0');
     }
     return PSC_RET_SUCCESS;
 }
@@ -148,10 +148,11 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
-            UART_TO_COMM_PutString("TXDT ");
+            UART_TO_COMM_PutString("TXDT 334");
+            CyDelay(30);
             UART_TO_COMM_PutArray(pChar,ucSize);
+            CyDelay(30);
             UART_TO_COMM_PutString("\n\r");
-  //          UART_TO_COMM_PutArray(tmpData,ucSize + 5);
             break;
         default:
             break;

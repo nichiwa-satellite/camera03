@@ -110,12 +110,12 @@ PSC_RET PSC_Proc_CameraShot_Main(PSC_ST_CMD* pstData)
             break;
         
     }
-    CyDelay(500);
+
     
-    UART_TO_COMM_PutString("TXDT 0001\n\r");
+    //UART_TO_COMM_PutString("TXDT 0001\n\r");
     psc_Comm_GetRecvCmd_For_Camera(DEV_ID_CAM,RcvMsg,RcvMsgSize);
     PSC_Comm_SndCommand(DEV_ID_COMM,RcvMsg, RcvMsgSize);
-    
+    CyDelay(500);    
     return ret;
 }
 
