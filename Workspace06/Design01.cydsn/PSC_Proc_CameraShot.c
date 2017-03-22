@@ -51,6 +51,9 @@ PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_LoadDataSize(PSC_ST_CMD*);
 
+#define RcvMsgSize ( 32 )
+static PSC_CHAR RcvMsg[RcvMsgSize];
+
 
 PSC_RET PSC_Proc_CameraShot_Init(PSC_RET (**pFunc)(PSC_ST_CMD*))
 {
@@ -107,11 +110,11 @@ PSC_RET PSC_Proc_CameraShot_Main(PSC_ST_CMD* pstData)
             break;
         
     }
-    CyDelay(1500);
-//    if( ret == PSC_RET_SUCCESS )
-//    {
-//        svPSC_PROC_STATE_CAMERASHOT++;
-//    }
+    CyDelay(500);
+    
+    UART_TO_COMM_PutString("TXDT 0001\n\r");
+    psc_Comm_GetRecvCmd_For_Camera(DEV_ID_CAM,RcvMsg,RcvMsgSize);
+    PSC_Comm_SndCommand(DEV_ID_COMM,RcvMsg, RcvMsgSize);
     
     return ret;
 }
@@ -143,6 +146,7 @@ PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
     {
         return ret;
     }
+    
 
     svPSC_PROC_STATE_CAMERASHOT++;
     return PSC_RET_SUCCESS;

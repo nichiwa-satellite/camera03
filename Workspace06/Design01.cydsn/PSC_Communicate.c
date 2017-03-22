@@ -28,6 +28,7 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],uint8);    //Send Command to Devic
 PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD*);
 PSC_RET psc_Comm_GetRecvChar(DEV_ID,PSC_CHAR*);
 PSC_RET psc_Comm_SndDataLine(PSC_ST_CMD*);
+PSC_RET psc_Comm_GetRecvCmd_For_Camera(DEV_ID dev_id, PSC_CHAR string[],  int size );
 
 PSC_RET PSC_Comm_Initialize()
 {
@@ -119,6 +120,19 @@ PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR*  pvData)
     return PSC_RET_SUCCESS;
 }
 
+PSC_RET psc_Comm_GetRecvCmd_For_Camera(DEV_ID dev_id, PSC_CHAR string[],  int size )
+{
+    int i = 0;
+    PSC_CHAR Data;
+    for( i = 0; i < size ; i++ )
+    {
+        (void)psc_Comm_GetRecvChar(dev_id, &Data );
+        string[i] = Data;
+    }
+    return PSC_RET_SUCCESS;
+}
+
+
 
 PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
 {
@@ -134,8 +148,10 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
-            sprintf(tmpData,"TXDT %s",pChar);
-            UART_TO_COMM_PutString(tmpData);
+            UART_TO_COMM_PutString("TXDT ");
+            UART_TO_COMM_PutArray(pChar,ucSize);
+            UART_TO_COMM_PutString("\n\r");
+  //          UART_TO_COMM_PutArray(tmpData,ucSize + 5);
             break;
         default:
             break;

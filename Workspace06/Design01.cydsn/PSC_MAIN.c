@@ -86,6 +86,7 @@ PSC_RET psc_Main()
     {
         switch(svPSC_PROG_STATE)
         {
+                
             case PSC_ST_IDLE:
                 /* DEBUG */
                 DBG_printf("TRACE PSC_ST_ILDE \n\r");
