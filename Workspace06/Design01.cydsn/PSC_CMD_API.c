@@ -68,11 +68,11 @@ PSC_RET PSC_CMD_CREATE_CONTEXT(PSC_ST_CMD* pstData)
     memset(pstData,0x00,sizeof(PSC_ST_CMD));
     return PSC_RET_SUCCESS;
 }
-
-PSC_RET PSC_CMD_RECV_SETUP(PSC_ST_CMD* pstRecvData, unsigned short pstRecvDataSize)
+PSC_RET PSC_CMD_RECV_SETUP(PSC_ST_CMD* pstData)
 {
+    pstData->Data.RecvDataSize = 0;
     svPSC_CMD_RCV_STATE = PSC_CMD_RCV_ST_INIT;
-    memset(pstRecvData, 0x00, pstRecvDataSize);
+    memset(pstData->Data.recv_data,0x00,sizeof(pstData->Data.recv_data));
     return PSC_RET_SUCCESS;
 }
 
@@ -113,18 +113,42 @@ PSC_RET PSC_CMD_SET_COMMAND(PSC_ST_CMD* pstData,PSC_COMMAND* pStr)
 PSC_RET PSC_CMD_SET_RECV_DATA(PSC_ST_CMD* pstData, PSC_CHAR* pChar)
 {
     PSC_RET ret;
-
-    if( *pChar != TX_COMMAND_NONE )
+    
+    switch(svPSC_CMD_RCV_STATE)
     {
-        ret = PSC_RET_INVALID_PARAM;
+        case PSC_CMD_RCV_ST_INIT:
+            if( *pChar != TX_COMMAND_NONE )
+            {
+                svPSC_CMD_RCV_STATE++;
+            }
+            break;
+        case PSC_CMD_RCV_ST_HEADER:
+        case PSC_CMD_RCV_ST_BODY:
+        case PSC_CMD_RCV_ST_END:
+            if( ssaPSC_CMD_RCV_PROC[svPSC_CMD_RCV_STATE].EndIndex <= pstData->Data.RecvDataSize )
+            {
+                svPSC_CMD_RCV_STATE++;
+            }
+            break;
+        case PSC_CMD_RCV_ST_COMPLETE:
+            break;
+        default:
+            return PSC_RET_INTERNAL_ERROR;
+            break;
     }
-
-    // Size Over
-    if( pstData->Data > pstData->Data.RecvDataSize )
+    
+    if( ssaPSC_CMD_RCV_PROC[svPSC_CMD_RCV_STATE].pfProc == 0)
     {
-        ret = PSC_CMD_RCV_ST_COMPLETE;
+        return PSC_RET_SUCCESS;
     }
-    return ret;
+    
+    ret = ssaPSC_CMD_RCV_PROC[svPSC_CMD_RCV_STATE].pfProc(pstData,pChar);
+    if( ret != PSC_RET_SUCCESS )
+    {
+        return ret;
+    }
+    
+    return PSC_RET_SUCCESS;
 }
 
 PSC_RET psc_cmd_Set_Recv_Header(PSC_ST_CMD* pstData,PSC_CHAR* pChar)

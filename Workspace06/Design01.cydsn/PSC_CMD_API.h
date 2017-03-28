@@ -40,10 +40,10 @@ typedef struct PSC_CMD_INTEGRITYtag
 
 typedef struct PSC_CMD_RCV_DATAtag
 {
-    unsigned    char    RecvDataSize;                   // Recv data size
-    PSC_COMMAND         command;                        // Recv data Conv after Command parts
-    PSC_CHAR            recv_data[SZ_COMMAND_FULL];     // Recv data
-    PSC_CMD_INTEGRITY   Integrity;                      // parity
+    unsigned    char    RecvDataSize;
+    PSC_COMMAND         command;
+    PSC_CHAR            recv_data[SZ_COMMAND_FULL];
+    PSC_CMD_INTEGRITY   Integrity;
 }PSC_CMD_RCV_DATA;
 
 
