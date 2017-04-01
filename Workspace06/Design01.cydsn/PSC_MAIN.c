@@ -15,6 +15,7 @@
 #include "PSC_MAIN.h"
 #include "PSC_Types.h"
 #include "PSC_Communicate.h"
+#include "PSC_Interrupt.h"
 #include "PSC_CMD_API.h"
 #include "PSC_Proc_Common.h"
 #include "PSC_Proc_CameraShot.h"
@@ -131,6 +132,7 @@ PSC_RET psc_Initialize()
         return ret;
     }
     
+    (void)PSC_Interrupt_Initialize();
     svPSC_PROG_STATE = PSC_ST_IDLE;
     svPSC_INTR_STATE = PSC_INTR_ST_ACTIVE;
     return PSC_RET_SUCCESS;

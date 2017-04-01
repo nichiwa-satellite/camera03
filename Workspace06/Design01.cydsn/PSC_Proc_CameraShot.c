@@ -14,6 +14,7 @@
 
 
 #include "PSC_Types.h"
+#include "PSC_Interrupt.h"
 #include "PSC_CMD_API.h"
 #include "PSC_Camera.h"
 #include "PSC_Communicate.h"
@@ -130,14 +131,30 @@ PSC_RET psc_Proc_CameraShot_Complete()
 PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
-    
-  
+    PSC_CHAR data[50];
+    PSC_INTR_TIKET ticket;
+    memset(data, 0x00, sizeof( data ) );
+    (void)PSC_Interrupt_GetTicket( &ticket );
+    (void)PSC_Interrupt_Registration( ticket, 1 );
+    (void)PSC_Interrupt_ReciveON();
     ret = PSC_Comm_SndCommand(DEV_ID_CAM,get,get_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
     }
-
+    CyDelay(100);
+    (void)PSC_Interrupt_ReciveOFF();
+    (void)PSC_Interrupt_Invalidation( ticket );
+    (void)PSC_Interrupt_GetData( ticket, data, 50 );
+    (void)PSC_Interrupt_TicketFree( ticket );
+    
+    ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,10);
+    if( ret != PSC_RET_SUCCESS )
+    {
+        return ret;
+    }
+    
+    
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
     if( ret != PSC_RET_SUCCESS )
     {

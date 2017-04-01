@@ -30,12 +30,12 @@ typedef enum tgPSC_INTR_TIKET
     PSC_INTR_TIKET_MAX,
 } PSC_INTR_TIKET;
 
-typedef enum tgPSC_INTR_STATE
+typedef enum tgPSC_INTR_RECV_STATE
 {
     PSC_INTR_STATE_RECV_ON,
     PSC_INTR_STATE_RECV_OFF,
     PSC_INTR_STATE_RECV_MAX,
-} PSC_INTR_STATE;
+} PSC_INTR_RECV_STATE;
 
 extern PSC_RET PSC_Interrupt_Initialize();
 extern PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket );
