@@ -43,6 +43,7 @@
           <File BuildType="BUILD" Toolchain="">PSC_CMD_API.c</File>
           <File BuildType="BUILD" Toolchain="">PSC_Proc_CameraShot.c</File>
           <File BuildType="BUILD" Toolchain="">Debugs.c</File>
+          <File BuildType="BUILD" Toolchain="">PSC_Interrupt.c</File>
           <File BuildType="BUILD" Toolchain="">cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">PSC_Types.h</File>
           <File BuildType="BUILD" Toolchain="">PSC_Camera.h</File>
@@ -52,6 +53,7 @@
           <File BuildType="BUILD" Toolchain="">PSC_Proc_CameraShot.h</File>
           <File BuildType="BUILD" Toolchain="">PSC_Proc_Common.h</File>
           <File BuildType="BUILD" Toolchain="">Debugs.h</File>
+          <File BuildType="BUILD" Toolchain="">PSC_Interrupt.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\youkan\Documents\GitHub\camera03\Workspace06\Design01.cydsn\Generated_Source\PSoC5">

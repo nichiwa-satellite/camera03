@@ -280,3 +280,5 @@ PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD* pstData)
     svPSC_PROC_STATE_CAMERASHOT++;
     return PSC_RET_SUCCESS;
 }
+
+
