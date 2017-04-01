@@ -108,7 +108,7 @@ PSC_RET PSC_Proc_CameraShot_Main(PSC_ST_CMD* pstData)
             break;
         
     }
-    CyDelay(1500);
+    CyDelay(150);
 //    if( ret == PSC_RET_SUCCESS )
 //    {
 //        svPSC_PROC_STATE_CAMERASHOT++;
@@ -131,7 +131,7 @@ PSC_RET psc_Proc_CameraShot_Complete()
 PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
-    PSC_CHAR data[50];
+    PSC_CHAR data[250];
     PSC_INTR_TIKET ticket;
     memset(data, 0x00, sizeof( data ) );
     (void)PSC_Interrupt_GetTicket( &ticket );
@@ -145,10 +145,10 @@ PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
     CyDelay(100);
     (void)PSC_Interrupt_ReciveOFF();
     (void)PSC_Interrupt_Invalidation( ticket );
-    (void)PSC_Interrupt_GetData( ticket, data, 50 );
+    (void)PSC_Interrupt_GetData( ticket, data, 250 );
     (void)PSC_Interrupt_TicketFree( ticket );
     
-    ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,10);
+    ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,250);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;

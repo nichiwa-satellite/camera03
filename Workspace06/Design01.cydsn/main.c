@@ -14,6 +14,7 @@
 
 int main(void)
 {
+    CyGlobalIntEnable;
     PSC_PROGRAM_START();
     return 0;
 }

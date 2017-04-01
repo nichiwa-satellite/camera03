@@ -51,12 +51,14 @@ static PSC_INTR_RECVDATA PSC_RecvDataList[PSC_INTR_TIKET_MAX];
 static PSC_INTR_TIKET PSC_ReciveTicket;
 static PSC_INTR_RECV_STATE PSC_ReciveState;
 
+CY_ISR_PROTO(Cam_Rx_Intr);
 
 
 
 
 PSC_RET PSC_Interrupt_Initialize()
 {
+    Cam_Rx_Intr_StartEx(Cam_Rx_Intr );
     PSC_ReciveTicket = PSC_INTR_TIKET_MAX;
     PSC_ReciveState = PSC_INTR_STATE_RECV_OFF;
     memset(PSC_RecvDataList, 0x00, sizeof( PSC_RecvDataList ) );
@@ -78,6 +80,7 @@ PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket )
     {
         if( PSC_RecvDataList[i].state == PSC_INTR_RSRC_ST_FREE )
         {
+            memset( &PSC_RecvDataList[i], 0x00, sizeof( PSC_RecvDataList[i] ) );
             PSC_RecvDataList[i].state = PSC_INTR_RSRC_ST_HOLD;
             *pTicket = (PSC_INTR_TIKET)i;
             ret = PSC_RET_SUCCESS;
@@ -198,6 +201,6 @@ CY_ISR(Cam_Rx_Intr)
     index = PSC_RecvDataList[PSC_ReciveTicket].index;
     PSC_RecvDataList[PSC_ReciveTicket].index++;
     recv_data = UART_TO_CAMERA_GetChar();
-    PSC_RecvDataList[PSC_ReciveTicket].data[index] = recv_data + '0';
+    PSC_RecvDataList[PSC_ReciveTicket].data[index] = recv_data;
     return;
 }
