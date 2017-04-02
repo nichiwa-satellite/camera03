@@ -138,9 +138,10 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             {
                 pChar[i] = pChar[i] + '0';
             }
+            pChar[ucSize - 1] = "\0";
             UART_TO_COMM_PutString("TXDT ");
             CyDelay(30);
-            UART_TO_COMM_PutArray( pChar,ucSize );
+            UART_TO_COMM_PutString( pChar );
             CyDelay(30);
             UART_TO_COMM_PutString("\n\r");
             break;
