@@ -133,6 +133,7 @@ PSC_RET psc_Initialize()
     }
     
     (void)PSC_Interrupt_Initialize();
+    CyGlobalIntEnable;
     svPSC_PROG_STATE = PSC_ST_IDLE;
     svPSC_INTR_STATE = PSC_INTR_ST_ACTIVE;
     return PSC_RET_SUCCESS;
