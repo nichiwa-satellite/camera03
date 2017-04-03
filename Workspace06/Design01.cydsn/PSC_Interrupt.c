@@ -142,7 +142,7 @@ PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size 
 {
     PSC_RET ret;
     
-    if( Ticket >= PSC_INTR_TIKET_MAX  )
+    if( ( PSC_ReciveTicket != Ticket ) || ( PSC_ReciveTicket == PSC_INTR_TIKET_MAX ) )
     {
         return PSC_RET_INVALID_PARAM;
     }

@@ -130,7 +130,6 @@ PSC_RET psc_Proc_CameraShot_Complete()
 
 PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
 {
-    int    i;
     PSC_RET ret;
     PSC_CHAR data[250];
     PSC_INTR_TIKET ticket;
@@ -143,9 +142,7 @@ PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
     {
         return ret;
     }
-    for( i = 0; i < 1000000; i++ )
-    {
-    }
+    CyDelay(100);
     (void)PSC_Interrupt_ReciveOFF();
     (void)PSC_Interrupt_Invalidation( ticket );
     (void)PSC_Interrupt_GetData( ticket, data, 250 );
@@ -174,28 +171,12 @@ PSC_RET psc_Proc_CameraShot_ResetCamera(PSC_ST_CMD* pstData)
     PSC_RET ret;
     //TODO: Return Value Check from CAM
     //      That is in pstData->
-    PSC_CHAR data[250];
-    PSC_INTR_TIKET ticket;
-    memset(data, 0x00, sizeof( data ) );
-    (void)PSC_Interrupt_GetTicket( &ticket );
-    (void)PSC_Interrupt_Registration( ticket, 1 );
-    (void)PSC_Interrupt_ReciveON();
+    
     ret = PSC_Comm_SndCommand(DEV_ID_CAM,reset_camera,reset_camera_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
         
-    }
-    CyDelay(100);
-    (void)PSC_Interrupt_ReciveOFF();
-    (void)PSC_Interrupt_Invalidation( ticket );
-    (void)PSC_Interrupt_GetData( ticket, data, 250 );
-    (void)PSC_Interrupt_TicketFree( ticket );
-    
-    ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,250);
-    if( ret != PSC_RET_SUCCESS )
-    {
-        return ret;
     }
 
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
