@@ -15,6 +15,7 @@
 #include "PSC_Types.h"
 #include "project.h"
 #include "PSC_Interrupt.h"
+#include "PSC_Communicate.h"
 #include "Debugs.h"
 
 #define RECVDATASIZE        ( 500 )
@@ -195,10 +196,10 @@ void PSC_Interrupt_ReciveOFF()
 void Cam_Rx_Intr()
 {
     int         index;
+    PSC_RET ret;
     PSC_CHAR    recv_data;
     
-    recv_data = UART_TO_CAMERA_GetChar();
-    UART_TO_DEBUG_PutChar(recv_data);
+    
     if( PSC_ReciveState != PSC_INTR_STATE_RECV_ON )
     {
         return;
@@ -211,12 +212,18 @@ void Cam_Rx_Intr()
     
     if( PSC_RecvDataList[PSC_ReciveTicket].index + 1 > RECVDATASIZE )
     {
-        return;
+        ret = PSC_Comm_SndCommand(DEV_ID_COMM,PSC_RecvDataList[PSC_ReciveTicket].data,PSC_RecvDataList[PSC_ReciveTicket].index - 1);
+        if( ret != PSC_RET_SUCCESS )
+        {
+            return;
+        }
+        PSC_RecvDataList[PSC_ReciveTicket].index = 0;
     }
     
     index = PSC_RecvDataList[PSC_ReciveTicket].index;
     PSC_RecvDataList[PSC_ReciveTicket].index++;
-    
+    recv_data = UART_TO_CAMERA_GetChar();
+    UART_TO_DEBUG_PutChar(recv_data);
     PSC_RecvDataList[PSC_ReciveTicket].data[index] = recv_data;
     return;
 }

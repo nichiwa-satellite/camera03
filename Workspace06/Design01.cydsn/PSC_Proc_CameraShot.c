@@ -298,11 +298,11 @@ PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR SendData[], int SendSize, int R
     (void)PSC_Interrupt_GetData( ticket, data, RecvSize, &RecvSize );
     (void)PSC_Interrupt_TicketFree( ticket );
     
+
     ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,RecvSize);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
     }
-    
     return PSC_RET_SUCCESS;
 }
