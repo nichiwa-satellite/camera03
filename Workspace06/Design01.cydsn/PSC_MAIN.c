@@ -117,6 +117,9 @@ PSC_RET psc_Main()
 PSC_RET psc_Initialize()
 {
     PSC_RET ret;
+
+    (void)PSC_Interrupt_Initialize();
+    CyGlobalIntEnable;
     DBG_Init();
     ret = PSC_CMD_CREATE_CONTEXT(&sstPSC_COMMAND);
     if( ret != PSC_RET_SUCCESS )
@@ -132,8 +135,7 @@ PSC_RET psc_Initialize()
         return ret;
     }
     
-    (void)PSC_Interrupt_Initialize();
-    CyGlobalIntEnable;
+
     svPSC_PROG_STATE = PSC_ST_IDLE;
     svPSC_INTR_STATE = PSC_INTR_ST_ACTIVE;
     return PSC_RET_SUCCESS;
