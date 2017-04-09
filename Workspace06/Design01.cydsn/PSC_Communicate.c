@@ -143,7 +143,7 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             }
             UART_TO_COMM_PutString("TXDA ");
             CyDelay(30);
-            UART_TO_COMM_PutArray( tmpData,ucSize *2 );
+            UART_TO_COMM_PutArray( tmpData,ucSize *2 + 50 );
             CyDelay(30);
             UART_TO_COMM_PutString("\n\r");
             break;

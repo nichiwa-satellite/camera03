@@ -17,7 +17,7 @@
 #include "PSC_Interrupt.h"
 #include "Debugs.h"
 
-#define RECVDATASIZE        ( 0xFF )
+#define RECVDATASIZE        ( 500 )
 
 
 
@@ -198,6 +198,11 @@ void Cam_Rx_Intr()
     }
     
     if( PSC_ReciveTicket >= PSC_INTR_TIKET_MAX )
+    {
+        return;
+    }
+    
+    if( PSC_RecvDataList[PSC_ReciveTicket].index + 1 > RECVDATASIZE )
     {
         return;
     }
