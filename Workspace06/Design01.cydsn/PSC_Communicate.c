@@ -20,6 +20,8 @@
 #include "PSC_Communicate.h"
 #include "Debugs.h"
 
+#define  HigherBitsMask  ( 0x0F )
+#define  LowerBitsMask   ( 0xF0 )
 
 
 PSC_RET PSC_Comm_Initialize();
@@ -28,6 +30,8 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],uint8);    //Send Command to Devic
 PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD*);
 PSC_RET psc_Comm_GetRecvChar(DEV_ID,PSC_CHAR*);
 PSC_RET psc_Comm_SndDataLine(PSC_ST_CMD*);
+PSC_RET psc_Comm_ConvertHEX(const PSC_CHAR, PSC_CHAR*, PSC_CHAR* );
+
 
 PSC_RET PSC_Comm_Initialize()
 {
@@ -122,8 +126,7 @@ PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR*  pvData)
 
 PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
 {
-    char    tmpData[SZ_COMMAND];
-    uint8   utmpData[SZ_COMMAND];
+    PSC_CHAR    tmpData[ucSize * 2 + 50];
     int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
@@ -136,11 +139,11 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
         case DEV_ID_COMM:
             for( i = 0; i < ucSize - 1; i++ )
             {
-                pChar[i] = pChar[i] + '0';
+                psc_Comm_ConvertHEX(pChar[i],&tmpData[ i * 2 ], &tmpData[ i * 2 + 1]);
             }
-            UART_TO_COMM_PutString("TXDT ");
+            UART_TO_COMM_PutString("TXDA ");
             CyDelay(30);
-            UART_TO_COMM_PutArray( pChar,ucSize );
+            UART_TO_COMM_PutArray( tmpData,ucSize *2 );
             CyDelay(30);
             UART_TO_COMM_PutString("\n\r");
             break;
@@ -148,5 +151,12 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             break;
     }
     DBG_printf("TRACE Send Command END \n\r");
+    return PSC_RET_SUCCESS;
+}
+
+PSC_RET psc_Comm_ConvertHEX(const PSC_CHAR Input, PSC_CHAR *pH4Bit, PSC_CHAR *pL4Bit )
+{
+    *pH4Bit = ( (Input & LowerBitsMask) >> 4 ) + '0';
+    *pL4Bit = (Input & HigherBitsMask) + '0';
     return PSC_RET_SUCCESS;
 }

@@ -51,7 +51,7 @@ PSC_RET psc_Proc_CameraShot_ConfigDataSize(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_LoadDataSize(PSC_ST_CMD*);
-
+PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR [], int, int, int );
 
 PSC_RET PSC_Proc_CameraShot_Init(PSC_RET (**pFunc)(PSC_ST_CMD*))
 {
@@ -131,30 +131,13 @@ PSC_RET psc_Proc_CameraShot_Complete()
 PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
-    PSC_CHAR data[250];
-    PSC_INTR_TIKET ticket;
-    memset(data, 0x00, sizeof( data ) );
-    (void)PSC_Interrupt_GetTicket( &ticket );
-    (void)PSC_Interrupt_Registration( ticket, 1 );
-    (void)PSC_Interrupt_ReciveON();
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,get,get_size);
+ 
+    ret = psc_Proc_CameraShot_SndCommand(get,get_size,get_size,100);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
     }
-    CyDelay(100);
-    (void)PSC_Interrupt_ReciveOFF();
-    (void)PSC_Interrupt_Invalidation( ticket );
-    (void)PSC_Interrupt_GetData( ticket, data, 250 );
-    (void)PSC_Interrupt_TicketFree( ticket );
-    
-    ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,250);
-    if( ret != PSC_RET_SUCCESS )
-    {
-        return ret;
-    }
-    
-    
+     
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
     if( ret != PSC_RET_SUCCESS )
     {
@@ -171,14 +154,12 @@ PSC_RET psc_Proc_CameraShot_ResetCamera(PSC_ST_CMD* pstData)
     PSC_RET ret;
     //TODO: Return Value Check from CAM
     //      That is in pstData->
-    
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,reset_camera,reset_camera_size);
+    ret = psc_Proc_CameraShot_SndCommand(reset_camera,reset_camera_size,reset_camera_size,100);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
-        
     }
-
+    
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
     if( ret != PSC_RET_SUCCESS )
     {
@@ -194,13 +175,13 @@ PSC_RET psc_Proc_CameraShot_Baurate(PSC_ST_CMD* pstData)
     PSC_RET ret;
     //TODO: Return Value Check from CAM
     //      That is in pstData->
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,baurate,sizeof(baurate));
+ 
+    ret = psc_Proc_CameraShot_SndCommand(baurate,sizeof(baurate),sizeof(baurate),100);
     if( ret != PSC_RET_SUCCESS )
     {
-        //return ret;
-        
+        return ret;
     }
-
+    
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
     if( ret != PSC_RET_SUCCESS )
     {
@@ -215,14 +196,12 @@ PSC_RET psc_Proc_CameraShot_ConfigDataSize(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     
-    
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,config_datasize,config_datasize_size);
+    ret = psc_Proc_CameraShot_SndCommand(config_datasize,config_datasize_size,config_datasize_size,100);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
-        
     }
-
+    
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
     if( ret != PSC_RET_SUCCESS )
     {
@@ -239,11 +218,11 @@ PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD* pstData)
     
     //TODO: Return Value Check from CAM
     //      That is in pstData->
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,take_picture,tack_picture_size);
+    
+    ret = psc_Proc_CameraShot_SndCommand(take_picture,tack_picture_size,tack_picture_size ,100);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
-        
     }
 
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
@@ -260,12 +239,11 @@ PSC_RET psc_Proc_CameraShot_LoadDataSize(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,read_datasize,read_datasize_size);
+    ret = psc_Proc_CameraShot_SndCommand(read_datasize,read_datasize_size,read_datasize_size ,100);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
-        
-    }
+    }    
 
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
     if( ret != PSC_RET_SUCCESS )
@@ -281,13 +259,12 @@ PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     
-    ret = PSC_Comm_SndCommand(DEV_ID_CAM,load_data,load_data_size);
+    ret = psc_Proc_CameraShot_SndCommand(load_data,load_data_size,30000 ,100);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
-        
-    }
-
+    }    
+    
     ret = PSC_CMD_SET_DEVICE_ID(pstData,DEV_ID_CAM);
     if( ret != PSC_RET_SUCCESS )
     {
@@ -299,3 +276,33 @@ PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD* pstData)
 }
 
 
+PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR SendData[], int SendSize, int RecvSize, int TimeOut )
+{
+    PSC_RET ret;
+    PSC_CHAR data[RecvSize];
+    PSC_INTR_TIKET ticket;
+
+    memset(data, 0x00, sizeof( data ) );
+    
+    (void)PSC_Interrupt_GetTicket( &ticket );
+    (void)PSC_Interrupt_Registration( ticket, 1 );
+    (void)PSC_Interrupt_ReciveON();
+    ret = PSC_Comm_SndCommand(DEV_ID_CAM,SendData,SendSize);
+    if( ret != PSC_RET_SUCCESS )
+    {
+        return ret;
+    }
+    CyDelay(TimeOut);
+    (void)PSC_Interrupt_ReciveOFF();
+    (void)PSC_Interrupt_Invalidation( ticket );
+    (void)PSC_Interrupt_GetData( ticket, data, RecvSize );
+    (void)PSC_Interrupt_TicketFree( ticket );
+    
+    ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,RecvSize);
+    if( ret != PSC_RET_SUCCESS )
+    {
+        return ret;
+    }
+    
+    return PSC_RET_SUCCESS;
+}
