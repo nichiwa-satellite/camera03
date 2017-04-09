@@ -41,7 +41,7 @@ extern PSC_RET PSC_Interrupt_Initialize();
 extern PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket );
 extern PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket, int Retry );
 extern PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket );
-extern PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size );
+extern PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize );
 extern PSC_RET PSC_Interrupt_TicketFree( PSC_INTR_TIKET Ticket );
 extern void PSC_Interrupt_ReciveON();
 extern void PSC_Interrupt_ReciveOFF();

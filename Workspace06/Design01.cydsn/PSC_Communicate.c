@@ -126,7 +126,7 @@ PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR*  pvData)
 
 PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
 {
-    PSC_CHAR    tmpData[ucSize * 2 + 50];
+    PSC_CHAR    tmpData[ucSize * 2 + 1];
     int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
@@ -143,7 +143,7 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             }
             UART_TO_COMM_PutString("TXDA ");
             CyDelay(30);
-            UART_TO_COMM_PutArray( tmpData,ucSize *2 + 50 );
+            UART_TO_COMM_PutArray( tmpData,ucSize * 2 + 1);
             CyDelay(30);
             UART_TO_COMM_PutString("\n\r");
             break;

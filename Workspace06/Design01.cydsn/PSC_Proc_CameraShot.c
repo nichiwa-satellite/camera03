@@ -259,7 +259,7 @@ PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     
-    ret = psc_Proc_CameraShot_SndCommand(load_data,load_data_size,30000 ,100);
+    ret = psc_Proc_CameraShot_SndCommand(load_data,load_data_size,500 ,100);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -295,7 +295,7 @@ PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR SendData[], int SendSize, int R
     CyDelay(TimeOut);
     (void)PSC_Interrupt_ReciveOFF();
     (void)PSC_Interrupt_Invalidation( ticket );
-    (void)PSC_Interrupt_GetData( ticket, data, RecvSize );
+    (void)PSC_Interrupt_GetData( ticket, data, RecvSize, &RecvSize );
     (void)PSC_Interrupt_TicketFree( ticket );
     
     ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,RecvSize);

@@ -40,7 +40,7 @@ PSC_RET PSC_Interrupt_Initialize();
 PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket );
 PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket, int Retry );
 PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket );
-PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size );
+PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize );
 PSC_RET PSC_Interrupt_TicketFree( PSC_INTR_TIKET Ticket );
 void PSC_Interrupt_ReciveON();
 void PSC_Interrupt_ReciveOFF();
@@ -139,7 +139,7 @@ PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket )
 }
 
 
-PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size )
+PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize )
 {
     PSC_RET ret;
     
@@ -153,7 +153,14 @@ PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size 
         return PSC_RET_INVALID_PARAM;
     }
     
-    memcpy( Data, PSC_RecvDataList[Ticket].data, size );
+    if( PSC_RecvDataList[Ticket].index > size )
+    {
+        PSC_RecvDataList[Ticket].index = size;
+    }
+    
+    *pSize = PSC_RecvDataList[Ticket].index;
+    
+    memcpy( Data, PSC_RecvDataList[Ticket].data, PSC_RecvDataList[Ticket].index );
     
     return PSC_RET_SUCCESS;
 }
