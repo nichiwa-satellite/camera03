@@ -207,7 +207,6 @@ void Cam_Rx_Intr()
 {
     int         index;
     PSC_CHAR    recv_data;
-    
     recv_data = UART_TO_CAMERA_GetChar();
     UART_TO_DEBUG_PutChar(recv_data);
     if( PSC_ReciveState != PSC_INTR_STATE_RECV_ON )
