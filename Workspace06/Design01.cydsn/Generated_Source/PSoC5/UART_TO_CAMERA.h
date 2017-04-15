@@ -369,7 +369,7 @@ extern uint8 UART_TO_CAMERA_initVar;
 
 #define UART_TO_CAMERA_INIT_TX_INTERRUPTS_MASK \
                                   (uint8)((0 << UART_TO_CAMERA_TX_STS_COMPLETE_SHIFT) \
-                                        | (1 << UART_TO_CAMERA_TX_STS_FIFO_EMPTY_SHIFT) \
+                                        | (0 << UART_TO_CAMERA_TX_STS_FIFO_EMPTY_SHIFT) \
                                         | (0 << UART_TO_CAMERA_TX_STS_FIFO_FULL_SHIFT) \
                                         | (0 << UART_TO_CAMERA_TX_STS_FIFO_NOT_FULL_SHIFT))
 
