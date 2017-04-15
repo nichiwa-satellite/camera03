@@ -41,7 +41,7 @@ typedef enum tgPSC_INTR_RECV_STATE
 
 extern PSC_RET PSC_Interrupt_Initialize();
 extern PSC_RET PSC_Interrupt_RecvStateIsOff();
-extern PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int size );
+extern PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int max );
 extern PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket,int Retry );
 extern PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket );
 extern PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize );

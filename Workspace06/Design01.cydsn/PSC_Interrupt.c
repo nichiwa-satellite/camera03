@@ -31,13 +31,13 @@ typedef struct tgPSC_INTR_RECVDATA
     PSC_INTR_RESOURCE_STATE state;
     PSC_CHAR                data[RECVDATASIZE];
     int                     size;
-    int                     index;
+    int                     max;
 } PSC_INTR_RECVDATA;
 
 /* function */
 PSC_RET PSC_Interrupt_RecvStateIsOff();
 PSC_RET PSC_Interrupt_Initialize();
-PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int size );
+PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int max );
 PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket, int Retry );
 PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket );
 PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize );
@@ -77,7 +77,7 @@ PSC_RET PSC_Interrupt_RecvStateIsOff()
 }
 
 
-PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int size )
+PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int max )
 {
     PSC_RET ret = PSC_RET_INTERNAL_ERROR;
     int     i;
@@ -93,7 +93,7 @@ PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int size )
         {
             memset( &PSC_RecvDataList[i], 0x00, sizeof( PSC_RecvDataList[i] ) );
             PSC_RecvDataList[i].state = PSC_INTR_RSRC_ST_HOLD;
-            PSC_RecvDataList[i].size = size;
+            PSC_RecvDataList[i].max = max;
             *pTicket = (PSC_INTR_TIKET)i;
             ret = PSC_RET_SUCCESS;
             break;
@@ -164,14 +164,14 @@ PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size,
         return PSC_RET_INVALID_PARAM;
     }
     
-    if( PSC_RecvDataList[Ticket].index > size )
+    if( PSC_RecvDataList[Ticket].size > size )
     {
-        PSC_RecvDataList[Ticket].index = size;
+        PSC_RecvDataList[Ticket].size = size;
     }
     
-    *pSize = PSC_RecvDataList[Ticket].index;
+    *pSize = PSC_RecvDataList[Ticket].size;
     
-    memcpy( Data, PSC_RecvDataList[Ticket].data, PSC_RecvDataList[Ticket].index );
+    memcpy( Data, PSC_RecvDataList[Ticket].data, PSC_RecvDataList[Ticket].size );
     
     return PSC_RET_SUCCESS;
 }
@@ -205,10 +205,8 @@ void PSC_Interrupt_ReciveOFF()
 
 void Cam_Rx_Intr()
 {
-    int         index;
     PSC_CHAR    recv_data;
     recv_data = UART_TO_CAMERA_GetChar();
-    UART_TO_DEBUG_PutChar(recv_data);
     if( PSC_ReciveState != PSC_INTR_STATE_RECV_ON )
     {
         return;
@@ -219,17 +217,14 @@ void Cam_Rx_Intr()
         return;
     }
     
-    if( PSC_RecvDataList[PSC_ReciveTicket].index + 1 > RECVDATASIZE )
+    if( PSC_RecvDataList[PSC_ReciveTicket].size + 1 > RECVDATASIZE )
     {
         return;
     }
     
-    index = PSC_RecvDataList[PSC_ReciveTicket].index;
-    PSC_RecvDataList[PSC_ReciveTicket].index++;
-    
-    PSC_RecvDataList[PSC_ReciveTicket].data[index] = recv_data;
-    
-    if( PSC_RecvDataList[PSC_ReciveTicket].index >= PSC_RecvDataList[PSC_ReciveTicket].size )
+    PSC_RecvDataList[PSC_ReciveTicket].data[PSC_RecvDataList[PSC_ReciveTicket].size] = recv_data;
+    PSC_RecvDataList[PSC_ReciveTicket].size++;
+    if( PSC_RecvDataList[PSC_ReciveTicket].size >= PSC_RecvDataList[PSC_ReciveTicket].max )
     {
         PSC_ReciveState = PSC_INTR_STATE_RECV_OFF;
     }
