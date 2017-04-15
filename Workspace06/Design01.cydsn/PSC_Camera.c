@@ -11,3 +11,10 @@
 */
 
 /* [] END OF FILE */
+
+#include "PSC_Camera.h"
+#include "PSC_Types.h"
+
+
+
+PSC_CHAR Buffer[PHOTO_BUFFER_SCALE_LAYER2][PHOTO_BUFFER_SCALE_LAYER1];

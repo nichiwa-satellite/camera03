@@ -16,8 +16,7 @@
 #include "project.h"
 #include "PSC_Interrupt.h"
 #include "Debugs.h"
-
-
+#include "PSC_Camera.h"
 
 typedef enum tgPSC_INTR_RESOURCE_STATE
 {

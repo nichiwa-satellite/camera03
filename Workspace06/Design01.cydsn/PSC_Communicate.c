@@ -23,7 +23,6 @@
 #define  HigherBitsMask  ( 0x0F )
 #define  LowerBitsMask   ( 0xF0 )
 
-
 PSC_RET PSC_Comm_Initialize();
 PSC_RET PSC_Comm_GetCommand(PSC_ST_CMD*);    //Get Command form Device
 PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],uint8);    //Send Command to Device
@@ -62,7 +61,7 @@ PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     PSC_CHAR recv_data;
-
+    
     ret = PSC_CMD_RECV_SETUP(pstData);
     if( ret != PSC_RET_SUCCESS )
     {
