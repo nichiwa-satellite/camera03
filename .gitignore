@@ -89,3 +89,4 @@ Debug
 *.cywrk.*
 Workspace06/Design01.cydsn/Design01.rpt
 *.cyfit
+Workspace06/Design01.cydsn/Export/PSoCCreatorExportIDE.xml

@@ -17,8 +17,6 @@
 #include "PSC_Interrupt.h"
 #include "Debugs.h"
 
-#define RECVDATASIZE        ( 500 )
-
 
 
 typedef enum tgPSC_INTR_RESOURCE_STATE
@@ -32,12 +30,14 @@ typedef struct tgPSC_INTR_RECVDATA
 {
     PSC_INTR_RESOURCE_STATE state;
     PSC_CHAR                data[RECVDATASIZE];
+    int                     size;
     int                     index;
 } PSC_INTR_RECVDATA;
 
 /* function */
+PSC_RET PSC_Interrupt_RecvStateIsOff();
 PSC_RET PSC_Interrupt_Initialize();
-PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket );
+PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int size );
 PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket, int Retry );
 PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket );
 PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize );
@@ -66,8 +66,18 @@ PSC_RET PSC_Interrupt_Initialize()
     return PSC_RET_SUCCESS;
 }
 
+PSC_RET PSC_Interrupt_RecvStateIsOff()
+{
+    if( PSC_ReciveState == PSC_INTR_STATE_RECV_OFF )
+    {
+        return PSC_RET_SUCCESS;
+    }
+    
+    return PSC_RET_INTERNAL_ERROR;
+}
 
-PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket )
+
+PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int size )
 {
     PSC_RET ret = PSC_RET_INTERNAL_ERROR;
     int     i;
@@ -83,6 +93,7 @@ PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket )
         {
             memset( &PSC_RecvDataList[i], 0x00, sizeof( PSC_RecvDataList[i] ) );
             PSC_RecvDataList[i].state = PSC_INTR_RSRC_ST_HOLD;
+            PSC_RecvDataList[i].size = size;
             *pTicket = (PSC_INTR_TIKET)i;
             ret = PSC_RET_SUCCESS;
             break;
@@ -218,5 +229,11 @@ void Cam_Rx_Intr()
     PSC_RecvDataList[PSC_ReciveTicket].index++;
     
     PSC_RecvDataList[PSC_ReciveTicket].data[index] = recv_data;
+    
+    if( PSC_RecvDataList[PSC_ReciveTicket].index >= PSC_RecvDataList[PSC_ReciveTicket].size )
+    {
+        PSC_ReciveState = PSC_INTR_STATE_RECV_OFF;
+    }
+    
     return;
 }
