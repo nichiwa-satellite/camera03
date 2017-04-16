@@ -157,6 +157,7 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],long int ucSize)
                 }
                 CyDelay(30);
                 UART_TO_COMM_PutString("\n\r");
+                CyDelay(30);
                 cnt = cnt + max;
             }
             break;

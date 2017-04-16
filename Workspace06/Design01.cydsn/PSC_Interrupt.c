@@ -28,10 +28,12 @@ typedef enum tgPSC_INTR_RESOURCE_STATE
 typedef struct tgPSC_INTR_RECVDATA
 {
     PSC_INTR_RESOURCE_STATE state;
-    PSC_CHAR                data[1250];
+    PSC_CHAR                data[10];
     long int                     size;
     long int                     max;
 } PSC_INTR_RECVDATA;
+
+static     long int                    count;
 
 /* function */
 PSC_RET PSC_Interrupt_RecvStateIsOff();
@@ -106,6 +108,7 @@ PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, long int max )
 /* Registration Recive Ticket */
 PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket, int Retry )
 {
+    count = 0;
     PSC_RET ret = PSC_RET_TIMEOUT;
     int     i;
     if( Retry < 1 )
@@ -202,6 +205,7 @@ void PSC_Interrupt_ReciveOFF()
 
 void Cam_Rx_Intr()
 {
+    count++;
     PSC_CHAR    recv_data;
     recv_data = UART_TO_CAMERA_GetChar();
     if( PSC_ReciveState != PSC_INTR_STATE_RECV_ON )
@@ -220,6 +224,7 @@ void Cam_Rx_Intr()
     }
     
     PSC_Camera_Buffer_WriteChar(recv_data,PSC_RecvDataList[PSC_ReciveTicket].size);
+    PSC_RecvDataList[PSC_ReciveTicket].size++;
     if( PSC_RecvDataList[PSC_ReciveTicket].size >= PSC_RecvDataList[PSC_ReciveTicket].max )
     {
         PSC_ReciveState = PSC_INTR_STATE_RECV_OFF;
