@@ -348,7 +348,7 @@ PSC_RET psc_Proc_CameraShot_BlueIndicateValue(PSC_ST_CMD* pstData)
     PSC_CHAR    SendData[] = {0x56, 0x00, 0x32, 0x0C, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC5, 0xF8, 0x10, 0x00};
     
     
-    ret = psc_Proc_CameraShot_SndCommand(SendData,sizeof( SendData ),200 );
+    ret = psc_Proc_CameraShot_SndCommand(SendData,sizeof( SendData ),52000 );
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;

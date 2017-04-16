@@ -128,7 +128,9 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],long int ucSize)
 {
     PSC_CHAR    tmpData[2];
     PSC_CHAR    RecvData;
-    int i;
+    long int max = 32;
+    long int cnt;
+    long int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
     switch(dev_id)
@@ -138,16 +140,25 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],long int ucSize)
             UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
-            UART_TO_COMM_PutString("TXDA ");
-            CyDelay(30);
-            for( i = 0; i < ucSize - 1; i++ )
+            cnt = 0;
+            while( cnt < ucSize )
             {
-                PSC_Camera_Buffer_ReadChar(&RecvData,i);
-                psc_Comm_ConvertHEX(RecvData,&tmpData[0], &tmpData[1]);
-                UART_TO_COMM_PutArray( tmpData,2);
+                UART_TO_COMM_PutString("TXDA ");
+                CyDelay(30);
+                for( i = 0 + cnt; i < max + cnt; i++ )
+                {
+                    if( i >= ucSize )
+                    {
+                        break;
+                    }
+                    PSC_Camera_Buffer_ReadChar(&RecvData,i);
+                    psc_Comm_ConvertHEX(RecvData,&tmpData[0], &tmpData[1]);
+                    UART_TO_COMM_PutArray( tmpData,2);
+                }
+                CyDelay(30);
+                UART_TO_COMM_PutString("\n\r");
+                cnt = cnt + max;
             }
-            CyDelay(30);
-            UART_TO_COMM_PutString("\n\r");
             break;
         default:
             break;

@@ -26,8 +26,8 @@
 
 // Photo Size
 #define PHOTO_COLOR_LAYER               (    3 )
-#define PHOTO_WIDTH                     (  640 )
-#define PHOTO_HIGHT                     (  480 )
+#define PHOTO_WIDTH                     (  160 )
+#define PHOTO_HIGHT                     (  120 )
 #define PHOTO_DATASIZE                  ( PHOTO_WIDTH * PHOTO_HIGHT * PHOTO_COLOR_LAYER )
 
 // Photo Buffer Scale

@@ -28,7 +28,7 @@ typedef enum tgPSC_INTR_RESOURCE_STATE
 typedef struct tgPSC_INTR_RECVDATA
 {
     PSC_INTR_RESOURCE_STATE state;
-    PSC_CHAR                data[RECVDATASIZE];
+    PSC_CHAR                data[1250];
     long int                     size;
     long int                     max;
 } PSC_INTR_RECVDATA;
