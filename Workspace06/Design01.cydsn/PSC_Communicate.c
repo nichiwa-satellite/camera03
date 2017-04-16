@@ -18,6 +18,7 @@
 #include "project.h"
 #include "PSC_CMD_API.h"
 #include "PSC_Communicate.h"
+#include "PSC_Camera.h"
 #include "Debugs.h"
 
 #define  HigherBitsMask  ( 0x0F )
@@ -25,7 +26,7 @@
 
 PSC_RET PSC_Comm_Initialize();
 PSC_RET PSC_Comm_GetCommand(PSC_ST_CMD*);    //Get Command form Device
-PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],uint8);    //Send Command to Device
+PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],long int);    //Send Command to Device
 PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD*);
 PSC_RET psc_Comm_GetRecvChar(DEV_ID,PSC_CHAR*);
 PSC_RET psc_Comm_SndDataLine(PSC_ST_CMD*);
@@ -123,9 +124,10 @@ PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR*  pvData)
 }
 
 
-PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
+PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],long int ucSize)
 {
-    PSC_CHAR    tmpData[ucSize * 2 + 1];
+    PSC_CHAR    tmpData[2];
+    PSC_CHAR    RecvData;
     int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
@@ -136,13 +138,14 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
-            for( i = 0; i < ucSize - 1; i++ )
-            {
-                psc_Comm_ConvertHEX(pChar[i],&tmpData[ i * 2 ], &tmpData[ i * 2 + 1]);
-            }
             UART_TO_COMM_PutString("TXDA ");
             CyDelay(30);
-            UART_TO_COMM_PutArray( tmpData,ucSize * 2 + 1);
+            for( i = 0; i < ucSize - 1; i++ )
+            {
+                PSC_Camera_Buffer_ReadChar(&RecvData,i);
+                psc_Comm_ConvertHEX(RecvData,&tmpData[0], &tmpData[1]);
+                UART_TO_COMM_PutArray( tmpData,2);
+            }
             CyDelay(30);
             UART_TO_COMM_PutString("\n\r");
             break;
