@@ -16,7 +16,29 @@
 #ifndef _camera
 #define _camera
 
+#include "PSC_Types.h"
 #include "project.h"
+
+// Get Photo Packet Size
+#define CAMERA_PHOTO_PACKETSIZE_ID      (    2 )
+#define CAMERA_PHOTO_PACKETSIZE_DATA    ( 1280 )
+#define CAMERA_PHOTO_PACKETSIZE         ( CAMERA_PHOTO_PACKETSIZE_ID + CAMERA_PHOTO_PACKETSIZE_DATA )
+
+// Photo Size
+#define PHOTO_COLOR_LAYER               (    3 )
+#define PHOTO_WIDTH                     (  160 )
+#define PHOTO_HIGHT                     (  120 )
+#define PHOTO_DATASIZE                  ( PHOTO_WIDTH * PHOTO_HIGHT * PHOTO_COLOR_LAYER )
+
+// Photo Buffer Scale
+#define PHOTO_BUFFER_SCALE_LAYER1       ( CAMERA_PHOTO_PACKETSIZE )
+#define PHOTO_BUFFER_SCALE_LAYER2       ( PHOTO_DATASIZE / CAMERA_PHOTO_PACKETSIZE + 1 )
+#define PHOTO_BUFFER_SCALE_MAX          ( PHOTO_BUFFER_SCALE_LAYER1 * PHOTO_BUFFER_SCALE_LAYER2 )
+ 
+    
+extern PSC_RET PSC_Camera_Buffer_Reset();
+extern PSC_RET PSC_Camera_Buffer_WriteChar( PSC_CHAR WriteData, long int WriteIndex );
+extern PSC_RET PSC_Camera_Buffer_ReadChar( PSC_CHAR* pReadData, long int ReadIndex );
 
 static unsigned char get[]             ={0x56, 0x00, 0x11, 0x00};
 static uint8         get_size          = 4;

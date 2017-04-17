@@ -40,7 +40,6 @@ typedef enum PSC_PROC_STATE_CAMERASHOTtag
     PR_STATE_CS_MAX
 }PSC_PROC_STATE_CAMERASHOT;
 
-static     PSC_CHAR    RecvData[RECVDATASIZE];
 static PSC_PROC_STATE_CAMERASHOT svPSC_PROC_STATE_CAMERASHOT;
 PSC_PROC_STATE gsvPSC_PROC_STATE;
 
@@ -60,7 +59,7 @@ PSC_RET psc_Proc_CameraShot_StopCurrentFrame(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_GetFrameDataLength(PSC_ST_CMD*);
 PSC_RET psc_Proc_CameraShot_BlueIndicateValue(PSC_ST_CMD*);
 
-PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR [], PSC_CHAR [], int, int, int );
+PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR [], int, long int);
 
 PSC_RET PSC_Proc_CameraShot_Init(PSC_RET (**pFunc)(PSC_ST_CMD*))
 {
@@ -156,7 +155,7 @@ PSC_RET psc_Proc_CameraShot_Get(PSC_ST_CMD* pstData)
 {
     PSC_RET     ret;
     
-    ret = psc_Proc_CameraShot_SndCommand(get,RecvData,get_size,get_size,100);
+    ret = psc_Proc_CameraShot_SndCommand(get,get_size,get_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -178,7 +177,7 @@ PSC_RET psc_Proc_CameraShot_ResetCamera(PSC_ST_CMD* pstData)
     PSC_RET     ret;
     //TODO: Return Value Check from CAM
     //      That is in pstData->
-    ret = psc_Proc_CameraShot_SndCommand(reset_camera,RecvData,reset_camera_size,reset_camera_size,100);
+    ret = psc_Proc_CameraShot_SndCommand(reset_camera,reset_camera_size,reset_camera_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -200,7 +199,7 @@ PSC_RET psc_Proc_CameraShot_Baurate(PSC_ST_CMD* pstData)
     //TODO: Return Value Check from CAM
     //      That is in pstData->
  
-    ret = psc_Proc_CameraShot_SndCommand(baurate,RecvData,sizeof(baurate),sizeof(baurate),100);
+    ret = psc_Proc_CameraShot_SndCommand(baurate,sizeof(baurate),sizeof(baurate));
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -219,7 +218,7 @@ PSC_RET psc_Proc_CameraShot_Baurate(PSC_ST_CMD* pstData)
 PSC_RET psc_Proc_CameraShot_ConfigDataSize(PSC_ST_CMD* pstData)
 {
     PSC_RET     ret;
-    ret = psc_Proc_CameraShot_SndCommand(config_datasize,RecvData,config_datasize_size,config_datasize_size,100);
+    ret = psc_Proc_CameraShot_SndCommand(config_datasize,config_datasize_size,config_datasize_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -241,7 +240,7 @@ PSC_RET psc_Proc_CameraShot_TakePicture(PSC_ST_CMD* pstData)
     //TODO: Return Value Check from CAM
     //      That is in pstData->
     
-    ret = psc_Proc_CameraShot_SndCommand(take_picture,RecvData,tack_picture_size,tack_picture_size ,100);
+    ret = psc_Proc_CameraShot_SndCommand(take_picture,tack_picture_size,tack_picture_size);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -261,7 +260,7 @@ PSC_RET psc_Proc_CameraShot_LoadDataSize(PSC_ST_CMD* pstData)
 {
     PSC_RET     ret;
     
-    ret = psc_Proc_CameraShot_SndCommand(read_datasize,RecvData,read_datasize_size,read_datasize_size ,100);
+    ret = psc_Proc_CameraShot_SndCommand(read_datasize,read_datasize_size,read_datasize_size );
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -282,7 +281,7 @@ PSC_RET psc_Proc_CameraShot_LoadData(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     
-    ret = psc_Proc_CameraShot_SndCommand(load_data,RecvData,load_data_size,500 ,100);
+    ret = psc_Proc_CameraShot_SndCommand(load_data,load_data_size,500 );
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -304,7 +303,7 @@ PSC_RET psc_Proc_CameraShot_StopCurrentFrame(PSC_ST_CMD* pstData)
     PSC_RET     ret;
     PSC_CHAR    SendData[] = {0x56, 0x00, 0x36, 0x01, 0x00};
     
-    ret = psc_Proc_CameraShot_SndCommand(SendData,RecvData,sizeof( SendData ),5 ,100);
+    ret = psc_Proc_CameraShot_SndCommand(SendData,sizeof( SendData ),5 );
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -327,7 +326,7 @@ PSC_RET psc_Proc_CameraShot_GetFrameDataLength(PSC_ST_CMD* pstData)
     PSC_CHAR    SendData[] = {0x56, 0x00, 0x34, 0x01, 0x00};
 
     
-   ret = psc_Proc_CameraShot_SndCommand(SendData,RecvData,sizeof( SendData ), 9 ,100);
+   ret = psc_Proc_CameraShot_SndCommand(SendData,sizeof( SendData ), 9 );
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -348,8 +347,11 @@ PSC_RET psc_Proc_CameraShot_BlueIndicateValue(PSC_ST_CMD* pstData)
     PSC_RET ret;
     PSC_CHAR    SendData[] = {0x56, 0x00, 0x32, 0x0C, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC5, 0xF8, 0x10, 0x00};
     
-    
-    ret = psc_Proc_CameraShot_SndCommand(SendData,RecvData,sizeof( SendData ),200 ,100);
+    (void)PSC_Camera_Buffer_ReadChar(&SendData[10],5);
+    (void)PSC_Camera_Buffer_ReadChar(&SendData[11],6);
+    (void)PSC_Camera_Buffer_ReadChar(&SendData[12],7);
+    (void)PSC_Camera_Buffer_ReadChar(&SendData[13],8);
+    ret = psc_Proc_CameraShot_SndCommand(SendData,sizeof( SendData ),28845 );
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
@@ -367,14 +369,11 @@ PSC_RET psc_Proc_CameraShot_BlueIndicateValue(PSC_ST_CMD* pstData)
 
 
 
-PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR SendData[], PSC_CHAR RecvDatas[], int SendSize, int RecvSize, int TimeOut )
+PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR SendData[],int SendSize, long int RecvSize )
 {
     PSC_RET ret;
-    PSC_CHAR data[RECVDATASIZE];
     PSC_INTR_TIKET ticket;
-
-    memset(data, 0x00, sizeof( data ) );
-    
+ 
     (void)PSC_Interrupt_GetTicket( &ticket, RecvSize );
     (void)PSC_Interrupt_Registration( ticket, 1 );
     (void)PSC_Interrupt_ReciveON();
@@ -386,16 +385,14 @@ PSC_RET psc_Proc_CameraShot_SndCommand( PSC_CHAR SendData[], PSC_CHAR RecvDatas[
     while( PSC_Interrupt_RecvStateIsOff() != PSC_RET_SUCCESS ){  }
     (void)PSC_Interrupt_ReciveOFF();
     (void)PSC_Interrupt_Invalidation( ticket );
-    (void)PSC_Interrupt_GetData( ticket, data, RecvSize, &RecvSize );
+    (void)PSC_Interrupt_GetData( ticket, RecvSize, &RecvSize );
     (void)PSC_Interrupt_TicketFree( ticket );
     
-    ret = PSC_Comm_SndCommand(DEV_ID_COMM,data,RecvSize);
+    ret = PSC_Comm_SndCommand(DEV_ID_COMM,NULL,RecvSize);
     if( ret != PSC_RET_SUCCESS )
     {
         return ret;
     }
-    
-    memcpy(RecvDatas,data,RECVDATASIZE);
     
     return PSC_RET_SUCCESS;
 }

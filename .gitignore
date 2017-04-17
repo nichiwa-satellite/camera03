@@ -90,3 +90,6 @@ Debug
 Workspace06/Design01.cydsn/Design01.rpt
 *.cyfit
 Workspace06/Design01.cydsn/Export/PSoCCreatorExportIDE.xml
+Workspace06/Design01.cydsn/Generated_Source/PSoC5/cydevice.h
+Workspace06/Design01.cydsn/Export/PSoCCreatorExportIDE.xml
+Workspace06/Design01.cydsn/Generated_Source/

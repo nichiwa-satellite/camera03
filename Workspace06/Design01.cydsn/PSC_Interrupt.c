@@ -16,8 +16,7 @@
 #include "project.h"
 #include "PSC_Interrupt.h"
 #include "Debugs.h"
-
-
+#include "PSC_Camera.h"
 
 typedef enum tgPSC_INTR_RESOURCE_STATE
 {
@@ -29,18 +28,20 @@ typedef enum tgPSC_INTR_RESOURCE_STATE
 typedef struct tgPSC_INTR_RECVDATA
 {
     PSC_INTR_RESOURCE_STATE state;
-    PSC_CHAR                data[RECVDATASIZE];
-    int                     size;
-    int                     max;
+    PSC_CHAR                data[10];
+    long int                     size;
+    long int                     max;
 } PSC_INTR_RECVDATA;
+
+static     long int                    count;
 
 /* function */
 PSC_RET PSC_Interrupt_RecvStateIsOff();
 PSC_RET PSC_Interrupt_Initialize();
-PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int max );
+PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, long int max );
 PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket, int Retry );
 PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket );
-PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize );
+PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, long int size, long int *pSize );
 PSC_RET PSC_Interrupt_TicketFree( PSC_INTR_TIKET Ticket );
 void PSC_Interrupt_ReciveON();
 void PSC_Interrupt_ReciveOFF();
@@ -77,7 +78,7 @@ PSC_RET PSC_Interrupt_RecvStateIsOff()
 }
 
 
-PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int max )
+PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, long int max )
 {
     PSC_RET ret = PSC_RET_INTERNAL_ERROR;
     int     i;
@@ -107,6 +108,7 @@ PSC_RET PSC_Interrupt_GetTicket( PSC_INTR_TIKET *pTicket, int max )
 /* Registration Recive Ticket */
 PSC_RET PSC_Interrupt_Registration( PSC_INTR_TIKET Ticket, int Retry )
 {
+    count = 0;
     PSC_RET ret = PSC_RET_TIMEOUT;
     int     i;
     if( Retry < 1 )
@@ -150,7 +152,7 @@ PSC_RET PSC_Interrupt_Invalidation( PSC_INTR_TIKET Ticket )
 }
 
 
-PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size, int *pSize )
+PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket,  long int size, long int *pSize )
 {
     PSC_RET ret;
     
@@ -170,8 +172,6 @@ PSC_RET PSC_Interrupt_GetData( PSC_INTR_TIKET Ticket, PSC_CHAR Data[], int size,
     }
     
     *pSize = PSC_RecvDataList[Ticket].size;
-    
-    memcpy( Data, PSC_RecvDataList[Ticket].data, PSC_RecvDataList[Ticket].size );
     
     return PSC_RET_SUCCESS;
 }
@@ -205,6 +205,7 @@ void PSC_Interrupt_ReciveOFF()
 
 void Cam_Rx_Intr()
 {
+    count++;
     PSC_CHAR    recv_data;
     recv_data = UART_TO_CAMERA_GetChar();
     if( PSC_ReciveState != PSC_INTR_STATE_RECV_ON )
@@ -217,12 +218,12 @@ void Cam_Rx_Intr()
         return;
     }
     
-    if( PSC_RecvDataList[PSC_ReciveTicket].size + 1 > RECVDATASIZE )
+    if( PSC_RecvDataList[PSC_ReciveTicket].size >= PHOTO_BUFFER_SCALE_MAX )
     {
         return;
     }
     
-    PSC_RecvDataList[PSC_ReciveTicket].data[PSC_RecvDataList[PSC_ReciveTicket].size] = recv_data;
+    PSC_Camera_Buffer_WriteChar(recv_data,PSC_RecvDataList[PSC_ReciveTicket].size);
     PSC_RecvDataList[PSC_ReciveTicket].size++;
     if( PSC_RecvDataList[PSC_ReciveTicket].size >= PSC_RecvDataList[PSC_ReciveTicket].max )
     {

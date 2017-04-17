@@ -18,15 +18,15 @@
 #include "project.h"
 #include "PSC_CMD_API.h"
 #include "PSC_Communicate.h"
+#include "PSC_Camera.h"
 #include "Debugs.h"
 
 #define  HigherBitsMask  ( 0x0F )
 #define  LowerBitsMask   ( 0xF0 )
 
-
 PSC_RET PSC_Comm_Initialize();
 PSC_RET PSC_Comm_GetCommand(PSC_ST_CMD*);    //Get Command form Device
-PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],uint8);    //Send Command to Device
+PSC_RET PSC_Comm_SndCommand(DEV_ID,PSC_CHAR[],long int);    //Send Command to Device
 PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD*);
 PSC_RET psc_Comm_GetRecvChar(DEV_ID,PSC_CHAR*);
 PSC_RET psc_Comm_SndDataLine(PSC_ST_CMD*);
@@ -62,7 +62,7 @@ PSC_RET psc_Comm_GetRecvLine(PSC_ST_CMD* pstData)
 {
     PSC_RET ret;
     PSC_CHAR recv_data;
-
+    
     ret = PSC_CMD_RECV_SETUP(pstData);
     if( ret != PSC_RET_SUCCESS )
     {
@@ -124,10 +124,13 @@ PSC_RET psc_Comm_GetRecvChar(DEV_ID dev_id,PSC_CHAR*  pvData)
 }
 
 
-PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
+PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],long int ucSize)
 {
-    PSC_CHAR    tmpData[ucSize * 2 + 1];
-    int i;
+    PSC_CHAR    tmpData[2];
+    PSC_CHAR    RecvData;
+    long int max = 32;
+    long int cnt;
+    long int i;
     /* debug */
     DBG_printf("TRACE Send Command Start \n\r");
     switch(dev_id)
@@ -137,15 +140,26 @@ PSC_RET PSC_Comm_SndCommand(DEV_ID dev_id,PSC_CHAR pChar[],uint8 ucSize)
             UART_TO_CAMERA_PutArray(pChar, ucSize);
             break;
         case DEV_ID_COMM:
-            for( i = 0; i < ucSize - 1; i++ )
+            cnt = 0;
+            while( cnt < ucSize )
             {
-                psc_Comm_ConvertHEX(pChar[i],&tmpData[ i * 2 ], &tmpData[ i * 2 + 1]);
+                UART_TO_COMM_PutString("TXDA ");
+                CyDelay(30);
+                for( i = 0 + cnt; i < max + cnt; i++ )
+                {
+                    if( i >= ucSize )
+                    {
+                        break;
+                    }
+                    PSC_Camera_Buffer_ReadChar(&RecvData,i);
+                    psc_Comm_ConvertHEX(RecvData,&tmpData[0], &tmpData[1]);
+                    UART_TO_COMM_PutArray( tmpData,2);
+                }
+                CyDelay(30);
+                UART_TO_COMM_PutString("\n\r");
+                CyDelay(30);
+                cnt = cnt + max;
             }
-            UART_TO_COMM_PutString("TXDA ");
-            CyDelay(30);
-            UART_TO_COMM_PutArray( tmpData,ucSize * 2 + 1);
-            CyDelay(30);
-            UART_TO_COMM_PutString("\n\r");
             break;
         default:
             break;

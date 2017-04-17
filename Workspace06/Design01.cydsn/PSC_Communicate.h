@@ -22,6 +22,6 @@
 
 extern PSC_RET PSC_Comm_Initialize();
 extern PSC_RET PSC_Comm_GetCommand(PSC_ST_CMD*);    //Get Command form Device
-extern PSC_RET PSC_Comm_SndCommand(DEV_ID, PSC_CHAR [],uint8);    //Send Command to Device
+extern PSC_RET PSC_Comm_SndCommand(DEV_ID, PSC_CHAR [],long int);    //Send Command to Device
 
 #endif
